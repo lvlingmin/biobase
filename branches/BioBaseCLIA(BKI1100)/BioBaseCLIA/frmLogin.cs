@@ -321,6 +321,11 @@ namespace BioBaseCLIA.User
             Thread.Sleep(2000);
             DialogResult = DialogResult.OK;
             complete:
+            //管理员账号握手初始化失败也能进入软件
+            if (LoginUserType == "1") //lyq add20201204
+            {
+                DialogResult = DialogResult.OK;
+            }
             BeginInvoke(new Action(() =>
             {
                 Close();
