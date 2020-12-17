@@ -773,6 +773,7 @@ namespace BioBaseCLIA.Run
 
         private void fbtnTestResult_Click(object sender, EventArgs e)
         {
+            fbtnTestResult.Enabled = false;
             LeavePageSetReagentToMix();
             if (!CheckFormIsOpen("frmTestResult"))
             {
@@ -787,6 +788,7 @@ namespace BioBaseCLIA.Run
                 frmTR.Show();
                 frmTR.BringToFront(); 
             }
+            fbtnTestResult.Enabled = true;
         }
         private void LeavePageSetReagentToMix()//离开页面时，通知下位机加载完成，同时让装卸栽按钮变灰
         {
@@ -826,6 +828,7 @@ namespace BioBaseCLIA.Run
         }
         private void btnLoadSample_Click(object sender, EventArgs e)
         {
+            btnLoadSample.Enabled = false;
             LeavePageSetReagentToMix();
             if (!CheckFormIsOpen("frmSampleLoad"))
             {
@@ -841,6 +844,7 @@ namespace BioBaseCLIA.Run
                 frmSL.BringToFront(); 
             }
             barCodeHook.Stop();
+            btnLoadSample.Enabled = true;
             this.Close();//2018-11-14 zlx add
         }
 
