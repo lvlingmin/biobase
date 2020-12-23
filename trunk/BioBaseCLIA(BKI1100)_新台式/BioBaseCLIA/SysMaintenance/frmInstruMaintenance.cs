@@ -1205,7 +1205,7 @@ namespace BioBaseCLIA.SysMaintenance
         }
         private void fbtnReturn_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
         }
 
         private void fbtnInstruDiagnost_Click(object sender, EventArgs e)
