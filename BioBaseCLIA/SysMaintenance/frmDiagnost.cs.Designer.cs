@@ -425,6 +425,7 @@
             this.label84 = new System.Windows.Forms.Label();
             this.label88 = new System.Windows.Forms.Label();
             this.label89 = new System.Windows.Forms.Label();
+            this.fbtnInitSpReadCard = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.panel1.SuspendLayout();
             this.tabControlMy1.SuspendLayout();
             this.tabAddSample.SuspendLayout();
@@ -5647,6 +5648,7 @@
             // 
             // groupBox43
             // 
+            this.groupBox43.Controls.Add(this.fbtnInitSpReadCard);
             this.groupBox43.Controls.Add(this.fbtnInitIni);
             this.groupBox43.Location = new System.Drawing.Point(389, 26);
             this.groupBox43.Name = "groupBox43";
@@ -6257,6 +6259,25 @@
             this.label89.TabIndex = 4;
             this.label89.Text = "温育盘放管孔位:";
             // 
+            // fbtnInitSpReadCard
+            // 
+            this.fbtnInitSpReadCard.BackColor = System.Drawing.Color.Transparent;
+            this.fbtnInitSpReadCard.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("fbtnInitSpReadCard.BackgroundImage")));
+            this.fbtnInitSpReadCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.fbtnInitSpReadCard.EnabledSet = true;
+            this.fbtnInitSpReadCard.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.fbtnInitSpReadCard.FlatAppearance.BorderSize = 0;
+            this.fbtnInitSpReadCard.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.fbtnInitSpReadCard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.fbtnInitSpReadCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.fbtnInitSpReadCard.Location = new System.Drawing.Point(22, 66);
+            this.fbtnInitSpReadCard.Name = "fbtnInitSpReadCard";
+            this.fbtnInitSpReadCard.Size = new System.Drawing.Size(129, 23);
+            this.fbtnInitSpReadCard.TabIndex = 63;
+            this.fbtnInitSpReadCard.Text = "初始化射频读卡器";
+            this.fbtnInitSpReadCard.UseVisualStyleBackColor = false;
+            this.fbtnInitSpReadCard.Click += new System.EventHandler(this.fbtnInitSpReadCard_Click);
+            // 
             // frmDiagnost
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -6767,5 +6788,6 @@
         private System.Windows.Forms.Label label99;
         private System.Windows.Forms.GroupBox groupBox43;
         private CustomControl.FunctionButton fbtnInitIni;
+        private CustomControl.FunctionButton fbtnInitSpReadCard;
     }
 }
