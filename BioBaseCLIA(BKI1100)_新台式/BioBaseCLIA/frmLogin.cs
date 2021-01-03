@@ -350,8 +350,12 @@ namespace BioBaseCLIA.User
             DialogResult = DialogResult.OK;
             complete:
 
+            if (NetCom3.Instance.ErrorMessage != null)
+            {
+                ;
+            }
             //管理员账号握手失败也能进入软件
-            if (LoginUserType == "1") //lyq add20201204
+            else if (LoginUserType == "1") //lyq add20201204
             {
                 DialogResult = DialogResult.OK;
             }
