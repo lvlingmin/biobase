@@ -59,32 +59,32 @@
             // 
             // contextMenuStrip1
             // 
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.chineseToolStripMenuItem,
             this.engllishToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             // 
             // chineseToolStripMenuItem
             // 
+            resources.ApplyResources(this.chineseToolStripMenuItem, "chineseToolStripMenuItem");
             this.chineseToolStripMenuItem.Image = global::BioBaseCLIA.Properties.Resources.china;
             this.chineseToolStripMenuItem.Name = "chineseToolStripMenuItem";
-            resources.ApplyResources(this.chineseToolStripMenuItem, "chineseToolStripMenuItem");
             this.chineseToolStripMenuItem.Click += new System.EventHandler(this.chineseToolStripMenuItem_Click);
             // 
             // engllishToolStripMenuItem
             // 
+            resources.ApplyResources(this.engllishToolStripMenuItem, "engllishToolStripMenuItem");
             this.engllishToolStripMenuItem.Image = global::BioBaseCLIA.Properties.Resources.english;
             this.engllishToolStripMenuItem.Name = "engllishToolStripMenuItem";
-            resources.ApplyResources(this.engllishToolStripMenuItem, "engllishToolStripMenuItem");
             this.engllishToolStripMenuItem.Click += new System.EventHandler(this.engllishToolStripMenuItem_Click);
             // 
             // paProcess
             // 
+            resources.ApplyResources(this.paProcess, "paProcess");
             this.paProcess.BackColor = System.Drawing.Color.Transparent;
             this.paProcess.Controls.Add(this.lblDescribe);
             this.paProcess.Controls.Add(this.progressData);
-            resources.ApplyResources(this.paProcess, "paProcess");
             this.paProcess.Name = "paProcess";
             // 
             // lblDescribe
@@ -100,9 +100,9 @@
             // 
             // logo
             // 
+            resources.ApplyResources(this.logo, "logo");
             this.logo.BackColor = System.Drawing.Color.Transparent;
             this.logo.BackgroundImage = global::BioBaseCLIA.Properties.Resources.logo;
-            resources.ApplyResources(this.logo, "logo");
             this.logo.Name = "logo";
             this.logo.TabStop = false;
             // 
@@ -117,18 +117,18 @@
             // 
             // panellogin
             // 
+            resources.ApplyResources(this.panellogin, "panellogin");
             this.panellogin.BackColor = System.Drawing.Color.Transparent;
             this.panellogin.BackgroundImage = global::BioBaseCLIA.Properties.Resources.backgroundglass;
-            resources.ApplyResources(this.panellogin, "panellogin");
             this.panellogin.Controls.Add(this.label1);
             this.panellogin.Controls.Add(this.comboBox1);
             this.panellogin.Controls.Add(this.chkKeepPwd);
             this.panellogin.Controls.Add(this.cmbUserName);
             this.panellogin.Controls.Add(this.btnCancel);
-            this.panellogin.Controls.Add(this.label3);
             this.panellogin.Controls.Add(this.label2);
             this.panellogin.Controls.Add(this.btnLogin);
             this.panellogin.Controls.Add(this.txtUserPassword);
+            this.panellogin.Controls.Add(this.label3);
             this.panellogin.Name = "panellogin";
             // 
             // label1
@@ -156,16 +156,16 @@
             // 
             // cmbUserName
             // 
-            this.cmbUserName.FormattingEnabled = true;
             resources.ApplyResources(this.cmbUserName, "cmbUserName");
+            this.cmbUserName.FormattingEnabled = true;
             this.cmbUserName.Name = "cmbUserName";
             this.cmbUserName.SelectedIndexChanged += new System.EventHandler(this.cmbUserName_SelectedIndexChanged);
             this.cmbUserName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbUserName_KeyDown);
             // 
             // btnCancel
             // 
-            this.btnCancel.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.BackColor = System.Drawing.Color.Transparent;
             this.btnCancel.EnabledSet = true;
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnCancel.FlatAppearance.BorderSize = 0;
@@ -192,8 +192,8 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnLogin, "btnLogin");
+            this.btnLogin.BackColor = System.Drawing.Color.Transparent;
             this.btnLogin.EnabledSet = true;
             this.btnLogin.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnLogin.FlatAppearance.BorderSize = 0;
@@ -212,9 +212,9 @@
             // 
             // titleofbio
             // 
+            resources.ApplyResources(this.titleofbio, "titleofbio");
             this.titleofbio.BackColor = System.Drawing.Color.Transparent;
             this.titleofbio.BackgroundImage = global::BioBaseCLIA.Properties.Resources.title;
-            resources.ApplyResources(this.titleofbio, "titleofbio");
             this.titleofbio.Name = "titleofbio";
             this.titleofbio.TabStop = false;
             // 
