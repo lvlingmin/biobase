@@ -571,6 +571,9 @@
     <EmbeddedResource Include="SysMaintenance\frmInstruMaintenance.en-US.resx">
       <DependentUpon>frmInstruMaintenance.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SysMaintenance\frmInstruMaintenance.en.resx">
+      <DependentUpon>frmInstruMaintenance.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SysMaintenance\frmInstruMaintenance.resx">
       <DependentUpon>frmInstruMaintenance.cs</DependentUpon>
     </EmbeddedResource>
