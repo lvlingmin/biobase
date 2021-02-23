@@ -137,11 +137,11 @@
   <data name="&gt;&gt;timerConnect.Name" xml:space="preserve">
     <value>timerConnect</value>
   </data>
-  <data name="&gt;&gt;fbtnDataQuery.Parent" xml:space="preserve">
-    <value>pnlSidebar</value>
+  <data name="&gt;&gt;timerStatus.Name" xml:space="preserve">
+    <value>timerStatus</value>
   </data>
-  <data name="dbtnRegent.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;dbtnWash.Name" xml:space="preserve">
+    <value>dbtnWash</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pnlbarDown.Size" type="System.Drawing.Size, System.Drawing">
@@ -170,9 +170,6 @@
   </data>
   <data name="dbtnWaste.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
-  </data>
-  <data name="&gt;&gt;pnlPublic.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dbtnRack.Type" xml:space="preserve">
     <value>BioBaseCLIA.CustomControl.defineButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
@@ -270,6 +267,9 @@
   <data name="&gt;&gt;dbtnSubstract.Type" xml:space="preserve">
     <value>BioBaseCLIA.CustomControl.defineButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="pnlPublic.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1024, 557</value>
+  </data>
   <data name="fbtnMaintenance.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
@@ -285,8 +285,8 @@
   <data name="&gt;&gt;dbtnRack.Parent" xml:space="preserve">
     <value>pnlbarUP</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
+  <data name="btnVersion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 30</value>
   </data>
   <data name="&gt;&gt;dbtnLog.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -315,17 +315,14 @@
   <data name="defineButton1.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 68</value>
   </data>
-  <data name="&gt;&gt;defineButton3.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.defineButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;fbtnMaintenance.Name" xml:space="preserve">
     <value>fbtnMaintenance</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 19</value>
   </data>
-  <data name="temperatureButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 29</value>
+  <data name="&gt;&gt;pnlPublic.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="temperatureButton.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -341,6 +338,9 @@
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="&gt;&gt;fbtnSet.Parent" xml:space="preserve">
+    <value>pnlSidebar</value>
   </data>
   <data name="logo.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
@@ -390,9 +390,6 @@
   <data name="temperatureButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;btnExit.Name" xml:space="preserve">
-    <value>btnExit</value>
-  </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -407,6 +404,9 @@
   </data>
   <data name="&gt;&gt;dbtnConnect.Name" xml:space="preserve">
     <value>dbtnConnect</value>
+  </data>
+  <data name="label2.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;dbtnSound.Type" xml:space="preserve">
     <value>BioBaseCLIA.CustomControl.defineButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
@@ -490,8 +490,8 @@
   <data name="btnExit.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;defineButton1.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.defineButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
   </data>
   <data name="&gt;&gt;btnExit.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -574,9 +574,6 @@
   </data>
   <data name="&gt;&gt;dbtnSound.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;timerStatus.Name" xml:space="preserve">
-    <value>timerStatus</value>
   </data>
   <data name="&gt;&gt;pnlSidebar.Name" xml:space="preserve">
     <value>pnlSidebar</value>
@@ -683,9 +680,6 @@
         vNjc7RVu0Y6LLmsngNlKNixblk3LtsOtJ017IPzlIu/X/G0RtzA/4hYXnAMwS8hmZbuyYdlyuo0npX0o
         /BszvVKvx5MPAzA7yGZlu5nptv2Pm/MHz+N45ZRT+BMAAAAASUVORK5CYII=
 </value>
-  </data>
-  <data name="dbtnWash.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 100</value>
   </data>
   <data name="&gt;&gt;pnlbarUP.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -904,8 +898,14 @@
   <data name="dbtnWaste.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="&gt;&gt;defineButton1.Type" xml:space="preserve">
+    <value>BioBaseCLIA.CustomControl.defineButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="dbtnWash.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="&gt;&gt;fbtnMaintenance.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="btnExit.ToolTip" xml:space="preserve">
     <value />
@@ -934,9 +934,6 @@
   <data name="&gt;&gt;defineButton2.Name" xml:space="preserve">
     <value>defineButton2</value>
   </data>
-  <data name="dbtnSubstract.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
   <data name="dbtnRegent.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
@@ -949,8 +946,8 @@
   <data name="pnlSidebar.Location" type="System.Drawing.Point, System.Drawing">
     <value>863, 1</value>
   </data>
-  <data name="&gt;&gt;btnVersion.Parent" xml:space="preserve">
-    <value>pnlbarDown</value>
+  <data name="fbtnTest.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -964,14 +961,11 @@
   <data name="fbtnMaintenance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="label2.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;logo.Name" xml:space="preserve">
+    <value>logo</value>
   </data>
   <data name="&gt;&gt;logo.Parent" xml:space="preserve">
     <value>pnlbarUP</value>
-  </data>
-  <data name="pnlbarUP.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="defineButton1.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 80</value>
@@ -1210,8 +1204,11 @@
   <data name="dbtnSound.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="btnVersion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+  <data name="pnlbarDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 708</value>
+  </data>
+  <data name="dbtnLog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 100</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>label2</value>
@@ -1221,12 +1218,6 @@
   </data>
   <data name="dbtnLog.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="dbtnSound.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 30</value>
-  </data>
-  <data name="&gt;&gt;temperatureButton.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.defineButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="fbtnScalQc.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1252,8 +1243,8 @@
   <data name="dbtnRack.Location" type="System.Drawing.Point, System.Drawing">
     <value>836, 29</value>
   </data>
-  <data name="fbtnTest.ToolTip" xml:space="preserve">
-    <value />
+  <data name="dbtnSound.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
   </data>
   <data name="dbtnRack.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1264,6 +1255,9 @@
   <data name="defineButton2.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;dbtnRack.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
   <data name="&gt;&gt;fbtnMaintenance.Parent" xml:space="preserve">
     <value>pnlSidebar</value>
   </data>
@@ -1272,6 +1266,9 @@
   </data>
   <data name="&gt;&gt;label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnVersion.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
   </data>
   <data name="btnExit.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1288,8 +1285,8 @@
   <data name="&gt;&gt;fbtnTest.Parent" xml:space="preserve">
     <value>pnlSidebar</value>
   </data>
-  <data name="&gt;&gt;fbtnMaintenance.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;defineButton3.Type" xml:space="preserve">
+    <value>BioBaseCLIA.CustomControl.defineButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnHelp.Parent" xml:space="preserve">
     <value>pnlbarDown</value>
@@ -1361,6 +1358,12 @@
         /BszvVKvx5MPAzA7yGZlu5nptv2Pm/MHz+N45ZRT+BMAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="&gt;&gt;fbtnMaintenance.Type" xml:space="preserve">
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;fbtnDataQuery.Parent" xml:space="preserve">
+    <value>pnlSidebar</value>
+  </data>
   <data name="fbtnSet.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -1382,9 +1385,6 @@
   <data name="dbtnConnect.Location" type="System.Drawing.Point, System.Drawing">
     <value>77, 13</value>
   </data>
-  <data name="fbtnMaintenance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 60</value>
-  </data>
   <data name="&gt;&gt;pnlbarDown.Name" xml:space="preserve">
     <value>pnlbarDown</value>
   </data>
@@ -1400,11 +1400,14 @@
   <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>pnlbarDown</value>
   </data>
+  <data name="temperatureButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>199, 29</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frmMain</value>
   </data>
-  <data name="&gt;&gt;fbtnSet.Parent" xml:space="preserve">
-    <value>pnlSidebar</value>
+  <data name="pnlbarUP.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="fbtnSet.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 348</value>
@@ -1417,9 +1420,6 @@
   </data>
   <data name="btnVersion.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
-  </data>
-  <data name="dbtnBuffer.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="dbtnSubstract.ToolTip" xml:space="preserve">
     <value />
@@ -1454,8 +1454,8 @@
   <data name="fbtnSet.Font" type="System.Drawing.Font, System.Drawing">
     <value>宋体, 14.25pt, style=Bold</value>
   </data>
-  <data name="dbtnConnect.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="dbtnWash.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 100</value>
   </data>
   <data name="btnWasteRack.ToolTip" xml:space="preserve">
     <value />
@@ -1475,8 +1475,8 @@
   <data name="&gt;&gt;timerConnect.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dbtnWash.Name" xml:space="preserve">
-    <value>dbtnWash</value>
+  <data name="&gt;&gt;temperatureButton.Type" xml:space="preserve">
+    <value>BioBaseCLIA.CustomControl.defineButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;pnlPublic.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -1766,8 +1766,8 @@
   <data name="fbtnSet.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="dbtnSound.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
+  <data name="dbtnRegent.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;pnlbarDown.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -1792,6 +1792,9 @@
   </data>
   <data name="&gt;&gt;dbtnRegent.Type" xml:space="preserve">
     <value>BioBaseCLIA.CustomControl.defineButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dbtnConnect.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1838,8 +1841,11 @@
   <data name="pnlSidebar.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="btnVersion.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
+  <data name="dbtnConnect.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="dbtnSound.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 30</value>
   </data>
   <data name="&gt;&gt;defineButton3.Name" xml:space="preserve">
     <value>defineButton3</value>
@@ -2159,17 +2165,11 @@
   <data name="&gt;&gt;dbtnWaste.Type" xml:space="preserve">
     <value>BioBaseCLIA.CustomControl.defineButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;logo.Name" xml:space="preserve">
-    <value>logo</value>
-  </data>
   <data name="pnlbarDown.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
   <data name="btnVersion.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="fbtnTest.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
   </data>
   <data name="&gt;&gt;defineButton1.Name" xml:space="preserve">
     <value>defineButton1</value>
@@ -2195,8 +2195,8 @@
   <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
     <value>toolTip1</value>
   </data>
-  <data name="pnlbarDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 708</value>
+  <data name="fbtnTest.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;defineButton2.Parent" xml:space="preserve">
     <value>pnlbarUP</value>
@@ -2207,11 +2207,8 @@
   <data name="&gt;&gt;fbtnTest.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="dbtnLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 100</value>
-  </data>
-  <data name="dbtnRack.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
+  <data name="dbtnBuffer.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="dbtnSound.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 13</value>
@@ -2237,11 +2234,14 @@
   <data name="&gt;&gt;btnWasteRack.Name" xml:space="preserve">
     <value>btnWasteRack</value>
   </data>
+  <data name="&gt;&gt;btnVersion.Parent" xml:space="preserve">
+    <value>pnlbarDown</value>
+  </data>
   <data name="dbtnLog.Location" type="System.Drawing.Point, System.Drawing">
     <value>928, 29</value>
   </data>
-  <data name="pnlPublic.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1024, 557</value>
+  <data name="dbtnSubstract.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
   <data name="&gt;&gt;fbtnSet.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -2249,14 +2249,14 @@
   <data name="&gt;&gt;dbtnSound.Parent" xml:space="preserve">
     <value>pnlbarDown</value>
   </data>
-  <data name="&gt;&gt;dbtnRack.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="fbtnMaintenance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 60</value>
   </data>
-  <data name="&gt;&gt;fbtnMaintenance.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;btnExit.Name" xml:space="preserve">
+    <value>btnExit</value>
   </data>
-  <data name="&gt;&gt;dbtnConnect.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="dbtnRack.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>en</value>
