@@ -28,7 +28,10 @@ namespace BioBaseCLIA
                 System.Threading.Thread.CurrentThread.CurrentCulture = Language.AppCultureInfo;
                 System.Threading.Thread.CurrentThread.CurrentUICulture = Language.AppCultureInfo;
 
-                if ((Process.GetProcesses().Where(x => x.ProcessName == Process.GetCurrentProcess().ProcessName).Select(x => x).ToList().Count > 1))
+                if ((Process.GetProcesses()
+                    .Where(x => x.ProcessName == Process.GetCurrentProcess().ProcessName)
+                    .Select(x => x)
+                    .ToList().Count > 1))
                 {
                     MessageBox.Show(Res.Running, Res.Tips, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
