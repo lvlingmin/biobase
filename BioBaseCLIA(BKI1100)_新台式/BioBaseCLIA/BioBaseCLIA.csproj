@@ -244,6 +244,16 @@
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Resources\String\NetCom3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NetCom3.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\String\Program.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Program.resx</DependentUpon>
+    </Compile>
     <Compile Include="Run\BindingCollection.cs" />
     <Compile Include="Run\CONSTANTDEFINE.cs" />
     <Compile Include="Run\DiuInfo.cs" />
@@ -481,6 +491,16 @@
     </Compile>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\String\NetCom3.en.resx" />
+    <EmbeddedResource Include="Resources\String\NetCom3.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>NetCom3.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\String\Program.en.resx" />
+    <EmbeddedResource Include="Resources\String\Program.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Program.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Run\frmAddSample.en-US.resx">
       <DependentUpon>frmAddSample.cs</DependentUpon>
@@ -747,15 +767,6 @@
     <Content Include="Resources\未连接.png" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="Microsoft.Office.Core">
-      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>5</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="Microsoft.Office.Interop.Excel">
       <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>1</VersionMajor>
