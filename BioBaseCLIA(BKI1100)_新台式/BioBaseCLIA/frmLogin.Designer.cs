@@ -39,16 +39,16 @@
             this.logo = new System.Windows.Forms.PictureBox();
             this.ChangeLanguage = new System.Windows.Forms.PictureBox();
             this.panellogin = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.chkKeepPwd = new System.Windows.Forms.CheckBox();
             this.cmbUserName = new System.Windows.Forms.ComboBox();
             this.btnCancel = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnLogin = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.txtUserPassword = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.titleofbio = new System.Windows.Forms.PictureBox();
+            this.cbLanguage = new System.Windows.Forms.ComboBox();
+            this.lbLanguage = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.paProcess.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
@@ -120,8 +120,8 @@
             resources.ApplyResources(this.panellogin, "panellogin");
             this.panellogin.BackColor = System.Drawing.Color.Transparent;
             this.panellogin.BackgroundImage = global::BioBaseCLIA.Properties.Resources.backgroundglass;
-            this.panellogin.Controls.Add(this.label1);
-            this.panellogin.Controls.Add(this.comboBox1);
+            this.panellogin.Controls.Add(this.cbLanguage);
+            this.panellogin.Controls.Add(this.lbLanguage);
             this.panellogin.Controls.Add(this.chkKeepPwd);
             this.panellogin.Controls.Add(this.cmbUserName);
             this.panellogin.Controls.Add(this.btnCancel);
@@ -130,22 +130,6 @@
             this.panellogin.Controls.Add(this.txtUserPassword);
             this.panellogin.Controls.Add(this.label3);
             this.panellogin.Name = "panellogin";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Name = "label1";
-            // 
-            // comboBox1
-            // 
-            resources.ApplyResources(this.comboBox1, "comboBox1");
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            resources.GetString("comboBox1.Items"),
-            resources.GetString("comboBox1.Items1")});
-            this.comboBox1.Name = "comboBox1";
             // 
             // chkKeepPwd
             // 
@@ -176,13 +160,6 @@
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Name = "label3";
-            // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
@@ -210,6 +187,13 @@
             this.txtUserPassword.Name = "txtUserPassword";
             this.txtUserPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUserPassword_KeyDown);
             // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Name = "label3";
+            // 
             // titleofbio
             // 
             resources.ApplyResources(this.titleofbio, "titleofbio");
@@ -217,6 +201,23 @@
             this.titleofbio.BackgroundImage = global::BioBaseCLIA.Properties.Resources.title;
             this.titleofbio.Name = "titleofbio";
             this.titleofbio.TabStop = false;
+            // 
+            // cbLanguage
+            // 
+            resources.ApplyResources(this.cbLanguage, "cbLanguage");
+            this.cbLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLanguage.FormattingEnabled = true;
+            this.cbLanguage.Items.AddRange(new object[] {
+            resources.GetString("cbLanguage.Items"),
+            resources.GetString("cbLanguage.Items1")});
+            this.cbLanguage.Name = "cbLanguage";
+            this.cbLanguage.SelectedIndexChanged += new System.EventHandler(this.cbLanguage_SelectedIndexChanged);
+            // 
+            // lbLanguage
+            // 
+            resources.ApplyResources(this.lbLanguage, "lbLanguage");
+            this.lbLanguage.ForeColor = System.Drawing.Color.Black;
+            this.lbLanguage.Name = "lbLanguage";
             // 
             // frmLogin
             // 
@@ -271,7 +272,7 @@
         private System.Windows.Forms.Label lblDescribe;
         private System.Windows.Forms.ComboBox cmbUserName;
         private System.Windows.Forms.CheckBox chkKeepPwd;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbLanguage;
+        private System.Windows.Forms.Label lbLanguage;
     }
 }

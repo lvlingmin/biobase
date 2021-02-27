@@ -12,6 +12,7 @@ using System.IO;
 using System.Threading;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Resources;
 
 namespace BioBaseCLIA.User
 {
@@ -810,12 +811,72 @@ namespace BioBaseCLIA.User
             base.WndProc(ref m);
         }
 
-
         private void cmbUserName_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
                 txtUserPassword.Focus();
         }
+        int index = 0;//用来判断是否第一次
+        private void cbLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (((ComboBox)sender).SelectedIndex == 0)
+            {
+                Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("zh-CN");
+                Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("zh-CN");
+                OperateIniFile.WriteIniPara("CultureInfo", "Culture", "zh-CN");
+            }
+            else
+            {
+                Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en");
+                Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
+                OperateIniFile.WriteIniPara("CultureInfo", "Culture", "en");
+            }
 
+            ApplyResource();
+
+            if (index > 0)
+            {
+                if (DialogResult.Yes == MessageBox.Show(Getstring("RestartMsg"), "", MessageBoxButtons.YesNo))
+                {
+                    DialogResult = DialogResult.Cancel;
+                    Close();
+                }
+            }
+
+            index++;
+        }
+
+        #region 语言环境设置相关，比较粗糙后面整理一下
+        ComponentResourceManager resources = new ComponentResourceManager(typeof(frmLogin));
+        private void ApplyResource()
+        {
+            foreach (Control ctl in this.Controls)
+            {
+                resources.ApplyResources(ctl, ctl.Name);
+            }
+
+            this.ResumeLayout(false);
+            this.PerformLayout();
+            resources.ApplyResources(this, "$this");
+
+            SetBackgroundimageAndLocation();
+        }
+        private string GetCultureInfo()
+        {
+            if (OperateIniFile.ReadInIPara("CultureInfo", "Culture") == "en")
+            {
+                return "en";
+            }
+
+            return "zh-CN";
+        }
+
+        private string Getstring(string key)
+        {
+            ResourceManager resManagerA =
+                    new ResourceManager("BioBaseCLIA.User.frmLogin", typeof(frmLogin).Assembly);
+            return resManagerA.GetString(key);
+        }
+        #endregion
     }
 }
