@@ -448,6 +448,9 @@
     <EmbeddedResource Include="frmMessageShow.en-US.resx">
       <DependentUpon>frmMessageShow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMessageShow.en.resx">
+      <DependentUpon>frmMessageShow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMessageShow.resx">
       <DependentUpon>frmMessageShow.cs</DependentUpon>
     </EmbeddedResource>
