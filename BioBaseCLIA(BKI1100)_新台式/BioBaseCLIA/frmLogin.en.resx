@@ -117,19 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lbLanguage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lbLanguage.Text" xml:space="preserve">
-    <value>Language</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="cbLanguage.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 9pt</value>
+  </data>
+  <data name="cbLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="chkKeepPwd.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 15pt</value>
+  </data>
   <data name="chkKeepPwd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 24</value>
+    <value>196, 26</value>
   </data>
   <data name="chkKeepPwd.Text" xml:space="preserve">
     <value>Remember password</value>
+  </data>
+  <data name="cmbUserName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 15pt</value>
+  </data>
+  <data name="cmbUserName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 30</value>
   </data>
   <data name="btnCancel.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -195,11 +203,17 @@
         /BszvVKvx5MPAzA7yGZlu5nptv2Pm/MHz+N45ZRT+BMAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="btnCancel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 15pt</value>
+  </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>Exit</value>
   </data>
+  <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 15pt</value>
+  </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 20</value>
+    <value>108, 22</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Username：</value>
@@ -268,14 +282,36 @@
         /BszvVKvx5MPAzA7yGZlu5nptv2Pm/MHz+N45ZRT+BMAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="btnLogin.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 15pt</value>
+  </data>
   <data name="btnLogin.Text" xml:space="preserve">
     <value>Login</value>
   </data>
+  <data name="txtUserPassword.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 15pt</value>
+  </data>
+  <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 15pt</value>
+  </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 20</value>
+    <value>108, 22</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Password：</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lbLanguage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lbLanguage.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 15pt</value>
+  </data>
+  <data name="lbLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 22</value>
+  </data>
+  <data name="lbLanguage.Text" xml:space="preserve">
+    <value>语言</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -472,5 +508,62 @@
         FhTyFxTzGBXzGBXzGBXzGBXzGBXzGBXyFxTzFhTzFRPzFRPyFBIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
+  </data>
+  <data name="Alarmfailed" xml:space="preserve">
+    <value>The alarm module handshake failed!\n</value>
+  </data>
+  <data name="Cleanfailed" xml:space="preserve">
+    <value>The cleaning module handshake failed!\n</value>
+  </data>
+  <data name="ConnectErr" xml:space="preserve">
+    <value>Instrument initialization failed! Please confirm whether the connection status of the network cable and the connection address of the instrument are correct! Whether to run offline!</value>
+  </data>
+  <data name="Counterfailed" xml:space="preserve">
+    <value>Counter module handshake failed!\n</value>
+  </data>
+  <data name="Cupmanagementfailed" xml:space="preserve">
+    <value>The handshake of the cup processor module failed!\n</value>
+  </data>
+  <data name="Incubationfailure" xml:space="preserve">
+    <value>The incubation plate module handshake failed!\n</value>
+  </data>
+  <data name="InitErr" xml:space="preserve">
+    <value>Instrument initialization failed! Please confirm whether the instrument is turned on! Whether to run offline!</value>
+  </data>
+  <data name="InitExcetion" xml:space="preserve">
+    <value>Instrument initialization abnormal\n</value>
+  </data>
+  <data name="InitMsg" xml:space="preserve">
+    <value>Initialization progress</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="MessageboxTitle" xml:space="preserve">
+    <value>Tips</value>
+  </data>
+  <data name="PasswordErr" xml:space="preserve">
+    <value>The password input is empty, please re-enter!</value>
+  </data>
+  <data name="PwdUnexpectedCharacter" xml:space="preserve">
+    <value>Unexpected characters in password</value>
+  </data>
+  <data name="RestartMsg" xml:space="preserve">
+    <value>Language environment switch, please restart the software</value>
+  </data>
+  <data name="Runoffline" xml:space="preserve">
+    <value>\rWhether to run offline!</value>
+  </data>
+  <data name="Samplefailed" xml:space="preserve">
+    <value>Handshake failed to add prototype module!\n</value>
+  </data>
+  <data name="UnexpectedCharacter" xml:space="preserve">
+    <value>Unexpected characters, please re-enter</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>User </value>
+  </data>
+  <data name="UsernameErr" xml:space="preserve">
+    <value>The username is incorrect, please re-enter!</value>
   </data>
 </root>
