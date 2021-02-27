@@ -457,6 +457,9 @@
     <EmbeddedResource Include="frmSmallParent.resx">
       <DependentUpon>frmSmallParent.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmVersion.en.resx">
+      <DependentUpon>frmVersion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmVersion.resx">
       <DependentUpon>frmVersion.cs</DependentUpon>
     </EmbeddedResource>
