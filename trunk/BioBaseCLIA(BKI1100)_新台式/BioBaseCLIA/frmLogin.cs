@@ -10,8 +10,9 @@ using Common;
 using Maticsoft.DBUtility;
 using System.IO;
 using System.Threading;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
+using System.Globalization;
 using System.Resources;
 
 namespace BioBaseCLIA.User
@@ -42,8 +43,8 @@ namespace BioBaseCLIA.User
         List<string> lisUsedName = new List<string>();
         /// <summary>
         /// 是否记住密码
-        /// </summary>
-        string KeepPwd = "";//2018-08-04  zlx add
+        /// </summary>        
+        string KeepPwd = "";
         #region 快捷键变量
         Stopwatch swatch = new Stopwatch(); //快捷键进入调试工具软件时需得1s内快速按三下快捷键，的计时器
         int hotKeyFreq = 0; //快捷键1s内按下次数
@@ -53,20 +54,27 @@ namespace BioBaseCLIA.User
         #endregion
         public frmLogin()
         {
+            CultureInfo culture1 = System.Threading.Thread.CurrentThread.CurrentCulture;
+            CultureInfo culture = new CultureInfo(GetCultureInfo());
+            System.Threading.Thread.CurrentThread.CurrentCulture = culture;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
+
             InitializeComponent();
+
+            cbLanguage.Text = (GetCultureInfo() == "zh-CN" || string.IsNullOrEmpty(GetCultureInfo())) ? "中文" : "English";
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
             if (cmbUserName.Text.Trim() == "")
             {
-                frmMsgShow.MessageShow("用户登录", Localization.LanguageManager.Instance.getLocaltionStr("UserNameIsNull"));// "用户名输入为空，请重新输入！");
+                frmMsgShow.MessageShow(Getstring("MessageboxTitle"), Localization.LanguageManager.Instance.getLocaltionStr("UserNameIsNull"));// "用户名输入为空，请重新输入！");
                 cmbUserName.Focus();
                 return;
             }
             if (txtUserPassword.Text.Trim() == "")
             {
-                frmMsgShow.MessageShow("用户登录","密码输入为空，请重新输入！");
+                frmMsgShow.MessageShow(Getstring("MessageboxTitle"), Getstring("PasswordErr"));
                 txtUserPassword.Focus();
                 return;
             }
@@ -74,13 +82,13 @@ namespace BioBaseCLIA.User
             string password = txtUserPassword.Text.Trim();
             if (!BioBaseCLIA.InfoSetting.Inspect.NameOnlycharacter3(cmbUserName.Text.Trim()))//this y add 20180528
             {
-                frmMsgShow.MessageShow("用户登录", "用户名出现意外字符。");
+                frmMsgShow.MessageShow(Getstring("MessageboxTitle"), Getstring("UnexpectedCharacter"));
                 cmbUserName.Focus();
                 return;
             }
             if (!BioBaseCLIA.InfoSetting.Inspect.PasswordOnlycharacter(txtUserPassword.Text.Trim()))
             {
-                frmMsgShow.MessageShow("用户登录", "密码出现意外字符。");
+                frmMsgShow.MessageShow(Getstring("MessageboxTitle"), Getstring("PwdUnexpectedCharacter"));
                 txtUserPassword.Focus();
                 return;
             }//this end
@@ -90,7 +98,7 @@ namespace BioBaseCLIA.User
            
             if (dtUser.Rows.Count < 1)
             {
-                frmMsgShow.MessageShow("用户登录", "用户名不正确，请重新输入！");
+                frmMsgShow.MessageShow(Getstring("MessageboxTitle"), Getstring("UsernameErr"));
                 cmbUserName.Focus();
                 return;
             }
@@ -100,7 +108,7 @@ namespace BioBaseCLIA.User
                 var dr = dtUser.Select("UserPassword='" + password + "'");
                 if (dr.Length < 1)
                 {
-                    frmMsgShow.MessageShow("用户登录", "密码不正确，请重新输入！");
+                    frmMsgShow.MessageShow(Getstring("MessageboxTitle"), Getstring("UsernameErr"));
                     txtUserPassword.Text = "";
                     txtUserPassword.Focus();
                     return;
@@ -110,7 +118,7 @@ namespace BioBaseCLIA.User
                     //2018-08-04  zlx add
                     LoginGName = LoginUserName = cmbUserName.Text.Trim();
                     LoginUserType = dr[0]["RoleType"].ToString();
-                    LogFile.Instance.Write(DateTime.Now.ToString("HH:mm:ss") + " 用户  " + LoginUserName + " 登陆 ");
+                    LogFile.Instance.Write(DateTime.Now.ToString("HH:mm:ss") + " " + Getstring("User") + "  " + LoginUserName + " "+Getstring("Login")+" ");
                 }
             }
             foreach (string usdName in lisUsedName)
@@ -140,7 +148,7 @@ namespace BioBaseCLIA.User
             BeginInvoke(new Action(() =>
             {
                 progressData.Value = 1;
-                lblDescribe.Text = "初始化样本数据..." + " " + progressData.Value.ToString() + "%";
+                lblDescribe.Text = Getstring("InitMsg") + " " + progressData.Value.ToString() + "%";
             }));
             //初始化样本数据
             GetItemInfo();
@@ -148,14 +156,14 @@ namespace BioBaseCLIA.User
             BeginInvoke(new Action(() =>
             {
                 progressData.Value = 10;
-                lblDescribe.Text = "初始化样本运行信息..." + " " + progressData.Value.ToString() + "%";
+                lblDescribe.Text = Getstring("InitMsg") + " " + progressData.Value.ToString() + "%";
             }));
             //初始化样本运行信息
             InitSpRunInfo();
             BeginInvoke(new Action(() =>
             {
                 progressData.Value = 30;
-                lblDescribe.Text = "同步试剂、底物数据到数据库..." + " " + progressData.Value.ToString() + "%";
+                lblDescribe.Text = Getstring("InitMsg") + " " + progressData.Value.ToString() + "%";
             }));
             //同步试剂、底物数据到数据库
             IniUpdateAccess();
@@ -163,7 +171,7 @@ namespace BioBaseCLIA.User
             BeginInvoke(new Action(() =>
             {
                 progressData.Value = 40;
-                lblDescribe.Text = "上下位机连接..." + " " + progressData.Value.ToString() + "%";
+                lblDescribe.Text = Getstring("InitMsg") + " " + progressData.Value.ToString() + "%";
             }));
             if (!NetCom3.isConnect)
             {
@@ -173,8 +181,9 @@ namespace BioBaseCLIA.User
 
                     if (!NetCom3.isConnect)
                     {
-                        //2018-09-06 zlx mod
-                        DialogResult r = MessageBox.Show("仪器初始化失败！请确认仪器是否已经开启！是否脱机运行！", "开机提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                        DialogResult r = 
+                            MessageBox.Show(Getstring("InitErr"), Getstring("MessageboxTitle"), 
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                         DialogResult = r;
                         goto complete;
                     }
@@ -182,7 +191,9 @@ namespace BioBaseCLIA.User
                 }
                 else
                 {
-                    DialogResult r = MessageBox.Show("仪器初始化失败！请确认网线连接状态及仪器的连接地址是否正确！是否脱机运行！", "开机提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    DialogResult r = 
+                        MessageBox.Show(Getstring("ConnectErr"), Getstring("MessageboxTitle"),
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                     DialogResult = r;
                     goto complete;
                 }
@@ -191,7 +202,7 @@ namespace BioBaseCLIA.User
             BeginInvoke(new Action(() =>
             {
                 progressData.Value = 45;
-                lblDescribe.Text = "上下位机握手..." + " " + progressData.Value.ToString() + "%";
+                lblDescribe.Text = Getstring("InitMsg") + " " + progressData.Value.ToString() + "%";
             }));
             if (NetCom3.isConnect)
             {
@@ -210,65 +221,33 @@ namespace BioBaseCLIA.User
                 StringBuilder err = new StringBuilder();
                 if (HandData[4] != 255)
                 {
-                    err.Append("计数器模组握手失败！\n");
-                    //2018-09-06 zlx mod
-                    //DialogResult r = MessageBox.Show("计数器模组握手失败！是否脱机运行！", "上下位机握手", 
-                    //    MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                    //DialogResult = r;
-                    ////frmMsgShow.MessageShow("上下位机握手", "计数器模组握手失败！");
-                    //goto complete;
+                    err.Append(Getstring("Counterfailed"));
                 }
                 if (HandData[5] != 255)
                 {
-                    err.Append("加样机模组握手失败！\n");
-                    //2018-09-06 zlx mod
-                    //DialogResult r = MessageBox.Show("加样机模组握手失败！是否脱机运行！", "上下位机握手", 
-                    //    MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                    //DialogResult = r;
-                    ////frmMsgShow.MessageShow("上下位机握手", "抓手模组握手失败！");
-                    //goto complete;
+                    err.Append(Getstring("Samplefailed"));
                 }
                 if (HandData[6] != 255)
                 {
-                    err.Append("理杯机模组握手失败!\n");
-                    //2018-09-06 zlx mod
-                    //DialogResult r = MessageBox.Show("理杯机模组握手失败!是否脱机运行！", "上下位机握手", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                    //DialogResult = r;
-                    ////frmMsgShow.MessageShow("上下位机握手", "加样机模组握手失败！");
-                    //goto complete;
+                    err.Append(Getstring("Cupmanagementfailed"));
                 }
                 if (HandData[7] != 255)
                 {
-                    err.Append("清洗模组握手失败!\n");
-                    //2018-09-06 zlx mod
-                    //DialogResult r = MessageBox.Show("清洗模组握手失败!是否脱机运行！", "上下位机握手", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                    //DialogResult = r;
-                    ////frmMsgShow.MessageShow("上下位机握手", "清洗模组握手失败！");
-                    //goto complete;
+                    err.Append(Getstring("Cleanfailed"));
                 }
                 if (HandData[8] != 255)
                 {
-                    err.Append("报警模组握手失败!\n");
-                    //2018-09-06 zlx mod
-                    //DialogResult r = MessageBox.Show("报警模组握手失败!是否脱机运行！", "上下位机握手", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                    //DialogResult = r;
-                    ////frmMsgShow.MessageShow("上下位机握手", "报警模组握手失败！");
-                    //goto complete;
+                    err.Append(Getstring("Alarmfailed"));
                 }
                 if (HandData[9] != 255)
                 {
-                    err.Append("温育盘模组握手失败!\n");
-                    //2018-09-06 zlx mod
-                    //DialogResult r = MessageBox.Show("温育盘模组握手失败!是否脱机运行！", "上下位机握手", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                    //DialogResult = r;
-                    ////frmMsgShow.MessageShow("上下位机握手", "报警模组握手失败！");
-                    //goto complete;
+                    err.Append(Getstring("Incubationfailure"));
                 }
-                if (!string.IsNullOrEmpty(err.ToString()))
+                if (!string.IsNullOrEmpty(err.ToString())) 
                 {
                     Invoke(new Action(() =>
                     {
-                        MessageBox.Show("仪器初始化异常:\n\n" + err.ToString(), "温馨提示",
+                        MessageBox.Show(Getstring("InitExcetion") + err.ToString(),Getstring("MessageboxTitle"),
                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }));
                     goto complete;
@@ -278,7 +257,7 @@ namespace BioBaseCLIA.User
                 BeginInvoke(new Action(() =>
                 {
                     progressData.Value = 70;
-                    lblDescribe.Text = "仪器初始化..." + " " + progressData.Value.ToString() + "%";
+                    lblDescribe.Text = Getstring("InitMsg") + " " + progressData.Value.ToString() + "%";
                 }));
                 NetCom3.Instance.Send(NetCom3.Cover("EB 90 F1 02"), 5);
                 if (!NetCom3.Instance.SingleQuery())
@@ -286,65 +265,21 @@ namespace BioBaseCLIA.User
                     goto complete;
                 }
                 #region 判断各个模组是否初始化成功
-                /*
-                HandData = new int[16];
-                while (dataRecive[0] == null)
-                {
-                    Thread.Sleep(10);
-                }
-                HandData = NetCom3.converTo10(dataRecive);
-                if (HandData[4] != 255)
-                {
-                    //2018-09-06 zlx mod
-                    DialogResult r = MessageBox.Show("计数器模组初始化失败！是否脱机运行！", "仪器初始化", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                    DialogResult = r;
-                    //frmMsgShow.MessageShow("仪器初始化", "计数器模组初始化失败！");
-                    goto complete;
-                }
-                if (HandData[5] != 255)
-                {
-                    //2018-09-06 zlx mod
-                    DialogResult r = MessageBox.Show("抓手模组初始化失败！是否脱机运行！", "仪器初始化", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                    DialogResult = r;
-                    //frmMsgShow.MessageShow("仪器初始化", "抓手模组初始化失败！");
-                    goto complete;
-                }
-                if (HandData[6] != 255)
-                {
-                    //2018-09-06 zlx mod
-                    DialogResult r = MessageBox.Show("加样机模组初始化失败！是否脱机运行！", "仪器初始化", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                    DialogResult = r;
-                    //frmMsgShow.MessageShow("仪器初始化", "加样机模组初始化失败！");
-                    goto complete;
-                }
-                if (HandData[7] != 255)
-                {
-                    //2018-09-06 zlx mod
-                    DialogResult r = MessageBox.Show("清洗模组初始化失败！是否脱机运行！", "仪器初始化", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                    DialogResult = r;
-                    //frmMsgShow.MessageShow("仪器初始化", "清洗模组初始化失败！");
-                    goto complete;
-                }
-                 */
                 if (NetCom3.Instance.ErrorMessage != null)
                 {
-                    //2018-09-06 zlx mod
-                    DialogResult r = MessageBox.Show(NetCom3.Instance.ErrorMessage + "\r是否脱机运行！", "仪器初始化", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                    DialogResult = r;
+                    Invoke(new Action(() =>
+                    {
+                        DialogResult r = MessageBox.Show(NetCom3.Instance.ErrorMessage + Getstring("Runoffline"), Getstring("MessageboxTitle"), MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                        DialogResult = r;
+                    }));
                     goto complete;
                 }
                 #endregion
                 currentHoleNum = int.Parse(OperateIniFile.ReadInIPara("OtherPara", "washCurrentHoleNum"));
-                //currentHoleNum孔转到清洗盘取放管位置
-                //NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 03 02 " + currentHoleNum.ToString("x2")), 2);
-                //if (!NetCom3.Instance.WashQuery())
-                //{
-                //    goto complete;
-                //}
                 BeginInvoke(new Action(() =>
                 {
                     progressData.Value = 100;
-                    lblDescribe.Text = "仪器初始化..." + " " + progressData.Value.ToString() + "%";
+                    lblDescribe.Text = Getstring("InitMsg") + " " + progressData.Value.ToString() + "%";
                 }));
             }
             Thread.Sleep(5000);
@@ -355,18 +290,15 @@ namespace BioBaseCLIA.User
             {
                 ;
             }
-            //管理员账号握手失败也能进入软件
+            //管理员账号握手初始化失败也能进入软件
             else if (LoginUserType == "1") //lyq add20201204
             {
                 DialogResult = DialogResult.OK;
             }
-
             BeginInvoke(new Action(() =>
             {
                 Close();
             }));
-            
-           
         }
         /// <summary>
         /// 查询配置文件中试剂的信息
@@ -460,16 +392,6 @@ namespace BioBaseCLIA.User
                     sbNum1 = "0";//this block end
                     DbHelperOleDb.ExecuteSql(3,@"update tbSubstrate set leftoverTest =" + sbNum1 + " where BarCode = '"+ sbCode1 + "'");//move y 20180511
             }
-            /*
-            string sbCode2 = OperateIniFile.ReadIniData("Substrate2", "BarCode", "0", iniPathSubstrateTube);
-            string sbNum2 = OperateIniFile.ReadIniData("Substrate2", "LeftCount", "0", iniPathSubstrateTube);
-            if (sbCode2.Trim() != "")//this block add y 20180511
-            {
-                if (sbNum2.Trim() == "")
-                    sbNum2 = "0";//this block end
-                    DbHelperOleDb.ExecuteSql(@"update tbSubstrate set leftoverTest =" + sbNum2 + " where BarCode = '"+ sbCode2 + "'");//move y 20180511
-            }
-            */
             #endregion
 
         }
@@ -691,6 +613,7 @@ namespace BioBaseCLIA.User
             ////注册热键Alt+D，Id号为102。HotKey.KeyModifiers.Alt也可以直接使用数字1来表示。
             //DebugToolHotKeys.RegisterHotKey(Handle, 102, DebugToolHotKeys.KeyModifiers.Alt, Keys.D);
         }
+
         class DebugToolHotKeys
         {
             [DllImport("user32.dll", SetLastError = true)]
@@ -775,7 +698,7 @@ namespace BioBaseCLIA.User
                                             {
                                                 Process.Start(debugAppPath, strCommand);
                                                 DialogResult = DialogResult.Cancel;
-                                                BeginInvoke(new Action(() =>
+                                                BeginInvoke(new Action(()=>
                                                 {
                                                     Close();
                                                 }));
@@ -816,6 +739,7 @@ namespace BioBaseCLIA.User
             if (e.KeyCode == Keys.Enter)
                 txtUserPassword.Focus();
         }
+
         int index = 0;//用来判断是否第一次
         private void cbLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -871,11 +795,11 @@ namespace BioBaseCLIA.User
             return "zh-CN";
         }
 
-        private string Getstring(string key)
+        private string Getstring(string key) 
         {
             ResourceManager resManagerA =
                     new ResourceManager("BioBaseCLIA.User.frmLogin", typeof(frmLogin).Assembly);
-            return resManagerA.GetString(key);
+            return  resManagerA.GetString(key); 
         }
         #endregion
     }
