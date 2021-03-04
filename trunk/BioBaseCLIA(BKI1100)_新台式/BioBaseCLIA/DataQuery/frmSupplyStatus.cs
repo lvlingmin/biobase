@@ -11,6 +11,7 @@ using Maticsoft.DBUtility;
 using System.IO;
 using BioBaseCLIA.Run;
 using System.Threading;
+using System.Resources;
 
 namespace BioBaseCLIA.DataQuery
 {
@@ -84,70 +85,14 @@ namespace BioBaseCLIA.DataQuery
             subBottle1.Location = new Point(i-33, subBottle1.Location.Y);
             subBottle2.Location = new Point(i-33, subBottle2.Location.Y);
 
-            //试剂列表绑定数据源
             GetReagentInfo();
             dgvRegentInfo.DataSource = dtRg;
-
         }
-        [Obsolete("废弃")]
-        private void GetSupplyInfo()
-        {
-            List<ReagentIniInfo> ReagentList = QueryReagentIniInfo();
-            dtRg.Clear();
-            foreach (ReagentIniInfo ReagentInfo in ReagentList)
-            {
-                if (ReagentInfo.BarCode != "")
-                {
-                    dtRg.Rows.Add(Convert.ToInt32(ReagentInfo.Postion), ReagentInfo.ItemName,ReagentInfo.BarCode,
-                        ReagentInfo.TestCount ,ReagentInfo.LeftReagent1);
-                }
-            }
-            DataView dv = dtRg.DefaultView;
-            dv.Sort = "Postion";
-            dtRg = dv.ToTable();
-            dgvRegentInfo.DataSource = dtRg;
-            string left1 = OperateIniFile.ReadIniData("Substrate1", "LeftCount", "0", Application.StartupPath + "//SubstrateTube.ini");
-            string count1 = OperateIniFile.ReadIniData("Substrate1", "TestCount", "0", Application.StartupPath + "//SubstrateTube.ini");
-            if (left1 != "" && count1 != "")
-            {
-                subBottle1.TestRatio = (float)Math.Truncate(float.Parse(left1) / float.Parse(count1) * 10) / 10;
-                subBottle1.Invalidate();
-                lblSuBottle1.Text = left1 + "/" + count1;
-            }
-        }
-
-        /// <summary>
-        /// 试剂信息
-        /// </summary>
-        /// <returns></returns>
-        private void GetReagentInfo()
-        {
-            DbHelperOleDb db = new DbHelperOleDb(3);
-            DataTable dtReagentInfo = new BLL.tbReagent().GetList("Status ='" + "正常" + "'").Tables[0];
-
-            for (int indexRow = 0; indexRow < dtReagentInfo.Rows.Count; indexRow++)
-            {
-                dtRg.Rows.Add(dtReagentInfo.Rows[indexRow]["Postion"], dtReagentInfo.Rows[indexRow]["ReagentName"],
-                    dtReagentInfo.Rows[indexRow]["BarCode"],
-                    dtReagentInfo.Rows[indexRow]["AllTestNumber"], dtReagentInfo.Rows[indexRow]["leftoverTestR1"]);
-            }
-
-            DataView dv = dtRg.DefaultView;
-            dv.Sort = "Postion";
-            dtRg = dv.ToTable(); string left1 = OperateIniFile.ReadIniData("Substrate1", "LeftCount", "0", Application.StartupPath + "//SubstrateTube.ini");
-            string count1 = OperateIniFile.ReadIniData("Substrate1", "TestCount", "0", Application.StartupPath + "//SubstrateTube.ini");
-            if (left1 != "" && count1 != "")
-            {
-                subBottle1.TestRatio = (float)Math.Truncate(float.Parse(left1) / float.Parse(count1) * 10) / 10;
-                subBottle1.Invalidate();
-                lblSuBottle1.Text = left1 + "/" + count1;
-            }
-        }
-
-        #region 暂时屏蔽
+        #region 屏蔽
         /*
         private void GetSupplyInfo()
         {
+            //2018-08-15 zlx mod
             DataTable dt;
             if (dtRgInfo.Rows.Count > 0)
             {
@@ -251,10 +196,65 @@ namespace BioBaseCLIA.DataQuery
             //    subBottle2.Invalidate();
             //    lblSuBottle2.Text = left2 + "/" + count2;
             //}
-            
         }
-            */
+        */
         #endregion
+        [Obsolete("废弃")]
+        private void GetSupplyInfo()
+        {
+            dtRg.Clear();
+            List<ReagentIniInfo> ReagentList = QueryReagentIniInfo();
+            foreach (ReagentIniInfo ReagentInfo in ReagentList)
+            {
+                if (ReagentInfo.BarCode != "")
+                {
+                    dtRg.Rows.Add(Convert.ToInt32(ReagentInfo.Postion), ReagentInfo.ItemName, ReagentInfo.BarCode,
+                        ReagentInfo.TestCount, ReagentInfo.LeftReagent1);
+                }
+            }
+            DataView dv = dtRg.DefaultView;
+            dv.Sort = "Postion";
+            dtRg = dv.ToTable();
+            dgvRegentInfo.DataSource = dtRg;
+            string left1 = OperateIniFile.ReadIniData("Substrate1", "LeftCount", "0", Application.StartupPath + "//SubstrateTube.ini");
+            string count1 = OperateIniFile.ReadIniData("Substrate1", "TestCount", "0", Application.StartupPath + "//SubstrateTube.ini");
+            if (left1 != "" && count1 != "")
+            {
+                subBottle1.TestRatio = (float)Math.Truncate(float.Parse(left1) / float.Parse(count1) * 10) / 10;
+                subBottle1.Invalidate();
+                lblSuBottle1.Text = left1 + "/" + count1;
+            }
+        }
+
+        /// <summary>
+        /// 试剂信息
+        /// </summary>
+        /// <returns></returns>
+        public void GetReagentInfo()
+        {
+            DbHelperOleDb db = new DbHelperOleDb(3);
+            DataTable dtReagentInfo = new BLL.tbReagent().GetList("Status ='" + Getstring("normal") + "'").Tables[0];
+
+            for (int indexRow = 0; indexRow < dtReagentInfo.Rows.Count; indexRow++) 
+            {
+                dtRg.Rows.Add(dtReagentInfo.Rows[indexRow]["Postion"], dtReagentInfo.Rows[indexRow]["ReagentName"],
+                    dtReagentInfo.Rows[indexRow]["BarCode"],
+                    dtReagentInfo.Rows[indexRow]["AllTestNumber"], dtReagentInfo.Rows[indexRow]["leftoverTestR1"]);
+            }
+            
+            DataView dv = dtRg.DefaultView;
+            dv.Sort = "Postion";
+            dtRg = dv.ToTable();
+            string left1 = OperateIniFile.ReadIniData("Substrate1", "LeftCount", "0", Application.StartupPath + "//SubstrateTube.ini");
+            string count1 = OperateIniFile.ReadIniData("Substrate1", "TestCount", "0", Application.StartupPath + "//SubstrateTube.ini");
+            if (left1 != "" && count1 != "")
+            {
+                subBottle1.TestRatio = (float)Math.Truncate(float.Parse(left1) / float.Parse(count1) * 10) / 10;
+                subBottle1.Invalidate();
+                lblSuBottle1.Text = left1 + "/" + count1;
+            }
+        }
+
         /// <summary>
         /// 查询试剂盘中试剂的信息
         /// </summary>
@@ -318,7 +318,6 @@ namespace BioBaseCLIA.DataQuery
                 return null;
             }
         }
-
         /// <summary>
         /// 查询四个管架中管的个数
         /// </summary>
@@ -332,8 +331,6 @@ namespace BioBaseCLIA.DataQuery
             lisTubeNum.Add(int.Parse(OperateIniFile.ReadIniData("Tube", "Pos4", "", Application.StartupPath + "//SubstrateTube.ini")));
             return lisTubeNum;
         }
-
-       
         private void btnLoadRackA_Click(object sender, EventArgs e)
         {
             string curPos = OperateIniFile.ReadIniData("Tube", "Pos1", "0", Application.StartupPath + "//SubstrateTube.ini");
@@ -451,7 +448,6 @@ namespace BioBaseCLIA.DataQuery
             //}
             if (e.Button == MouseButtons.Left)
             {
-                
                 if (!CheckFormIsOpen("frmLoadSu"))
                 {
                     frmLoadSu frmLs = new frmLoadSu();
@@ -485,13 +481,13 @@ namespace BioBaseCLIA.DataQuery
         private void ItemUnLoad_Click(object sender, EventArgs e)
         {
             DbHelperOleDb db = new DbHelperOleDb(3);
-            DataTable dtSb = bllsb.GetList("Status='正常'and SubstrateNumber = '" + CurBottle.ToString()+ "'").Tables[0];
+            DataTable dtSb = bllsb.GetList("Status='"+Getstring("normal") +"'and SubstrateNumber = '" + CurBottle.ToString()+ "'").Tables[0];
             Model.tbSubstrate modelSb = new Model.tbSubstrate();
             modelSb = bllsb.GetModel(int.Parse(dtSb.Rows[0]["SubstrateID"].ToString()));
-            modelSb.Status = "卸载";
+            modelSb.Status = Getstring("uninstall");
             if (bllsb.Update(modelSb))
             {
-                frmMsgShow.MessageShow("供应品状态", "底物卸载成功！");
+                frmMsgShow.MessageShow(Getstring("MessageHead1"), Getstring("UnstallSubSucess"));
                 OperateIniFile.WriteIniData("Substrate" + CurBottle.ToString(), "BarCode", "", Application.StartupPath + "//SubstrateTube.ini");
                 OperateIniFile.WriteIniData("Substrate" + CurBottle.ToString(), "TestCount", "", Application.StartupPath + "//SubstrateTube.ini");
                 OperateIniFile.WriteIniData("Substrate" + CurBottle.ToString(), "LeftCount", "", Application.StartupPath + "//SubstrateTube.ini");
@@ -509,6 +505,14 @@ namespace BioBaseCLIA.DataQuery
                     lblSuBottle2.Text = "0/500";
                 }
             }            
-        }      
+        }
+
+        private string Getstring(string key)
+        {
+            ResourceManager resManagerA =
+                    new ResourceManager("BioBaseCLIA.DataQuery.frmSupplyStatus", typeof(frmSupplyStatus).Assembly);
+            return resManagerA.GetString(key);
+        }
+
     }
 }
