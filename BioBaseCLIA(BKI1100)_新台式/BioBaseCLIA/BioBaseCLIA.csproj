@@ -389,8 +389,14 @@
     <EmbeddedResource Include="DataQuery\frmHistoryScaling.en-US.resx">
       <DependentUpon>frmHistoryScaling.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DataQuery\frmHistoryScaling.en.resx">
+      <DependentUpon>frmHistoryScaling.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataQuery\frmHistoryScaling.resx">
       <DependentUpon>frmHistoryScaling.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataQuery\frmLoadSu.en.resx">
+      <DependentUpon>frmLoadSu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataQuery\frmLoadSu.resx">
       <DependentUpon>frmLoadSu.cs</DependentUpon>
@@ -401,10 +407,16 @@
     <EmbeddedResource Include="DataQuery\frmModifyTestResult.en-US.resx">
       <DependentUpon>frmModifyTestResult.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DataQuery\frmModifyTestResult.en.resx">
+      <DependentUpon>frmModifyTestResult.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataQuery\frmModifyTestResult.resx">
       <DependentUpon>frmModifyTestResult.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataQuery\frmPatientInfo.en-US.resx">
+      <DependentUpon>frmPatientInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataQuery\frmPatientInfo.en.resx">
       <DependentUpon>frmPatientInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataQuery\frmPatientInfo.resx">
@@ -417,6 +429,9 @@
     <EmbeddedResource Include="DataQuery\frmResultQuery.en-ZA.resx">
       <DependentUpon>frmResultQuery.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DataQuery\frmResultQuery.en.resx">
+      <DependentUpon>frmResultQuery.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataQuery\frmResultQuery.resx">
       <DependentUpon>frmResultQuery.cs</DependentUpon>
     </EmbeddedResource>
@@ -424,6 +439,9 @@
       <DependentUpon>frmSupplyStatus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataQuery\frmSupplyStatus.en-ZA.resx">
+      <DependentUpon>frmSupplyStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataQuery\frmSupplyStatus.en.resx">
       <DependentUpon>frmSupplyStatus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataQuery\frmSupplyStatus.resx">
@@ -466,20 +484,32 @@
     <EmbeddedResource Include="frmVersion.resx">
       <DependentUpon>frmVersion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InfoSetting\frmInfo.en.resx">
+      <DependentUpon>frmInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InfoSetting\frmInfo.resx">
       <DependentUpon>frmInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoSetting\frmInstrumentPara.en-US.resx">
       <DependentUpon>frmInstrumentPara.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InfoSetting\frmInstrumentPara.en.resx">
+      <DependentUpon>frmInstrumentPara.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InfoSetting\frmInstrumentPara.resx">
       <DependentUpon>frmInstrumentPara.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoSetting\frmNetSet.en.resx">
+      <DependentUpon>frmNetSet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoSetting\frmNetSet.resx">
       <DependentUpon>frmNetSet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoSetting\frmUserManage.en-US.resx">
+      <DependentUpon>frmUserManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoSetting\frmUserManage.en.resx">
       <DependentUpon>frmUserManage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoSetting\frmUserManage.resx">
