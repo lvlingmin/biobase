@@ -6,9 +6,10 @@ using BioBaseCLIA.User;
 using Localization;
 using System.IO;
 using System.Diagnostics;
-//using BioBaseCLIA.Run;
 using Res = BioBaseCLIA.Resources.String.Program;
 using Common;
+//using BioBaseCLIA.Run;
+
 
 namespace BioBaseCLIA
 {
@@ -28,10 +29,7 @@ namespace BioBaseCLIA
                 System.Threading.Thread.CurrentThread.CurrentCulture = Language.AppCultureInfo;
                 System.Threading.Thread.CurrentThread.CurrentUICulture = Language.AppCultureInfo;
 
-                if ((Process.GetProcesses()
-                    .Where(x => x.ProcessName == Process.GetCurrentProcess().ProcessName)
-                    .Select(x => x)
-                    .ToList().Count > 1))
+                if ((Process.GetProcesses().Where(x => x.ProcessName == Process.GetCurrentProcess().ProcessName).Select(x => x).ToList().Count > 1))
                 {
                     MessageBox.Show(Res.Running, Res.Tips, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
