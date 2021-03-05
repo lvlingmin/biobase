@@ -31,10 +31,17 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInstruMaintenance));
             this.panel2 = new System.Windows.Forms.Panel();
-            this.dfInitializers = new BioBaseCLIA.CustomControl.definePanal(this.components);
-            this.lainitializers = new System.Windows.Forms.Label();
-            this.pbinitializers = new System.Windows.Forms.ProgressBar();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.dfInitializers = new BioBaseCLIA.CustomControl.definePanal(this.components);
+            this.pbinitializers = new System.Windows.Forms.ProgressBar();
+            this.lainitializers = new System.Windows.Forms.Label();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnPourInto = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.numRepeat = new System.Windows.Forms.NumericUpDown();
+            this.cmbSelectAct = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.checkNewTube = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -52,23 +59,23 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.functionButton5 = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.functionButton4 = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.label22 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label23 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.numRepeat = new System.Windows.Forms.NumericUpDown();
-            this.cmbSelectAct = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.checkNewTube = new System.Windows.Forms.CheckBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.functionButton2 = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.functionButton6 = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtInfo = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rdbDaily = new System.Windows.Forms.RadioButton();
+            this.fbtnStop = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.fbtnStart = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.rdbtnCustom = new System.Windows.Forms.RadioButton();
             this.rdbtnGeneral = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -93,32 +100,25 @@
             this.chbClearWashTube = new System.Windows.Forms.CheckBox();
             this.chbInit = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.functionButton5 = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.functionButton4 = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.btnPourInto = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.functionButton2 = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.functionButton6 = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.fbtnStop = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.fbtnStart = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.functionButton1 = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnGroupTest = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnReturn = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnInstruDiagnost = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnInstruMaintenance = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.label6 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
-            this.dfInitializers.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.dfInitializers.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numRepeat)).BeginInit();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDwPourin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numRepeat)).BeginInit();
-            this.groupBox6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -128,37 +128,100 @@
             // panel2
             // 
             resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Controls.Add(this.dfInitializers);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Name = "panel2";
+            // 
+            // panel4
+            // 
+            resources.ApplyResources(this.panel4, "panel4");
+            this.panel4.Controls.Add(this.dfInitializers);
+            this.panel4.Controls.Add(this.groupBox6);
+            this.panel4.Controls.Add(this.groupBox5);
+            this.panel4.Controls.Add(this.label23);
+            this.panel4.Controls.Add(this.textBox1);
+            this.panel4.Controls.Add(this.groupBox4);
+            this.panel4.Name = "panel4";
             // 
             // dfInitializers
             // 
             resources.ApplyResources(this.dfInitializers, "dfInitializers");
             this.dfInitializers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dfInitializers.Controls.Add(this.lainitializers);
             this.dfInitializers.Controls.Add(this.pbinitializers);
+            this.dfInitializers.Controls.Add(this.lainitializers);
             this.dfInitializers.Name = "dfInitializers";
-            // 
-            // lainitializers
-            // 
-            resources.ApplyResources(this.lainitializers, "lainitializers");
-            this.lainitializers.Name = "lainitializers";
             // 
             // pbinitializers
             // 
             resources.ApplyResources(this.pbinitializers, "pbinitializers");
             this.pbinitializers.Name = "pbinitializers";
             // 
-            // panel4
+            // lainitializers
             // 
-            resources.ApplyResources(this.panel4, "panel4");
-            this.panel4.Controls.Add(this.groupBox5);
-            this.panel4.Controls.Add(this.label23);
-            this.panel4.Controls.Add(this.textBox1);
-            this.panel4.Controls.Add(this.groupBox4);
-            this.panel4.Controls.Add(this.groupBox6);
-            this.panel4.Name = "panel4";
+            resources.ApplyResources(this.lainitializers, "lainitializers");
+            this.lainitializers.Name = "lainitializers";
+            // 
+            // groupBox6
+            // 
+            resources.ApplyResources(this.groupBox6, "groupBox6");
+            this.groupBox6.Controls.Add(this.btnPourInto);
+            this.groupBox6.Controls.Add(this.numRepeat);
+            this.groupBox6.Controls.Add(this.cmbSelectAct);
+            this.groupBox6.Controls.Add(this.label8);
+            this.groupBox6.Controls.Add(this.label7);
+            this.groupBox6.Controls.Add(this.checkNewTube);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.TabStop = false;
+            // 
+            // btnPourInto
+            // 
+            resources.ApplyResources(this.btnPourInto, "btnPourInto");
+            this.btnPourInto.BackColor = System.Drawing.Color.Transparent;
+            this.btnPourInto.EnabledSet = true;
+            this.btnPourInto.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnPourInto.FlatAppearance.BorderSize = 0;
+            this.btnPourInto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnPourInto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnPourInto.Name = "btnPourInto";
+            this.btnPourInto.UseVisualStyleBackColor = false;
+            this.btnPourInto.Click += new System.EventHandler(this.btnPourInto_Click);
+            // 
+            // numRepeat
+            // 
+            resources.ApplyResources(this.numRepeat, "numRepeat");
+            this.numRepeat.Name = "numRepeat";
+            this.numRepeat.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // cmbSelectAct
+            // 
+            resources.ApplyResources(this.cmbSelectAct, "cmbSelectAct");
+            this.cmbSelectAct.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSelectAct.FormattingEnabled = true;
+            this.cmbSelectAct.Items.AddRange(new object[] {
+            resources.GetString("cmbSelectAct.Items"),
+            resources.GetString("cmbSelectAct.Items1")});
+            this.cmbSelectAct.Name = "cmbSelectAct";
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // checkNewTube
+            // 
+            resources.ApplyResources(this.checkNewTube, "checkNewTube");
+            this.checkNewTube.Checked = true;
+            this.checkNewTube.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkNewTube.Name = "checkNewTube";
+            this.checkNewTube.UseVisualStyleBackColor = true;
             // 
             // groupBox5
             // 
@@ -215,11 +278,6 @@
             // numDwPourin
             // 
             resources.ApplyResources(this.numDwPourin, "numDwPourin");
-            this.numDwPourin.Maximum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
             this.numDwPourin.Name = "numDwPourin";
             this.numDwPourin.Value = new decimal(new int[] {
             20,
@@ -312,7 +370,6 @@
             // label21
             // 
             resources.ApplyResources(this.label21, "label21");
-            this.label21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label21.Name = "label21";
             // 
             // numericUpDown2
@@ -329,6 +386,32 @@
             0,
             0,
             0});
+            // 
+            // functionButton5
+            // 
+            resources.ApplyResources(this.functionButton5, "functionButton5");
+            this.functionButton5.BackColor = System.Drawing.Color.Transparent;
+            this.functionButton5.EnabledSet = true;
+            this.functionButton5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.functionButton5.FlatAppearance.BorderSize = 0;
+            this.functionButton5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.functionButton5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.functionButton5.Name = "functionButton5";
+            this.functionButton5.UseVisualStyleBackColor = false;
+            this.functionButton5.Click += new System.EventHandler(this.functionButton5_Click);
+            // 
+            // functionButton4
+            // 
+            resources.ApplyResources(this.functionButton4, "functionButton4");
+            this.functionButton4.BackColor = System.Drawing.Color.Transparent;
+            this.functionButton4.EnabledSet = true;
+            this.functionButton4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.functionButton4.FlatAppearance.BorderSize = 0;
+            this.functionButton4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.functionButton4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.functionButton4.Name = "functionButton4";
+            this.functionButton4.UseVisualStyleBackColor = false;
+            this.functionButton4.Click += new System.EventHandler(this.functionButton4_Click);
             // 
             // label22
             // 
@@ -387,67 +470,25 @@
             // groupBox4
             // 
             resources.ApplyResources(this.groupBox4, "groupBox4");
-            this.groupBox4.Controls.Add(this.btnPourInto);
-            this.groupBox4.Controls.Add(this.numRepeat);
-            this.groupBox4.Controls.Add(this.cmbSelectAct);
-            this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.checkNewTube);
+            this.groupBox4.Controls.Add(this.functionButton2);
+            this.groupBox4.Controls.Add(this.numericUpDown5);
+            this.groupBox4.Controls.Add(this.numericUpDown4);
+            this.groupBox4.Controls.Add(this.functionButton6);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
             // 
-            // numRepeat
+            // functionButton2
             // 
-            resources.ApplyResources(this.numRepeat, "numRepeat");
-            this.numRepeat.Name = "numRepeat";
-            this.numRepeat.Value = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            // 
-            // cmbSelectAct
-            // 
-            resources.ApplyResources(this.cmbSelectAct, "cmbSelectAct");
-            this.cmbSelectAct.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSelectAct.FormattingEnabled = true;
-            this.cmbSelectAct.Items.AddRange(new object[] {
-            resources.GetString("cmbSelectAct.Items"),
-            resources.GetString("cmbSelectAct.Items1")});
-            this.cmbSelectAct.Name = "cmbSelectAct";
-            // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
-            // 
-            // label7
-            // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
-            // 
-            // checkNewTube
-            // 
-            resources.ApplyResources(this.checkNewTube, "checkNewTube");
-            this.checkNewTube.Checked = true;
-            this.checkNewTube.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkNewTube.Name = "checkNewTube";
-            this.checkNewTube.UseVisualStyleBackColor = true;
-            // 
-            // groupBox6
-            // 
-            resources.ApplyResources(this.groupBox6, "groupBox6");
-            this.groupBox6.Controls.Add(this.functionButton2);
-            this.groupBox6.Controls.Add(this.numericUpDown4);
-            this.groupBox6.Controls.Add(this.functionButton6);
-            this.groupBox6.Controls.Add(this.numericUpDown5);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.TabStop = false;
-            // 
-            // numericUpDown4
-            // 
-            resources.ApplyResources(this.numericUpDown4, "numericUpDown4");
-            this.numericUpDown4.Name = "numericUpDown4";
+            resources.ApplyResources(this.functionButton2, "functionButton2");
+            this.functionButton2.BackColor = System.Drawing.Color.Transparent;
+            this.functionButton2.EnabledSet = true;
+            this.functionButton2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.functionButton2.FlatAppearance.BorderSize = 0;
+            this.functionButton2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.functionButton2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.functionButton2.Name = "functionButton2";
+            this.functionButton2.UseVisualStyleBackColor = false;
+            this.functionButton2.Click += new System.EventHandler(this.functionButton2_Click);
             // 
             // numericUpDown5
             // 
@@ -458,6 +499,24 @@
             0,
             0,
             0});
+            // 
+            // numericUpDown4
+            // 
+            resources.ApplyResources(this.numericUpDown4, "numericUpDown4");
+            this.numericUpDown4.Name = "numericUpDown4";
+            // 
+            // functionButton6
+            // 
+            resources.ApplyResources(this.functionButton6, "functionButton6");
+            this.functionButton6.BackColor = System.Drawing.Color.Transparent;
+            this.functionButton6.EnabledSet = true;
+            this.functionButton6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.functionButton6.FlatAppearance.BorderSize = 0;
+            this.functionButton6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.functionButton6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.functionButton6.Name = "functionButton6";
+            this.functionButton6.UseVisualStyleBackColor = false;
+            this.functionButton6.Click += new System.EventHandler(this.functionButton6_Click);
             // 
             // groupBox3
             // 
@@ -490,6 +549,32 @@
             this.rdbDaily.TabStop = true;
             this.rdbDaily.UseVisualStyleBackColor = true;
             this.rdbDaily.CheckedChanged += new System.EventHandler(this.RdbDaily_CheckedChanged);
+            // 
+            // fbtnStop
+            // 
+            resources.ApplyResources(this.fbtnStop, "fbtnStop");
+            this.fbtnStop.BackColor = System.Drawing.Color.Transparent;
+            this.fbtnStop.EnabledSet = true;
+            this.fbtnStop.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.fbtnStop.FlatAppearance.BorderSize = 0;
+            this.fbtnStop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.fbtnStop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.fbtnStop.Name = "fbtnStop";
+            this.fbtnStop.UseVisualStyleBackColor = false;
+            this.fbtnStop.Click += new System.EventHandler(this.fbtnStop_Click);
+            // 
+            // fbtnStart
+            // 
+            resources.ApplyResources(this.fbtnStart, "fbtnStart");
+            this.fbtnStart.BackColor = System.Drawing.Color.Transparent;
+            this.fbtnStart.EnabledSet = true;
+            this.fbtnStart.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.fbtnStart.FlatAppearance.BorderSize = 0;
+            this.fbtnStart.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.fbtnStart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.fbtnStart.Name = "fbtnStart";
+            this.fbtnStart.UseVisualStyleBackColor = false;
+            this.fbtnStart.Click += new System.EventHandler(this.fbtnStart_Click);
             // 
             // rdbtnCustom
             // 
@@ -695,102 +780,6 @@
             this.panel1.Controls.Add(this.fbtnInstruMaintenance);
             this.panel1.Name = "panel1";
             // 
-            // label6
-            // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
-            // 
-            // functionButton5
-            // 
-            resources.ApplyResources(this.functionButton5, "functionButton5");
-            this.functionButton5.BackColor = System.Drawing.Color.Transparent;
-            this.functionButton5.EnabledSet = true;
-            this.functionButton5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.functionButton5.FlatAppearance.BorderSize = 0;
-            this.functionButton5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.functionButton5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.functionButton5.Name = "functionButton5";
-            this.functionButton5.UseVisualStyleBackColor = false;
-            this.functionButton5.Click += new System.EventHandler(this.functionButton5_Click);
-            // 
-            // functionButton4
-            // 
-            resources.ApplyResources(this.functionButton4, "functionButton4");
-            this.functionButton4.BackColor = System.Drawing.Color.Transparent;
-            this.functionButton4.EnabledSet = true;
-            this.functionButton4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.functionButton4.FlatAppearance.BorderSize = 0;
-            this.functionButton4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.functionButton4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.functionButton4.Name = "functionButton4";
-            this.functionButton4.UseVisualStyleBackColor = false;
-            this.functionButton4.Click += new System.EventHandler(this.functionButton4_Click);
-            // 
-            // btnPourInto
-            // 
-            resources.ApplyResources(this.btnPourInto, "btnPourInto");
-            this.btnPourInto.BackColor = System.Drawing.Color.Transparent;
-            this.btnPourInto.EnabledSet = true;
-            this.btnPourInto.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnPourInto.FlatAppearance.BorderSize = 0;
-            this.btnPourInto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnPourInto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnPourInto.Name = "btnPourInto";
-            this.btnPourInto.UseVisualStyleBackColor = false;
-            this.btnPourInto.Click += new System.EventHandler(this.btnPourInto_Click);
-            // 
-            // functionButton2
-            // 
-            resources.ApplyResources(this.functionButton2, "functionButton2");
-            this.functionButton2.BackColor = System.Drawing.Color.Transparent;
-            this.functionButton2.EnabledSet = true;
-            this.functionButton2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.functionButton2.FlatAppearance.BorderSize = 0;
-            this.functionButton2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.functionButton2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.functionButton2.Name = "functionButton2";
-            this.functionButton2.UseVisualStyleBackColor = false;
-            this.functionButton2.Click += new System.EventHandler(this.functionButton2_Click);
-            // 
-            // functionButton6
-            // 
-            resources.ApplyResources(this.functionButton6, "functionButton6");
-            this.functionButton6.BackColor = System.Drawing.Color.Transparent;
-            this.functionButton6.EnabledSet = true;
-            this.functionButton6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.functionButton6.FlatAppearance.BorderSize = 0;
-            this.functionButton6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.functionButton6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.functionButton6.Name = "functionButton6";
-            this.functionButton6.UseVisualStyleBackColor = false;
-            this.functionButton6.Click += new System.EventHandler(this.functionButton6_Click);
-            // 
-            // fbtnStop
-            // 
-            resources.ApplyResources(this.fbtnStop, "fbtnStop");
-            this.fbtnStop.BackColor = System.Drawing.Color.Transparent;
-            this.fbtnStop.EnabledSet = true;
-            this.fbtnStop.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.fbtnStop.FlatAppearance.BorderSize = 0;
-            this.fbtnStop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.fbtnStop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.fbtnStop.Name = "fbtnStop";
-            this.fbtnStop.UseVisualStyleBackColor = false;
-            this.fbtnStop.Click += new System.EventHandler(this.fbtnStop_Click);
-            // 
-            // fbtnStart
-            // 
-            resources.ApplyResources(this.fbtnStart, "fbtnStart");
-            this.fbtnStart.BackColor = System.Drawing.Color.Transparent;
-            this.fbtnStart.EnabledSet = true;
-            this.fbtnStart.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.fbtnStart.FlatAppearance.BorderSize = 0;
-            this.fbtnStart.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.fbtnStart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.fbtnStart.Name = "fbtnStart";
-            this.fbtnStart.UseVisualStyleBackColor = false;
-            this.fbtnStart.Click += new System.EventHandler(this.fbtnStart_Click);
-            // 
             // functionButton1
             // 
             resources.ApplyResources(this.functionButton1, "functionButton1");
@@ -855,6 +844,11 @@
             this.fbtnInstruMaintenance.Name = "fbtnInstruMaintenance";
             this.fbtnInstruMaintenance.UseVisualStyleBackColor = false;
             // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
             // frmInstruMaintenance
             // 
             resources.ApplyResources(this, "$this");
@@ -871,10 +865,13 @@
             this.Load += new System.EventHandler(this.frmInstruMaintenance_Load);
             this.SizeChanged += new System.EventHandler(this.frmInstruMaintenance_SizeChanged);
             this.panel2.ResumeLayout(false);
-            this.dfInitializers.ResumeLayout(false);
-            this.dfInitializers.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.dfInitializers.ResumeLayout(false);
+            this.dfInitializers.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numRepeat)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
@@ -883,11 +880,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numDwPourin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numRepeat)).EndInit();
-            this.groupBox6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -943,7 +937,11 @@
         private System.Windows.Forms.ComboBox cmbSubstrate;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.NumericUpDown numericUpDown5;
+        private CustomControl.FunctionButton functionButton6;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private CustomControl.FunctionButton functionButton2;
         private System.Windows.Forms.TextBox textBox1;
         private CustomControl.FunctionButton functionButton5;
         private CustomControl.FunctionButton functionButton4;
@@ -966,17 +964,13 @@
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.CheckBox checkNewTube;
+        private System.Windows.Forms.GroupBox groupBox6;
         private CustomControl.FunctionButton btnPourInto;
         private System.Windows.Forms.NumericUpDown numRepeat;
         private System.Windows.Forms.ComboBox cmbSelectAct;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private CustomControl.FunctionButton functionButton2;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
-        private CustomControl.FunctionButton functionButton6;
-        private System.Windows.Forms.NumericUpDown numericUpDown5;
+        private System.Windows.Forms.CheckBox checkNewTube;
         private System.Windows.Forms.NumericUpDown numDwPourin;
     }
 }
