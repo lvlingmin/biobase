@@ -89,7 +89,6 @@ namespace BioBaseCLIA.SysMaintenance
         /// </summary>
         DataTable dtWashTrayInfo = new DataTable();
         commands cmd = new commands();
-
         #endregion
 
         #region 烧录界面变量
@@ -285,6 +284,11 @@ namespace BioBaseCLIA.SysMaintenance
         {
             if (!bClose)
             {
+                return;
+            }
+            if (needleUpUp == false)
+            {
+                MessageBox.Show("请检查加样针模块是否全部复位！");
                 return;
             }
             timer1.Stop(); //返回就结束timer  jun add 20190426
@@ -933,31 +937,31 @@ namespace BioBaseCLIA.SysMaintenance
             //稀释液
             else if (cmbASPara.SelectedIndex == 3)
             {
-                NetCom3.Instance.Send(NetCom3.Cover("EB 90 02 A1 01 03"), 5);
+                sendMonitor(NetCom3.Cover("EB 90 02 A1 01 03"), 5);
                 NetCom3.Instance.SingleQuery();
             }
             //R3
             else if (cmbASPara.SelectedIndex == 4)
             {
-                NetCom3.Instance.Send(NetCom3.Cover("EB 90 02 A1 01 04"), 5);
+                sendMonitor(NetCom3.Cover("EB 90 02 A1 01 04"), 5);
                 NetCom3.Instance.SingleQuery();
             }
             //R2
             else if (cmbASPara.SelectedIndex == 5)
             {
-                NetCom3.Instance.Send(NetCom3.Cover("EB 90 02 A1 01 05"), 5);
+                sendMonitor(NetCom3.Cover("EB 90 02 A1 01 05"), 5);
                 NetCom3.Instance.SingleQuery();
             }
             //R1
             else if (cmbASPara.SelectedIndex == 6)
             {
-                NetCom3.Instance.Send(NetCom3.Cover("EB 90 02 A1 01 06"), 5);
+                sendMonitor(NetCom3.Cover("EB 90 02 A1 01 06"), 5);
                 NetCom3.Instance.SingleQuery();
             }
             //磁珠
             else if (cmbASPara.SelectedIndex == 7)
             {
-                NetCom3.Instance.Send(NetCom3.Cover("EB 90 02 A1 01 07"), 5);
+                sendMonitor(NetCom3.Cover("EB 90 02 A1 01 07"), 5);
                 NetCom3.Instance.SingleQuery();
             }
             cmbASPara.Enabled = true;
@@ -9659,6 +9663,12 @@ namespace BioBaseCLIA.SysMaintenance
         private bool needleUpUp = true;
         private bool handUpUp = true;
 
+        string needleDownR1 = "EB 90 02 A1 01 06";//针在试剂盘R1位置
+        string needleDownR2 = "EB 90 02 A1 01 05";//针在试剂盘R2位置
+        string needleDownR3 = "EB 90 02 A1 01 04";//针在试剂盘R3位置
+        string needleDownDilute = "EB 90 02 A1 01 03";//针在试剂盘稀释位置
+        string needleDownBeads = "EB 90 02 A1 01 07";//针在试剂盘磁珠位置
+
         string needleDownTray = "EB 90 02 A1 01 00";//针在温育盘
         string needleModuleReset = "EB 90 02 00";//加样针模块全部复位
         string handDownTray = "EB 90 01 01 02";//抓手在温育盘
@@ -9772,7 +9782,11 @@ namespace BioBaseCLIA.SysMaintenance
             if (order.Contains(needleDownTray))//针在温育盘
             {
                 needleUpUp = false;
-
+            }
+            else if(order.Contains(needleDownR1) || order.Contains(needleDownR2) || order.Contains(needleDownR3) 
+                || order.Contains(needleDownDilute) || order.Contains(needleDownBeads))//针在试剂盘
+            {
+                needleUpUp = false;
             }
             else if (order.Contains(handDownTray))//抓手在温育盘
             {
@@ -9786,7 +9800,7 @@ namespace BioBaseCLIA.SysMaintenance
             {
                 handUpUp = true;
             }
-            else if (order.Contains(reactTrayReset) || order.Contains(reactTrayModuleReset) || order.Contains(mixHole) || order.Contains(trayResetPosition))
+            else if (order.Contains(reactTrayReset) || order.Contains(reactTrayModuleReset) || order.Contains(mixHole) || order.Contains(trayResetPosition) )
             {
                 if (needleUpUp == false || handUpUp == false)
                 {
