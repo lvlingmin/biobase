@@ -191,7 +191,6 @@ namespace BioBaseCLIA.User
                         DialogResult = r;
                         goto complete;
                     }
-
                 }
                 else
                 {
