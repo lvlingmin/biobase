@@ -11,6 +11,7 @@ using BioBaseCLIA.CalculateCurve;
 using Dialogs;
 using System.Threading;
 using Common;
+using System.Resources;
 
 namespace BioBaseCLIA.ScalingQC
 {
@@ -76,7 +77,7 @@ namespace BioBaseCLIA.ScalingQC
 
             for (int i = 0; i < dtQI.Rows.Count; i++)
             {
-                dtQI.Rows[i]["QCLevel"] = dtQI.Rows[i]["QCLevel"].ToString() == "0" ? "高" : (dtQI.Rows[i]["QCLevel"].ToString() == "1" ? "中" : "低");
+                dtQI.Rows[i]["QCLevel"] = dtQI.Rows[i]["QCLevel"].ToString() == "0" ? getString("keywordText.High") : (dtQI.Rows[i]["QCLevel"].ToString() == "1" ? getString("keywordText.Middle") : getString("keywordText.Low"));
             }
             dgvQCInfo.DataSource = dtQI;
             dgvQCInfo.SelectionChanged += dgvQCInfo_SelectionChanged;
@@ -130,7 +131,7 @@ namespace BioBaseCLIA.ScalingQC
         private void btnAddQC_Click(object sender, EventArgs e)
         {
             SetControlStatus(true);
-            btnDeleteQC.Text = "取消";
+            btnDeleteQC.Text = getString("keywordText.Cancel");
             btnDeleteQC.Enabled = true;
             addOrModify = 1;
             ClearControlContext();
@@ -147,8 +148,9 @@ namespace BioBaseCLIA.ScalingQC
         {
 
             SetControlStatus(true);
-            btnDeleteQC.Text = "取消";
+            btnDeleteQC.Text = getString("keywordText.Cancel");
             btnDeleteQC.Enabled = true;
+	    txtBatch.Enabled = cmbProName.Enabled = cmbBype.Enabled = dtpValidity.Enabled = dtpAddDate.Enabled = false;
             addOrModify = 2;
         }
 
@@ -157,31 +159,31 @@ namespace BioBaseCLIA.ScalingQC
             DbHelperOleDb db = new DbHelperOleDb(3);
             if (txtBatch.Text == "")
             {
-                frmMsgShow.MessageShow("质控管理", "请输入质控批号！");
+                frmMsgShow.MessageShow(getString("keywordText.QcManagement"), getString("keywordText.InputBatch"));
                 txtBatch.Focus();
                 return;
             }
             if (txtXValue.Text == "")
             {
-                frmMsgShow.MessageShow("质控管理", "请输入质控靶值！");
+                frmMsgShow.MessageShow(getString("keywordText.QcManagement"), getString("keywordText.InputTargetValue"));
                 txtXValue.Focus();
                 return;
             }
             if (txtSD.Text == "")
             {
-                frmMsgShow.MessageShow("质控管理", "请输入质控标准差！");
+                frmMsgShow.MessageShow(getString("keywordText.QcManagement"), getString("keywordText.InputSD"));
                 txtSD.Focus();
                 return;
             }
             if (cmbBype.Text == "")
             {
-                frmMsgShow.MessageShow("质控管理", "请输入质控类别！");
+                frmMsgShow.MessageShow(getString("keywordText.QcManagement"), getString("keywordText.InputCategory"));
                 cmbBype.Focus();
                 return;
             }
             if (txtOperator.Text == "")
             {
-                frmMsgShow.MessageShow("质控管理", "请输入录入者！");
+                frmMsgShow.MessageShow(getString("keywordText.QcManagement"), getString("keywordText.InputPeople"));
                 txtOperator.Focus();
                 return;
             }
@@ -226,13 +228,13 @@ namespace BioBaseCLIA.ScalingQC
                     dtQI = bllQC.GetAllList().Tables[0];
                     for (int i = 0; i < dtQI.Rows.Count; i++)
                     {
-                        dtQI.Rows[i]["QCLevel"] = dtQI.Rows[i]["QCLevel"].ToString() == "0" ? "高" : (dtQI.Rows[i]["QCLevel"].ToString() == "1" ? "中" : "低");
+                        dtQI.Rows[i]["QCLevel"] = dtQI.Rows[i]["QCLevel"].ToString() == "0" ? getString("keywordText.High") : (dtQI.Rows[i]["QCLevel"].ToString() == "1" ? getString("keywordText.Middle") : getString("keywordText.Low"));
                     }
                     dgvQCInfo.DataSource = dtQI;
                     dgvQCInfo.SelectionChanged += dgvQCInfo_SelectionChanged;
                     int s = dgvQCInfo.SelectedRows[0].Index;
                     ShowQCInfo(s + 1);
-                    frmMsgShow.MessageShow("质控管理", "信息添加成功！");
+                    frmMsgShow.MessageShow(getString("keywordText.QcManagement"), getString("keywordText.AddSuccess"));
                 }
             }
             else if (addOrModify == 2)//修改质控
@@ -277,23 +279,23 @@ namespace BioBaseCLIA.ScalingQC
                     dtQI = bllQC.GetAllList().Tables[0];
                     for (int i = 0; i < dtQI.Rows.Count; i++)
                     {
-                        dtQI.Rows[i]["QCLevel"] = dtQI.Rows[i]["QCLevel"].ToString() == "0" ? "高" : (dtQI.Rows[i]["QCLevel"].ToString() == "1" ? "中" : "低");
+                        dtQI.Rows[i]["QCLevel"] = dtQI.Rows[i]["QCLevel"].ToString() == "0" ? getString("keywordText.High") : (dtQI.Rows[i]["QCLevel"].ToString() == "1" ? getString("keywordText.Middle") : getString("keywordText.Low"));
                     }
                     dgvQCInfo.DataSource = dtQI;
                     dgvQCInfo.SelectionChanged += dgvQCInfo_SelectionChanged;
                     int s = dgvQCInfo.SelectedRows[0].Index;
                     ShowQCInfo(s + 1);
-                    frmMsgShow.MessageShow("质控管理", "信息更新成功！");
+                    frmMsgShow.MessageShow(getString("keywordText.QcManagement"), getString("keywordText.UpdateSuccess"));
                 }
             }
             SetControlStatus(false);
-            btnDeleteQC.Text = "删除";
+            btnDeleteQC.Text = getString("keywordText.Delete");
             addOrModify = 0;
         }
 
         private void btnDeleteQC_Click(object sender, EventArgs e)
         {
-            if (btnDeleteQC.Text.Trim() == "删除")
+            if (btnDeleteQC.Text.Trim() == getString("keywordText.Delete"))
             {
                 DbHelperOleDb db = new DbHelperOleDb(3);
                 if (bllQC.Delete(int.Parse(dgvQCInfo.SelectedRows[0].Cells[0].Value.ToString())))
@@ -302,7 +304,7 @@ namespace BioBaseCLIA.ScalingQC
                     dtQI = bllQC.GetAllList().Tables[0];
                     for (int i = 0; i < dtQI.Rows.Count; i++)
                     {
-                        dtQI.Rows[i]["QCLevel"] = dtQI.Rows[i]["QCLevel"].ToString() == "0" ? "高" : (dtQI.Rows[i]["QCLevel"].ToString() == "1" ? "中" : "低");
+                        dtQI.Rows[i]["QCLevel"] = dtQI.Rows[i]["QCLevel"].ToString() == "0" ? getString("keywordText.High") : (dtQI.Rows[i]["QCLevel"].ToString() == "1" ? getString("keywordText.Middle") : getString("keywordText.Low"));
                     }
                     dgvQCInfo.DataSource = dtQI;
                     dgvQCInfo.SelectionChanged += dgvQCInfo_SelectionChanged;
@@ -310,13 +312,13 @@ namespace BioBaseCLIA.ScalingQC
                     {
                         ShowQCInfo(1);
                     }
-                    frmMsgShow.MessageShow("质控管理", "删除成功！");
+                    frmMsgShow.MessageShow(getString("keywordText.QcManagement"), getString("keywordText.DeleteSuccess"));
                 }
             }
-            if (btnDeleteQC.Text.Trim() == "取消")
+            if (btnDeleteQC.Text.Trim() == getString("keywordText.Cancel"))
             {
                 SetControlStatus(false);
-                btnDeleteQC.Text = "删除";
+                btnDeleteQC.Text = getString("keywordText.Delete");
                 dgvQCInfo_SelectionChanged(null, null);
                 addOrModify = 0;
             }
@@ -331,7 +333,7 @@ namespace BioBaseCLIA.ScalingQC
             if (dr.Length > 0)
             {
                 txtBatch.Text = dr[0]["Batch"].ToString();
-                cmbBype.SelectedIndex = int.Parse(dr[0]["QCLevel"].ToString() == "高" ? "0" : (dr[0]["QCLevel"].ToString() == "中" ? "1" : "2"));
+                cmbBype.SelectedIndex = int.Parse(dr[0]["QCLevel"].ToString() == getString("keywordText.High") ? "0" : (dr[0]["QCLevel"].ToString() == getString("keywordText.Middle") ? "1" : "2"));
                 cmbProName.Text = dr[0]["ProjectName"].ToString();
                 txtSD.Text = dr[0]["SD"].ToString();
                 txtXValue.Text = dr[0]["XValue"].ToString();
@@ -483,17 +485,20 @@ namespace BioBaseCLIA.ScalingQC
                 if (tempQueryStr != "")
                 {
 
-                    if (tempQueryStr == "0")
+                    if (queryStr == "QCLevel")
                     {
-                        tempQueryStr = "高";
-                    }
-                    else if (tempQueryStr == "1")
-                    {
-                        tempQueryStr = "中";
-                    }
-                    else if (tempQueryStr == "2")
-                    {
-                        tempQueryStr = "低";
+                        if (tempQueryStr == "0")
+                        {
+                            tempQueryStr = getString("keywordText.High");
+                        }
+                        else if (tempQueryStr == "1")
+                        {
+                            tempQueryStr = getString("keywordText.Middle");
+                        }
+                        else if (tempQueryStr == "2")
+                        {
+                            tempQueryStr = getString("keywordText.Low");
+                        }
                     }
                     control.Items.Add(tempQueryStr);
 
@@ -673,7 +678,17 @@ namespace BioBaseCLIA.ScalingQC
                     if (dgvQCValue.DataSource != dtQCAvgDay)
                         dgvQCValue.DataSource = dtQCAvgDay;
             }
-            rtxtLoseControl.AppendText(qcrules.QCLoseControlShow(AVGVALUE, DifferenceValue, tabControl1.SelectedIndex));
+            string[] alertInfo = qcrules.QCLoseControlShow(AVGVALUE, DifferenceValue, tabControl1.SelectedIndex).Trim().Split('\n');
+            if (alertInfo[0] != "")
+            {
+                foreach (string ale in alertInfo)
+                {
+                    string point = ale.Substring(0, ale.IndexOf("号点"));
+                    string rules = ale.Split('反')[1];
+                    rules = rules.Substring(0, rules.IndexOf("质控"));
+                    rtxtLoseControl.AppendText(String.Format(getString("keywordText.QcRulesAlertInfo"), point, rules) + Environment.NewLine);
+                }
+            }
             //质控图点填充颜色
             foreach (DataRow dr in dtQCValue.Rows)
             {
@@ -730,16 +745,16 @@ namespace BioBaseCLIA.ScalingQC
         /// <returns></returns>
         int QCLevel1(string levelValue)
         {
-            if (levelValue == "高")
+            if (levelValue == getString("keywordText.High"))
             {
                 return 0;
 
             }
-            else if (levelValue == "中")
+            else if (levelValue == getString("keywordText.Middle"))
             {
                 return 1;
             }
-            else if (levelValue == "低")
+            else if (levelValue == getString("keywordText.Low"))
             {
                 return 2;
             }
@@ -791,20 +806,20 @@ namespace BioBaseCLIA.ScalingQC
             {
                 return;
             }
-            if (fbtnAdd.Text == "增加")
+            if (fbtnAdd.Text == getString("keywordText.Add"))
             {
                 isAdd = true;
                 fbtnModify.Enabled = false;
-                fbtnDelete.Text = "保存";
-                fbtnAdd.Text = "取消";
+                fbtnDelete.Text = getString("keywordText.Keep");
+                fbtnAdd.Text = getString("keywordText.Cancel");
                 txtQCNewValue.ReadOnly = false;
                 txtQCNewValue.Focus();
             }
             else
             {
                 fbtnModify.Enabled = true;
-                fbtnDelete.Text = "删除";
-                fbtnAdd.Text = "增加";
+                fbtnDelete.Text = getString("keywordText.Delete");
+                fbtnAdd.Text = getString("keywordText.Add");
                 txtQCNewValue.ReadOnly = true;
                 //return;
             }
@@ -816,20 +831,20 @@ namespace BioBaseCLIA.ScalingQC
             {
                 return;
             }
-            if (fbtnModify.Text == "修改")
+            if (fbtnModify.Text == getString("keywordText.Update")) 
             {
                 isAdd = false;
                 fbtnAdd.Enabled = false;
-                fbtnDelete.Text = "保存";
-                fbtnModify.Text = "取消";
+                fbtnDelete.Text = getString("keywordText.Keep"); 
+                fbtnModify.Text = getString("keywordText.Cancel"); 
                 txtQCNewValue.ReadOnly = false;
                 txtQCNewValue.Focus();
             }
             else
             {
                 fbtnAdd.Enabled = true;
-                fbtnDelete.Text = "删除";
-                fbtnModify.Text = "修改";
+                fbtnDelete.Text = getString("keywordText.Delete"); 
+                fbtnModify.Text = getString("keywordText.Update"); 
                 txtQCNewValue.ReadOnly = true;
             }
         }
@@ -842,10 +857,10 @@ namespace BioBaseCLIA.ScalingQC
             DbHelperOleDb db = new DbHelperOleDb(1);
             BLL.tbQCResult bllqcresult = new BLL.tbQCResult();
             Model.tbQCResult mdqcresult = new Model.tbQCResult();
-            if (fbtnDelete.Text == "删除")
+            if (fbtnDelete.Text == getString("keywordText.Delete"))
             {
                 if (dgvQCValue.CurrentRow == null) return;
-                if (msd.Confirm("是否确认删除该条数据？") != DialogResult.OK) return;
+                if (msd.Confirm(getString("keywordText.DeleteConfirm")) != DialogResult.OK) return;
                 bllqcresult.Delete(int.Parse(dgvQCValue.CurrentRow.Cells["QCResultID"].Value.ToString()));
             }
             else
@@ -897,7 +912,7 @@ namespace BioBaseCLIA.ScalingQC
                         mdqcresult.QCResultID = int.Parse(dgvQCValue.CurrentRow.Cells["QCResultID"].Value.ToString());
                         bllqcresult.Update(mdqcresult);
                     }
-                    fbtnDelete.Text = "删除";
+                    fbtnDelete.Text = getString("keywordText.Delete");
                     updFlag = true; //lyq 190911
                 }
             }
@@ -913,8 +928,8 @@ namespace BioBaseCLIA.ScalingQC
                 txtQCNewValue.Text = "0";
             }
 
-            fbtnAdd.Text = "增加";
-            fbtnModify.Text = "修改";
+            fbtnAdd.Text = getString("keywordText.Add");
+            fbtnModify.Text = getString("keywordText.Update");
             fbtnAdd.Enabled = true;
             fbtnModify.Enabled = true;
             fbtnDelete.Enabled = true;
@@ -989,7 +1004,7 @@ namespace BioBaseCLIA.ScalingQC
                     remindDTime = DateTime.Now;
                     BeginInvoke(new Action(() =>
                     {
-                        MessageBox.Show("注意！当前查询点数量为：" + dgvQCValue.Rows.Count + ",超出31点绘图区域");
+                        MessageBox.Show(getString("keywordText.ExceedRemind") + dgvQCValue.Rows.Count );//"注意！当前查询点数量为：" + dgvQCValue.Rows.Count + ",超出31点绘图区域"
                     }));
                 }
             }
@@ -999,5 +1014,11 @@ namespace BioBaseCLIA.ScalingQC
         {
 
         }
+        private string getString(string key)
+        {
+            ResourceManager resManager = new ResourceManager(typeof(frmQC));
+            return resManager.GetString(key);
+        }
+
     }
 }
