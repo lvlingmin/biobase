@@ -9317,24 +9317,12 @@ namespace BioBaseCLIA.Run
             {
                 string LeftCount1 = OperateIniFile.ReadIniData("Substrate1", "LeftCount", "", iniPathSubstrateTube);
                 OperateIniFile.WriteIniData("Substrate1", "LeftCount", (int.Parse(LeftCount1) - 1).ToString(), iniPathSubstrateTube);
-                /*
-                string LeftCount2 = OperateIniFile.ReadIniData("Substrate2", "LeftCount", "", iniPathSubstrateTube);
-                if (int.Parse(substratePipe) == 1)//2018-10-17 zlx mod
-                {
-                    OperateIniFile.WriteIniData("Substrate1", "LeftCount", (int.Parse(LeftCount1)-1).ToString(), iniPathSubstrateTube);
-                    substrateNum1 = int.Parse(LeftCount1) - 1;
-                    //OperateIniFile.WriteIniData("Substrate1", "LeftCount", (substrateNum1 - 1).ToString(), iniPathSubstrateTube);
-                    //substrateNum1--;
-                }
-                else
-                {
-                    OperateIniFile.WriteIniData("Substrate2", "LeftCount", (int.Parse(LeftCount2) - 1).ToString(), iniPathSubstrateTube);
-                    substrateNum2 = int.Parse(LeftCount2) - 1;
-                    //OperateIniFile.WriteIniData("Substrate2", "LeftCount", (substrateNum2 - 1).ToString(), iniPathSubstrateTube);
-                    //substrateNum2--;
-                }
-                 */
-                //2018-10-17 zlx add
+
+                string sbCode1 = OperateIniFile.ReadIniData("Substrate1", "BarCode", "0", iniPathSubstrateTube);
+                string sbNum1 = OperateIniFile.ReadIniData("Substrate1", "LeftCount", "0", iniPathSubstrateTube);
+                DbHelperOleDb dbase = new DbHelperOleDb(3);
+                DbHelperOleDb.ExecuteSql(3, @"update tbSubstrate set leftoverTest =" + sbNum1 + " where BarCode = '" + sbCode1 + "'");
+
                 if (dgvWorkListData.RowCount == 0) return;
                 dgvWorkListData.Rows[int.Parse(dtWashTrayTubeStatus.Rows[18 + isNewCleanTray][2].ToString()) - 1].Cells["SubstratePipe"].Value = substratePipe;
                 lisProBar[int.Parse(dtWashTrayTubeStatus.Rows[18 + isNewCleanTray][2].ToString()) - 1].
