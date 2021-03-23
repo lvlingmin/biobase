@@ -361,7 +361,7 @@ namespace BioBaseCLIA.ScalingQC
                         //对处理过的数据进行纠错
                         if (double.IsNaN(MainltData[i].Data) || double.IsNaN(MainltData[i].DataValue))
                         {
-                            MessageBox.Show(getString("keywordText.CalcError"), getString("keywordText.Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(getString("keywordText.FuncCalcError"), getString("keywordText.Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
 
                         }
