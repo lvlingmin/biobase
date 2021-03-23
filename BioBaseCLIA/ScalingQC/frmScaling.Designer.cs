@@ -36,6 +36,14 @@
             this.fbtnReturn = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnQCQuery = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.dgvScalData = new System.Windows.Forms.DataGridView();
+            this.colItemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRegentBatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colISMainCurve = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsScal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCalType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colActiveDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colValidDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ExpiryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.fbtnReset = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnSelectCurve = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
@@ -51,14 +59,6 @@
             this.MenuCurve = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.itemSave = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.colItemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRegentBatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colISMainCurve = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsScal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCalType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colActiveDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colValidDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ExpiryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colScalPoint = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colConcentration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRLU = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -144,6 +144,74 @@
             this.dgvScalData.RowTemplate.Height = 23;
             this.dgvScalData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvScalData.SelectionChanged += new System.EventHandler(this.dgvScalData_SelectionChanged);
+            // 
+            // colItemName
+            // 
+            this.colItemName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colItemName.DataPropertyName = "ItemName";
+            this.colItemName.FillWeight = 80F;
+            resources.ApplyResources(this.colItemName, "colItemName");
+            this.colItemName.Name = "colItemName";
+            this.colItemName.ReadOnly = true;
+            // 
+            // colRegentBatch
+            // 
+            this.colRegentBatch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colRegentBatch.DataPropertyName = "RegentBatch";
+            resources.ApplyResources(this.colRegentBatch, "colRegentBatch");
+            this.colRegentBatch.Name = "colRegentBatch";
+            this.colRegentBatch.ReadOnly = true;
+            // 
+            // colISMainCurve
+            // 
+            this.colISMainCurve.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colISMainCurve.DataPropertyName = "MainCurve";
+            this.colISMainCurve.FillWeight = 95F;
+            resources.ApplyResources(this.colISMainCurve, "colISMainCurve");
+            this.colISMainCurve.Name = "colISMainCurve";
+            this.colISMainCurve.ReadOnly = true;
+            // 
+            // colIsScal
+            // 
+            this.colIsScal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colIsScal.DataPropertyName = "Scaling";
+            this.colIsScal.FillWeight = 90F;
+            resources.ApplyResources(this.colIsScal, "colIsScal");
+            this.colIsScal.Name = "colIsScal";
+            this.colIsScal.ReadOnly = true;
+            // 
+            // colCalType
+            // 
+            this.colCalType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colCalType.DataPropertyName = "CalType";
+            this.colCalType.FillWeight = 70F;
+            resources.ApplyResources(this.colCalType, "colCalType");
+            this.colCalType.Name = "colCalType";
+            this.colCalType.ReadOnly = true;
+            // 
+            // colActiveDate
+            // 
+            this.colActiveDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colActiveDate.DataPropertyName = "ActiveDate";
+            this.colActiveDate.FillWeight = 70F;
+            resources.ApplyResources(this.colActiveDate, "colActiveDate");
+            this.colActiveDate.Name = "colActiveDate";
+            this.colActiveDate.ReadOnly = true;
+            // 
+            // colValidDate
+            // 
+            this.colValidDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colValidDate.DataPropertyName = "ValidDate";
+            resources.ApplyResources(this.colValidDate, "colValidDate");
+            this.colValidDate.Name = "colValidDate";
+            this.colValidDate.ReadOnly = true;
+            // 
+            // ExpiryDate
+            // 
+            this.ExpiryDate.DataPropertyName = "ExpiryDate";
+            resources.ApplyResources(this.ExpiryDate, "ExpiryDate");
+            this.ExpiryDate.Name = "ExpiryDate";
+            this.ExpiryDate.ReadOnly = true;
             // 
             // groupBox1
             // 
@@ -283,77 +351,10 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.Timer1_Tick_1);
             // 
-            // colItemName
-            // 
-            this.colItemName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colItemName.DataPropertyName = "ItemName";
-            this.colItemName.FillWeight = 80F;
-            resources.ApplyResources(this.colItemName, "colItemName");
-            this.colItemName.Name = "colItemName";
-            this.colItemName.ReadOnly = true;
-            // 
-            // colRegentBatch
-            // 
-            this.colRegentBatch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colRegentBatch.DataPropertyName = "RegentBatch";
-            resources.ApplyResources(this.colRegentBatch, "colRegentBatch");
-            this.colRegentBatch.Name = "colRegentBatch";
-            this.colRegentBatch.ReadOnly = true;
-            // 
-            // colISMainCurve
-            // 
-            this.colISMainCurve.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colISMainCurve.DataPropertyName = "MainCurve";
-            this.colISMainCurve.FillWeight = 95F;
-            resources.ApplyResources(this.colISMainCurve, "colISMainCurve");
-            this.colISMainCurve.Name = "colISMainCurve";
-            this.colISMainCurve.ReadOnly = true;
-            // 
-            // colIsScal
-            // 
-            this.colIsScal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colIsScal.DataPropertyName = "Scaling";
-            this.colIsScal.FillWeight = 90F;
-            resources.ApplyResources(this.colIsScal, "colIsScal");
-            this.colIsScal.Name = "colIsScal";
-            this.colIsScal.ReadOnly = true;
-            // 
-            // colCalType
-            // 
-            this.colCalType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colCalType.DataPropertyName = "CalType";
-            this.colCalType.FillWeight = 70F;
-            resources.ApplyResources(this.colCalType, "colCalType");
-            this.colCalType.Name = "colCalType";
-            this.colCalType.ReadOnly = true;
-            // 
-            // colActiveDate
-            // 
-            this.colActiveDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colActiveDate.DataPropertyName = "ActiveDate";
-            this.colActiveDate.FillWeight = 70F;
-            resources.ApplyResources(this.colActiveDate, "colActiveDate");
-            this.colActiveDate.Name = "colActiveDate";
-            this.colActiveDate.ReadOnly = true;
-            // 
-            // colValidDate
-            // 
-            this.colValidDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colValidDate.DataPropertyName = "ValidDate";
-            resources.ApplyResources(this.colValidDate, "colValidDate");
-            this.colValidDate.Name = "colValidDate";
-            this.colValidDate.ReadOnly = true;
-            // 
-            // ExpiryDate
-            // 
-            this.ExpiryDate.DataPropertyName = "ExpiryDate";
-            resources.ApplyResources(this.ExpiryDate, "ExpiryDate");
-            this.ExpiryDate.Name = "ExpiryDate";
-            this.ExpiryDate.ReadOnly = true;
-            // 
             // colScalPoint
             // 
             this.colScalPoint.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colScalPoint.FillWeight = 60F;
             resources.ApplyResources(this.colScalPoint, "colScalPoint");
             this.colScalPoint.Name = "colScalPoint";
             this.colScalPoint.ReadOnly = true;
