@@ -841,4 +841,34 @@
         wf+0BQAAgAUAAIAFAACAAQAAgAHB/4ABAACAAQAAgAEAALwBAAC8AQAAvAHB/4ABbP///5H/
 </value>
   </data>
+  <data name="keywordText.Calibration" xml:space="preserve">
+    <value>Calibration</value>
+  </data>
+  <data name="keywordText.CorrelationCoefficient" xml:space="preserve">
+    <value>Correlation Coefficient：</value>
+  </data>
+  <data name="keywordText.Equation" xml:space="preserve">
+    <value>Equation：</value>
+  </data>
+  <data name="keywordText.Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="keywordText.Formula" xml:space="preserve">
+    <value>Formula：</value>
+  </data>
+  <data name="keywordText.FuncCalcError" xml:space="preserve">
+    <value>Function calculation error, maybe the data is not suitable for this regression model</value>
+  </data>
+  <data name="keywordText.NoInputCurve" xml:space="preserve">
+    <value>Calibration curve not entered!</value>
+  </data>
+  <data name="keywordText.RegressionCalcError" xml:space="preserve">
+    <value>Calculation error occurred in regression calculation, so the data may not be suitable for this regression model</value>
+  </data>
+  <data name="keywordText.SixPoint" xml:space="preserve">
+    <value>Six Point</value>
+  </data>
+  <data name="keywordText.TwoPoint" xml:space="preserve">
+    <value>Two Point</value>
+  </data>
 </root>
