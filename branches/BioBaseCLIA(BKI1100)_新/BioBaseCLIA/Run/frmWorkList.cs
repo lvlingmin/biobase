@@ -175,6 +175,10 @@ namespace BioBaseCLIA.Run
         /// 温育盘起始位置。LYN add 20171114
         /// </summary>
         int ReactStartPos = 0;
+        /// <summary>
+        /// 实验始末清洗盘清洗次数
+        /// </summary>
+        int WashTrayCleanTimes = 4;//lyq 为判断底物数量不足
         #endregion
 
         #region 实验运行相关变量
@@ -3695,7 +3699,7 @@ namespace BioBaseCLIA.Run
                     return false;
             }
              */
-            if (substrateNum1 + substrateNum2 < BTestItem.Count)
+            if (substrateNum1 + substrateNum2 < BTestItem.Count + WashTrayCleanTimes)
             {
                 frmMsgShow.MessageShow("工作列表", "底物测数不够本次实验测试，请装载底物！");
                 return false;
@@ -4088,7 +4092,7 @@ namespace BioBaseCLIA.Run
                 if (!AddTubeInCleanTray())
                     return false;
                 CleanTrayMovePace(5 + isNewCleanTray);
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < WashTrayCleanTimes; i++)
                 {
                     if (RunFlag != (int)RunFlagStart.IsRuning &&
                         RunFlag != (int)RunFlagStart.IsStoping || NetCom3.Instance.stopsendFlag) break;
@@ -4177,8 +4181,8 @@ namespace BioBaseCLIA.Run
             {
                 if (oneOrTwo == 1)
                 {
-                    OperateIniFile.WriteIniData("Substrate1", "LeftCount", (substrateNum1 - 1).ToString(), iniPathSubstrateTube);
-                    substrateNum1--;
+                    substrateNum1 = (substrateNum1 - 1) > 0 ? (substrateNum1 - 1) : 0;
+                    OperateIniFile.WriteIniData("Substrate1", "LeftCount", substrateNum1.ToString(), iniPathSubstrateTube);
                 }
                 /*
                 if (oneOrTwo == 1)
@@ -5989,6 +5993,10 @@ namespace BioBaseCLIA.Run
                                 }
                                 OperateIniFile.WriteIniData("ReagentPos" + rgPos.ToString(), "LeftReagent1",
                                     (leftR1 - 1).ToString(), iniPathReagentTrayInfo);
+                                //lyq
+                                string rgBar = OperateIniFile.ReadIniData("ReagentPos" + rgPos.ToString(), "BarCode", "", iniPathReagentTrayInfo);
+                                DbHelperOleDb.ExecuteSql(3, @"update tbReagent set leftoverTestR1 =" + (leftR1 - 1).ToString() + " where BarCode = '"
+                                                + rgBar + "' and Postion = '" + rgPos.ToString() + "'");
                                 if (AddErrorCount > 0)
                                 {
                                     if (AddErrorCount > 1)
@@ -6614,6 +6622,10 @@ namespace BioBaseCLIA.Run
                                     drRg[i]["leftoverTestR1"] = leftR1 - 1;
                             }
                             OperateIniFile.WriteIniData("ReagentPos" + rgPos.ToString(), "LeftReagent1", (leftR1 - 1).ToString(), iniPathReagentTrayInfo);
+                            //lyq
+                            string rgBar = OperateIniFile.ReadIniData("ReagentPos" + rgPos.ToString(), "BarCode", "", iniPathReagentTrayInfo);
+                            DbHelperOleDb.ExecuteSql(3, @"update tbReagent set leftoverTestR1 =" + (leftR1 - 1).ToString() + " where BarCode = '"
+                                            + rgBar + "' and Postion = '" + rgPos.ToString() + "'");
                             if (AddErrorCount > 0)
                             {
                                 if (AddErrorCount > 1)
