@@ -1,0 +1,306 @@
+
+************************************************************************
+出现应用程序未处理的异常：：2021/4/9 14:21:36
+类型：IndexOutOfRangeException
+消息：索引超出了数组界限。
+信息：   在 BioBaseCLIA.Run.frmSampleLoad.ShowRgInfo()
+   在 BioBaseCLIA.Run.frmSampleLoad.frmSampleLoad_Load(Object sender, EventArgs e)
+   在 System.EventHandler.Invoke(Object sender, EventArgs e)
+   在 System.Windows.Forms.Form.OnLoad(EventArgs e)
+   在 System.Windows.Forms.Form.OnCreateControl()
+   在 System.Windows.Forms.Control.CreateControl(Boolean fIgnoreVisible)
+   在 System.Windows.Forms.Control.CreateControl()
+   在 System.Windows.Forms.Control.SetVisibleCore(Boolean value)
+   在 System.Windows.Forms.Form.SetVisibleCore(Boolean value)
+   在 System.Windows.Forms.Control.Show()
+   在 BioBaseCLIA.Run.frmReagentLoad.btnLoadSample_Click(Object sender, EventArgs e)
+   在 System.Windows.Forms.Control.OnClick(EventArgs e)
+   在 System.Windows.Forms.Button.OnClick(EventArgs e)
+   在 BioBaseCLIA.CustomControl.FunctionButton.OnClick(EventArgs e)
+   在 System.Windows.Forms.Button.OnMouseUp(MouseEventArgs mevent)
+   在 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.ButtonBase.WndProc(Message& m)
+   在 System.Windows.Forms.Button.WndProc(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+************************************************************************
+
+
+************************************************************************
+出现应用程序未处理的异常：：2021/4/9 17:40:11
+Application UnhandledException:线程间操作无效: 从不是创建控件“dgvResultData”的线程访问它。;
+信息:   在 System.Windows.Forms.Control.get_Handle()
+   在 System.Windows.Forms.DataGridView.FlushDisplayedChanged()
+   在 System.Windows.Forms.DataGridView.PerformLayoutPrivate(Boolean useRowShortcut, Boolean computeVisibleRows, Boolean invalidInAdjustFillingColumns, Boolean repositionEditingControl)
+   在 System.Windows.Forms.DataGridView.ResetUIState(Boolean useRowShortcut, Boolean computeVisibleRows)
+   在 System.Windows.Forms.DataGridViewRowCollection.OnCollectionChanged_PreNotification(CollectionChangeAction cca, Int32 rowIndex, Int32 rowCount, DataGridViewRow& dataGridViewRow, Boolean changeIsInsertion)
+   在 System.Windows.Forms.DataGridViewRowCollection.OnCollectionChanged(CollectionChangeEventArgs e, Int32 rowIndex, Int32 rowCount, Boolean changeIsDeletion, Boolean changeIsInsertion, Boolean recreateNewRow, Point newCurrentCell)
+   在 System.Windows.Forms.DataGridViewRowCollection.InsertInternal(Int32 rowIndex, DataGridViewRow dataGridViewRow, Boolean force)
+   在 System.Windows.Forms.DataGridView.DataGridViewDataConnection.ProcessListChanged(ListChangedEventArgs e)
+   在 System.Windows.Forms.DataGridView.DataGridViewDataConnection.currencyManager_ListChanged(Object sender, ListChangedEventArgs e)
+   在 System.Windows.Forms.CurrencyManager.OnListChanged(ListChangedEventArgs e)
+   在 System.Windows.Forms.CurrencyManager.List_ListChanged(Object sender, ListChangedEventArgs e)
+   在 System.ComponentModel.BindingList`1.OnListChanged(ListChangedEventArgs e)
+   在 System.ComponentModel.BindingList`1.FireListChanged(ListChangedType type, Int32 index)
+   在 System.ComponentModel.BindingList`1.InsertItem(Int32 index, T item)
+   在 System.Collections.ObjectModel.Collection`1.Add(T item)
+   在 BioBaseCLIA.Run.frmWorkList.SaveTestResultData(List`1 BToListTi, List`1 lis1, List`1 lis2) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 10101
+   在 BioBaseCLIA.Run.frmWorkList.CalculatResult(Int32 testid, Int32 pmt) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 10047
+   在 BioBaseCLIA.Run.frmWorkList.Read(Object readInfo) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 9440
+   在 System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   在 System.Threading.ThreadHelper.ThreadStart(Object obj)
+************************************************************************
+
+
+************************************************************************
+出现应用程序未处理的异常：：2021/4/9 17:40:31
+Application UnhandledException:线程间操作无效: 从不是创建控件“dgvResultData”的线程访问它。;
+信息:   在 System.Windows.Forms.Control.get_Handle()
+   在 System.Windows.Forms.DataGridView.FlushDisplayedChanged()
+   在 System.Windows.Forms.DataGridView.PerformLayoutPrivate(Boolean useRowShortcut, Boolean computeVisibleRows, Boolean invalidInAdjustFillingColumns, Boolean repositionEditingControl)
+   在 System.Windows.Forms.DataGridView.ResetUIState(Boolean useRowShortcut, Boolean computeVisibleRows)
+   在 System.Windows.Forms.DataGridViewRowCollection.OnCollectionChanged_PreNotification(CollectionChangeAction cca, Int32 rowIndex, Int32 rowCount, DataGridViewRow& dataGridViewRow, Boolean changeIsInsertion)
+   在 System.Windows.Forms.DataGridViewRowCollection.OnCollectionChanged(CollectionChangeEventArgs e, Int32 rowIndex, Int32 rowCount, Boolean changeIsDeletion, Boolean changeIsInsertion, Boolean recreateNewRow, Point newCurrentCell)
+   在 System.Windows.Forms.DataGridViewRowCollection.InsertInternal(Int32 rowIndex, DataGridViewRow dataGridViewRow, Boolean force)
+   在 System.Windows.Forms.DataGridView.DataGridViewDataConnection.ProcessListChanged(ListChangedEventArgs e)
+   在 System.Windows.Forms.DataGridView.DataGridViewDataConnection.currencyManager_ListChanged(Object sender, ListChangedEventArgs e)
+   在 System.Windows.Forms.CurrencyManager.OnListChanged(ListChangedEventArgs e)
+   在 System.Windows.Forms.CurrencyManager.List_ListChanged(Object sender, ListChangedEventArgs e)
+   在 System.ComponentModel.BindingList`1.OnListChanged(ListChangedEventArgs e)
+   在 System.ComponentModel.BindingList`1.FireListChanged(ListChangedType type, Int32 index)
+   在 System.ComponentModel.BindingList`1.InsertItem(Int32 index, T item)
+   在 System.Collections.ObjectModel.Collection`1.Add(T item)
+   在 BioBaseCLIA.Run.frmWorkList.SaveTestResultData(List`1 BToListTi, List`1 lis1, List`1 lis2) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 10101
+   在 BioBaseCLIA.Run.frmWorkList.CalculatResult(Int32 testid, Int32 pmt) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 10047
+   在 BioBaseCLIA.Run.frmWorkList.Read(Object readInfo) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 9440
+   在 System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   在 System.Threading.ThreadHelper.ThreadStart(Object obj)
+************************************************************************
+
+
+************************************************************************
+出现应用程序未处理的异常：：2021/4/9 17:40:51
+Application UnhandledException:线程间操作无效: 从不是创建控件“dgvResultData”的线程访问它。;
+信息:   在 System.Windows.Forms.Control.get_Handle()
+   在 System.Windows.Forms.DataGridView.FlushDisplayedChanged()
+   在 System.Windows.Forms.DataGridView.PerformLayoutPrivate(Boolean useRowShortcut, Boolean computeVisibleRows, Boolean invalidInAdjustFillingColumns, Boolean repositionEditingControl)
+   在 System.Windows.Forms.DataGridView.ResetUIState(Boolean useRowShortcut, Boolean computeVisibleRows)
+   在 System.Windows.Forms.DataGridViewRowCollection.OnCollectionChanged_PreNotification(CollectionChangeAction cca, Int32 rowIndex, Int32 rowCount, DataGridViewRow& dataGridViewRow, Boolean changeIsInsertion)
+   在 System.Windows.Forms.DataGridViewRowCollection.OnCollectionChanged(CollectionChangeEventArgs e, Int32 rowIndex, Int32 rowCount, Boolean changeIsDeletion, Boolean changeIsInsertion, Boolean recreateNewRow, Point newCurrentCell)
+   在 System.Windows.Forms.DataGridViewRowCollection.InsertInternal(Int32 rowIndex, DataGridViewRow dataGridViewRow, Boolean force)
+   在 System.Windows.Forms.DataGridView.DataGridViewDataConnection.ProcessListChanged(ListChangedEventArgs e)
+   在 System.Windows.Forms.DataGridView.DataGridViewDataConnection.currencyManager_ListChanged(Object sender, ListChangedEventArgs e)
+   在 System.Windows.Forms.CurrencyManager.OnListChanged(ListChangedEventArgs e)
+   在 System.Windows.Forms.CurrencyManager.List_ListChanged(Object sender, ListChangedEventArgs e)
+   在 System.ComponentModel.BindingList`1.OnListChanged(ListChangedEventArgs e)
+   在 System.ComponentModel.BindingList`1.FireListChanged(ListChangedType type, Int32 index)
+   在 System.ComponentModel.BindingList`1.InsertItem(Int32 index, T item)
+   在 System.Collections.ObjectModel.Collection`1.Add(T item)
+   在 BioBaseCLIA.Run.frmWorkList.SaveTestResultData(List`1 BToListTi, List`1 lis1, List`1 lis2) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 10101
+   在 BioBaseCLIA.Run.frmWorkList.CalculatResult(Int32 testid, Int32 pmt) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 10047
+   在 BioBaseCLIA.Run.frmWorkList.Read(Object readInfo) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 9440
+   在 System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   在 System.Threading.ThreadHelper.ThreadStart(Object obj)
+************************************************************************
+
+
+************************************************************************
+出现应用程序未处理的异常：：2021/4/9 17:41:11
+Application UnhandledException:线程间操作无效: 从不是创建控件“dgvResultData”的线程访问它。;
+信息:   在 System.Windows.Forms.Control.get_Handle()
+   在 System.Windows.Forms.DataGridView.FlushDisplayedChanged()
+   在 System.Windows.Forms.DataGridView.PerformLayoutPrivate(Boolean useRowShortcut, Boolean computeVisibleRows, Boolean invalidInAdjustFillingColumns, Boolean repositionEditingControl)
+   在 System.Windows.Forms.DataGridView.ResetUIState(Boolean useRowShortcut, Boolean computeVisibleRows)
+   在 System.Windows.Forms.DataGridViewRowCollection.OnCollectionChanged_PreNotification(CollectionChangeAction cca, Int32 rowIndex, Int32 rowCount, DataGridViewRow& dataGridViewRow, Boolean changeIsInsertion)
+   在 System.Windows.Forms.DataGridViewRowCollection.OnCollectionChanged(CollectionChangeEventArgs e, Int32 rowIndex, Int32 rowCount, Boolean changeIsDeletion, Boolean changeIsInsertion, Boolean recreateNewRow, Point newCurrentCell)
+   在 System.Windows.Forms.DataGridViewRowCollection.InsertInternal(Int32 rowIndex, DataGridViewRow dataGridViewRow, Boolean force)
+   在 System.Windows.Forms.DataGridView.DataGridViewDataConnection.ProcessListChanged(ListChangedEventArgs e)
+   在 System.Windows.Forms.DataGridView.DataGridViewDataConnection.currencyManager_ListChanged(Object sender, ListChangedEventArgs e)
+   在 System.Windows.Forms.CurrencyManager.OnListChanged(ListChangedEventArgs e)
+   在 System.Windows.Forms.CurrencyManager.List_ListChanged(Object sender, ListChangedEventArgs e)
+   在 System.ComponentModel.BindingList`1.OnListChanged(ListChangedEventArgs e)
+   在 System.ComponentModel.BindingList`1.FireListChanged(ListChangedType type, Int32 index)
+   在 System.ComponentModel.BindingList`1.InsertItem(Int32 index, T item)
+   在 System.Collections.ObjectModel.Collection`1.Add(T item)
+   在 BioBaseCLIA.Run.frmWorkList.SaveTestResultData(List`1 BToListTi, List`1 lis1, List`1 lis2) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 10101
+   在 BioBaseCLIA.Run.frmWorkList.CalculatResult(Int32 testid, Int32 pmt) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 10047
+   在 BioBaseCLIA.Run.frmWorkList.Read(Object readInfo) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 9440
+   在 System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   在 System.Threading.ThreadHelper.ThreadStart(Object obj)
+************************************************************************
+
+
+************************************************************************
+出现应用程序未处理的异常：：2021/4/9 17:41:31
+Application UnhandledException:线程间操作无效: 从不是创建控件“dgvResultData”的线程访问它。;
+信息:   在 System.Windows.Forms.Control.get_Handle()
+   在 System.Windows.Forms.DataGridView.FlushDisplayedChanged()
+   在 System.Windows.Forms.DataGridView.PerformLayoutPrivate(Boolean useRowShortcut, Boolean computeVisibleRows, Boolean invalidInAdjustFillingColumns, Boolean repositionEditingControl)
+   在 System.Windows.Forms.DataGridView.ResetUIState(Boolean useRowShortcut, Boolean computeVisibleRows)
+   在 System.Windows.Forms.DataGridViewRowCollection.OnCollectionChanged_PreNotification(CollectionChangeAction cca, Int32 rowIndex, Int32 rowCount, DataGridViewRow& dataGridViewRow, Boolean changeIsInsertion)
+   在 System.Windows.Forms.DataGridViewRowCollection.OnCollectionChanged(CollectionChangeEventArgs e, Int32 rowIndex, Int32 rowCount, Boolean changeIsDeletion, Boolean changeIsInsertion, Boolean recreateNewRow, Point newCurrentCell)
+   在 System.Windows.Forms.DataGridViewRowCollection.InsertInternal(Int32 rowIndex, DataGridViewRow dataGridViewRow, Boolean force)
+   在 System.Windows.Forms.DataGridView.DataGridViewDataConnection.ProcessListChanged(ListChangedEventArgs e)
+   在 System.Windows.Forms.DataGridView.DataGridViewDataConnection.currencyManager_ListChanged(Object sender, ListChangedEventArgs e)
+   在 System.Windows.Forms.CurrencyManager.OnListChanged(ListChangedEventArgs e)
+   在 System.Windows.Forms.CurrencyManager.List_ListChanged(Object sender, ListChangedEventArgs e)
+   在 System.ComponentModel.BindingList`1.OnListChanged(ListChangedEventArgs e)
+   在 System.ComponentModel.BindingList`1.FireListChanged(ListChangedType type, Int32 index)
+   在 System.ComponentModel.BindingList`1.InsertItem(Int32 index, T item)
+   在 System.Collections.ObjectModel.Collection`1.Add(T item)
+   在 BioBaseCLIA.Run.frmWorkList.SaveTestResultData(List`1 BToListTi, List`1 lis1, List`1 lis2) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 10101
+   在 BioBaseCLIA.Run.frmWorkList.CalculatResult(Int32 testid, Int32 pmt) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 10047
+   在 BioBaseCLIA.Run.frmWorkList.Read(Object readInfo) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 9440
+   在 System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   在 System.Threading.ThreadHelper.ThreadStart(Object obj)
+************************************************************************
+
+
+************************************************************************
+出现应用程序未处理的异常：：2021/4/10 10:38:36
+Application UnhandledException:线程间操作无效: 从不是创建控件“dgvResultData”的线程访问它。;
+信息:   在 System.Windows.Forms.Control.get_Handle()
+   在 System.Windows.Forms.DataGridView.FlushDisplayedChanged()
+   在 System.Windows.Forms.DataGridView.PerformLayoutPrivate(Boolean useRowShortcut, Boolean computeVisibleRows, Boolean invalidInAdjustFillingColumns, Boolean repositionEditingControl)
+   在 System.Windows.Forms.DataGridView.ResetUIState(Boolean useRowShortcut, Boolean computeVisibleRows)
+   在 System.Windows.Forms.DataGridViewRowCollection.OnCollectionChanged_PreNotification(CollectionChangeAction cca, Int32 rowIndex, Int32 rowCount, DataGridViewRow& dataGridViewRow, Boolean changeIsInsertion)
+   在 System.Windows.Forms.DataGridViewRowCollection.OnCollectionChanged(CollectionChangeEventArgs e, Int32 rowIndex, Int32 rowCount, Boolean changeIsDeletion, Boolean changeIsInsertion, Boolean recreateNewRow, Point newCurrentCell)
+   在 System.Windows.Forms.DataGridViewRowCollection.InsertInternal(Int32 rowIndex, DataGridViewRow dataGridViewRow, Boolean force)
+   在 System.Windows.Forms.DataGridView.DataGridViewDataConnection.ProcessListChanged(ListChangedEventArgs e)
+   在 System.Windows.Forms.DataGridView.DataGridViewDataConnection.currencyManager_ListChanged(Object sender, ListChangedEventArgs e)
+   在 System.Windows.Forms.CurrencyManager.OnListChanged(ListChangedEventArgs e)
+   在 System.Windows.Forms.CurrencyManager.List_ListChanged(Object sender, ListChangedEventArgs e)
+   在 System.ComponentModel.BindingList`1.OnListChanged(ListChangedEventArgs e)
+   在 System.ComponentModel.BindingList`1.FireListChanged(ListChangedType type, Int32 index)
+   在 System.ComponentModel.BindingList`1.InsertItem(Int32 index, T item)
+   在 System.Collections.ObjectModel.Collection`1.Add(T item)
+   在 BioBaseCLIA.Run.frmWorkList.SaveTestResultData(List`1 BToListTi, List`1 lis1, List`1 lis2, TestResult Result) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 10101
+   在 BioBaseCLIA.Run.frmWorkList.CalculatResult(Int32 testid, Int32 pmt) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 10048
+   在 BioBaseCLIA.Run.frmWorkList.Read(Object readInfo) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 9440
+   在 System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   在 System.Threading.ThreadHelper.ThreadStart(Object obj)
+************************************************************************
+
+
+************************************************************************
+出现应用程序未处理的异常：：2021/4/10 11:47:27
+Application UnhandledException:线程间操作无效: 从不是创建控件“dgvResultData”的线程访问它。;
+信息:   在 System.Windows.Forms.Control.get_Handle()
+   在 System.Windows.Forms.DataGridView.FlushDisplayedChanged()
+   在 System.Windows.Forms.DataGridView.PerformLayoutPrivate(Boolean useRowShortcut, Boolean computeVisibleRows, Boolean invalidInAdjustFillingColumns, Boolean repositionEditingControl)
+   在 System.Windows.Forms.DataGridView.ResetUIState(Boolean useRowShortcut, Boolean computeVisibleRows)
+   在 System.Windows.Forms.DataGridViewRowCollection.OnCollectionChanged_PreNotification(CollectionChangeAction cca, Int32 rowIndex, Int32 rowCount, DataGridViewRow& dataGridViewRow, Boolean changeIsInsertion)
+   在 System.Windows.Forms.DataGridViewRowCollection.OnCollectionChanged(CollectionChangeEventArgs e, Int32 rowIndex, Int32 rowCount, Boolean changeIsDeletion, Boolean changeIsInsertion, Boolean recreateNewRow, Point newCurrentCell)
+   在 System.Windows.Forms.DataGridViewRowCollection.InsertInternal(Int32 rowIndex, DataGridViewRow dataGridViewRow, Boolean force)
+   在 System.Windows.Forms.DataGridView.DataGridViewDataConnection.ProcessListChanged(ListChangedEventArgs e)
+   在 System.Windows.Forms.DataGridView.DataGridViewDataConnection.currencyManager_ListChanged(Object sender, ListChangedEventArgs e)
+   在 System.Windows.Forms.CurrencyManager.OnListChanged(ListChangedEventArgs e)
+   在 System.Windows.Forms.CurrencyManager.List_ListChanged(Object sender, ListChangedEventArgs e)
+   在 System.ComponentModel.BindingList`1.OnListChanged(ListChangedEventArgs e)
+   在 System.ComponentModel.BindingList`1.FireListChanged(ListChangedType type, Int32 index)
+   在 System.ComponentModel.BindingList`1.InsertItem(Int32 index, T item)
+   在 System.Collections.ObjectModel.Collection`1.Add(T item)
+   在 BioBaseCLIA.Run.frmWorkList.SaveTestResultData(List`1 BToListTi, List`1 lis1, List`1 lis2) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 10100
+   在 BioBaseCLIA.Run.frmWorkList.CalculatResult(Int32 testid, Int32 pmt) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 10046
+   在 BioBaseCLIA.Run.frmWorkList.Read(Object readInfo) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 9440
+   在 System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   在 System.Threading.ThreadHelper.ThreadStart(Object obj)
+************************************************************************
+
+
+************************************************************************
+出现应用程序未处理的异常：：2021/4/10 11:48:07
+Application UnhandledException:线程间操作无效: 从不是创建控件“dgvResultData”的线程访问它。;
+信息:   在 System.Windows.Forms.Control.get_Handle()
+   在 System.Windows.Forms.DataGridView.FlushDisplayedChanged()
+   在 System.Windows.Forms.DataGridView.PerformLayoutPrivate(Boolean useRowShortcut, Boolean computeVisibleRows, Boolean invalidInAdjustFillingColumns, Boolean repositionEditingControl)
+   在 System.Windows.Forms.DataGridView.ResetUIState(Boolean useRowShortcut, Boolean computeVisibleRows)
+   在 System.Windows.Forms.DataGridViewRowCollection.OnCollectionChanged_PreNotification(CollectionChangeAction cca, Int32 rowIndex, Int32 rowCount, DataGridViewRow& dataGridViewRow, Boolean changeIsInsertion)
+   在 System.Windows.Forms.DataGridViewRowCollection.OnCollectionChanged(CollectionChangeEventArgs e, Int32 rowIndex, Int32 rowCount, Boolean changeIsDeletion, Boolean changeIsInsertion, Boolean recreateNewRow, Point newCurrentCell)
+   在 System.Windows.Forms.DataGridViewRowCollection.InsertInternal(Int32 rowIndex, DataGridViewRow dataGridViewRow, Boolean force)
+   在 System.Windows.Forms.DataGridView.DataGridViewDataConnection.ProcessListChanged(ListChangedEventArgs e)
+   在 System.Windows.Forms.DataGridView.DataGridViewDataConnection.currencyManager_ListChanged(Object sender, ListChangedEventArgs e)
+   在 System.Windows.Forms.CurrencyManager.OnListChanged(ListChangedEventArgs e)
+   在 System.Windows.Forms.CurrencyManager.List_ListChanged(Object sender, ListChangedEventArgs e)
+   在 System.ComponentModel.BindingList`1.OnListChanged(ListChangedEventArgs e)
+   在 System.ComponentModel.BindingList`1.FireListChanged(ListChangedType type, Int32 index)
+   在 System.ComponentModel.BindingList`1.InsertItem(Int32 index, T item)
+   在 System.Collections.ObjectModel.Collection`1.Add(T item)
+   在 BioBaseCLIA.Run.frmWorkList.SaveTestResultData(List`1 BToListTi, List`1 lis1, List`1 lis2) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 10100
+   在 BioBaseCLIA.Run.frmWorkList.CalculatResult(Int32 testid, Int32 pmt) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 10046
+   在 BioBaseCLIA.Run.frmWorkList.Read(Object readInfo) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 9440
+   在 System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   在 System.Threading.ThreadHelper.ThreadStart(Object obj)
+************************************************************************
+
+
+************************************************************************
+出现应用程序未处理的异常：：2021/4/10 11:48:32
+Application UnhandledException:线程间操作无效: 从不是创建控件“dgvResultData”的线程访问它。;
+信息:   在 System.Windows.Forms.Control.get_Handle()
+   在 System.Windows.Forms.DataGridView.FlushDisplayedChanged()
+   在 System.Windows.Forms.DataGridView.PerformLayoutPrivate(Boolean useRowShortcut, Boolean computeVisibleRows, Boolean invalidInAdjustFillingColumns, Boolean repositionEditingControl)
+   在 System.Windows.Forms.DataGridView.ResetUIState(Boolean useRowShortcut, Boolean computeVisibleRows)
+   在 System.Windows.Forms.DataGridViewRowCollection.OnCollectionChanged_PreNotification(CollectionChangeAction cca, Int32 rowIndex, Int32 rowCount, DataGridViewRow& dataGridViewRow, Boolean changeIsInsertion)
+   在 System.Windows.Forms.DataGridViewRowCollection.OnCollectionChanged(CollectionChangeEventArgs e, Int32 rowIndex, Int32 rowCount, Boolean changeIsDeletion, Boolean changeIsInsertion, Boolean recreateNewRow, Point newCurrentCell)
+   在 System.Windows.Forms.DataGridViewRowCollection.InsertInternal(Int32 rowIndex, DataGridViewRow dataGridViewRow, Boolean force)
+   在 System.Windows.Forms.DataGridView.DataGridViewDataConnection.ProcessListChanged(ListChangedEventArgs e)
+   在 System.Windows.Forms.DataGridView.DataGridViewDataConnection.currencyManager_ListChanged(Object sender, ListChangedEventArgs e)
+   在 System.Windows.Forms.CurrencyManager.OnListChanged(ListChangedEventArgs e)
+   在 System.Windows.Forms.CurrencyManager.List_ListChanged(Object sender, ListChangedEventArgs e)
+   在 System.ComponentModel.BindingList`1.OnListChanged(ListChangedEventArgs e)
+   在 System.ComponentModel.BindingList`1.FireListChanged(ListChangedType type, Int32 index)
+   在 System.ComponentModel.BindingList`1.InsertItem(Int32 index, T item)
+   在 System.Collections.ObjectModel.Collection`1.Add(T item)
+   在 BioBaseCLIA.Run.frmWorkList.SaveTestResultData(List`1 BToListTi, List`1 lis1, List`1 lis2) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 10100
+   在 BioBaseCLIA.Run.frmWorkList.CalculatResult(Int32 testid, Int32 pmt) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 10046
+   在 BioBaseCLIA.Run.frmWorkList.Read(Object readInfo) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 9440
+   在 System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   在 System.Threading.ThreadHelper.ThreadStart(Object obj)
+************************************************************************
+
+
+************************************************************************
+出现应用程序未处理的异常：：2021/4/10 14:28:23
+Application UnhandledException:输入字符串的格式不正确。;
+信息:   在 System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   在 System.Double.Parse(String s)
+   在 BioBaseCLIA.Run.frmWorkList.CalculatResult(Int32 testid, Int32 pmt) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 9925
+   在 BioBaseCLIA.Run.frmWorkList.Read(Object readInfo) 位置 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\BioBaseCLIA\Run\frmWorkList.cs:行号 9440
+   在 System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   在 System.Threading.ThreadHelper.ThreadStart(Object obj)
+************************************************************************
+
