@@ -99,6 +99,10 @@ namespace BioBaseCLIA.Run
         /// </summary>
         AddRegent3,
         /// <summary>
+        /// 加稀释液位试剂
+        /// </summary>
+        AddRegentD,
+        /// <summary>
         /// 加磁珠
         /// </summary>
         AddBeads,
