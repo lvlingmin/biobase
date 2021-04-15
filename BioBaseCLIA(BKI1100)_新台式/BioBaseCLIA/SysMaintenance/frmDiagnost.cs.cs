@@ -7947,7 +7947,7 @@ namespace BioBaseCLIA.SysMaintenance
                 int pos = version.IndexOf("EB9011FF");
                 version = version.Substring(pos, 32);
                 version = version.Substring(8);
-                string tag = version.Substring(0, 2); //0X 选择板子                
+                string tag = version.Substring(0, 2); //0X 选择板子
                 MM = Convert.ToInt32(version.Substring(2, 2), 16);
                 NN = Convert.ToInt32(version.Substring(4, 2), 16);
 
