@@ -1084,6 +1084,8 @@ namespace BioBaseCLIA.Run
 
         private void btnAddD_Click(object sender, EventArgs e)
         {
+            if (txtRgPosition.Text == "")
+                return;
             if (dtRgInfo.Select("Postion=" + Convert.ToInt32(txtRgPosition.Text) + "").Length == 0)
             {
                 frmMessageShow frmMsgShow = new frmMessageShow();
