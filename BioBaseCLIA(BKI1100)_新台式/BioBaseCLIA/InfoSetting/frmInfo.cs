@@ -1423,6 +1423,13 @@ namespace BioBaseCLIA.InfoSetting
                 txtDepName.Focus();
                 return;
             }
+
+            if (cmbPrintMode.SelectedItem == null)//lyq
+            {
+                return;
+            }
+            OperateIniFile.WriteIniPara("PrintSet", "PrintMode", cmbPrintMode.Text.Trim());
+
             OperateIniFile.WriteIniPara("PrintSet", "HospitalName", txtHospitalName.Text.Trim());
             OperateIniFile.WriteIniPara("PrintSet", "defaultPrinter", cmbPrinter.SelectedItem.ToString());
 
