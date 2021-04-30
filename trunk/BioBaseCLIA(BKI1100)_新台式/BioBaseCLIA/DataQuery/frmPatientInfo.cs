@@ -71,11 +71,17 @@ namespace BioBaseCLIA.DataQuery
 
             cmbSendDoctor.Text = modelSp.SendDoctor;
             dateSendDateTime.Value = (DateTime)modelSp.SendDateTime;
+
+            txtInspectionItems.Text = modelSp.InspectionItems;//lyq add 20210421
+            dateAcquisitionTime.Value = (DateTime)modelSp.AcquisitionTime;//lyq add 20210421
+
             if (modelSp.InspectDoctor != "")
                 txtInspectDoctor.Text = modelSp.InspectDoctor;
             else
                 txtInspectDoctor.Text = LoginGName;
             txtCheckDoctor.Text = modelSp.CheckDoctor;
+
+
             bool IsLisConnect = bool.Parse(OperateIniFile.ReadInIPara("LisSet", "IsLisConnect"));
             if (!IsLisConnect)
             {
@@ -92,7 +98,7 @@ namespace BioBaseCLIA.DataQuery
                 modelSp.Age = 0;
             }
             else
-            modelSp.Age = int.Parse(txtAge.Text);
+                modelSp.Age = int.Parse(txtAge.Text);
             modelSp.BedNo = txtBedNo.Text;
             modelSp.ClinicNo = txtClinicNo.Text;
             modelSp.Diagnosis = txtDiagnosis.Text;
@@ -107,6 +113,10 @@ namespace BioBaseCLIA.DataQuery
             modelSp.SendDateTime = dateSendDateTime.Value;
             modelSp.InspectDoctor = txtInspectDoctor.Text;
             modelSp.CheckDoctor = txtCheckDoctor.Text;
+
+            modelSp.AcquisitionTime = dateAcquisitionTime.Value;//lyq add 20210421
+            modelSp.InspectionItems = txtInspectionItems.Text;
+
             if (bllsp.Exists(SampleID))
             {
                 bllsp.UpdatePatientInfo(modelSp);
@@ -133,7 +143,7 @@ namespace BioBaseCLIA.DataQuery
             if (ConnectType != Getstring("TwoWay"))
             {
                 frmMessageShow frmMessage = new frmMessageShow();
-                frmMessage.MessageShow( Getstring("MessageHead"), Getstring("ConnMessage"));
+                frmMessage.MessageShow(Getstring("MessageHead"), Getstring("ConnMessage"));
                 return;
             }
             else//如果与LIS连接，发送查询
@@ -171,42 +181,7 @@ namespace BioBaseCLIA.DataQuery
                     //}
                     modelSp = CAmp.GetSampleInfo(modelSp);
                 }
-                //switch (CommunicationType)
-                //{
-                //    case "网口通讯":
-                //        if (!LisCommunication.Instance.IsConnect())
-                //        {
-                //            MessageBox.Show(Getstring("NoConnMessage"), Getstring("MessageHead"));
-                //            return;
-                //        }
-                //        CMessageParser Cmp = new CMessageParser();
-                //        Cmp.SelectBySampleNo(modelSp.SampleNo);
-                //        //LisCommunication.Instance.comWait.WaitOne();
-                //        bool delay = LisCommunication.Instance.comWait.WaitOne(10000);
-                //        if (!delay)
-                //        {
-                //            LisCommunication.Instance.comWait.Set();
-                //        }
-                //        modelSp = Cmp.GetSampleInfo(modelSp);
-                //        break;
-                //    case "串口通讯":
-                //        if (!LisConnection.Instance.IsOpen())
-                //        {
-                //            MessageBox.Show(Getstring("NoConnMessage"), Getstring("MessageHead"));
-                //            return;
-                //        }
-                //        CAMessageParser CAmp = new CAMessageParser();
-                //        CAmp.SelectBySampleNo(modelSp.SampleNo);
-                //        //delay = LisConnection.Instance.SelectWait.WaitOne(10000);
-                //        //if (!delay)
-                //        //{
-                //        //    LisConnection.Instance.SelectWait.Set();
-                //        //}
-                //        modelSp = CAmp.GetSampleInfo(modelSp);
-                //        break;
-                //    default:
-                //        break;
-                //}
+
                 txtAge.Text = modelSp.Age.ToString();
                 txtBedNo.Text = modelSp.BedNo;
                 txtClinicNo.Text = modelSp.ClinicNo;
@@ -223,8 +198,8 @@ namespace BioBaseCLIA.DataQuery
             if (cmbDepartment.SelectedItem.ToString() != "")
             {
                 cmbSendDoctor.Items.Clear();
-                DataRow[]dr=dtDepInfo.Select("DepartmentName='"+cmbDepartment.SelectedItem+"'");
-                if (dr.Length > 0)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+                DataRow[] dr = dtDepInfo.Select("DepartmentName='" + cmbDepartment.SelectedItem + "'");
+                if (dr.Length > 0)
                 {
                     DbHelperOleDb db = new DbHelperOleDb(2);
                     DataTable dtDoctor = bllDoctor.GetList("DepartmentID=" + dr[0]["DepartmentID"] + "").Tables[0];
@@ -233,7 +208,7 @@ namespace BioBaseCLIA.DataQuery
                         cmbSendDoctor.Items.Add(docdr["DoctorName"]);
                     }
                 }
-                
+
             }
         }
         /// <summary>
