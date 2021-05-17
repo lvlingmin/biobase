@@ -2763,7 +2763,7 @@ namespace BioBaseCLIA.Run
                 }));
 
                 int hole = i;
-                hole = hole - 5 > 0 ? (hole - 5) : (20 + hole - 5);
+                hole = hole - 15 > 0 ? (hole - 15) : (30 + hole - 15);
                 string HoleNum = hole.ToString("x2");
 
                 RotSendAgain:
