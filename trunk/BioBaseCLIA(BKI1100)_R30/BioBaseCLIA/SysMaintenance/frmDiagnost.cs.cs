@@ -7878,7 +7878,7 @@ namespace BioBaseCLIA.SysMaintenance
 
         private void cmbStep_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbStep.SelectedItem == "查询温度")
+            if (cmbStep.SelectedItem.ToString() == "查询温度")
                 label10.Text = " 温度：";
             else
                 label10.Text = "校准值：";
