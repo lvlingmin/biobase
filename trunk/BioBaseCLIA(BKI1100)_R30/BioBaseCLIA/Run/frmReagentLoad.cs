@@ -1379,7 +1379,7 @@ namespace BioBaseCLIA.Run
                     txtRgLastTest.Text = testNum;
 
                     //对比生产日期后一年 和 今天装载日期后90天
-                    DateTime dt1 = DateTime.ParseExact(productDay/*.Replace(shortName, "")*/, "yyyyMMdd", null, System.Globalization.DateTimeStyles.AllowWhiteSpaces).AddYears(1).AddDays(-1);
+                    DateTime dt1 = DateTime.ParseExact(batch.Replace(shortName, ""), "yyyyMMdd", null, System.Globalization.DateTimeStyles.AllowWhiteSpaces).AddYears(1).AddDays(-1);
                     #region 暂时不考虑开封后有效期计算
                     //DateTime dt2 = DateTime.Now.AddDays(90);
                     //if (DateTime.Compare(dt1, dt2) <= 0)//使用两个最小的作为有效期
