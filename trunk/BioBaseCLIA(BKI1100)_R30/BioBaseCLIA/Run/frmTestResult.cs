@@ -76,7 +76,7 @@ namespace BioBaseCLIA.Run
             //2018-10-17 zlx add
             string ValidDate1 = OperateIniFile.ReadIniData("Substrate1", "ValidDate", "", iniPathSubstrateTube);//2018-10-17 zlx add
             //string ValidDate2 = OperateIniFile.ReadIniData("Substrate2", "ValidDate", "", iniPathSubstrateTube);//2018-10-17 zlx add
-            if (Convert.ToDateTime(ValidDate1) < DateTime.Now.Date)
+            if (ValidDate1!="" && Convert.ToDateTime(ValidDate1) < DateTime.Now.Date)
                 OverSubpos.Add(1);
             //if (Convert.ToDateTime(ValidDate2) < DateTime.Now.Date)
             //    OverSubpos.Add(2);
@@ -145,6 +145,15 @@ namespace BioBaseCLIA.Run
         {
             List<TestResult> listResult = BindingListToList().ToList();
 
+            ////lyq add 20190831
+            //for (int i = 0; i < listResult.Count; i++)
+            //{
+            //    if (listResult[i].SampleType.Contains("交叉污染"))
+            //    {
+            //        MessageBox.Show("交叉污染不支持保存到数据库");
+            //        return;
+            //    }                    
+            //}
 
             for (int i = 0; i < listResult.Count; i++)
             {
@@ -285,7 +294,6 @@ namespace BioBaseCLIA.Run
                 modelScalingResult.ScalingModel = null;
                 modelScalingResult.Source = 1;
                 modelScalingResult.Status = 1;
-                db1 = new DbHelperOleDb(1); 
                 bllScalingResult.Add(modelScalingResult);
             }
             #endregion
@@ -502,6 +510,7 @@ namespace BioBaseCLIA.Run
                         db1 = new DbHelperOleDb(1);
                         ExitsMainCurve = new BLL.tbMainScalCurve().ExistsCurve(ilistStandardResult[0].ItemName, ilistStandardResult[0].ReagentBeach);
                     }
+                   
                     //该项目的历史定标  2018-08-27 zlx mod
                     if (ExitsMainCurve || pointerNumber == PointsNum)
                     {
@@ -679,8 +688,8 @@ namespace BioBaseCLIA.Run
             else
             {
                 frmSampleLoad frmSL = (frmSampleLoad)Application.OpenForms["frmSampleLoad"];
-                frmSL.LoadData();//2018-01-10 zlx add
                 frmSL.Show();
+                frmSL.LoadData();//2018-01-10 zlx add
                 frmSL.BringToFront(); ;
             }
             if (CheckFormIsOpen("frmWorkList") && (frmWorkList.RunFlag == (int)RunFlagStart.Stoped || frmWorkList.RunFlag == (int)RunFlagStart.NoStart))//2019-01-11 zlx add
@@ -692,6 +701,7 @@ namespace BioBaseCLIA.Run
 
         private void btnWorkList_Click(object sender, EventArgs e)
         {
+
             if (!CheckFormIsOpen("frmWorkList"))
             {
                 frmWorkList frmWL = new frmWorkList();
@@ -704,6 +714,7 @@ namespace BioBaseCLIA.Run
                 frmWorkList frmWL = (frmWorkList)Application.OpenForms["frmWorkList"];
                 frmWL.Show();
                 frmWL.BringToFront(); 
+
             }
         }
 
@@ -720,7 +731,7 @@ namespace BioBaseCLIA.Run
             {
                 frmReagentLoad frmRL = (frmReagentLoad)Application.OpenForms["frmReagentLoad"];
                 frmRL.Show();
-                frmRL.BringToFront(); 
+                frmRL.BringToFront(); ;
                 frmRL.LoadData();//2018-11-14 zlx add
             }
             if (CheckFormIsOpen("frmWorkList") && (frmWorkList.RunFlag == (int)RunFlagStart.Stoped || frmWorkList.RunFlag == (int)RunFlagStart.NoStart))//2019-01-11 zlx add
@@ -772,7 +783,8 @@ namespace BioBaseCLIA.Run
 
         //2018-08-15 zlx add
         private void dgvResultData_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {  
+        {
+           
             if (!BRun)
                 btnLoadReagent.Enabled = btnLoadSample.Enabled = true;
             else
@@ -811,7 +823,6 @@ namespace BioBaseCLIA.Run
                     {
                         if (dtSpInfo.Rows[i]["SampleNo"].ToString().Equals(_dtSP.Rows[0]["SampleNo"].ToString()))
                         {
-                            db = new DbHelperOleDb(1);
                             if (DbHelperOleDb.ExecuteSql(1,@"update tbSampleInfo set Status = 0  where SampleID=" + dgvResultData.SelectedRows[0].Cells["SampleID"].Value + "") > 0)
                             {
                                 dtSpInfo.Rows[i]["Status"] = 0;
@@ -830,15 +841,14 @@ namespace BioBaseCLIA.Run
                 MessageBox.Show("重测设置成功！");
         }
 
-        private void fbtnClearResult_Click(object sender, EventArgs e)
+        private void functionButton1_Click(object sender, EventArgs e)
         {
-            if (frmWorkList.RunFlag == (int)RunFlagStart.IsRuning) 
+            if (frmWorkList.RunFlag == (int)RunFlagStart.IsRuning)
             {
-                MessageBox.Show("请在实验结束后进行清空操作！","温馨提示",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show("请在实验结束后进行清空操作！", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             frmWorkList.BTestResult.Clear();
-
         }
     }
 }

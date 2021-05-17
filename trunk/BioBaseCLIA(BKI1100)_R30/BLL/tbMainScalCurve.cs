@@ -65,7 +65,7 @@ namespace BioBaseCLIA.BLL
 		}
 
         /// <summary>
-        /// 根据批号返回id lyq add 20190815
+        /// 根据批号返回id 
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>

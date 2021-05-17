@@ -78,8 +78,8 @@ namespace Common
             if (fileExt == ".xlsx") { workbook = new XSSFWorkbook(); } else if (fileExt == ".xls") { workbook = new HSSFWorkbook(); } else { workbook = null; }
             if (workbook == null) { return; }
             ISheet sheet = string.IsNullOrEmpty(dt.TableName) ? workbook.CreateSheet("Sheet1") : workbook.CreateSheet(dt.TableName);
-            if(dt.Rows[0][0].ToString().Contains("测试"))
-                sheet.SetColumnWidth(0 , 30 * 256);
+            if (dt.Rows[0][0].ToString().Contains("测试"))
+                sheet.SetColumnWidth(0, 30 * 256);
             //表头  
             IRow row = sheet.CreateRow(0);
             for (int i = 0; i < dt.Columns.Count; i++)
@@ -98,10 +98,10 @@ namespace Common
                 {
                    cell = row1.CreateCell(j);
                     //cell.SetCellValue(double.Parse(dt.Rows[i][j].ToString()));
-                    if (dt.Rows[0][0].ToString().Contains("测试")) 
-                        cell.SetCellValue(dt.Rows[i][j].ToString());                   
+                    if (dt.Rows[0][0].ToString().Contains("测试"))
+                        cell.SetCellValue(dt.Rows[i][j].ToString());
                     else
-                        cell.SetCellValue(double.Parse(dt.Rows[i][j].ToString()));  
+                        cell.SetCellValue(double.Parse(dt.Rows[i][j].ToString()));
                 }
             }
 

@@ -20,7 +20,7 @@ namespace BioBaseCLIA.SysMaintenance
     public partial class frmDiagnost : frmParent
     {
         #region 变量
-        frmMessageShow frmMsgShow=new frmMessageShow();//20180524 zlx add
+        frmMessageShow frmMsgShow = new frmMessageShow();//20180524 zlx add
         /// <summary>
         /// 返回指令
         /// </summary>
@@ -30,6 +30,7 @@ namespace BioBaseCLIA.SysMaintenance
         /// 清洗盘取放管位置当前孔号
         /// </summary>
         int currentHoleNum = 1;
+
         /// <summary>
         /// 存储线程，返回按钮结束时使用
         /// </summary>
@@ -101,6 +102,7 @@ namespace BioBaseCLIA.SysMaintenance
         #region 版本号变量
         string[] boardVersion = new string[9];
         #endregion
+
         #region 规范测试变量
         /// <summary>
         /// 导出信息表
@@ -113,6 +115,10 @@ namespace BioBaseCLIA.SysMaintenance
         #endregion
         #endregion
         bool bClose = true;
+        /// <summary>
+        /// 记录单步指令类型，还原信号量时使用
+        /// </summary>
+        int stepOrderSendFlag = 5;
         #region 老化测试变量
         /// <summary>
         /// 老化测试线程
@@ -146,36 +152,29 @@ namespace BioBaseCLIA.SysMaintenance
         public frmDiagnost()
         {
             InitializeComponent();
-            label98.Location = new Point(22, 77);
-            untxtInjection.Location = new Point(89, 74);
-        }
-        /// <summary>
-        /// 获取选项卡的编号
-        /// </summary>
-        public int GetTabControlSelectIndex() 
-        {
-            return tabControlMy1.SelectedIndex;
+            label98.Location = new Point(22, 80);
+            untxtInjection.Location = new Point(89, 77);
         }
         #region 公共方法
         private void frmDiagnost_Load(object sender, EventArgs e)
         {
-            //fbtnReturn.Enabled = false;
             bClose = false;
             new Thread(new ParameterizedThreadStart((obj) =>
-          {
-              NetCom3.Instance.ReceiveHandel += new Action<string>(Instance_ReceiveHandel);
-              if (!NetCom3.isConnect)
-              {
-                  if (NetCom3.Instance.CheckMyIp_Port_Link())
-                  {
-                      NetCom3.Instance.ConnectServer();
+            {
+                NetCom3.Instance.ReceiveHandel += new Action<string>(Instance_ReceiveHandel);
+                if (!NetCom3.isConnect)
+                {
+                    if (NetCom3.Instance.CheckMyIp_Port_Link())
+                    {
+                        NetCom3.Instance.ConnectServer();
 
-                      if (!NetCom3.isConnect)
-                          return;
+                        if (!NetCom3.isConnect)
+                            return;
 
-                  }
-              }
-          })) { IsBackground = true }.Start();
+                    }
+                }
+            }))
+            { IsBackground = true }.Start();
             //this block add y 20180816
             new Thread(new ParameterizedThreadStart((obj) =>
             {
@@ -191,7 +190,8 @@ namespace BioBaseCLIA.SysMaintenance
 
                     }
                 }
-            })){ IsBackground = true }.Start();
+            }))
+            { IsBackground = true }.Start();
             //block end
             //查询清洗盘管信息
             dtWashTrayInfo = OperateIniFile.ReadConfig(iniPathWashTrayInfo);
@@ -206,23 +206,12 @@ namespace BioBaseCLIA.SysMaintenance
             chart1.ChartAreas[0].AxisY.Maximum = num2;
             saveFileDialog1.InitialDirectory = System.Windows.Forms.Application.StartupPath + @"\daily";//默认路径
             cmbArmRegentPos.SelectedIndex = 0;
-            #region 老化测试
-            cmbArmRegentPos.Items.Clear();
-            for (int i = 1; i <= RegentNum; i++)
-            {
-                cmbArmRegentPos.Items.Add(i);
-            }
             //zlx add 2018-08-31 zlx add 停止试剂盘旋转
-            #endregion
             NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 02 09 01"), 0);
             while (!NetCom3.SpReciveFlag)
             {
                 NetCom3.Delay(1);
             }
-            //tabControlMy1.TabPages.Remove(tabPhotonPressure);
-            //tabControlMy1.TabPages.Remove(tabPerformance);
-            //tabControlMy1.TabPages.Remove(tabAgingTest);
-            //fbtnReturn.Enabled = true;
             bClose = true;
             BQLiquaid = false;
             cmbSendDelay.SelectedIndex = 2;
@@ -293,8 +282,8 @@ namespace BioBaseCLIA.SysMaintenance
                 return;
             }
             timer1.Stop(); //返回就结束timer  jun add 20190426
-            NetCom3.Instance.ReceiveHandel -= dealAgingBack;          
-            foreach (Thread a in threadList) 
+            NetCom3.Instance.ReceiveHandel -= dealAgingBack;
+            foreach (Thread a in threadList)
             {
                 if (a != null && a.IsAlive)
                     a.Abort();
@@ -345,15 +334,44 @@ namespace BioBaseCLIA.SysMaintenance
                 NetCom3.Instance.Send(NetCom3.Cover("EB 90 01 01 04"), 5);
                 NetCom3.Instance.SingleQuery();
             }
-             //理杯块位置
+            //理杯块位置
             else if (cmbHandPara.SelectedIndex == 4)
             {
                 NetCom3.Instance.Send(NetCom3.Cover("EB 90 01 01 05"), 5);
                 NetCom3.Instance.SingleQuery();
             }
             cmbHandPara.Enabled = true;
+
+            UpdateHandSteps();
         }
 
+        private void UpdateHandSteps()
+        {
+            if (cmbHandPara.SelectedIndex < 0 || cmbHElecMachine.SelectedIndex < 0) return;
+
+            string machine = string.Empty;
+            switch (cmbHElecMachine.Text) 
+            {
+                case "理杯块电机":
+                    machine = "01";
+                    break;
+                case "暂存盘电机":
+                    machine = "02";
+                    break;
+                case "垂直电机":
+                    machine = "03";
+                    break;
+                case "旋转电机":
+                    machine = "04";
+                    break;
+                default:
+                    return;
+            }
+
+            txtWashCurValue.Text =
+                GetCurrentSteps((cmbHandPara.SelectedIndex + 1).ToString().PadLeft(2, '0'),
+                machine, "01");
+        }
         private void btnHandAdd_Click(object sender, EventArgs e)
         {
             if (!NetCom3.totalOrderFlag)
@@ -458,7 +476,7 @@ namespace BioBaseCLIA.SysMaintenance
 
         private void btnSaveHand_Click(object sender, EventArgs e)
         {
-          
+
             if (!NetCom3.totalOrderFlag)
             {
                 frmMsgShow.MessageShow("仪器调试", "仪器正在运动，请稍等！");
@@ -520,6 +538,7 @@ namespace BioBaseCLIA.SysMaintenance
           }
            */
             btnSaveHand.Enabled = true;
+            UpdateHandSteps();
         }
 
         private void btnHand_Click(object sender, EventArgs e)
@@ -606,7 +625,7 @@ namespace BioBaseCLIA.SysMaintenance
                 return;
             }
             fbtnHandZ.Enabled = false;
-            NetCom3.Instance.Send(NetCom3.Cover("EB 90 11 01 05 " +int.Parse(numHole.Value.ToString()).ToString("X2")+""), 5);
+            NetCom3.Instance.Send(NetCom3.Cover("EB 90 11 01 05 " + int.Parse(numHole.Value.ToString()).ToString("X2") + ""), 5);
             NetCom3.Instance.SingleQuery();
             fbtnHandZ.Enabled = true;
         }
@@ -693,7 +712,7 @@ namespace BioBaseCLIA.SysMaintenance
         private void btnHandYInit_Click(object sender, EventArgs e)
         {
             //2018-09-30 mod
-             if (!NetCom3.totalOrderFlag)
+            if (!NetCom3.totalOrderFlag)
             {
                 frmMsgShow.MessageShow("仪器调试", "仪器正在运动，请稍等！");
                 return;
@@ -729,6 +748,8 @@ namespace BioBaseCLIA.SysMaintenance
             sendMonitor(NetCom3.Cover("EB 90 01 03 00"), 5);
             NetCom3.Instance.SingleQuery();
             btnHandAllInit.Enabled = true;
+
+            UpdateHandSteps();
         }
 
         private void btnHandOpen_Click(object sender, EventArgs e)
@@ -753,7 +774,7 @@ namespace BioBaseCLIA.SysMaintenance
             //    NetCom3.Instance.Send(NetCom3.Cover("EB 90 11 01 03 30"), 5);
             //    NetCom3.Instance.SingleQuery();
             //}
-            btnHandOpen.Enabled = true;//2018-09-30 zlx mod
+            btnHandOpen.Enabled = true;
         }
 
 
@@ -811,15 +832,10 @@ namespace BioBaseCLIA.SysMaintenance
 
         private void fbtnInTubeClear_Click(object sender, EventArgs e)
         {
-            if (!NetCom3.totalOrderFlag)
-            {
-                frmMsgShow.MessageShow("仪器调试", "仪器正在运动，请稍等！");
-                return;
-            }
             fbtnInTubeClear.Enabled = false;
-           
+
             reactTrayTubeClear();
-            
+
             fbtnInTubeClear.Enabled = true;
         }
 
@@ -838,50 +854,52 @@ namespace BioBaseCLIA.SysMaintenance
             DataTable dtWashTrayIni = OperateIniFile.ReadConfig(iniPathWashTrayInfo);
             //2018-08-20 zlx mod
             for (int i = 0; i < dtWashTrayIni.Rows.Count; i++)
+            {
+                if (i != 0)
                 {
-                    if (i != 0)
-                    {
-                        //清洗盘顺时针旋转一位
-                        NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 03 01 " + (-1).ToString("X2").Substring(6, 2)), 2);
-                        if (!NetCom3.Instance.WashQuery())
-                        {
-                            fbtnWashTubeClear.Enabled = true;
-                            return false;
-                        }
-                        currentHoleNum = currentHoleNum - 1;
-                        //如果孔号小于等于0
-                        if (currentHoleNum <= 0)
-                        {
-                            currentHoleNum = currentHoleNum + 30;
-                        }
-                        OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
-                        dtWashTrayIni = OperateIniFile.ReadConfig(iniPathWashTrayInfo);
-                        DataTable dtTemp = new DataTable();
-                        dtTemp = dtWashTrayIni.Copy();
-                        //清洗盘状态列表中添加反应盘位置字段，赋值需多赋值一个字段。 
-                        for (int j = 1; j < 2; j++)
-                            dtWashTrayIni.Rows[dtWashTrayIni.Rows.Count - 1][j] = dtTemp.Rows[0][j];
-                        for (int k = 0; k < dtWashTrayIni.Rows.Count - 1; k++)
-                        {
-                            for (int j = 1; j < 2; j++)
-                            {
-                                dtWashTrayIni.Rows[k][j] = dtTemp.Rows[k + 1][j];
-                            }
-                        }
-
-                        OperateIniFile.WriteConfigToFile("[TubePosition]", iniPathWashTrayInfo, dtWashTrayIni);
-                    }
-                    #region 移管手取放管位置取管扔废管
-                    NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 04 06"), 1);
-                    LogFile.Instance.Write("==============  " + currentHoleNum + "  扔管");
-                    if (!NetCom3.Instance.MoveQuery()&&NetCom3.Instance.MoverrorFlag!=(int)ErrorState.IsNull)
+                    //清洗盘顺时针旋转一位
+                    NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 03 01 " + (-1).ToString("X2").Substring(6, 2)), 2);
+                    if (!NetCom3.Instance.WashQuery())
                     {
                         fbtnWashTubeClear.Enabled = true;
                         return false;
                     }
-                    OperateIniFile.WriteIniData("TubePosition", "No1", "0", iniPathWashTrayInfo);
-                    #endregion
+                    currentHoleNum = currentHoleNum - 1;
+                    //如果孔号小于等于0
+                    if (currentHoleNum <= 0)
+                    {
+                        currentHoleNum = currentHoleNum + 30;
+                    }
+                    OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
+                    dtWashTrayIni = OperateIniFile.ReadConfig(iniPathWashTrayInfo);
+                    DataTable dtTemp = new DataTable();
+                    dtTemp = dtWashTrayIni.Copy();
+                    //清洗盘状态列表中添加反应盘位置字段，赋值需多赋值一个字段。 
+                    for (int j = 1; j < 2; j++)
+                        dtWashTrayIni.Rows[dtWashTrayIni.Rows.Count - 1][j] = dtTemp.Rows[0][j];
+                    for (int k = 0; k < dtWashTrayIni.Rows.Count - 1; k++)
+                    {
+                        for (int j = 1; j < 2; j++)
+                        {
+                            dtWashTrayIni.Rows[k][j] = dtTemp.Rows[k + 1][j];
+                        }
+                    }
+
+                    OperateIniFile.WriteConfigToFile("[TubePosition]", iniPathWashTrayInfo, dtWashTrayIni);
                 }
+                #region 移管手取放管位置取管扔废管
+                NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 04 06"), 1);
+                LogFile.Instance.Write("==============  " + currentHoleNum + "  扔管");
+                if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
+                {
+                    fbtnWashTubeClear.Enabled = true;
+                    return false;
+                }
+                OperateIniFile.WriteIniData("TubePosition", "No1", "0", iniPathWashTrayInfo);
+                if (LogFileRtest.Instance.Bcount)
+                    LogFileRtest.Instance.Testcount++;
+                #endregion
+            }
             return true;
         }
         /// <summary>
@@ -894,15 +912,18 @@ namespace BioBaseCLIA.SysMaintenance
             for (int i = 0; i < dtInTrayIni.Rows.Count; i++)
             {
                 NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 05 " + int.Parse(dtInTrayIni.Rows[i][0].ToString().Substring(2)).ToString("x2")), 1);
-                if (!NetCom3.Instance.MoveQuery()&&NetCom3.Instance.MoverrorFlag!=(int)ErrorState.IsNull)
+                if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
                 {
                     fbtnInTubeClear.Enabled = true;
                     return false;
                 }
+                if (LogFileRtest.Instance.Bcount)
+                    LogFileRtest.Instance.Testcount++;
                 //修改反应盘信息
                 OperateIniFile.WriteIniData("ReactTrayInfo", "no" + int.Parse(dtInTrayIni.Rows[i][0].ToString().Substring(2)).ToString(), "0", iniPathReactTrayInfo);
             }
             OperateIniFile.WriteIniData("Tube", "ReacTrayTub", "", iniPathSubstrateTube);
+            
             return true;
         }
         #endregion
@@ -966,8 +987,148 @@ namespace BioBaseCLIA.SysMaintenance
                 NetCom3.Instance.SingleQuery();
             }
             cmbASPara.Enabled = true;
+
+            UpdateSampleSteps();
         }
 
+        /// <summary>
+        /// 更新加样机步数
+        /// </summary>
+        private void UpdateSampleSteps() 
+        {
+            if (cmbASPara.SelectedIndex < 0 || cmbASElecMachine.SelectedIndex < 0) return;
+            txtASCurrentPos.Text =
+                GetCurrentSteps(cmbASPara.SelectedIndex.ToString().PadLeft(2, '0'),
+                (cmbASElecMachine.SelectedIndex + 1).ToString().PadLeft(2, '0'), "0206");
+        }
+
+        /// <summary>
+        /// 获取步数
+        /// </summary>
+        /// <param name="parameter">参数名</param>
+        /// <param name="machinery">电机</param>
+        /// <param name="module">模块标志</param>
+        /// <returns></returns>
+        private string GetCurrentSteps(string parameter, string machinery, string module)
+        {
+            if (string.IsNullOrEmpty(parameter) ||
+                string.IsNullOrEmpty(machinery)) return string.Empty;
+
+            string steps = string.Empty;
+            List<string> results = GetResults(module);
+
+            string stepContent = string.Empty;
+            foreach (var item in results)
+            {
+                if (item.Substring(18).Trim().StartsWith(parameter + " " + machinery))
+                {
+                    stepContent = item.Substring(24).Trim();
+                    break;
+                }
+            }
+
+            StringBuilder tempSteps = new StringBuilder();
+            if (stepContent != string.Empty)
+            {
+                foreach (var item in stepContent.Split(' '))
+                {
+                    if (item != "00")
+                    {
+                        tempSteps.Append(item);
+                    }
+                }
+            }
+
+            if (string.IsNullOrEmpty(tempSteps.ToString())) return tempSteps.ToString();
+
+            return Convert.ToInt64(tempSteps.ToString(), 16).ToString();
+        }
+        private string GetCurrentWashSteps(string parameter, string machinery, string module)
+        {
+            if (string.IsNullOrEmpty(parameter) ||
+                string.IsNullOrEmpty(machinery)) return string.Empty;
+
+            string steps = string.Empty;
+            List<string> results = GetResults(module);
+
+            string stepContent = string.Empty;
+            foreach (var item in results)
+            {
+                if (item.Substring(18).Trim().StartsWith(parameter + " " + machinery))
+                {
+                    stepContent = item.Substring(24).Trim();
+                    break;
+                }
+            }
+
+            StringBuilder tempSteps = new StringBuilder();
+            if (stepContent != string.Empty)
+            {
+                if ((parameter == "02") && (machinery == "03"))
+                {
+                    string[] temp=stepContent.Split(' ');
+
+                    for (int i = 0; i < temp.Length; i++)
+                    {
+                        if (i == 0 || i == 1) continue;
+                        if (temp[i] != "00") 
+                        {
+                            tempSteps.Append(temp[i]);
+                        }
+                    }
+                    goto result;
+                }
+                foreach (var item in stepContent.Split(' '))
+                {
+                    if (item != "00")
+                    {
+                        tempSteps.Append(item);
+                    }
+                }
+            }
+
+            result:
+            if (string.IsNullOrEmpty(tempSteps.ToString())) return tempSteps.ToString();
+
+            return Convert.ToInt64(tempSteps.ToString(), 16).ToString();
+        }
+        /// <summary>
+        /// 返回配置文件中当前模块所有数据
+        /// </summary>
+        /// <param name="module">模块标志</param>
+        /// <returns>当前模块数据信息</returns>
+        private List<string> GetResults(string module)
+        {
+            List<string> results = new List<string>();
+            if (module == "0206")
+            {
+                if (GetData("02") != null)
+                    results.AddRange(GetData("02"));
+
+                if (GetData("06") != null)
+                    results.AddRange(GetData("06"));
+            }
+
+            if (module == "01")
+            {
+                if (GetData("01") != null)
+                    results.AddRange(GetData("01"));
+            }
+
+            if (module == "04")
+            {
+                if (GetData("04") != null)
+                    results.AddRange(GetData("04"));
+            }
+
+            if (module == "03")
+            {
+                if (GetData("03") != null)
+                    results.AddRange(GetData("03"));
+            }
+
+            return results;
+        }
         private void fbtnASAdd_Click(object sender, EventArgs e)
         {
             if (!NetCom3.totalOrderFlag)
@@ -1095,6 +1256,8 @@ namespace BioBaseCLIA.SysMaintenance
             }
             NetCom3.Delay(500);//lyq add 20201016 指令返回太快，增加一个点击停顿
             fbtnASSave.Enabled = true;
+
+            UpdateSampleSteps();
         }
 
         private void fbtnAsZReset_Click(object sender, EventArgs e)
@@ -1134,6 +1297,8 @@ namespace BioBaseCLIA.SysMaintenance
             sendMonitor(NetCom3.Cover("EB 90 02 00"), 5);
             NetCom3.Instance.SingleQuery();
             fbtnAsAllReset.Enabled = true;
+
+            UpdateSampleSteps();
         }
         private void fbtnSamReset_Click(object sender, EventArgs e)
         {
@@ -1404,13 +1569,25 @@ namespace BioBaseCLIA.SysMaintenance
                 #region 加样管路灌注
                 txtWashTestShow.AppendText("正在进行加样管路灌注.." + Environment.NewLine + Environment.NewLine);
                 int addsamPerfuseNum = int.Parse(txtAddSample.Text.Trim());
+
+                DateTime dtime = DateTime.Now.AddDays(-1);   //lyq add 20190903
                 while (addsamPerfuseNum > 0)
                 {
+                    //lyq add 20190903
+                    double dti = DateTime.Now.Subtract(dtime).TotalMilliseconds;  //收到返回指令 与 下一次发送指令的时间差
+                    while (dti < 5000)   //收发指令间隔5s
+                    {
+                        NetCom3.Delay(100);
+                        dti = DateTime.Now.Subtract(dtime).TotalMilliseconds;
+                    }
+
                     NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 02 08"), 0);
                     if (!NetCom3.Instance.SPQuery())
                     {
                         break;
                     }
+                    dtime = DateTime.Now;  // lyq add 20190903 收到返回指令的时间
+
                     addsamPerfuseNum--;
                     txtAddSample.Text = addsamPerfuseNum.ToString();
                 }
@@ -1443,7 +1620,7 @@ namespace BioBaseCLIA.SysMaintenance
                 int leftcount1 = int.Parse(LeftCount1);
                 if (leftcount1 < SubstratePerfuseNum)
                 {
-                    frmMsgShow.MessageShow("仪器调试","底物不足！");
+                    frmMsgShow.MessageShow("仪器调试", "底物不足！");
                     runFlag = false;
                     fbtnPerfusionStart.Enabled = true;
                     return;
@@ -1678,7 +1855,7 @@ namespace BioBaseCLIA.SysMaintenance
                     }
                     #region 取放管成功 相关配置文件修改
                     List<int> lisTubeNum = new List<int>();
-                    lisTubeNum = QueryTubeNum();                    
+                    lisTubeNum = QueryTubeNum();
                     OperateIniFile.WriteIniData("TubePosition", "No10", "1", iniPathWashTrayInfo);
                     #endregion
                     #endregion
@@ -1714,7 +1891,7 @@ namespace BioBaseCLIA.SysMaintenance
                     //    currentHoleNum = 30 + currentHoleNum;
                     //}
                     //OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
-                    
+
                     NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 06 "), 1);
                     if (!NetCom3.Instance.MoveQuery())
                     {
@@ -1769,12 +1946,12 @@ namespace BioBaseCLIA.SysMaintenance
                         return;
                     }
                     CleanTrayMovePace(pos1);
-                    LiquidInjectionFlag[0] = LiquidInjectionFlag[1]=LiquidInjectionFlag[2]=1;
+                    LiquidInjectionFlag[0] = LiquidInjectionFlag[1] = LiquidInjectionFlag[2] = 1;
                     #endregion
                 }
                 while (washPerfuseNum > 0)
                 {
-                    #region 注液
+                    #region 注液 
                     NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 03 03 00 " + LiquidInjectionFlag[0] + "" + LiquidInjectionFlag[1] + " " + LiquidInjectionFlag[2] + "0"), 2);
                     if (!NetCom3.Instance.WashQuery())
                     {
@@ -1815,7 +1992,7 @@ namespace BioBaseCLIA.SysMaintenance
                         runFlag = false;
                         fbtnPerfusionStart.Enabled = true;
                         return;
-                    }                                                             
+                    }
                     currentHoleNum = currentHoleNum - 1;
                     if (currentHoleNum <= 0)
                     {
@@ -1926,7 +2103,7 @@ namespace BioBaseCLIA.SysMaintenance
                         fbtnPerfusionStart.Enabled = true;
                         return;
                     }
-                    CleanTrayMovePace(pos2- pos3);
+                    CleanTrayMovePace(pos2 - pos3);
                     if (!MoveWashTube())
                     {
                         runFlag = false;
@@ -1952,7 +2129,7 @@ namespace BioBaseCLIA.SysMaintenance
         {
             int iNeedCool = 0;
             int IsKnockedCool = 0;
-        AgainNewMove:
+            AgainNewMove:
             string order = "EB 90 31 01 06";
             NetCom3.Instance.Send(NetCom3.Cover(order), 1);
             if (!NetCom3.Instance.MoveQuery())
@@ -1961,16 +2138,22 @@ namespace BioBaseCLIA.SysMaintenance
                 if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull)
                 {
                     iNeedCool++;
-                    if (iNeedCool >2)
+                    if (iNeedCool > 2)
                     {
-                        LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手向清洗盘抓新管时多次抓空!实验停止运行！");
-                        DialogResult tempresult = frmMsgShow.MessageShow("移管手错误！", "移管手清洗盘抓新管时多次抓空！实验将停止运行！");
+                        LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手抓新管多次抓空！实验将停止运行！");
+                        DialogResult tempresult = frmMsgShow.MessageShow("移管手错误！", "移管手抓新管多次抓空！实验将停止运行！");
                         return false; ;
                     }
-                    else 
+                    else
                     {
                         goto AgainNewMove;
                     }
+                }
+                else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.LackTube)
+                {
+                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "理杯机缺管！实验将停止运行！");
+                    DialogResult tempresult = frmMsgShow.MessageShow("移管手错误！", "理杯机缺管！实验将停止运行！");
+                    return false; ;
                 }
                 else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.Sendfailure)
                 {
@@ -1992,16 +2175,10 @@ namespace BioBaseCLIA.SysMaintenance
                     }
 
                 }
-                else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.LackTube)
-                {
-                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "理杯机缺管，实验停止运行！");
-                    DialogResult tempresult = frmMsgShow.MessageShow("移管手错误", "理杯机缺管，实验停止运行！");
-                    return false;
-                }
                 else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.OverTime)
                 {
-                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手向清洗盘抓新管时接收数据超时！");
-                    DialogResult tempresult = frmMsgShow.MessageShow("移管手错误", "移管手向清洗盘抓新管时接收数据超时，实验将进行停止！");
+                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手在向清洗盘抓新管接收数据超时，实验将停止！！");
+                    DialogResult tempresult = frmMsgShow.MessageShow("移管手错误", "移管手在向清洗盘抓新管接收数据超时，实验将停止！");
                     return false;
                 }
                 #endregion
@@ -2022,7 +2199,7 @@ namespace BioBaseCLIA.SysMaintenance
                 order = "EB 90 31 03 01 " + (pace).ToString("X2").Substring(6, 2);
             }
             else return;
-        AgainNewMove:
+            AgainNewMove:
             NetCom3.Instance.Send(NetCom3.Cover(order), 2);
             if (!NetCom3.Instance.WashQuery())
             {
@@ -2085,7 +2262,7 @@ namespace BioBaseCLIA.SysMaintenance
                 frmMsgShow.MessageShow("仪器调试", "请选择需要进行的测试！");
                 return;
             }
-           
+
             string LeftCount1 = OperateIniFile.ReadIniData("Substrate1", "LeftCount", "", iniPathSubstrateTube);
             if (int.Parse(txtTestSubNum.Text) > int.Parse(LeftCount1))
             {
@@ -2224,7 +2401,7 @@ namespace BioBaseCLIA.SysMaintenance
                 }
                 #endregion
                 start = 0;
-               
+
                 //将温育盘的已经加样的管添加到清洗盘
                 /*
                 while (start < subNum)
@@ -2259,7 +2436,7 @@ namespace BioBaseCLIA.SysMaintenance
                     }
                 }
                */
-               
+
                 if (subNum < 19)
                 {
                     #region 当温育盘上的管夹到清洗盘还未到加底物位置时
@@ -2340,11 +2517,11 @@ namespace BioBaseCLIA.SysMaintenance
                     {
                         if (i - (19 - leftStartPos) < 0)
                         {
-                            dtWashTrayInfo.Rows[i][1] = dtTemp1.Rows[i-19+ leftStartPos +30][1];
+                            dtWashTrayInfo.Rows[i][1] = dtTemp1.Rows[i - 19 + leftStartPos + 30][1];
                         }
                         else
                         {
-                            dtWashTrayInfo.Rows[i][1]= dtTemp1.Rows[i - 19 + leftStartPos][1];
+                            dtWashTrayInfo.Rows[i][1] = dtTemp1.Rows[i - 19 + leftStartPos][1];
                         }
                         //for (int j = 1; j < 2; j++)
                         //{
@@ -2471,13 +2648,13 @@ namespace BioBaseCLIA.SysMaintenance
                                 NetCom3.Delay(10);
                             }
                         }
-                      
+
                         start++;
                     }
                     #endregion
                 }
-               
-                while (WashExitsTube() )
+
+                while (WashExitsTube())
                 {
                     #region 清洗盘中存在反应管
                     if (lisMoveTube.Count == 0)
@@ -2614,7 +2791,7 @@ namespace BioBaseCLIA.SysMaintenance
                         txtWashTestShow.AppendText("管架夹管到清洗盘。" + Environment.NewLine + Environment.NewLine);
                         ///从管架takePos位置夹管到清洗盘
                         NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 06"), 1);
-                        if (!NetCom3.Instance.MoveQuery()&&NetCom3.Instance.MoverrorFlag!=(int)ErrorState.IsNull)
+                        if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
                         {
                             return;
                         }
@@ -3018,99 +3195,35 @@ namespace BioBaseCLIA.SysMaintenance
         }
         private void fbtnWashTestStart_Click(object sender, EventArgs e)
         {
-            Thread WashTest=null;
-            if (fbtnWashTestStart.Text == "开始")
+            if (runFlag)
             {
-                if (runFlag)
-                {
-                    frmMsgShow.MessageShow("仪器调试", "正在执行其他操作，请稍后！");
-                    return;
-                }
-                if (txtWashPosStart.Text.Trim() == "")
-                {
-                    frmMsgShow.MessageShow("仪器调试", "请输入样本号开始位置！");
-                    txtWashPosEnd.Focus();
-                    return;
-                }
-                if (txtWashPosEnd.Text.Trim() == "")
-                {
-                    frmMsgShow.MessageShow("仪器调试", "请输入样本号结束位置！");
-                    txtWashPosEnd.Focus();
-                    return;
-                }
-                if (int.Parse(txtWashPosStart.Text) > int.Parse(txtWashPosEnd.Text))
-                {
-                    frmMsgShow.MessageShow("仪器调试", "样本号开始位置不能大于样本号结束位置。");
-                    txtWashPosEnd.Focus();
-                    return;
-                }
-                #region 变量取值
-                //取样开始位置
-                int startSamPos = int.Parse(txtWashPosStart.Text.Trim());
-                //取样结束位置
-                int endSampos = int.Parse(txtWashPosEnd.Text.Trim());
-                //重复次数
-                int RepeatNum = int.Parse(txtWashRepeatNum.Text.Trim());
-                //底物量
-                string subVol = txtWashSubVol.Text.Trim();
-                //底物管路
-                //string subPipe = cmbWashSubPipe.SelectedItem.ToString();
-                //样本量
-                string samVol = txtWashSamVol.Text.Trim();
-                //存储清洗测试的信息
-                List<performanceTest> lisPt = new List<performanceTest>();
-                performanceTest pt = new performanceTest();
-                //序号
-                #endregion
-                if ((endSampos - startSamPos) * RepeatNum > ReactTrayNum)
-                {
-                    frmMsgShow.MessageShow("仪器调试", "测试次数不能超过" + ReactTrayNum + "，请重新输入！");
-                    return;
-                }
-                string LeftCount1 = OperateIniFile.ReadIniData("Substrate1", "LeftCount", "", iniPathSubstrateTube);
-                if (int.Parse(LeftCount1) < ((endSampos - startSamPos) * RepeatNum))
-                {
-                    frmMsgShow.MessageShow("仪器调试", "底物不足，请核实后继续");
-                    return;
-                }
-                fbtnWashTestStart.Enabled = false;
-                fbtnWashTestStart.Text = "停止";
-                txtWashTestShow.Clear();
-                runFlag = true;
-                if (!washTrayTubeClear())
-                {
-                    runFlag = false;
-                    fbtnWashTestStart.Enabled = true;
-                    fbtnWashTestStart.Text = "开始";
-                    return;
-                }
-                WashTest = new Thread(CleanTest);
-                WashTest.IsBackground = true;
-                WashTest.Start();
-                fbtnWashTestStart.Enabled = true;
+                frmMsgShow.MessageShow("仪器调试", "正在执行其他操作，请稍后！");
+                return;
             }
-            else
+            //if (cmbWashSubPipe.SelectedItem == null)
+            //{
+            //    frmMsgShow.MessageShow("仪器调试", "请选择底物管路。");
+            //    return;
+            //}
+
+            if (txtWashPosStart.Text.Trim() == "")
             {
-                fbtnWashTestStart.Enabled =false;
-                for (int i = 0; i < 100;i++ )
-                {
-                    if (WashTest != null && WashTest.ThreadState != System.Threading.ThreadState.Stopped)
-                    {
-                        WashTest.Abort();
-                        Thread.Sleep(100);
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-                runFlag = false;
-                fbtnWashTestStart.Enabled = true;
-                fbtnWashTestStart.Text = "开始";
+                frmMsgShow.MessageShow("仪器调试", "请输入样本号开始位置！");
+                txtWashPosEnd.Focus();
+                return;
             }
-        }
-        void CleanTest()
-        {
+            if (txtWashPosEnd.Text.Trim() == "")
+            {
+                frmMsgShow.MessageShow("仪器调试", "请输入样本号结束位置！");
+                txtWashPosEnd.Focus();
+                return;
+            }
+            if (int.Parse(txtWashPosStart.Text) > int.Parse(txtWashPosEnd.Text))
+            {
+                frmMsgShow.MessageShow("仪器调试", "样本号开始位置不能大于样本号结束位置。");
+                txtWashPosEnd.Focus();
+                return;
+            }
             #region 变量取值
             //取样开始位置
             int startSamPos = int.Parse(txtWashPosStart.Text.Trim());
@@ -3128,13 +3241,32 @@ namespace BioBaseCLIA.SysMaintenance
             List<performanceTest> lisPt = new List<performanceTest>();
             performanceTest pt = new performanceTest();
             //序号
-            #endregion
             int id = 1;
             //加样位置
             int reactStartPos = 1;
+
             //开始变量
             int start = 0;
+            #endregion
+            if ((endSampos - startSamPos) * RepeatNum > ReactTrayNum)
+            {
+                frmMsgShow.MessageShow("仪器调试", "测试次数不能超过" + ReactTrayNum + "，请重新输入！");
+                return;
+            }
             string LeftCount1 = OperateIniFile.ReadIniData("Substrate1", "LeftCount", "", iniPathSubstrateTube);
+            if (int.Parse(LeftCount1) < ((endSampos - startSamPos) * RepeatNum))
+            {
+                frmMsgShow.MessageShow("仪器调试", "底物不足，请核实后继续");
+                return;
+            }
+            txtWashTestShow.Clear();
+            fbtnWashTestStart.Enabled = false;
+            runFlag = true;
+            //启动移管线程
+            MoveTubeThread = new Thread(new ParameterizedThreadStart(MoveTube));
+            MoveTubeThread.IsBackground = true;
+            MoveTubeThread.Start();
+            washTrayTubeClear();
             #region 检测反应盘空白反应管个数，不足十个补齐。
             //查询反应盘管信息
             DataTable dtReactTrayInfo = OperateIniFile.ReadConfig(iniPathReactTrayInfo);
@@ -3161,29 +3293,22 @@ namespace BioBaseCLIA.SysMaintenance
                     TrayPos = "NO0";
                 }
                 int LackTubeNum = toUsedTube - sumReactTubeNum;
-                BeginInvoke(new Action(() =>
-                {
-                    txtWashTestShow.AppendText("管架夹管到温育盘。" + Environment.NewLine + Environment.NewLine);
-                }));
                 for (int i = 0; i < LackTubeNum; i++)
                 {
                     if (!runFlag) return;
-                    int putpos = int.Parse(TrayPos.Substring(2)) + i + 1;
-                    NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 01 " + putpos.ToString("x2")), 1);
-                    if (!NetCom3.Instance.MoveQuery())
+                    MoveTubeStatus moveTube1 = new MoveTubeStatus();
+                    moveTube1.StepNum = 0;
+                    moveTube1.putTubePos = "1-" + (int.Parse(TrayPos.Substring(2)) + i + 1).ToString();
+                    moveTube1.TestId = 0;
+                    moveTube1.TakeTubePos = "0-1";
+                    lisMoveTube.Add(moveTube1);
+                    while (lisMoveTube.Count != 0)
                     {
-                        runFlag = false;
-                        fbtnWashTestStart.Enabled = true;
-                        BeginInvoke(new Action(() =>
-                        {
-                            fbtnWashTestStart.Text = "开始";
-                        }));
-                        return;
+                        NetCom3.Delay(10);
                     }
-                    #region 取管成功
-                    OperateIniFile.WriteIniData("ReactTrayInfo", "no" + putpos, "1", iniPathReactTrayInfo);
-                    #endregion
+
                 }
+
             }
             #endregion
             dtReactTrayInfo = OperateIniFile.ReadConfig(iniPathReactTrayInfo);
@@ -3199,10 +3324,7 @@ namespace BioBaseCLIA.SysMaintenance
             DataTable dt = new DataTable();
             dt.Columns.Add("ID", typeof(string));
             dt.Columns.Add("pmt", typeof(string));
-            BeginInvoke(new Action(() =>
-            {
-                txtWashTestShow.AppendText("清洗测试开始。。" + Environment.NewLine + Environment.NewLine);
-            }));
+            txtWashTestShow.AppendText("清洗测试开始。。" + Environment.NewLine + Environment.NewLine);
             //清洗信息赋值
             for (int i = startSamPos; i <= endSampos; i++)
             {
@@ -3225,98 +3347,59 @@ namespace BioBaseCLIA.SysMaintenance
                 if (!runFlag) return;
                 int addsamplePos = lisPt[start].addSamplePos;
                 int samPos = lisPt[start].takeSamplePos;
-                BeginInvoke(new Action(() =>
-                {
-                   txtWashTestShow.AppendText(lisPt[start].ID + "号反应管正在加样" + Environment.NewLine + Environment.NewLine);
-                }));
+                txtWashTestShow.AppendText(lisPt[start].ID + "号反应管正在加样" + Environment.NewLine + Environment.NewLine);
                 ///在samPos位置吸取addSampleVol体积的样本加到反应盘addsamplePos位置 
                 NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 02 01 " + samPos.ToString("x2") + " " + addsamplePos.ToString("x2")
                                  + " " + int.Parse(samVol).ToString("x2")), 0);
                 if (!NetCom3.Instance.SPQuery())
                 {
-                    runFlag = false;
-                    fbtnWashTestStart.Enabled = true;
-                    BeginInvoke(new Action(() =>
-                    {
-                        fbtnWashTestStart.Text = "开始";
-                    }));
                     return;
                 }
-                #region 取管成功
-                OperateIniFile.WriteIniData("ReactTrayInfo", "no" + addsamplePos, "2", iniPathReactTrayInfo);
-                #endregion
-                //加样同时进行移管手从TubeRackPos夹管到温育盘  
-                if (start + 10 < ReactTrayHoleNum)
+                //加样同时进行移管手从TubeRackPos夹管到温育盘               
+                MoveTubeStatus moveTube2 = new MoveTubeStatus();
+                moveTube2.StepNum = 0;
+                int pos = (addsamplePos + toUsedTube) % ReactTrayHoleNum;
+                if (pos == 0)
                 {
-                    int pos = (addsamplePos + toUsedTube) % ReactTrayHoleNum;
-                    int putpos = 0;
-                    if (pos == 0)
-                    {
-                        putpos = ReactTrayHoleNum;
-                    }
-                    else
-                    {
-                        putpos = pos;
-                    }
-                    NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 01 " + putpos.ToString("x2")), 1);
-                    if (!NetCom3.Instance.MoveQuery())
-                    {
-                        runFlag = false;
-                        fbtnWashTestStart.Enabled = true;
-                        BeginInvoke(new Action(() =>
-                        {
-                            fbtnWashTestStart.Text = "开始";
-                        }));
-                        return;
-                    }
-                    #region 取管成功
-                    OperateIniFile.WriteIniData("ReactTrayInfo", "no" + putpos, "1", iniPathReactTrayInfo);
-                    #endregion
-                    while (lisMoveTube.Count != 0)
-                    {
-                        NetCom3.Delay(10);
-                    }
-                    
+                    moveTube2.putTubePos = "1-" + ReactTrayHoleNum.ToString();
+                }
+                else
+                {
+                    moveTube2.putTubePos = "1-" + pos.ToString();
+                }
+                moveTube2.TestId = 0;
+                moveTube2.TakeTubePos = "0-" + OperateIniFile.ReadIniData("Tube", "TubePos", "1", iniPathSubstrateTube);
+                lisMoveTube.Add(moveTube2);
+                while (lisMoveTube.Count != 0)
+                {
+                    NetCom3.Delay(10);
                 }
                 start++;
             }
             #endregion
             start = 0;
             #region 取管到清洗盘清洗、加底物及读数
-            int loop = lisPt.Count / WashTrayNum;
             while (start < lisPt.Count && runFlag)
             {
-                NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 02 " + lisPt[start].addSamplePos.ToString("x2")), 1);
-                if (!NetCom3.Instance.MoveQuery())
+                MoveTubeStatus moveTube3 = new MoveTubeStatus();
+                moveTube3.putTubePos = "2-1";
+                moveTube3.StepNum = 0;
+                //移管列表加样位置赋值给列表中的反应盘取样位置
+                int addSampos = lisPt[start].addSamplePos;
+                moveTube3.TakeTubePos = "1-" + addSampos.ToString();
+                moveTube3.TestId = 0;
+                lisMoveTube.Add(moveTube3);
+                while (lisMoveTube.Count > 0)
                 {
-                    runFlag = false;
-                    fbtnWashTestStart.Enabled = true;
-                    BeginInvoke(new Action(() =>
-                    {
-                        fbtnWashTestStart.Text = "开始";
-                    }));
-                    return;
+                    NetCom3.Delay(10);
                 }
-                #region 取管成功
-                OperateIniFile.WriteIniData("ReactTrayInfo", "no" + lisPt[start].addSamplePos, "0", iniPathReactTrayInfo);
-                OperateIniFile.WriteIniData("TubePosition", "no1", "1", iniPathWashTrayInfo);
-                #endregion
                 do
                 {
-                    BeginInvoke(new Action(() =>
-                    {
-                       txtWashTestShow.AppendText("清洗盘旋转1位" + Environment.NewLine + Environment.NewLine);
-                    }));
+                    txtWashTestShow.AppendText("清洗盘旋转1位" + Environment.NewLine + Environment.NewLine);
                     ///清洗盘旋转一位
                     NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 03 01 01"), 2);
                     if (!NetCom3.Instance.WashQuery())
                     {
-                        runFlag = false;
-                        fbtnWashTestStart.Enabled = true;
-                        BeginInvoke(new Action(() =>
-                        {
-                            fbtnWashTestStart.Text = "开始";
-                        }));
                         return;
                     }
                     currentHoleNum = currentHoleNum + 1;
@@ -3399,22 +3482,25 @@ namespace BioBaseCLIA.SysMaintenance
                     //吸液、注液或者加底物的位置下面有反应管
                     if (Imbibition == "01" || LiquidInjectionFlag.Contains("1") || AddSubstrate == "1" || read == "1")
                     {
+                        //if (AddSubstrate == "1")
+                        //{
+                        //    if (cmbWashSubPipe.SelectedItem.ToString() == "1")
+                        //    {
+                        //        substratePipe = "1";
+                        //    }
+                        //    else if (cmbWashSubPipe.SelectedItem.ToString() == "2")
+                        //    {
+                        //        substratePipe = "2";
+                        //    }
+
+                        //}
                         substratePipe = "1";
-                        BeginInvoke(new Action(() =>
-                        {
-                            txtWashTestShow.AppendText("正在清洗、加底物或读数" + Environment.NewLine + Environment.NewLine);
-                        }));
+                        txtWashTestShow.AppendText("正在清洗、加底物或读数" + Environment.NewLine + Environment.NewLine);
                         ///发送指令
                         NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 03 03 " + Imbibition + " " + LiquidInjectionFlag[0]
                         + LiquidInjectionFlag[1] + " " + LiquidInjectionFlag[2] + AddSubstrate + " " + substratePipe + read), 2);
                         if (!NetCom3.Instance.WashQuery())
                         {
-                            runFlag = false;
-                            fbtnWashTestStart.Enabled = true;
-                            BeginInvoke(new Action(() =>
-                            {
-                                fbtnWashTestStart.Text = "开始";
-                            }));
                             return;
                         }
 
@@ -3429,27 +3515,22 @@ namespace BioBaseCLIA.SysMaintenance
                         Random rd = new Random();
                         BackObj = rd.Next(1, 100).ToString();
                         dt.Rows.Add(lisPt[start].ID, int.Parse(BackObj));
-                        BeginInvoke(new Action(() =>
-                        {
-                            txtTestValue.Text = BackObj;
-                        }));
+                        txtTestValue.Text = BackObj;
                     }
                     if (dtWashTrayInfo.Rows[28][1].ToString() == "1")
                     {
-                        NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 04 01"), 1);
-                        if (!NetCom3.Instance.MoveQuery())
+                        MoveTubeStatus moveTube = new MoveTubeStatus();
+                        //清洗盘扔废管
+                        moveTube.putTubePos = "0-0";
+                        moveTube.StepNum = 0;
+                        moveTube.TakeTubePos = "2-" + dtWashTrayInfo.Rows[28][0].ToString().Substring(2);
+                        moveTube.TestId = 0;
+                        lisMoveTube.Add(moveTube);
+                        moveTube = new MoveTubeStatus();
+                        while (lisMoveTube.Count > 0)
                         {
-                            runFlag = false;
-                            fbtnWashTestStart.Enabled = true;
-                            BeginInvoke(new Action(() =>
-                            {
-                                fbtnWashTestStart.Text = "开始";
-                            }));
-                            return;
+                            NetCom3.Delay(10);
                         }
-                        #region 取管成功
-                        OperateIniFile.WriteIniData("TubePosition", "no29", "0", iniPathWashTrayInfo);
-                        #endregion
                     }
                     //start++;
 
@@ -3457,6 +3538,8 @@ namespace BioBaseCLIA.SysMaintenance
 
                 start++;
             }
+
+
             #region 数据导出
             if (chbWashExport.Checked)
             {
@@ -3466,13 +3549,14 @@ namespace BioBaseCLIA.SysMaintenance
             }
             #endregion
             #endregion
+            while (lisMoveTube.Count > 0)
+            {
+                NetCom3.Delay(10);
+            }
             runFlag = false;
             fbtnWashTestStart.Enabled = true;
-            BeginInvoke(new Action(() =>
-            {
-                fbtnWashTestStart.Text = "开始";
-            }));
         }
+
         private void cmbTestChioce_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbTestChioce.SelectedIndex == 0)
@@ -3500,7 +3584,7 @@ namespace BioBaseCLIA.SysMaintenance
 
             while (runFlag)
             {
-            again:
+                again:
                 //CanCom.Instance.ComWait.WaitOne();
                 Thread.Sleep(1);
                 if (lisMoveTube.Count > 0)
@@ -3527,8 +3611,8 @@ namespace BioBaseCLIA.SysMaintenance
                             {
                                 txtWashTestShow.AppendText("管架夹管到温育盘。" + Environment.NewLine + Environment.NewLine);
                             }));
-                            NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 01 "+ int.Parse(putpos[1]).ToString("x2")), 1);
-                            if (!NetCom3.Instance.MoveQuery()&&NetCom3.Instance.MoverrorFlag!=(int)ErrorState.IsNull)
+                            NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 01 " + int.Parse(putpos[1]).ToString("x2")), 1);
+                            if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
                             {
                                 return;
                             }
@@ -3558,7 +3642,7 @@ namespace BioBaseCLIA.SysMaintenance
                             //那个架子减了一个管
                             OperateIniFile.WriteIniData("Tube", "Pos" + (TubeRack + 1).ToString(), (88 - curTube).ToString(), iniPathSubstrateTube);
                             */
-                             //修改反应盘信息
+                            //修改反应盘信息
                             OperateIniFile.WriteIniData("ReactTrayInfo", "no" + putpos[1], "1", iniPathReactTrayInfo);
                             #endregion
 
@@ -3578,12 +3662,12 @@ namespace BioBaseCLIA.SysMaintenance
                             washTrayFlag = true;
                             MoveTubeUseFlag = true;
                             BeginInvoke(new Action(() =>
-                           {
-                               txtWashTestShow.AppendText("清洗盘扔废管。" + Environment.NewLine + Environment.NewLine);
-                           }));
+                            {
+                                txtWashTestShow.AppendText("清洗盘扔废管。" + Environment.NewLine + Environment.NewLine);
+                            }));
                             ///清洗盘takepos[1]取管扔废管
                             NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 04 01"), 1);
-                            if (!NetCom3.Instance.MoveQuery()&&NetCom3.Instance.MoverrorFlag!=(int)ErrorState.IsNull)
+                            if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
                             {
                                 return;
                             }
@@ -3611,12 +3695,12 @@ namespace BioBaseCLIA.SysMaintenance
                         #region 指令发送及文件修改（反应盘扔废管）
                         MoveTubeUseFlag = true;
                         BeginInvoke(new Action(() =>
-                           {
-                               txtWashTestShow.AppendText("温育盘扔废管。" + Environment.NewLine + Environment.NewLine);
-                           }));
+                        {
+                            txtWashTestShow.AppendText("温育盘扔废管。" + Environment.NewLine + Environment.NewLine);
+                        }));
                         ///温育盘takepos[1]取管扔废管
                         NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 05 " + int.Parse(takepos[1]).ToString("x2")), 1);
-                        if (!NetCom3.Instance.MoveQuery()&&NetCom3.Instance.MoverrorFlag!=(int)ErrorState.IsNull)
+                        if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
                         {
                             return;
                         }
@@ -3636,12 +3720,12 @@ namespace BioBaseCLIA.SysMaintenance
                         washTrayFlag = true;
                         #region 指令发送及文件修改（反应盘夹管到清洗盘）
                         BeginInvoke(new Action(() =>
-                           {
-                               txtWashTestShow.AppendText("温育盘夹管到清洗盘。" + Environment.NewLine + Environment.NewLine);
-                           }));
+                        {
+                            txtWashTestShow.AppendText("温育盘夹管到清洗盘。" + Environment.NewLine + Environment.NewLine);
+                        }));
                         ///从反应盘takepos[1]位取管放到清洗盘putpos[1]位置
                         NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 02 " + int.Parse(takepos[1]).ToString("x2")), 1);
-                        if (!NetCom3.Instance.MoveQuery()&&NetCom3.Instance.MoverrorFlag!=(int)ErrorState.IsNull)
+                        if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
                         {
                             return;
                         }
@@ -3701,7 +3785,7 @@ namespace BioBaseCLIA.SysMaintenance
             for (int i = 1; i <= readStart; i++)
             {
                 txtReadShow.AppendText("向清洗盘加第" + i + "个管" + Environment.NewLine);
-                 NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 06"), 1);
+                NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 06"), 1);
                 if (!NetCom3.Instance.WashQuery())
                     return;
                 NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 03 01 01"), 2);
@@ -3812,7 +3896,6 @@ namespace BioBaseCLIA.SysMaintenance
             thFire = new Thread(new ThreadStart(LoadPro));
             thFire.Start();
         }
-
         private void LoadPro() //IAP
         {
             BeginInvoke(new Action(() =>
@@ -3858,7 +3941,6 @@ namespace BioBaseCLIA.SysMaintenance
             }));
             BinaryReader binreader = new BinaryReader(Myfile);
             int file_len = (int)Myfile.Length;//获取bin文件长度
-
             int allNumber = file_len + 8 - (file_len % 8 == 0 ? 8 : file_len % 8); //1107mod:EB90后一次发送8字节
             byte[] buff = new byte[allNumber];
             byte[] buff1 = binreader.ReadBytes(file_len);
@@ -3998,7 +4080,7 @@ namespace BioBaseCLIA.SysMaintenance
                 //Console.WriteLine(m+"-------"+allNumber);//测试
                 loadDataDone.Reset();
                 if ((m + 8) >= allNumber)
-                    NetCom3.Instance.iapNoBack = false; ;
+                    NetCom3.Instance.iapNoBack = false;
                 string data = "EB 90 "
                             + buff[m].ToString("x2") + " " + buff[m + 1].ToString("x2") + " "
                             + buff[m + 2].ToString("x2") + " " + buff[m + 3].ToString("x2") + " "
@@ -4010,11 +4092,6 @@ namespace BioBaseCLIA.SysMaintenance
                     frmMsgShow.MessageShow("ERROR", "数据传输失败！");
                     goto errorOrEnd;
                 }
-                //if (!NetCom3.Instance.SingleQuery())
-                //{
-                //    frmMsgShow.MessageShow("ERROR", "数据传输失败！");
-                //    goto errorOrEnd;
-                //}
 
                 if (m / (allNumber / 50) == k)
                 {
@@ -4026,7 +4103,7 @@ namespace BioBaseCLIA.SysMaintenance
                     k++;
                 }
                 //Thread.Sleep(2);
-                if(!loadDataDone.WaitOne(sendDelay,false))
+                if (!loadDataDone.WaitOne(sendDelay, false))
                 {
                     ;
                 }
@@ -4034,7 +4111,7 @@ namespace BioBaseCLIA.SysMaintenance
             while (true)
             {
                 if (receiveFlag[5] == 0)
-                    NetCom3.Delay(100);                
+                    NetCom3.Delay(100);
                 else if (receiveFlag[5] == 1)
                     break;
                 else if (receiveFlag[5] == 2)
@@ -4088,6 +4165,7 @@ namespace BioBaseCLIA.SysMaintenance
                 else
                     goto bbcd;
             }
+
 
             NetCom3.Instance.iapNoBack = false;
             NetCom3.Delay(500);
@@ -4148,7 +4226,7 @@ namespace BioBaseCLIA.SysMaintenance
                 goto errorOrEnd;
             }
             #endregion
-            //传输完毕后初始化仪器           
+            //传输完毕后初始化仪器
             NetCom3.Instance.Send(NetCom3.Cover("EB 90 F1 02"), 5);
             if (!NetCom3.Instance.SingleQuery())
             {
@@ -5276,7 +5354,7 @@ namespace BioBaseCLIA.SysMaintenance
         /// 读数线程
         /// </summary>
         Thread ReadThread;
-        
+
         private void beginAndStop_Click(object sender, EventArgs e)//开始与暂停按钮点击事件
         {
             if (beginAndStop.Text == "开始")
@@ -5484,6 +5562,7 @@ namespace BioBaseCLIA.SysMaintenance
             }
             else
             {
+
                 numOfSam = (double)numOfSample.Value;
                 timespan = timespanOfSample.Value;
                 num1 = (double)numDown.Value;
@@ -5703,8 +5782,35 @@ namespace BioBaseCLIA.SysMaintenance
             }
              */
             cmbWashPara.Enabled = true;
+
+            UpdateWashSteps();
         }
 
+        private void UpdateWashSteps() 
+        {
+            if (cmbWashPara.SelectedIndex < 0 
+                || cmbWashElecMachine.SelectedIndex < 0) return;
+
+            string wash = string.Empty;
+            switch (cmbWashElecMachine.Text) 
+            {
+                case "Z轴电机":
+                    wash = "01";
+                    break;
+                case "清洗盘电机":
+                    wash = "02";
+                    break;
+                case "压杯电机":
+                    wash = "03";
+                    break;
+                default:
+                    return;
+            }
+            txtWashCurrent.Text =
+                GetCurrentWashSteps((cmbWashPara.SelectedIndex + 1).ToString().PadLeft(2, '0'),
+                wash, "03");
+            
+        }
         private void fbtnWashAdd_Click(object sender, EventArgs e)
         {
             if (!NetCom3.totalOrderFlag)
@@ -5826,6 +5932,8 @@ namespace BioBaseCLIA.SysMaintenance
             NetCom3.Instance.SingleQuery();
             NetCom3.Delay(500);//lyq add 20201016 指令返回太快，增加一个点击停顿
             fbtnWashSave.Enabled = true;
+
+            UpdateWashSteps();
             /*
             if (cmbWashPara.SelectedItem == null)
             {
@@ -5886,13 +5994,13 @@ namespace BioBaseCLIA.SysMaintenance
             }*/
         }
 
-       
+
 
         //20190118 YLS add 清洗盘目标孔位移动功能
         private void fbtnHoleTarget_Click_1(object sender, EventArgs e)
         {
             fbtnHoleTarget.Enabled = false;
-            if (!(NetCom3.totalOrderFlag || NetCom3.WashReciveFlag))
+            if (!(NetCom3.totalOrderFlag||NetCom3.WashReciveFlag))
             {
                 frmMsgShow.MessageShow("仪器调试", "仪器正在运动，请稍等！");
                 return;
@@ -5927,7 +6035,7 @@ namespace BioBaseCLIA.SysMaintenance
             }
             fbtnHoleTarget.Enabled = true;
         }
-               
+
         private void fbtnPeristalticPSave_Click(object sender, EventArgs e)
         {
             if (!NetCom3.totalOrderFlag)
@@ -6018,6 +6126,8 @@ namespace BioBaseCLIA.SysMaintenance
             NetCom3.Instance.Send(NetCom3.Cover("EB 90 03 00 00"), 5);// 20180524 zlx add
             NetCom3.Instance.SingleQuery();
             fbtnWashReset.Enabled = true;
+
+            UpdateWashSteps();
         }
 
         private void fbtnWashTrayReset_Click(object sender, EventArgs e)
@@ -6042,7 +6152,7 @@ namespace BioBaseCLIA.SysMaintenance
                 return;
             }
             fbtnWashZReset.Enabled = false;
-           // NetCom3.Instance.Send(NetCom3.Cover("EB 90 03 02 00"), 5);
+            // NetCom3.Instance.Send(NetCom3.Cover("EB 90 03 02 00"), 5);
             NetCom3.Instance.Send(NetCom3.Cover("EB 90 03 00 01"), 5);//20180524 zlx mod
             NetCom3.Instance.SingleQuery();
             fbtnWashZReset.Enabled = true;
@@ -6078,6 +6188,9 @@ namespace BioBaseCLIA.SysMaintenance
             fbtnWashAgingStart.Enabled = true;
             fbtnWashAgingStop.Enabled = false;
             showLog = "";
+            LogFileRtest.Instance.Write(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "老化测试指令执行次数为：" + LogFileRtest.Instance.Testcount);
+            LogFileRtest.Instance.Bcount = false;
+            LogFileRtest.Instance.Testcount = 0;
             Invoke(new Action(() =>
             {
                 txtmoveNum.ReadOnly = false;
@@ -6091,7 +6204,7 @@ namespace BioBaseCLIA.SysMaintenance
             {
                 return;
             }
-            txtmoveNum.ReadOnly = true; 
+            txtmoveNum.ReadOnly = true; //lyq add 20190826
             txtAgingInfoShow.Clear();
             txtTestErrorShow.Clear();
             //washTrayTubeClear();
@@ -6149,7 +6262,7 @@ namespace BioBaseCLIA.SysMaintenance
 
         bool ArmAgingCondition()
         {
-            if (cmbArmRegentPos.SelectedItem == null || cmbArmRegentPos.SelectedItem == "")
+            if (cmbArmRegentPos.SelectedItem == null)
             {
                 frmMsgShow.MessageShow("仪器调试", "请选择试剂位！");
                 return false;
@@ -6215,7 +6328,7 @@ namespace BioBaseCLIA.SysMaintenance
             NetCom3.Instance.ReceiveHandel -= dealAgingBack;
             ControlIntit();
         }
-        
+
         /// <summary>
         /// 老化测试运行
         /// </summary>
@@ -6228,6 +6341,8 @@ namespace BioBaseCLIA.SysMaintenance
             if (fbtnMoveAgingStop.Enabled)
             {
                 #region 移管手
+                LogFileRtest.Instance.Bcount = true;
+                LogFileRtest.Instance.Testcount = 0;
                 //总测试数
                 int testNum = int.Parse(txtmoveNum.Text);
                 //夹管临时计数
@@ -6248,11 +6363,12 @@ namespace BioBaseCLIA.SysMaintenance
                 if (rdbRackIN.Checked)
                 {
                     #region 管架与温育盘之间
+                    LogFileRtest.Instance.Write(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "移管手老化测试开始，暂存盘与温育盘之间移管测试，测试次数：" + testNum.ToString());
                     if (!reactTrayTubeClear())//2018-09-26
                     {
                         ControlIntit();
                         return;
-                    }                    
+                    }
                     BeginInvoke(new Action(() =>
                     {
                         txtAgingInfoShow.AppendText("-----移管手老化测试开始，管架与温育盘之间移管测试，测试次数：" + testNum.ToString() + "-----" + Environment.NewLine);
@@ -6319,6 +6435,8 @@ namespace BioBaseCLIA.SysMaintenance
                                 return;
                             }
                             //NetCom3.Instance.MoveQuery();
+                            if (LogFileRtest.Instance.Bcount)
+                                LogFileRtest.Instance.Testcount++;
                             #region 取放管成功
                             //移管手要夹的下一个管架位置
                             //CurrentTubePos = CurrentTubePos + 1 == 353 ? 1 : CurrentTubePos + 1;
@@ -6380,6 +6498,8 @@ namespace BioBaseCLIA.SysMaintenance
                             }
                             */
                             #endregion 取放管成功
+                            if (LogFileRtest.Instance.Bcount)
+                                LogFileRtest.Instance.Testcount++;
                             CurrentReactPos++;
                         }
                         //下一次循环次数
@@ -6390,11 +6510,12 @@ namespace BioBaseCLIA.SysMaintenance
                 else if (rdbRackWash.Checked)
                 {
                     #region 管架与清洗盘之间
+                    LogFileRtest.Instance.Write(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "移管手老化测试开始，暂存盘与清洗盘之间移管测试，测试次数：" + testNum.ToString());
                     if (!washTrayTubeClear())//2018-09-26
                     {
                         ControlIntit();
                         return;
-                    }                        
+                    }
                     BeginInvoke(new Action(() =>
                     {
                         txtAgingInfoShow.AppendText("-----移管手老化测试开始，管架与清洗盘之间移管测试，测试次数：" + testNum.ToString() + "-----" + Environment.NewLine);
@@ -6476,6 +6597,8 @@ namespace BioBaseCLIA.SysMaintenance
                                 }
                             }
                             #endregion
+                            if (LogFileRtest.Instance.Bcount)
+                                LogFileRtest.Instance.Testcount++;
                             TubetempNum++;
                             //lyq add 20190826
                             surplusNum--;
@@ -6493,14 +6616,14 @@ namespace BioBaseCLIA.SysMaintenance
                             {
                                 txtAgingInfoShow.AppendText("移管手从清洗盘扔第" + TubetempNum.ToString() + "个管" + Environment.NewLine);
                             }));
-                            //温育盘夹管到管架
+                            //清洗盘夹管到管架
                             NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 04"), 1);
                             if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
                             {
                                 BeginInvoke(new Action(() =>
-                               {
-                                   txtAgingInfoShow.AppendText("\n温育盘夹管到管架异常");
-                               }));
+                                {
+                                    txtAgingInfoShow.AppendText("\n清洗盘夹管到管架异常");
+                                }));
                                 ControlIntit();
                                 return;
                             }
@@ -6534,8 +6657,9 @@ namespace BioBaseCLIA.SysMaintenance
                                     return;
                                 }
                             }
-
                             #endregion
+                            if (LogFileRtest.Instance.Bcount)
+                                LogFileRtest.Instance.Testcount++;
                             TubetempNum++;
                         }
                         //下一次循环次数
@@ -6551,10 +6675,11 @@ namespace BioBaseCLIA.SysMaintenance
                     {
                         txtAgingInfoShow.AppendText("-----移管手老化测试开始，管架与废弃处之间移管测试，测试次数：" + testNum.ToString() + "-----" + Environment.NewLine);
                     }));
+                    LogFileRtest.Instance.Write(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "移管手老化测试开始，暂存盘与废弃处之间移管测试，测试次数：" + testNum.ToString());
                     int num = 0;
                     while (testNum > 0)
                     {
-                        #region                              
+                        #region
                         BeginInvoke(new Action(() =>
                         {
                             txtAgingInfoShow.AppendText("移管手正在暂存盘扔第" + ++num + "个管" + Environment.NewLine);
@@ -6563,7 +6688,7 @@ namespace BioBaseCLIA.SysMaintenance
                         NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 07"), 1);
                         if (!NetCom3.Instance.MoveQuery())
                         {
-                            #region 异常处理
+                            #region 异常处理                            
                             if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked)
                             {
                                 BeginInvoke(new Action(() =>
@@ -6592,23 +6717,25 @@ namespace BioBaseCLIA.SysMaintenance
                                     {
                                         AgingHaveTube = false;
                                         goto AgainNewMove;
-                                    }                                        
+                                    }
                                 }
                             }
                             BeginInvoke(new Action(() =>
                             {
-                                txtAgingInfoShow.AppendText("\n管架与废弃处异常" );
+                                txtAgingInfoShow.AppendText("\n管架与废弃处异常");
                             }));
                             #endregion
                             ControlIntit();
                             return;
                         }
+                        if (LogFileRtest.Instance.Bcount)
+                            LogFileRtest.Instance.Testcount++;
                         #endregion
                         testNum--;
-                        BeginInvoke(new Action(() =>
-                        {
-                            txtmoveNum.Text = testNum.ToString();
-                        }));
+                        //BeginInvoke(new Action(() =>
+                        //{
+                        //    txtmoveNum.Text = testNum.ToString();
+                        //}));
                         surplusNum--;
                         BeginInvoke(new Action(() =>
                         {
@@ -6620,9 +6747,18 @@ namespace BioBaseCLIA.SysMaintenance
                 else if (rdbtnWashIn.Checked)
                 {
                     #region 清洗盘与温育盘之间取放管测试
+                    LogFileRtest.Instance.Write(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "移管手老化测试开始，清洗盘与温育盘之间移管测试，测试次数：" + testNum.ToString());
                     //2018-09-26
-                    if (!washTrayTubeClear()) { ControlIntit(); return; }
-                    if (!reactTrayTubeClear()) { ControlIntit(); return; }
+                    if (!washTrayTubeClear())
+                    {
+                        ControlIntit();
+                        return;
+                    }
+                    if (!reactTrayTubeClear())
+                    {
+                        ControlIntit();
+                        return;
+                    }
                     BeginInvoke(new Action(() =>
                     {
                         txtAgingInfoShow.AppendText("-----移管手老化测试开始，温育盘与清洗盘之间移管测试，测试次数：" + testNum.ToString() + "-----" + Environment.NewLine);
@@ -6631,7 +6767,7 @@ namespace BioBaseCLIA.SysMaintenance
                     //lyq add 20191010 
                     Random ra = new Random();
                     int random;
-                    int[] reactTray = new int[50];
+                    int[] reactTray = new int[ReactTrayNum];
                     for (int iya = reactTray.Length - 1; iya >= 0; iya--)
                     {
                         reactTray[iya] = 0;
@@ -6690,6 +6826,8 @@ namespace BioBaseCLIA.SysMaintenance
                             ControlIntit();
                             return;
                         }
+                        if (LogFileRtest.Instance.Bcount)
+                            LogFileRtest.Instance.Testcount++;
                         //移管手要夹的下一个管架位置
                         //CurrentTubePos = CurrentTubePos + 1 == 353 ? 1 : CurrentTubePos + 1;
                         if (TubetempNum != singleLooPNum)
@@ -6715,12 +6853,13 @@ namespace BioBaseCLIA.SysMaintenance
                         CurrentReactPos = CurrentReactPos == ReactTrayNum + 1 ? 1 : CurrentReactPos;
                         while (TubetempNum <= singleLooPNum)
                         {
-                            #region 清洗盘夹管到温育盘  
+                            #region 清洗盘夹管到温育盘
+
                             //lyq add 20191010
-                            random = ra.Next(1, 51);
+                            random = ra.Next(1, ReactTrayNum+1);
                             while (reactTray[random - 1] != 0)
                             {
-                                random = ra.Next(1, 51);
+                                random = ra.Next(1, ReactTrayNum + 1);
                             }
                             CurrentReactPos = random;
 
@@ -6739,7 +6878,8 @@ namespace BioBaseCLIA.SysMaintenance
                                 ControlIntit();
                                 return;
                             }
-
+                            if (LogFileRtest.Instance.Bcount)
+                                LogFileRtest.Instance.Testcount++;
                             reactTray[random - 1] = 1; //lyq 191010
 
                             CurrentReactPos = CurrentReactPos + 1 == ReactTrayNum + 1 ? 1 : CurrentReactPos + 1;
@@ -6765,14 +6905,15 @@ namespace BioBaseCLIA.SysMaintenance
                         while (TubetempNum <= singleLooPNum)
                         {
                             #region 温育盘夹管到清洗盘
+
                             //lyq 20191010
-                            random = ra.Next(1, 51);
+                            random = ra.Next(1, ReactTrayNum + 1);
                             while (reactTray[random - 1] != 1)
                             {
-                                random = ra.Next(1, 51);
+                                random = ra.Next(1, ReactTrayNum + 1);
                             }
                             CurrentReactPos = random;
-                                                        
+
                             BeginInvoke(new Action(() =>
                             {
                                 txtAgingInfoShow.AppendText(TubetempNum.ToString() + ":移管手从温育盘" + CurrentReactPos.ToString() + "位置夹管到清洗盘" + Environment.NewLine);
@@ -6788,7 +6929,8 @@ namespace BioBaseCLIA.SysMaintenance
                                 ControlIntit();
                                 return;
                             }
-
+                            if (LogFileRtest.Instance.Bcount)
+                                LogFileRtest.Instance.Testcount++;
                             reactTray[random - 1] = 0; //lyq 191010
 
                             CurrentReactPos = CurrentReactPos + 1 == ReactTrayNum + 1 ? 1 : CurrentReactPos + 1;
@@ -6807,6 +6949,7 @@ namespace BioBaseCLIA.SysMaintenance
                                 }
                             }
                             #endregion
+                          
                             TubetempNum++;
                             //lyq add 20190826
                             surplusNum--;
@@ -6818,22 +6961,20 @@ namespace BioBaseCLIA.SysMaintenance
                         //下一次循环次数
                         singleLooPNum = SumNum - (j + 2) == 0 ? testNum - (j + 1) * 30 : 30;
                     }
-
                     #endregion
-
                 }
                 #endregion
             }
             else if (fbtnArmAgingStop.Enabled)
             {
-                 //试剂盘位号
+                //试剂盘位号
                 int regentPos = 1;
                 #region 加样臂
                 Invoke(new Action(() =>
-                  {
-                      //试剂盘位号
-                       regentPos = int.Parse(cmbArmRegentPos.SelectedItem.ToString());
-                  }));
+                {
+                    //试剂盘位号
+                    regentPos = int.Parse(cmbArmRegentPos.SelectedItem.ToString());
+                }));
                 //总测试数
                 int testNum = int.Parse(txtArmAgingNum.Text);
                 //加样臂动作临时计数
@@ -6864,8 +7005,8 @@ namespace BioBaseCLIA.SysMaintenance
                         //int column = CurrentTubePos % 11 == 0 ? CurrentTubePos / 11 - (plate * 8) : CurrentTubePos / 11 + 1 - (plate * 8);
                         //int hole = CurrentTubePos % 11 == 0 ? 11 : CurrentTubePos % 11;
                         //管架取管放到温育盘
-                        NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 01 "+ CurrentReactPos.ToString("x2")), 1);
-                        if (!NetCom3.Instance.MoveQuery()&&NetCom3.Instance.MoverrorFlag!=(int)ErrorState.IsNull)
+                        NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 01 " + CurrentReactPos.ToString("x2")), 1);
+                        if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
                         {
                             BeginInvoke(new Action(() =>
                             {
@@ -6896,7 +7037,6 @@ namespace BioBaseCLIA.SysMaintenance
                     #region  加R1
                     BeginInvoke(new Action(() =>
                     {
-
                         txtAgingInfoShow.AppendText(regentPos.ToString() + "号试剂位R1加到到温育盘" + CurrentReactPos.ToString() + "位置。" + Environment.NewLine);
                     }));
                     NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 02 03 " + regentPos.ToString("x2") + " " + CurrentReactPos.ToString("x2")
@@ -6915,7 +7055,6 @@ namespace BioBaseCLIA.SysMaintenance
                     #region  加R2
                     BeginInvoke(new Action(() =>
                     {
-
                         txtAgingInfoShow.AppendText(regentPos.ToString() + "号试剂位R2加到到温育盘" + CurrentReactPos.ToString() + "位置。" + Environment.NewLine);
                     }));
                     NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 02 04 " + regentPos.ToString("x2") + " " + CurrentReactPos.ToString("x2")
@@ -6934,14 +7073,13 @@ namespace BioBaseCLIA.SysMaintenance
                     #region  加R3
                     BeginInvoke(new Action(() =>
                     {
-
                         txtAgingInfoShow.AppendText(regentPos.ToString() + "号试剂位R3加到到温育盘" + CurrentReactPos.ToString() + "位置。" + Environment.NewLine);
                     }));
                     NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 02 05 " + regentPos.ToString("x2") + " " + CurrentReactPos.ToString("x2")
                               + " 14 05 12"), 0);
                     if (!NetCom3.Instance.SPQuery())
                     {
-                        BeginInvoke(new Action(()=>
+                        BeginInvoke(new Action(() =>
                         {
                             txtAgingInfoShow.AppendText("\n加R3异常");
                         }));
@@ -6954,7 +7092,6 @@ namespace BioBaseCLIA.SysMaintenance
                     /*
                     BeginInvoke(new Action(() =>
                     {
-
                         txtAgingInfoShow.AppendText(regentPos.ToString() + "号试剂位稀释液加到到温育盘" + CurrentReactPos.ToString() + "位置。" + Environment.NewLine);
                     }));
                     NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 02 06 " + regentPos.ToString("x2") + " " + CurrentReactPos.ToString("x2")
@@ -6985,42 +7122,42 @@ namespace BioBaseCLIA.SysMaintenance
                     }
                     #endregion
 
-                    CurrentReactPos = CurrentReactPos + 1 == ReactTrayNum+1 ? 1 : CurrentReactPos + 1;
-                    CurrentAsPos = CurrentAsPos + 1 == SampleNum+1 ? 1 : CurrentAsPos + 1;
+                    CurrentReactPos = CurrentReactPos + 1 == ReactTrayNum + 1 ? 1 : CurrentReactPos + 1;
+                    CurrentAsPos = CurrentAsPos + 1 == SampleNum + 1 ? 1 : CurrentAsPos + 1;
                     ArmtempNum++;
                 }
                 #region 清空温育盘反应管到管架               
                 BeginInvoke(new Action(() =>
-                {                    
+                {
                     txtAgingInfoShow.AppendText("将反应管丢弃！" + Environment.NewLine);
-                }));                
-               if (chbArmIsTube.Checked)
-               {
-                   //CurrentTubePos = 1;
-                   CurrentReactPos = 1;
-                   for (int i = 0; i < sumNum; i++)
-                   {
-                       //int plate = CurrentTubePos % 88 == 0 ? CurrentTubePos / 88 - 1 : CurrentTubePos / 88;//几号板
-                       //int column = CurrentTubePos % 11 == 0 ? CurrentTubePos / 11 - (plate * 8) : CurrentTubePos / 11 + 1 - (plate * 8);
-                       //int hole = CurrentTubePos % 11 == 0 ? 11 : CurrentTubePos % 11;
-                       //温育盘夹管到管架
-                       NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 05 " + CurrentReactPos.ToString("x2")), 1);
-                       if (!NetCom3.Instance.MoveQuery()&&NetCom3.Instance.MoverrorFlag!=(int)ErrorState.IsNull)
-                       {
-                           BeginInvoke(new Action(() =>
-                           {
-                               txtAgingInfoShow.AppendText("\n温育盘夹管到管架异常");
-                           }));
+                }));
+                if (chbArmIsTube.Checked)
+                {
+                    //CurrentTubePos = 1;
+                    CurrentReactPos = 1;
+                    for (int i = 0; i < sumNum; i++)
+                    {
+                        //int plate = CurrentTubePos % 88 == 0 ? CurrentTubePos / 88 - 1 : CurrentTubePos / 88;//几号板
+                        //int column = CurrentTubePos % 11 == 0 ? CurrentTubePos / 11 - (plate * 8) : CurrentTubePos / 11 + 1 - (plate * 8);
+                        //int hole = CurrentTubePos % 11 == 0 ? 11 : CurrentTubePos % 11;
+                        //温育盘夹管到管架
+                        NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 05 " + CurrentReactPos.ToString("x2")), 1);
+                        if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
+                        {
+                            BeginInvoke(new Action(() =>
+                            {
+                                txtAgingInfoShow.AppendText("\n温育盘夹管到管架异常");
+                            }));
                             ControlIntit();
-                           return;
-                       }
-                       #region 取放管成功
-                       //移管手要夹的下一个管架位置
-                       //CurrentTubePos++;
-                       CurrentReactPos++;
-                       #endregion
-                   }
-               }               
+                            return;
+                        }
+                        #region 取放管成功
+                        //移管手要夹的下一个管架位置
+                        //CurrentTubePos++;
+                        CurrentReactPos++;
+                        #endregion
+                    }
+                }
                 #endregion
                 #endregion
             }
@@ -7036,7 +7173,7 @@ namespace BioBaseCLIA.SysMaintenance
                 {
                     txtAgingInfoShow.AppendText("-----清洗盘老化测试开始，测试次数：" + testNum.ToString() + "-----" + Environment.NewLine);
                 }));
-                
+
                 #region 夹新管到清洗盘
                 if (chbWashIsTube.Checked)
                 {
@@ -7044,14 +7181,14 @@ namespace BioBaseCLIA.SysMaintenance
                     {
                         BeginInvoke(new Action(() =>
                         {
-                            txtAgingInfoShow.AppendText((i+1).ToString()+": 夹新管到清洗盘。"+ Environment.NewLine);
+                            txtAgingInfoShow.AppendText((i + 1).ToString() + ": 夹新管到清洗盘。" + Environment.NewLine);
                         }));
                         //int plate = CurrentTubePos % 88 == 0 ? CurrentTubePos / 88 - 1 : CurrentTubePos / 88;//几号板
                         //int column = CurrentTubePos % 11 == 0 ? CurrentTubePos / 11 - (plate * 8) : CurrentTubePos / 11 + 1 - (plate * 8);
                         //int hole = CurrentTubePos % 11 == 0 ? 11 : CurrentTubePos % 11;
                         //管架取管放到清洗盘
                         NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 06"), 1);
-                        if (!NetCom3.Instance.MoveQuery()&&NetCom3.Instance.MoverrorFlag!=(int)ErrorState.IsNull)
+                        if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
                         {
                             BeginInvoke(new Action(() =>
                             {
@@ -7079,7 +7216,7 @@ namespace BioBaseCLIA.SysMaintenance
                     }
                 }
                 #endregion
-                 
+
                 while (WashtempNum <= testNum)
                 {
                     BeginInvoke(new Action(() =>
@@ -7116,7 +7253,7 @@ namespace BioBaseCLIA.SysMaintenance
                 }
 
                 #region 清洗盘夹回管架
-                
+
                 if (chbWashIsTube.Checked)
                 {
                     //CurrentTubePos = 1;
@@ -7124,14 +7261,14 @@ namespace BioBaseCLIA.SysMaintenance
                     {
                         BeginInvoke(new Action(() =>
                         {
-                          txtAgingInfoShow.AppendText((i + 1).ToString() + ": 清洗盘扔废管" + Environment.NewLine);
+                            txtAgingInfoShow.AppendText((i + 1).ToString() + ": 清洗盘扔废管" + Environment.NewLine);
                         }));
                         //int plate = CurrentTubePos % 88 == 0 ? CurrentTubePos / 88 - 1 : CurrentTubePos / 88;//几号板
                         //int column = CurrentTubePos % 11 == 0 ? CurrentTubePos / 11 - (plate * 8) : CurrentTubePos / 11 + 1 - (plate * 8);
                         //int hole = CurrentTubePos % 11 == 0 ? 11 : CurrentTubePos % 11;
                         //管架取管放到清洗盘
                         NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 04"), 1);
-                        if (!NetCom3.Instance.MoveQuery()&&NetCom3.Instance.MoverrorFlag!=(int)ErrorState.IsNull)
+                        if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
                         {
                             BeginInvoke(new Action(() =>
                             {
@@ -7158,16 +7295,16 @@ namespace BioBaseCLIA.SysMaintenance
                         }
                     }
                 }
-                
+
                 #endregion
                 #endregion
             }
             BeginInvoke(new Action(() =>
             {
                 txtAgingInfoShow.AppendText("--------------------------测试完成--------------------------" + Environment.NewLine);
-                txtmoveNum.ReadOnly = false;                
+                txtmoveNum.ReadOnly = false;
             }));
-            ControlIntit();            
+            ControlIntit();
             NetCom3.Instance.ReceiveHandel -= dealAgingBack;
         }
 
@@ -7346,7 +7483,7 @@ namespace BioBaseCLIA.SysMaintenance
             {
                 NetCom3.Instance.Send(NetCom3.Cover("EB 90 11 08 01"), 5);
             }
-            else if(rbtnWainOpen.Checked )
+            else if (rbtnWainOpen.Checked)
             {
                 NetCom3.Instance.Send(NetCom3.Cover("EB 90 11 09 00"), 5);
             }
@@ -7377,8 +7514,9 @@ namespace BioBaseCLIA.SysMaintenance
                 frmMsgShow.MessageShow("仪器调试", "请选择要查询的温控模块！");
                 return;
             }
-            else if (cmbStep.SelectedItem != "查询校准值" && cmbStep.SelectedItem != "查询温度")
+            else if (cmbStep.SelectedItem.ToString() != "查询校准值" && cmbStep.SelectedItem.ToString() != "查询温度")
             {
+                LogFile.Instance.Write(cmbStep.SelectedItem.ToString());
                 frmMsgShow.MessageShow("仪器调试", "选择查询的温控模块有误，请重新选择！");
                 return;
             }
@@ -7427,7 +7565,7 @@ namespace BioBaseCLIA.SysMaintenance
 
         private void chkQXGL_CheckedChanged(object sender, EventArgs e)
         {
-            chart1.Series[4].Enabled = chkQXGL.Checked;
+            chart1.Series[5].Enabled = chkQXGL.Checked;
         }
 
         /// <summary>
@@ -7459,7 +7597,7 @@ namespace BioBaseCLIA.SysMaintenance
                 }
                 else if (holetarget < 0)
                 {
-                   holetargethex = holetarget.ToString("X2").Substring(6, 2);
+                    holetargethex = holetarget.ToString("X2").Substring(6, 2);
                 }
                 if (holetarget == 0 || holetarget == 30 || holetarget == -30)
                 {
@@ -7482,15 +7620,15 @@ namespace BioBaseCLIA.SysMaintenance
                 }
                 functionButton1.Enabled = true;
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 MessageBox.Show("请输入数字！");
             }
-            finally 
+            finally
             {
                 functionButton1.Enabled = true;
             }
-           
+
         }
 
         private void btnHandvertical_Click(object sender, EventArgs e)
@@ -7581,6 +7719,16 @@ namespace BioBaseCLIA.SysMaintenance
                 NetCom3.Instance.SingleQuery();
             }
             CmbIpara.Enabled = true;
+
+            UpdateIncubationSteps();
+        }
+
+        private void UpdateIncubationSteps()
+        {
+            if (CmbIpara.SelectedIndex < 0 || cmbIElecMachine.SelectedIndex < 0) return;
+            textBox2.Text =
+                GetCurrentSteps((CmbIpara.SelectedIndex + 1).ToString().PadLeft(2, '0'),
+                (cmbIElecMachine.SelectedIndex + 1).ToString().PadLeft(2, '0'), "04");
         }
 
         private void btnIAdd_Click(object sender, EventArgs e)
@@ -7646,7 +7794,7 @@ namespace BioBaseCLIA.SysMaintenance
                 return;
             }
             btnISub.Enabled = false;
-            string incream = int.Parse("-"+txtIIncrem.Text.Trim()).ToString("x8");
+            string incream = int.Parse("-" + txtIIncrem.Text.Trim()).ToString("x8");
             //温育盘电机
             if (cmbIElecMachine.SelectedIndex == 0)
             {
@@ -7683,6 +7831,8 @@ namespace BioBaseCLIA.SysMaintenance
             NetCom3.Instance.SingleQuery();
             NetCom3.Delay(500);//lyq add 20201016 指令返回太快，增加一个点击停顿
             btnISave.Enabled = true;
+
+            UpdateIncubationSteps();
         }
 
         private void btnIAllInit_Click(object sender, EventArgs e)
@@ -7696,6 +7846,8 @@ namespace BioBaseCLIA.SysMaintenance
             sendMonitor(NetCom3.Cover("EB 90 04 03 00"), 5);
             NetCom3.Instance.SingleQuery();
             btnIAllInit.Enabled = true;
+
+            UpdateIncubationSteps();
         }
 
         private void fbtnInTubeReset_Click(object sender, EventArgs e)
@@ -7747,37 +7899,42 @@ namespace BioBaseCLIA.SysMaintenance
 
         private void btnReadNum_Click(object sender, EventArgs e)
         {
+            textReadShow.Clear();
             btnReadNum.Enabled = false;
             int Num = int.Parse(numRepeat.Text);
+            NetCom3.Instance.ReceiveHandel += GetReadNum2;
             for (int i = 1; i <= Num; i++)
             {
-                BackObj = "";
+                //BackObj = "";
                 NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 03 03 00 00 00 01"), 2);
                 if (!NetCom3.Instance.WashQuery())
                     return;
-                else
-                {
-                    int delay = 1000;
-                    while (!BackObj.Contains("EB 90 31 A3") && delay > 0)
-                    {
-                        NetCom3.Delay(10);
-                        delay = delay - 10;
-                    }
-                    if (BackObj.Contains("EB 90 31 A3"))
-                    {
-                        //string temp = BackObj.Replace(" ", "");
-                        //int pos = temp.IndexOf("EB9031A3");
-                        //temp = temp.Substring(pos, 32);
-                        //temp = temp.Substring(temp.Length - 8);
-                        string temp = BackObj.Substring(BackObj.Length - 16).Replace(" ", "");
-                        temp = Convert.ToInt64(temp, 16).ToString();
-                        if (int.Parse(temp) > Math.Pow(10, 5))
-                            temp = ((int)GetPMT(double.Parse(temp))).ToString();
-                        textReadShow.AppendText(DateTime.Now.ToString("HH-mm-ss") + ": " + "PMT背景值：" + temp + Environment.NewLine);
-                    }
-                }
+                //else
+                //{
+                //    int delay = 1000;
+                //    while (!BackObj.Contains("EB 90 31 A3") && delay > 0)
+                //    {
+                //        NetCom3.Delay(10);
+                //        delay = delay - 10;
+                //    }
+                //    if (BackObj.Contains("EB 90 31 A3"))
+                //    {
+                //        //string temp = BackObj.Replace(" ", "");
+                //        //int pos = temp.IndexOf("EB9031A3");
+                //        //temp = temp.Substring(pos, 32);
+                //        //temp = temp.Substring(temp.Length - 8);
+                //        string temp = BackObj.Substring(BackObj.Length - 16).Replace(" ", "");
+                //        temp = Convert.ToInt64(temp, 16).ToString();
+                //        if (int.Parse(temp) > Math.Pow(10, 5))
+                //            temp = ((int)GetPMT(double.Parse(temp))).ToString();
+                //        textReadShow.AppendText(DateTime.Now.ToString("HH-mm-ss") + ": " + "PMT背景值：" + temp + Environment.NewLine);
+                //    }
+                //}
             }
-            textReadShow.AppendText("已完成" + Environment.NewLine);
+            Thread.Sleep(500);
+            NetCom3.Instance.ReceiveHandel -= GetReadNum2;
+            TExtAppend("已完成" + Environment.NewLine);
+            //textReadShow.AppendText("已完成" + Environment.NewLine);
             btnReadNum.Enabled = true;
         }
 
@@ -7835,42 +7992,107 @@ namespace BioBaseCLIA.SysMaintenance
             NetCom3.Instance.SingleQuery();
             btnPutCupInit.Enabled = true;
         }
-        //lyq add 190816
+
         private void BtnOrderSend_Click(object sender, EventArgs e)
         {
-            if (textStepOrder.Text.Trim() == "")       //控件名
+            if (textStepOrder.Text.Trim() == "")
             {
-                MessageBox.Show("请输入通讯命令！");
+                frmMsgShow.MessageShow("提示", "请输入通讯命令！");
                 return;
             }
-            btnOrderSend.Enabled = false;
 
-            string order = textStepOrder.Text.ToString();
+            string order = textStepOrder.Text.ToString().Trim().Replace("eb", "EB").Replace("eB", "EB").Replace("Eb", "EB");
+
+            if (order.Substring(0, 5) != "EB 90")
+            {
+                frmMsgShow.MessageShow("提示", "未识别的指令！");
+                return;
+            }
+            if (!Regex.IsMatch(order.Replace(" ", ""), @"^[0-9a-fA-F]{1,}$"))
+            {
+                frmMsgShow.MessageShow("提示", "未识别的指令！");
+                return;
+            }
+            foreach (string temp in order.Split(' '))
+            {
+                if (temp.Length != 2)
+                {
+                    frmMsgShow.MessageShow("提示", "未识别的指令！");
+                    return;
+                }
+            }
+
+            btnOrderSend.Enabled = false;
+            btnOrderCancel.Enabled = true;
 
             if (order.Contains("EB 90 31 01"))
             {
+                stepOrderSendFlag = 1;
                 NetCom3.Instance.Send(NetCom3.Cover(order), 1);
                 NetCom3.Instance.MoveQuery();
             }
             else if (order.Contains("EB 90 31 02") || order.Contains("EB 90 31 04"))
             {
+                stepOrderSendFlag = 0;
                 NetCom3.Instance.Send(NetCom3.Cover(order), 0);
                 NetCom3.Instance.SPQuery();
             }
             else if (order.Contains("EB 90 31 03"))
             {
+                stepOrderSendFlag = 2;
                 NetCom3.Instance.Send(NetCom3.Cover(order), 2);
                 NetCom3.Instance.WashQuery();
             }
             else
             {
+                stepOrderSendFlag = 5;
                 NetCom3.Instance.Send(NetCom3.Cover(order), 5);
                 NetCom3.Instance.SingleQuery();
             }
 
-            btnOrderSend.Enabled = true;   //返回套接字后按钮可用
-
+            btnOrderSend.Enabled = true;
+            btnOrderCancel.Enabled = false;
             LogFile.Instance.Write(DateTime.Now.ToString("HH-mm-ss"));
+        }
+
+        private void btnWashMix_Click(object sender, EventArgs e)
+        {
+            if (!NetCom3.totalOrderFlag)
+            {
+                frmMsgShow.MessageShow("仪器调试", "仪器正在运动，请稍等！");
+                return;
+            }
+            if (cmbWashMix.SelectedItem == null)
+            {
+                frmMsgShow.MessageShow("仪器调试", "请选择压杯电机动作！");
+            }
+            btnWashMix.Enabled = false;
+            if (cmbWashMix.SelectedIndex == 0)
+            {
+                //NetCom3.Instance.Send(NetCom3.Cover("EB 90 03 01 01"), 5);
+                NetCom3.Instance.Send(NetCom3.Cover("EB 90 11 03 33 01"), 5);
+                NetCom3.Instance.SingleQuery();
+            }
+            else if (cmbWashMix.SelectedIndex == 1)
+            {
+                //NetCom3.Instance.Send(NetCom3.Cover("EB 90 03 01 02"), 5);
+                NetCom3.Instance.Send(NetCom3.Cover("EB 90 11 03 33 02"), 5);
+                NetCom3.Instance.SingleQuery();
+            }
+            btnWashMix.Enabled = true;
+        }
+
+        private void fbtnStchDiskTurn_Click(object sender, EventArgs e)
+        {
+            if (!NetCom3.totalOrderFlag)
+            {
+                frmMsgShow.MessageShow("仪器调试", "仪器正在运动，请稍等！");
+                return;
+            }
+            fbtnStchDiskTurn.Enabled = false;
+            NetCom3.Instance.Send(NetCom3.Cover("EB 90 11 01 05 01"), 5);
+            NetCom3.Instance.SingleQuery();
+            fbtnStchDiskTurn.Enabled = true;
         }
 
         private void BtnVersion_Click(object sender, EventArgs e)
@@ -7880,21 +8102,22 @@ namespace BioBaseCLIA.SysMaintenance
                 frmMsgShow.MessageShow("仪器调试", "仪器正在运动，请稍等！");
                 return;
             }
-
             TxtVersionClear();
-            btnVersion.Enabled = false;
-            NetCom3.Instance.ReceiveHandel += GetVersionNum;
 
+            btnVersion.Enabled = false;
+
+            //userTextBoxBase[] a = new userTextBoxBase[8];
+
+            NetCom3.Instance.ReceiveHandel += GetVersionNum;
             for (int i = 1; i <= 8; i++)
             {
                 string boardId = i.ToString("x2");
-               
+
                 NetCom3.Instance.Send(NetCom3.Cover("EB 90 11 FF " + boardId), 5);
                 VersionQuery();
-                //NetCom3.Instance.SingleQuery();
+                //NetCom3.Instance.SingleQuery();                
 
             }
-
             NetCom3.Instance.ReceiveHandel -= GetVersionNum;
 
             for (int i = 1; i <= 8; i++)
@@ -7998,6 +8221,7 @@ namespace BioBaseCLIA.SysMaintenance
                 return true;
             }
         }
+
         private void TxtTestErrorShow_TextChanged(object sender, EventArgs e)
         {
             txtTestErrorShow.ScrollToCaret();
@@ -8014,8 +8238,7 @@ namespace BioBaseCLIA.SysMaintenance
         private void dealAgingBack(string order)
         {
             if (showLog == "" || showLog == null)
-                return;            
-            
+                return;
             if (order.Contains("EB 90 31 A1"))
             {
                 string log = showLog;
@@ -8072,8 +8295,7 @@ namespace BioBaseCLIA.SysMaintenance
                     }));
                 }
             }
-            
-                
+
         }
 
         private void CmbTestName_SelectedIndexChanged(object sender, EventArgs e)
@@ -8166,13 +8388,12 @@ namespace BioBaseCLIA.SysMaintenance
             BeginInvoke(new Action(() =>
             {
                 textBox3.AppendText(Environment.NewLine + DateTime.Now.ToString("HH-mm-ss") + ": 测试结束。" + Environment.NewLine + Environment.NewLine);
-                
+
                 threadList.Find(xy => xy.Name == "specificationTest").Abort();
                 threadList.RemoveAll(xy => xy.Name == "specificationTest");
                 fbtnTestS.Enabled = true;
                 cmbTestName.Enabled = true;
                 fbtnTestsStop.Enabled = false;
-                
             }));
         }
 
@@ -8188,11 +8409,18 @@ namespace BioBaseCLIA.SysMaintenance
                 frmMsgShow.MessageShow("仪器调试", "没有选择具体测试项目，请重试！");
                 return;
             }
-            if (untxtSamplePos.Text == "" || untxtSampleVol.Text == "" || untxtPos1.Text == "" || untxtPos2.Text == "" || untxtReadNum.Text == "")
+            if (untxtSamplePos2.Text == "" || untxtSamplePos.Text == "" || untxtSampleVol.Text == "" || untxtPos1.Text == "" || untxtPos2.Text == "" || untxtReadNum.Text == "" || untxtInjection.Text == "")
             {
                 frmMsgShow.MessageShow("仪器调试", "存在输入框为空，请重新输入！");
                 return;
             }
+            //if (int.Parse(untxtSamplePos.Text) > int.Parse(untxtSamplePos2.Text) && cmbTestName.SelectedIndex != 2)
+            //{
+            //    frmMsgShow.MessageShow("仪器调试", "样本位输入不正确，请重新输入！");
+            //    untxtSamplePos.Text = untxtSamplePos2.Text = "1";
+            //    untxtSamplePos.Focus();
+            //    return;
+            //}
             if (int.Parse(untxtPos1.Text) > int.Parse(untxtPos2.Text))
             {
                 frmMsgShow.MessageShow("仪器调试", "温育盘放管孔位输入不正确，请重新输入！");
@@ -8252,7 +8480,11 @@ namespace BioBaseCLIA.SysMaintenance
             //加样准确性测试
             if (testIndex == 0)
             {
-                frmMsgShow.MessageShow("仪器调试", "请确认在温育盘 " + reactTrayStartPos + " 号到 " + reactTrayEndPos + " 号孔位是否放好反应管，点击确定马上开始测试。");
+                DialogResult r = MessageBox.Show("请确认在温育盘 " + reactTrayStartPos + " 号到 " + reactTrayEndPos + " 号孔位是否放好反应管，点击确定马上开始测试。", "仪器调试", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (r == DialogResult.Cancel)
+                {
+                    goto enzymaticActivityTestEnd;
+                }
                 for (int i = 0; i < repeat; i++)
                 {
                     NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 02 01 " + int.Parse(samplePos).ToString("x2") + " " + reactTrayStartPos.ToString("x2")
@@ -8275,7 +8507,11 @@ namespace BioBaseCLIA.SysMaintenance
                     goto enzymaticActivityTestEnd;
                 }
 
-                frmMsgShow.MessageShow("仪器调试", "请确认在温育盘 " + reactTrayStartPos + " 号到 " + reactTrayEndPos + " 号孔位是否放好反应管，是否加好试剂，点击确定马上开始测试。");
+                DialogResult r = MessageBox.Show("请确认在温育盘 " + reactTrayStartPos + " 号到 " + reactTrayEndPos + " 号孔位是否放好反应管，是否加好试剂，点击确定马上开始测试。", "仪器调试", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (r == DialogResult.Cancel)
+                {
+                    goto enzymaticActivityTestEnd;
+                }
 
                 BeginInvoke(new Action(() =>
                 {
@@ -8412,7 +8648,11 @@ namespace BioBaseCLIA.SysMaintenance
                     MessageBox.Show("请输入大于0的测试次数");
                     goto enzymaticActivityTestEnd;
                 }
-
+                DialogResult r = MessageBox.Show("请确认准备完毕，点击确定马上开始测试。", "仪器调试", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (r == DialogResult.Cancel)
+                {
+                    goto enzymaticActivityTestEnd;
+                }
                 BeginInvoke(new Action(() =>
                 {
                     textBox3.AppendText(DateTime.Now.ToString("HH-mm-ss") + ": 测试开始。" + Environment.NewLine);
@@ -8807,7 +9047,11 @@ namespace BioBaseCLIA.SysMaintenance
                     MessageBox.Show("请输入大于0的测试次数");
                     goto enzymaticActivityTestEnd;
                 }
-
+                DialogResult r = MessageBox.Show("请确认准备完毕，点击确定马上开始测试。", "仪器调试", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (r == DialogResult.Cancel)
+                {
+                    goto enzymaticActivityTestEnd;
+                }
                 BeginInvoke(new Action(() =>
                 {
                     textBox3.AppendText(DateTime.Now.ToString("HH-mm-ss") + ": 测试开始。" + Environment.NewLine);
@@ -8947,6 +9191,11 @@ namespace BioBaseCLIA.SysMaintenance
             //清洗注液测试
             else if (testIndex == 4)
             {
+                DialogResult r = MessageBox.Show("请确认准备完毕，点击确定马上开始测试。", "仪器调试", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (r == DialogResult.Cancel)
+                {
+                    goto enzymaticActivityTestEnd;
+                }
                 if (!washTrayTubeClear())
                 {
                     MessageBox.Show("清空清洗盘失败，请重试");
@@ -9311,6 +9560,7 @@ namespace BioBaseCLIA.SysMaintenance
             }));
         }
 
+
         /// <summary>
         /// 规范测试清洗效果测试 清洗盘指令
         /// </summary>
@@ -9461,7 +9711,7 @@ namespace BioBaseCLIA.SysMaintenance
         {
             if (dtexp.Rows.Count == 0)
             {
-                MessageBox.Show("没有实验结果。","null");
+                MessageBox.Show("没有实验结果。", "null");
                 return;
             }
             try
@@ -9476,15 +9726,14 @@ namespace BioBaseCLIA.SysMaintenance
 
                 filePath = dialog.SelectedPath + @"\" + dtexp.Columns[0].ColumnName.ToString() + "_" + DateTime.Now.ToString("yyyyMMdd HHmmss") + ".xls";
                 DataTableExcel.TableToExcel(dtexp, filePath);
-                frmMsgShow.MessageShow("SUCCESS" , "导出成功。");
-                
+                frmMsgShow.MessageShow("SUCCESS", "导出成功。");
+
                 #endregion
             }
             catch (System.Exception ex)
             {
-                frmMsgShow.MessageShow("ERROR" , "导出失败。\n" + ex.Message);
+                frmMsgShow.MessageShow("ERROR", "导出失败。\n" + ex.Message);
             }
-
         }
 
         private void TextBox3_TextChanged(object sender, EventArgs e)
@@ -9544,45 +9793,43 @@ namespace BioBaseCLIA.SysMaintenance
                             return;
                         if (File.Exists(path))
                             File.Delete(path);
-                      
+
                         DataTableExcel.TableToExcel(dtexp, path);
                     }
-                   
-                    frmMsgShow.MessageShow("SUCCESS" , "添加记录成功。");
+
+                    frmMsgShow.MessageShow("SUCCESS", "添加记录成功。");
                 }
                 catch (System.Exception ex)
                 {
                     frmMsgShow.MessageShow("ERROR", "添加记录失败。\n" + ex.Message);
                 }
-                
+
             }
         }
 
-        private void btnWashMix_Click(object sender, EventArgs e)
+        private void btnHandClose_Click(object sender, EventArgs e)
         {
             if (!NetCom3.totalOrderFlag)
             {
                 frmMsgShow.MessageShow("仪器调试", "仪器正在运动，请稍等！");
                 return;
             }
-            if (cmbWashMix.SelectedItem == null)
-            {
-                frmMsgShow.MessageShow("仪器调试", "请选择压杯电机动作！");
-            }
-            btnWashMix.Enabled = false;
-            if (cmbWashMix.SelectedIndex == 0)
-            {
-                //NetCom3.Instance.Send(NetCom3.Cover("EB 90 03 01 01"), 5);
-                NetCom3.Instance.Send(NetCom3.Cover("EB 90 11 03 33 01"), 5);
-                NetCom3.Instance.SingleQuery();
-            }
-            else if (cmbWashMix.SelectedIndex == 1)
-            {
-                //NetCom3.Instance.Send(NetCom3.Cover("EB 90 03 01 02"), 5);
-                NetCom3.Instance.Send(NetCom3.Cover("EB 90 11 03 33 02"), 5);
-                NetCom3.Instance.SingleQuery();
-            }
-            btnWashMix.Enabled = true;
+            btnHandClose.Enabled = false;
+            NetCom3.Instance.Send(NetCom3.Cover("EB 90 11 01 03 30"), 5);
+            NetCom3.Instance.SingleQuery();
+            //if (btnHandOpen.Text == "抓手打开")
+            //{
+            //    btnHandOpen.Text = "抓手关闭";
+            //    NetCom3.Instance.Send(NetCom3.Cover("EB 90 11 01 03 31"), 5);
+            //    NetCom3.Instance.SingleQuery();
+            //}
+            //else
+            //{
+            //    btnHandOpen.Text = "抓手打开";
+            //    NetCom3.Instance.Send(NetCom3.Cover("EB 90 11 01 03 30"), 5);
+            //    NetCom3.Instance.SingleQuery();
+            //}
+            btnHandClose.Enabled = true;
         }
 
         private void btnBQLiquaid_Click(object sender, EventArgs e)
@@ -9601,35 +9848,28 @@ namespace BioBaseCLIA.SysMaintenance
             btnBQLiquaid.Enabled = true;
         }
 
-        private void fbtnInstruDiagnost_Click(object sender, EventArgs e)
+        private void GetReadNum2(string order)
         {
-
+            if (order.Contains("EB 90 31 A3"))
+            {
+                string temp = order.Replace(" ", "");
+                int pos = temp.IndexOf("EB9031A3");
+                temp = temp.Substring(pos, 32);
+                temp = temp.Substring(temp.Length - 8);
+                temp = Convert.ToInt64(temp, 16).ToString();
+                if (int.Parse(temp) > Math.Pow(10, 5))
+                    temp = ((int)GetPMT(double.Parse(temp))).ToString();
+                TExtAppend(DateTime.Now.ToString("HH-mm-ss") + ": " + "PMT背景值：" + temp);
+            }
         }
 
-        private void btnHandClose_Click(object sender, EventArgs e)
+        private void TExtAppend(string text)
         {
-            if (!NetCom3.totalOrderFlag)
+            while (!this.IsHandleCreated)
             {
-                frmMsgShow.MessageShow("仪器调试", "仪器正在运动，请稍等！");
-                return;
+                Thread.Sleep(15);
             }
-            btnHandClose.Enabled = false;
-            NetCom3.Instance.Send(NetCom3.Cover("EB 90 11 01 03 30"), 5);
-            NetCom3.Instance.SingleQuery();
-            btnHandClose.Enabled = true;
-        }
-
-        private void fbtnStchDiskTurn_Click(object sender, EventArgs e)
-        {
-            if (!NetCom3.totalOrderFlag)
-            {
-                frmMsgShow.MessageShow("仪器调试", "仪器正在运动，请稍等！");
-                return;
-            }
-            fbtnStchDiskTurn.Enabled = false;
-            NetCom3.Instance.Send(NetCom3.Cover("EB 90 11 01 05 01"), 5);
-            NetCom3.Instance.SingleQuery();
-            fbtnStchDiskTurn.Enabled = true;
+            textReadShow.Invoke(new Action(() => { textReadShow.AppendText(Environment.NewLine + text); }));
         }
 
         private bool IapTraQuery()
@@ -9645,9 +9885,9 @@ namespace BioBaseCLIA.SysMaintenance
                 if (++sendFlag < 2)
                 {
                     LogFile.Instance.Write("errorFlag = ： " + NetCom3.Instance.errorFlag + "  *****当前 " + DateTime.Now.ToString("HH - mm - ss") + "  *****IAP数据传输，正在等待连接 ");
-                   
+                    
                     NetCom3.Delay(5000);
-                    if (NetCom3.isConnect)
+                    if (NetCom3.isConnect)//如果连接上了，goto继续
                     {
                         goto aabc;
                     }
@@ -9661,7 +9901,7 @@ namespace BioBaseCLIA.SysMaintenance
             }
         }
 
-        private bool needleUpUp = true;
+        private bool needleUpUp = true;//加样针在上
         private bool handUpUp = true;
 
         string needleDownR1 = "EB 90 02 A1 01 06";//针在试剂盘R1位置
@@ -9748,10 +9988,6 @@ namespace BioBaseCLIA.SysMaintenance
 
         }
 
-       
-
-        string trayResetPosition = "EB 90 04 01 03";//温育盘初始位置
-
         private void cmbModelName_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbModelName.SelectedItem.ToString() != "试剂盘")
@@ -9778,7 +10014,14 @@ namespace BioBaseCLIA.SysMaintenance
             }
         }
 
+        string trayResetPosition = "EB 90 04 01 03";//温育盘初始位置
+
         private void fbtnASSave2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fbtnASSave2_Click_1(object sender, EventArgs e)
         {
             if (!NetCom3.totalOrderFlag)
             {
@@ -9806,29 +10049,6 @@ namespace BioBaseCLIA.SysMaintenance
                 NetCom3.Instance.SingleQuery();
             }
             fbtnASSave2.Enabled = true;
-        }
-        private List<string> GetData(string state)
-        {
-            string path = Directory.GetCurrentDirectory() + "\\LocationData.ini";
-            if (!File.Exists(path))
-            {
-                MessageBox.Show("在指定目录下不存在数据文件文件，请确认！");
-                return new List<string>();
-            }
-
-            List<string> data = new List<string>();
-
-            StreamReader sr = new StreamReader(path, Encoding.Default);
-            String line;
-            while ((line = sr.ReadLine()) != null)
-            {
-                if (line.Contains("="))
-                    data.Add(line);
-            }
-
-            List<string> finalData = data.Where(item => item.Substring(0, 2) == state).ToList();
-
-            return finalData;
         }
 
         private void btnSaveHand2_Click(object sender, EventArgs e)
@@ -9902,7 +10122,28 @@ namespace BioBaseCLIA.SysMaintenance
             }
             fbtnWashSave2.Enabled = true;
         }
+        private List<string> GetData(string state)
+        {
+            string path = Directory.GetCurrentDirectory() + "\\LocationData.ini";
+            if (!File.Exists(path))
+            {
+                MessageBox.Show("在指定目录下不存在数据文件文件，请确认！");
+                return new List<string>();
+            }
 
+            List<string> data = new List<string>();
+            using (StreamReader sr = new StreamReader(path, Encoding.Default))
+            {
+                String line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    if (line.Contains("="))
+                        data.Add(line);
+                }
+            }
+
+            return data.Where(item => item.Substring(0, 2) == state).ToList();
+        }
         private void sendMonitor(string order, int orderType)
         {
             if (order.Contains(needleDownTray))//针在温育盘
@@ -9911,7 +10152,7 @@ namespace BioBaseCLIA.SysMaintenance
 
             }
             else if (order.Contains(needleDownR1) || order.Contains(needleDownR2) || order.Contains(needleDownR3)
-              || order.Contains(needleDownDilute) || order.Contains(needleDownBeads))//针在试剂盘
+               || order.Contains(needleDownDilute) || order.Contains(needleDownBeads))//针在试剂盘
             {
                 needleUpUp = false;
             }
@@ -9940,6 +10181,26 @@ namespace BioBaseCLIA.SysMaintenance
             ////////////
 
             NetCom3.Instance.Send(order, orderType);
+        }
+
+        private void cmbASElecMachine_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateSampleSteps();
+        }
+
+        private void cmbIElecMachine_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateIncubationSteps();
+        }
+
+        private void cmbHElecMachine_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateHandSteps();
+        }
+
+        private void cmbWashElecMachine_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateWashSteps();
         }
 
         private void fbtnInitIni_Click(object sender, EventArgs e)
@@ -10062,6 +10323,87 @@ namespace BioBaseCLIA.SysMaintenance
             fbtnInitSpReadCard.Enabled = true;
         }
 
+        private void btnOrderCancel_Click(object sender, EventArgs e)
+        {
+            btnOrderCancel.Enabled = false;
+
+            if (stepOrderSendFlag == 0)//判断指令标志
+            {
+                NetCom3.Instance.AdderrorFlag = (int)ErrorState.OverTime;
+                NetCom3.SpSendFlag = true;
+                NetCom3.SpReciveFlag = true;
+                NetCom3.totalOrderFlag = true;
+                NetCom3.spreceiveDone.Set();
+            }
+            else if (stepOrderSendFlag == 1)
+            {
+                NetCom3.Instance.MoverrorFlag = (int)ErrorState.OverTime;
+                NetCom3.MoveSendFlag = true;
+                NetCom3.MoveReciveFlag = true;
+                NetCom3.totalOrderFlag = true;
+                NetCom3.movereceiveDone.Set();
+
+            }
+            else if (stepOrderSendFlag == 2)
+            {
+                NetCom3.Instance.WasherrorFlag = (int)ErrorState.OverTime;
+                NetCom3.WashSendFlag = true;
+                NetCom3.WashReciveFlag = true;
+                NetCom3.totalOrderFlag = true;
+                NetCom3.washreceiveDone.Set();
+            }
+            else
+            {
+                NetCom3.Instance.errorFlag = (int)ErrorState.OverTime;
+                NetCom3.totalOrderFlag = true;
+                NetCom3.DiagnostDone.Set();
+            }
+            NetCom3.Delay(500);
+            btnOrderSend.Enabled = true;
+        }
+        /// <summary>
+        /// 磁珠抽液泵执行标志
+        /// </summary>
+        bool bDrainageB = false;
+        private void startDrainageB_Click(object sender, EventArgs e)
+        {
+            int num = int.Parse(numDrainageB.Value.ToString());
+
+            bDrainageB = true;
+            startDrainageB.Enabled = false;
+            endDrainageB.Enabled = true;
+            while (num > 0)
+            {
+                if (bDrainageB)
+                {
+                    NetCom3.Instance.Send(NetCom3.Cover("EB 90 11 0B 00 00"), 5);
+                    if (!NetCom3.Instance.SingleQuery() && NetCom3.Instance.errorFlag != (int)ErrorState.ReadySend)
+                    {
+                        StopDrainageB();
+                        return;
+                    }
+                    num--;
+                    BeginInvoke(new Action(() => { numDrainageB.Value = num; }));
+                }
+                else
+                {
+                    StopDrainageB();
+                    return;
+                }
+            }
+            StopDrainageB();
+        }
+
+        private void endDrainageB_Click(object sender, EventArgs e)
+        {
+            bDrainageB = false;
+        }
+        void StopDrainageB()
+        {
+            bDrainageB = false;
+            startDrainageB.Enabled = true;
+            endDrainageB.Enabled = false;
+        }
         /// <summary>
         /// 试剂盘温度超时默认查询
         /// </summary>
@@ -10107,6 +10449,7 @@ namespace BioBaseCLIA.SysMaintenance
         //        temp = this.textBox1.Text;   // 将现在textBox的值保存下来
         //    }
         //}
+
         private void frmReturn()
         {
             if (!bClose)
@@ -10125,7 +10468,7 @@ namespace BioBaseCLIA.SysMaintenance
             NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 02 0B B0 00 00"), 0);
             NetCom3.Instance.SPQuery();
             fbtnReturn.Enabled = true;
-            Invoke(new Action(()=>
+            Invoke(new Action(() =>
             {
                 this.Close();
             }));

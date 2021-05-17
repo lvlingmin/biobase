@@ -41,10 +41,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtRegentPos = new BioBaseCLIA.CustomControl.userTextBoxBase();
             this.btnLoadSubstrate = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.btnChangeSubstrate = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.cmbUnit1 = new System.Windows.Forms.ComboBox();
             this.cmbUnit2 = new System.Windows.Forms.ComboBox();
             this.functionButton1 = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.chkManualInput = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label7
@@ -65,7 +65,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 12);
             this.label6.TabIndex = 14;
-            this.label6.Text = "编码:";
+            this.label6.Text = "条码:";
             // 
             // label8
             // 
@@ -85,6 +85,7 @@
             this.txtDiluteNumber.Size = new System.Drawing.Size(147, 21);
             this.txtDiluteNumber.TabIndex = 17;
             this.txtDiluteNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtDiluteNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDiluteNumber_KeyDown);
             // 
             // txtSubstrateLastTest
             // 
@@ -125,16 +126,17 @@
             this.txtSubstrateAllTest.Size = new System.Drawing.Size(72, 21);
             this.txtSubstrateAllTest.TabIndex = 18;
             this.txtSubstrateAllTest.Text = "25";
+            this.txtSubstrateAllTest.TextChanged += new System.EventHandler(this.txtSubstrateAllTest_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(40, 150);
+            this.label1.Location = new System.Drawing.Point(52, 152);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 12);
+            this.label1.Size = new System.Drawing.Size(59, 12);
             this.label1.TabIndex = 22;
-            this.label1.Text = "使用有效期:";
+            this.label1.Text = "有效期至:";
             // 
             // ValidDate
             // 
@@ -168,7 +170,6 @@
             this.btnLoadSubstrate.BackColor = System.Drawing.Color.Transparent;
             this.btnLoadSubstrate.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLoadSubstrate.BackgroundImage")));
             this.btnLoadSubstrate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnLoadSubstrate.Enabled = false;
             this.btnLoadSubstrate.EnabledSet = true;
             this.btnLoadSubstrate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnLoadSubstrate.FlatAppearance.BorderSize = 0;
@@ -176,33 +177,13 @@
             this.btnLoadSubstrate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnLoadSubstrate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLoadSubstrate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnLoadSubstrate.Location = new System.Drawing.Point(206, 182);
+            this.btnLoadSubstrate.Location = new System.Drawing.Point(117, 196);
             this.btnLoadSubstrate.Name = "btnLoadSubstrate";
             this.btnLoadSubstrate.Size = new System.Drawing.Size(57, 27);
             this.btnLoadSubstrate.TabIndex = 21;
             this.btnLoadSubstrate.Text = "保存";
             this.btnLoadSubstrate.UseVisualStyleBackColor = false;
             this.btnLoadSubstrate.Click += new System.EventHandler(this.btnLoadSubstrate_Click);
-            // 
-            // btnChangeSubstrate
-            // 
-            this.btnChangeSubstrate.BackColor = System.Drawing.Color.Transparent;
-            this.btnChangeSubstrate.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnChangeSubstrate.BackgroundImage")));
-            this.btnChangeSubstrate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnChangeSubstrate.EnabledSet = true;
-            this.btnChangeSubstrate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnChangeSubstrate.FlatAppearance.BorderSize = 0;
-            this.btnChangeSubstrate.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnChangeSubstrate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnChangeSubstrate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChangeSubstrate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnChangeSubstrate.Location = new System.Drawing.Point(42, 182);
-            this.btnChangeSubstrate.Name = "btnChangeSubstrate";
-            this.btnChangeSubstrate.Size = new System.Drawing.Size(57, 27);
-            this.btnChangeSubstrate.TabIndex = 20;
-            this.btnChangeSubstrate.Text = "更换";
-            this.btnChangeSubstrate.UseVisualStyleBackColor = false;
-            this.btnChangeSubstrate.Click += new System.EventHandler(this.btnChangeSubstrate_Click);
             // 
             // cmbUnit1
             // 
@@ -238,7 +219,7 @@
             this.functionButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.functionButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.functionButton1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.functionButton1.Location = new System.Drawing.Point(124, 182);
+            this.functionButton1.Location = new System.Drawing.Point(207, 196);
             this.functionButton1.Name = "functionButton1";
             this.functionButton1.Size = new System.Drawing.Size(57, 27);
             this.functionButton1.TabIndex = 28;
@@ -246,11 +227,23 @@
             this.functionButton1.UseVisualStyleBackColor = false;
             this.functionButton1.Click += new System.EventHandler(this.functionButton1_Click);
             // 
+            // chkManualInput
+            // 
+            this.chkManualInput.AutoSize = true;
+            this.chkManualInput.Location = new System.Drawing.Point(192, 173);
+            this.chkManualInput.Name = "chkManualInput";
+            this.chkManualInput.Size = new System.Drawing.Size(72, 16);
+            this.chkManualInput.TabIndex = 30;
+            this.chkManualInput.Text = "手动输入";
+            this.chkManualInput.UseVisualStyleBackColor = true;
+            this.chkManualInput.CheckedChanged += new System.EventHandler(this.chkManualInput_CheckedChanged);
+            // 
             // frmLoadSu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(339, 235);
+            this.Controls.Add(this.chkManualInput);
             this.Controls.Add(this.functionButton1);
             this.Controls.Add(this.cmbUnit2);
             this.Controls.Add(this.cmbUnit1);
@@ -263,11 +256,11 @@
             this.Controls.Add(this.btnLoadSubstrate);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.btnChangeSubstrate);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtDiluteNumber);
             this.Name = "frmLoadSu";
             this.Text = "稀释液装载";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmLoadSu_FormClosed);
             this.Load += new System.EventHandler(this.frmLoadSu_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -279,7 +272,6 @@
         private CustomControl.FunctionButton btnLoadSubstrate;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private CustomControl.FunctionButton btnChangeSubstrate;
         private System.Windows.Forms.Label label8;
         private CustomControl.userTextBoxBase txtDiluteNumber;
         private CustomControl.userNumTextBox txtSubstrateLastTest;
@@ -291,5 +283,6 @@
         private System.Windows.Forms.ComboBox cmbUnit1;
         private System.Windows.Forms.ComboBox cmbUnit2;
         private CustomControl.FunctionButton functionButton1;
+        private System.Windows.Forms.CheckBox chkManualInput;
     }
 }

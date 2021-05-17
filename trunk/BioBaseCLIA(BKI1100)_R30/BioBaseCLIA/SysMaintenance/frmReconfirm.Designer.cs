@@ -30,13 +30,28 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmReconfirm));
+            this.txtUserPassword = new BioBaseCLIA.CustomControl.userTextBoxBase();
+            this.txtUserName = new BioBaseCLIA.CustomControl.userTextBoxBase();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.fbtnCancel = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnConfirm = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.txtUserPassword = new BioBaseCLIA.CustomControl.userTextBoxBase();
-            this.txtUserName = new BioBaseCLIA.CustomControl.userTextBoxBase();
             this.SuspendLayout();
+            // 
+            // txtUserPassword
+            // 
+            this.txtUserPassword.Location = new System.Drawing.Point(88, 55);
+            this.txtUserPassword.Name = "txtUserPassword";
+            this.txtUserPassword.PasswordChar = '*';
+            this.txtUserPassword.Size = new System.Drawing.Size(150, 21);
+            this.txtUserPassword.TabIndex = 9;
+            // 
+            // txtUserName
+            // 
+            this.txtUserName.Location = new System.Drawing.Point(88, 28);
+            this.txtUserName.Name = "txtUserName";
+            this.txtUserName.Size = new System.Drawing.Size(150, 21);
+            this.txtUserName.TabIndex = 8;
             // 
             // label2
             // 
@@ -93,21 +108,6 @@
             this.fbtnConfirm.Text = "确认";
             this.fbtnConfirm.UseVisualStyleBackColor = false;
             this.fbtnConfirm.Click += new System.EventHandler(this.fbtnConfirm_Click);
-            // 
-            // txtUserPassword
-            // 
-            this.txtUserPassword.Location = new System.Drawing.Point(88, 55);
-            this.txtUserPassword.Name = "txtUserPassword";
-            this.txtUserPassword.PasswordChar = '*';
-            this.txtUserPassword.Size = new System.Drawing.Size(150, 21);
-            this.txtUserPassword.TabIndex = 9;
-            // 
-            // txtUserName
-            // 
-            this.txtUserName.Location = new System.Drawing.Point(88, 28);
-            this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(150, 21);
-            this.txtUserName.TabIndex = 8;
             // 
             // frmReconfirm
             // 

@@ -30,6 +30,50 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmQC));
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.label6 = new System.Windows.Forms.Label();
+            this.tabControlMy1 = new BioBaseCLIA.CustomControl.TabControlMy();
+            this.tabQCManage = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtXValue = new BioBaseCLIA.CustomControl.userNumTextBox();
+            this.cmbProName = new System.Windows.Forms.ComboBox();
+            this.dtpValidity = new System.Windows.Forms.DateTimePicker();
+            this.dtpAddDate = new System.Windows.Forms.DateTimePicker();
+            this.cmbBype = new System.Windows.Forms.ComboBox();
+            this.btnSaveQC = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.btnDeleteQC = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.btnModifyQC = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.btnAddQC = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chk41s = new System.Windows.Forms.CheckBox();
+            this.chk10x = new System.Windows.Forms.CheckBox();
+            this.chk22s = new System.Windows.Forms.CheckBox();
+            this.chk13s = new System.Windows.Forms.CheckBox();
+            this.chk12s = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtOperator = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtSD = new BioBaseCLIA.CustomControl.userNumTextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtBatch = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dgvQCInfo = new System.Windows.Forms.DataGridView();
+            this.QCID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QCNO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QCBatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.XValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProjectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QCLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QCRule = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ValidDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OperatorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabQCCurve = new System.Windows.Forms.TabPage();
             this.rtxtLoseControl = new System.Windows.Forms.RichTextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -74,54 +118,16 @@
             this.label13 = new System.Windows.Forms.Label();
             this.cmbItem = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.fbtnQCQuery = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnReturn = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnScalingQuery = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.fbtnQCQuery = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnModifyQC = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.label9 = new System.Windows.Forms.Label();
-            this.chk13s = new System.Windows.Forms.CheckBox();
-            this.chk12s = new System.Windows.Forms.CheckBox();
-            this.cmbProName = new System.Windows.Forms.ComboBox();
-            this.dtpValidity = new System.Windows.Forms.DateTimePicker();
-            this.dtpAddDate = new System.Windows.Forms.DateTimePicker();
-            this.cmbBype = new System.Windows.Forms.ComboBox();
-            this.btnSaveQC = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.btnDeleteQC = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.btnAddQC = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.chk41s = new System.Windows.Forms.CheckBox();
-            this.chk10x = new System.Windows.Forms.CheckBox();
-            this.chk22s = new System.Windows.Forms.CheckBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtOperator = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtXValue = new BioBaseCLIA.CustomControl.userNumTextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtSD = new BioBaseCLIA.CustomControl.userNumTextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtBatch = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tabQCManage = new System.Windows.Forms.TabPage();
-            this.dgvQCInfo = new System.Windows.Forms.DataGridView();
-            this.QCID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QCNO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QCBatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.XValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProjectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QCLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QCRule = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ValidDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OperatorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tabControlMy1 = new BioBaseCLIA.CustomControl.TabControlMy();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            this.tabControlMy1.SuspendLayout();
+            this.tabQCManage.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvQCInfo)).BeginInit();
             this.tabQCCurve.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQCValue)).BeginInit();
@@ -132,13 +138,398 @@
             this.groupBox3.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.tabQCManage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvQCInfo)).BeginInit();
-            this.tabControlMy1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // tabControlMy1
+            // 
+            resources.ApplyResources(this.tabControlMy1, "tabControlMy1");
+            this.tabControlMy1.Controls.Add(this.tabQCManage);
+            this.tabControlMy1.Controls.Add(this.tabQCCurve);
+            this.tabControlMy1.Name = "tabControlMy1";
+            this.tabControlMy1.SelectedIndex = 0;
+            this.tabControlMy1.SelectedIndexChanged += new System.EventHandler(this.tabControlMy1_SelectedIndexChanged);
+            // 
+            // tabQCManage
+            // 
+            resources.ApplyResources(this.tabQCManage, "tabQCManage");
+            this.tabQCManage.BackColor = System.Drawing.Color.LightBlue;
+            this.tabQCManage.Controls.Add(this.groupBox1);
+            this.tabQCManage.Controls.Add(this.dgvQCInfo);
+            this.tabQCManage.Name = "tabQCManage";
+            // 
+            // groupBox1
+            // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.txtXValue);
+            this.groupBox1.Controls.Add(this.cmbProName);
+            this.groupBox1.Controls.Add(this.dtpValidity);
+            this.groupBox1.Controls.Add(this.dtpAddDate);
+            this.groupBox1.Controls.Add(this.cmbBype);
+            this.groupBox1.Controls.Add(this.btnSaveQC);
+            this.groupBox1.Controls.Add(this.btnDeleteQC);
+            this.groupBox1.Controls.Add(this.btnModifyQC);
+            this.groupBox1.Controls.Add(this.btnAddQC);
+            this.groupBox1.Controls.Add(this.groupBox2);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.txtOperator);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.txtSD);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.txtBatch);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
+            // 
+            // txtXValue
+            // 
+            resources.ApplyResources(this.txtXValue, "txtXValue");
+            this.txtXValue.IsDecimal = true;
+            this.txtXValue.IsNull = false;
+            this.txtXValue.MaxValue = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.txtXValue.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtXValue.Name = "txtXValue";
+            // 
+            // cmbProName
+            // 
+            resources.ApplyResources(this.cmbProName, "cmbProName");
+            this.cmbProName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbProName.FormattingEnabled = true;
+            this.cmbProName.Name = "cmbProName";
+            // 
+            // dtpValidity
+            // 
+            resources.ApplyResources(this.dtpValidity, "dtpValidity");
+            this.dtpValidity.Name = "dtpValidity";
+            // 
+            // dtpAddDate
+            // 
+            resources.ApplyResources(this.dtpAddDate, "dtpAddDate");
+            this.dtpAddDate.Name = "dtpAddDate";
+            // 
+            // cmbBype
+            // 
+            resources.ApplyResources(this.cmbBype, "cmbBype");
+            this.cmbBype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBype.FormattingEnabled = true;
+            this.cmbBype.Items.AddRange(new object[] {
+            resources.GetString("cmbBype.Items"),
+            resources.GetString("cmbBype.Items1"),
+            resources.GetString("cmbBype.Items2")});
+            this.cmbBype.Name = "cmbBype";
+            // 
+            // btnSaveQC
+            // 
+            resources.ApplyResources(this.btnSaveQC, "btnSaveQC");
+            this.btnSaveQC.BackColor = System.Drawing.Color.Transparent;
+            this.btnSaveQC.EnabledSet = true;
+            this.btnSaveQC.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnSaveQC.FlatAppearance.BorderSize = 0;
+            this.btnSaveQC.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnSaveQC.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnSaveQC.Name = "btnSaveQC";
+            this.btnSaveQC.UseVisualStyleBackColor = false;
+            this.btnSaveQC.Click += new System.EventHandler(this.btnSaveQC_Click);
+            // 
+            // btnDeleteQC
+            // 
+            resources.ApplyResources(this.btnDeleteQC, "btnDeleteQC");
+            this.btnDeleteQC.BackColor = System.Drawing.Color.Transparent;
+            this.btnDeleteQC.EnabledSet = true;
+            this.btnDeleteQC.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnDeleteQC.FlatAppearance.BorderSize = 0;
+            this.btnDeleteQC.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnDeleteQC.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnDeleteQC.Name = "btnDeleteQC";
+            this.btnDeleteQC.UseVisualStyleBackColor = false;
+            this.btnDeleteQC.Click += new System.EventHandler(this.btnDeleteQC_Click);
+            // 
+            // btnModifyQC
+            // 
+            resources.ApplyResources(this.btnModifyQC, "btnModifyQC");
+            this.btnModifyQC.BackColor = System.Drawing.Color.Transparent;
+            this.btnModifyQC.EnabledSet = true;
+            this.btnModifyQC.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnModifyQC.FlatAppearance.BorderSize = 0;
+            this.btnModifyQC.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnModifyQC.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnModifyQC.Name = "btnModifyQC";
+            this.btnModifyQC.UseVisualStyleBackColor = false;
+            this.btnModifyQC.Click += new System.EventHandler(this.btnModifyQC_Click);
+            // 
+            // btnAddQC
+            // 
+            resources.ApplyResources(this.btnAddQC, "btnAddQC");
+            this.btnAddQC.BackColor = System.Drawing.Color.Transparent;
+            this.btnAddQC.EnabledSet = true;
+            this.btnAddQC.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnAddQC.FlatAppearance.BorderSize = 0;
+            this.btnAddQC.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnAddQC.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnAddQC.Name = "btnAddQC";
+            this.btnAddQC.UseVisualStyleBackColor = false;
+            this.btnAddQC.Click += new System.EventHandler(this.btnAddQC_Click);
+            // 
+            // groupBox2
+            // 
+            resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.Controls.Add(this.chk41s);
+            this.groupBox2.Controls.Add(this.chk10x);
+            this.groupBox2.Controls.Add(this.chk22s);
+            this.groupBox2.Controls.Add(this.chk13s);
+            this.groupBox2.Controls.Add(this.chk12s);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.TabStop = false;
+            // 
+            // chk41s
+            // 
+            resources.ApplyResources(this.chk41s, "chk41s");
+            this.chk41s.Name = "chk41s";
+            this.chk41s.UseVisualStyleBackColor = true;
+            // 
+            // chk10x
+            // 
+            resources.ApplyResources(this.chk10x, "chk10x");
+            this.chk10x.Name = "chk10x";
+            this.chk10x.UseVisualStyleBackColor = true;
+            // 
+            // chk22s
+            // 
+            resources.ApplyResources(this.chk22s, "chk22s");
+            this.chk22s.Name = "chk22s";
+            this.chk22s.UseVisualStyleBackColor = true;
+            // 
+            // chk13s
+            // 
+            resources.ApplyResources(this.chk13s, "chk13s");
+            this.chk13s.Name = "chk13s";
+            this.chk13s.UseVisualStyleBackColor = true;
+            // 
+            // chk12s
+            // 
+            resources.ApplyResources(this.chk12s, "chk12s");
+            this.chk12s.Name = "chk12s";
+            this.chk12s.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // txtOperator
+            // 
+            resources.ApplyResources(this.txtOperator, "txtOperator");
+            this.txtOperator.Name = "txtOperator";
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            // 
+            // txtSD
+            // 
+            resources.ApplyResources(this.txtSD, "txtSD");
+            this.txtSD.IsDecimal = true;
+            this.txtSD.IsNull = false;
+            this.txtSD.MaxValue = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.txtSD.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtSD.Name = "txtSD";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // txtBatch
+            // 
+            resources.ApplyResources(this.txtBatch, "txtBatch");
+            this.txtBatch.Name = "txtBatch";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // dgvQCInfo
+            // 
+            resources.ApplyResources(this.dgvQCInfo, "dgvQCInfo");
+            this.dgvQCInfo.AllowUserToAddRows = false;
+            this.dgvQCInfo.AllowUserToDeleteRows = false;
+            this.dgvQCInfo.AllowUserToResizeRows = false;
+            this.dgvQCInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvQCInfo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.QCID,
+            this.QCNO,
+            this.QCBatch,
+            this.XValue,
+            this.SD,
+            this.Status,
+            this.ProjectName,
+            this.QCLevel,
+            this.QCRule,
+            this.ValidDate,
+            this.OperatorName,
+            this.AddDate});
+            this.dgvQCInfo.Name = "dgvQCInfo";
+            this.dgvQCInfo.ReadOnly = true;
+            this.dgvQCInfo.RowHeadersVisible = false;
+            this.dgvQCInfo.RowTemplate.Height = 23;
+            this.dgvQCInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvQCInfo.SelectionChanged += new System.EventHandler(this.dgvQCInfo_SelectionChanged);
+            // 
+            // QCID
+            // 
+            this.QCID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.QCID.DataPropertyName = "QCID";
+            resources.ApplyResources(this.QCID, "QCID");
+            this.QCID.Name = "QCID";
+            this.QCID.ReadOnly = true;
+            this.QCID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // QCNO
+            // 
+            this.QCNO.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.QCNO.DataPropertyName = "QCNumber";
+            resources.ApplyResources(this.QCNO, "QCNO");
+            this.QCNO.Name = "QCNO";
+            this.QCNO.ReadOnly = true;
+            this.QCNO.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // QCBatch
+            // 
+            this.QCBatch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.QCBatch.DataPropertyName = "Batch";
+            resources.ApplyResources(this.QCBatch, "QCBatch");
+            this.QCBatch.Name = "QCBatch";
+            this.QCBatch.ReadOnly = true;
+            this.QCBatch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // XValue
+            // 
+            this.XValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.XValue.DataPropertyName = "XValue";
+            resources.ApplyResources(this.XValue, "XValue");
+            this.XValue.Name = "XValue";
+            this.XValue.ReadOnly = true;
+            this.XValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // SD
+            // 
+            this.SD.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SD.DataPropertyName = "SD";
+            resources.ApplyResources(this.SD, "SD");
+            this.SD.Name = "SD";
+            this.SD.ReadOnly = true;
+            this.SD.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Status
+            // 
+            this.Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Status.DataPropertyName = "Status";
+            resources.ApplyResources(this.Status, "Status");
+            this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
+            this.Status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ProjectName
+            // 
+            this.ProjectName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ProjectName.DataPropertyName = "ProjectName";
+            resources.ApplyResources(this.ProjectName, "ProjectName");
+            this.ProjectName.Name = "ProjectName";
+            this.ProjectName.ReadOnly = true;
+            this.ProjectName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // QCLevel
+            // 
+            this.QCLevel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.QCLevel.DataPropertyName = "QCLevel";
+            resources.ApplyResources(this.QCLevel, "QCLevel");
+            this.QCLevel.Name = "QCLevel";
+            this.QCLevel.ReadOnly = true;
+            this.QCLevel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // QCRule
+            // 
+            this.QCRule.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.QCRule.DataPropertyName = "QCRules";
+            resources.ApplyResources(this.QCRule, "QCRule");
+            this.QCRule.Name = "QCRule";
+            this.QCRule.ReadOnly = true;
+            this.QCRule.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ValidDate
+            // 
+            this.ValidDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ValidDate.DataPropertyName = "ValidDate";
+            this.ValidDate.FillWeight = 120F;
+            resources.ApplyResources(this.ValidDate, "ValidDate");
+            this.ValidDate.Name = "ValidDate";
+            this.ValidDate.ReadOnly = true;
+            this.ValidDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // OperatorName
+            // 
+            this.OperatorName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OperatorName.DataPropertyName = "OperatorName";
+            resources.ApplyResources(this.OperatorName, "OperatorName");
+            this.OperatorName.Name = "OperatorName";
+            this.OperatorName.ReadOnly = true;
+            this.OperatorName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // AddDate
+            // 
+            this.AddDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.AddDate.DataPropertyName = "AddDate";
+            this.AddDate.FillWeight = 120F;
+            resources.ApplyResources(this.AddDate, "AddDate");
+            this.AddDate.Name = "AddDate";
+            this.AddDate.ReadOnly = true;
+            this.AddDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // tabQCCurve
             // 
@@ -550,6 +941,26 @@
             resources.ApplyResources(this.label14, "label14");
             this.label14.Name = "label14";
             // 
+            // panel1
+            // 
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.fbtnQCQuery);
+            this.panel1.Controls.Add(this.fbtnReturn);
+            this.panel1.Controls.Add(this.fbtnScalingQuery);
+            this.panel1.Name = "panel1";
+            // 
+            // fbtnQCQuery
+            // 
+            resources.ApplyResources(this.fbtnQCQuery, "fbtnQCQuery");
+            this.fbtnQCQuery.BackColor = System.Drawing.Color.Transparent;
+            this.fbtnQCQuery.EnabledSet = true;
+            this.fbtnQCQuery.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.fbtnQCQuery.FlatAppearance.BorderSize = 0;
+            this.fbtnQCQuery.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.fbtnQCQuery.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.fbtnQCQuery.Name = "fbtnQCQuery";
+            this.fbtnQCQuery.UseVisualStyleBackColor = false;
+            // 
             // fbtnReturn
             // 
             resources.ApplyResources(this.fbtnReturn, "fbtnReturn");
@@ -576,429 +987,25 @@
             this.fbtnScalingQuery.UseVisualStyleBackColor = false;
             this.fbtnScalingQuery.Click += new System.EventHandler(this.fbtnScalingQuery_Click);
             // 
-            // fbtnQCQuery
-            // 
-            resources.ApplyResources(this.fbtnQCQuery, "fbtnQCQuery");
-            this.fbtnQCQuery.BackColor = System.Drawing.Color.Transparent;
-            this.fbtnQCQuery.EnabledSet = true;
-            this.fbtnQCQuery.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.fbtnQCQuery.FlatAppearance.BorderSize = 0;
-            this.fbtnQCQuery.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.fbtnQCQuery.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.fbtnQCQuery.Name = "fbtnQCQuery";
-            this.fbtnQCQuery.UseVisualStyleBackColor = false;
-            // 
-            // panel1
-            // 
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Controls.Add(this.fbtnQCQuery);
-            this.panel1.Controls.Add(this.fbtnReturn);
-            this.panel1.Controls.Add(this.fbtnScalingQuery);
-            this.panel1.Name = "panel1";
-            // 
-            // btnModifyQC
-            // 
-            resources.ApplyResources(this.btnModifyQC, "btnModifyQC");
-            this.btnModifyQC.BackColor = System.Drawing.Color.Transparent;
-            this.btnModifyQC.EnabledSet = true;
-            this.btnModifyQC.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnModifyQC.FlatAppearance.BorderSize = 0;
-            this.btnModifyQC.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnModifyQC.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnModifyQC.Name = "btnModifyQC";
-            this.btnModifyQC.UseVisualStyleBackColor = false;
-            this.btnModifyQC.Click += new System.EventHandler(this.btnModifyQC_Click);
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
-            // 
-            // chk13s
-            // 
-            resources.ApplyResources(this.chk13s, "chk13s");
-            this.chk13s.Name = "chk13s";
-            this.chk13s.UseVisualStyleBackColor = true;
-            // 
-            // chk12s
-            // 
-            resources.ApplyResources(this.chk12s, "chk12s");
-            this.chk12s.Name = "chk12s";
-            this.chk12s.UseVisualStyleBackColor = true;
-            // 
-            // cmbProName
-            // 
-            resources.ApplyResources(this.cmbProName, "cmbProName");
-            this.cmbProName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbProName.FormattingEnabled = true;
-            this.cmbProName.Name = "cmbProName";
-            // 
-            // dtpValidity
-            // 
-            resources.ApplyResources(this.dtpValidity, "dtpValidity");
-            this.dtpValidity.Name = "dtpValidity";
-            // 
-            // dtpAddDate
-            // 
-            resources.ApplyResources(this.dtpAddDate, "dtpAddDate");
-            this.dtpAddDate.Name = "dtpAddDate";
-            // 
-            // cmbBype
-            // 
-            resources.ApplyResources(this.cmbBype, "cmbBype");
-            this.cmbBype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBype.FormattingEnabled = true;
-            this.cmbBype.Items.AddRange(new object[] {
-            resources.GetString("cmbBype.Items"),
-            resources.GetString("cmbBype.Items1"),
-            resources.GetString("cmbBype.Items2")});
-            this.cmbBype.Name = "cmbBype";
-            // 
-            // btnSaveQC
-            // 
-            resources.ApplyResources(this.btnSaveQC, "btnSaveQC");
-            this.btnSaveQC.BackColor = System.Drawing.Color.Transparent;
-            this.btnSaveQC.EnabledSet = true;
-            this.btnSaveQC.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnSaveQC.FlatAppearance.BorderSize = 0;
-            this.btnSaveQC.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnSaveQC.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnSaveQC.Name = "btnSaveQC";
-            this.btnSaveQC.UseVisualStyleBackColor = false;
-            this.btnSaveQC.Click += new System.EventHandler(this.btnSaveQC_Click);
-            // 
-            // btnDeleteQC
-            // 
-            resources.ApplyResources(this.btnDeleteQC, "btnDeleteQC");
-            this.btnDeleteQC.BackColor = System.Drawing.Color.Transparent;
-            this.btnDeleteQC.EnabledSet = true;
-            this.btnDeleteQC.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnDeleteQC.FlatAppearance.BorderSize = 0;
-            this.btnDeleteQC.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnDeleteQC.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnDeleteQC.Name = "btnDeleteQC";
-            this.btnDeleteQC.UseVisualStyleBackColor = false;
-            this.btnDeleteQC.Click += new System.EventHandler(this.btnDeleteQC_Click);
-            // 
-            // btnAddQC
-            // 
-            resources.ApplyResources(this.btnAddQC, "btnAddQC");
-            this.btnAddQC.BackColor = System.Drawing.Color.Transparent;
-            this.btnAddQC.EnabledSet = true;
-            this.btnAddQC.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnAddQC.FlatAppearance.BorderSize = 0;
-            this.btnAddQC.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnAddQC.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnAddQC.Name = "btnAddQC";
-            this.btnAddQC.UseVisualStyleBackColor = false;
-            this.btnAddQC.Click += new System.EventHandler(this.btnAddQC_Click);
-            // 
-            // groupBox2
-            // 
-            resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Controls.Add(this.chk41s);
-            this.groupBox2.Controls.Add(this.chk10x);
-            this.groupBox2.Controls.Add(this.chk22s);
-            this.groupBox2.Controls.Add(this.chk13s);
-            this.groupBox2.Controls.Add(this.chk12s);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.TabStop = false;
-            // 
-            // chk41s
-            // 
-            resources.ApplyResources(this.chk41s, "chk41s");
-            this.chk41s.Name = "chk41s";
-            this.chk41s.UseVisualStyleBackColor = true;
-            // 
-            // chk10x
-            // 
-            resources.ApplyResources(this.chk10x, "chk10x");
-            this.chk10x.Name = "chk10x";
-            this.chk10x.UseVisualStyleBackColor = true;
-            // 
-            // chk22s
-            // 
-            resources.ApplyResources(this.chk22s, "chk22s");
-            this.chk22s.Name = "chk22s";
-            this.chk22s.UseVisualStyleBackColor = true;
-            // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
-            // 
-            // txtOperator
-            // 
-            resources.ApplyResources(this.txtOperator, "txtOperator");
-            this.txtOperator.Name = "txtOperator";
-            // 
-            // groupBox1
-            // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Controls.Add(this.txtXValue);
-            this.groupBox1.Controls.Add(this.cmbProName);
-            this.groupBox1.Controls.Add(this.dtpValidity);
-            this.groupBox1.Controls.Add(this.dtpAddDate);
-            this.groupBox1.Controls.Add(this.cmbBype);
-            this.groupBox1.Controls.Add(this.btnSaveQC);
-            this.groupBox1.Controls.Add(this.btnDeleteQC);
-            this.groupBox1.Controls.Add(this.btnModifyQC);
-            this.groupBox1.Controls.Add(this.btnAddQC);
-            this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.txtOperator);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.txtSD);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtBatch);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
-            // 
-            // txtXValue
-            // 
-            resources.ApplyResources(this.txtXValue, "txtXValue");
-            this.txtXValue.IsDecimal = true;
-            this.txtXValue.IsNull = false;
-            this.txtXValue.MaxValue = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.txtXValue.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtXValue.Name = "txtXValue";
-            // 
-            // label7
-            // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
-            // label5
-            // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
-            // 
-            // label4
-            // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
-            // 
-            // txtSD
-            // 
-            resources.ApplyResources(this.txtSD, "txtSD");
-            this.txtSD.IsDecimal = true;
-            this.txtSD.IsNull = false;
-            this.txtSD.MaxValue = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.txtSD.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtSD.Name = "txtSD";
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
-            // 
-            // txtBatch
-            // 
-            resources.ApplyResources(this.txtBatch, "txtBatch");
-            this.txtBatch.Name = "txtBatch";
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            // 
-            // tabQCManage
-            // 
-            resources.ApplyResources(this.tabQCManage, "tabQCManage");
-            this.tabQCManage.BackColor = System.Drawing.Color.LightBlue;
-            this.tabQCManage.Controls.Add(this.groupBox1);
-            this.tabQCManage.Controls.Add(this.dgvQCInfo);
-            this.tabQCManage.Name = "tabQCManage";
-            // 
-            // dgvQCInfo
-            // 
-            resources.ApplyResources(this.dgvQCInfo, "dgvQCInfo");
-            this.dgvQCInfo.AllowUserToAddRows = false;
-            this.dgvQCInfo.AllowUserToDeleteRows = false;
-            this.dgvQCInfo.AllowUserToResizeRows = false;
-            this.dgvQCInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvQCInfo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.QCID,
-            this.QCNO,
-            this.QCBatch,
-            this.XValue,
-            this.SD,
-            this.Status,
-            this.ProjectName,
-            this.QCLevel,
-            this.QCRule,
-            this.ValidDate,
-            this.OperatorName,
-            this.AddDate});
-            this.dgvQCInfo.Name = "dgvQCInfo";
-            this.dgvQCInfo.ReadOnly = true;
-            this.dgvQCInfo.RowHeadersVisible = false;
-            this.dgvQCInfo.RowTemplate.Height = 23;
-            this.dgvQCInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvQCInfo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQCInfo_CellContentClick);
-            this.dgvQCInfo.SelectionChanged += new System.EventHandler(this.dgvQCInfo_SelectionChanged);
-            // 
-            // QCID
-            // 
-            this.QCID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.QCID.DataPropertyName = "QCID";
-            resources.ApplyResources(this.QCID, "QCID");
-            this.QCID.Name = "QCID";
-            this.QCID.ReadOnly = true;
-            this.QCID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // QCNO
-            // 
-            this.QCNO.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.QCNO.DataPropertyName = "QCNumber";
-            resources.ApplyResources(this.QCNO, "QCNO");
-            this.QCNO.Name = "QCNO";
-            this.QCNO.ReadOnly = true;
-            this.QCNO.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // QCBatch
-            // 
-            this.QCBatch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.QCBatch.DataPropertyName = "Batch";
-            resources.ApplyResources(this.QCBatch, "QCBatch");
-            this.QCBatch.Name = "QCBatch";
-            this.QCBatch.ReadOnly = true;
-            this.QCBatch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // XValue
-            // 
-            this.XValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.XValue.DataPropertyName = "XValue";
-            resources.ApplyResources(this.XValue, "XValue");
-            this.XValue.Name = "XValue";
-            this.XValue.ReadOnly = true;
-            this.XValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // SD
-            // 
-            this.SD.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SD.DataPropertyName = "SD";
-            resources.ApplyResources(this.SD, "SD");
-            this.SD.Name = "SD";
-            this.SD.ReadOnly = true;
-            this.SD.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Status
-            // 
-            this.Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Status.DataPropertyName = "Status";
-            resources.ApplyResources(this.Status, "Status");
-            this.Status.Name = "Status";
-            this.Status.ReadOnly = true;
-            this.Status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ProjectName
-            // 
-            this.ProjectName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ProjectName.DataPropertyName = "ProjectName";
-            resources.ApplyResources(this.ProjectName, "ProjectName");
-            this.ProjectName.Name = "ProjectName";
-            this.ProjectName.ReadOnly = true;
-            this.ProjectName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // QCLevel
-            // 
-            this.QCLevel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.QCLevel.DataPropertyName = "QCLevel";
-            resources.ApplyResources(this.QCLevel, "QCLevel");
-            this.QCLevel.Name = "QCLevel";
-            this.QCLevel.ReadOnly = true;
-            this.QCLevel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // QCRule
-            // 
-            this.QCRule.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.QCRule.DataPropertyName = "QCRules";
-            resources.ApplyResources(this.QCRule, "QCRule");
-            this.QCRule.Name = "QCRule";
-            this.QCRule.ReadOnly = true;
-            this.QCRule.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ValidDate
-            // 
-            this.ValidDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ValidDate.DataPropertyName = "ValidDate";
-            this.ValidDate.FillWeight = 120F;
-            resources.ApplyResources(this.ValidDate, "ValidDate");
-            this.ValidDate.Name = "ValidDate";
-            this.ValidDate.ReadOnly = true;
-            this.ValidDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // OperatorName
-            // 
-            this.OperatorName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.OperatorName.DataPropertyName = "OperatorName";
-            resources.ApplyResources(this.OperatorName, "OperatorName");
-            this.OperatorName.Name = "OperatorName";
-            this.OperatorName.ReadOnly = true;
-            this.OperatorName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // AddDate
-            // 
-            this.AddDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.AddDate.DataPropertyName = "AddDate";
-            this.AddDate.FillWeight = 120F;
-            resources.ApplyResources(this.AddDate, "AddDate");
-            this.AddDate.Name = "AddDate";
-            this.AddDate.ReadOnly = true;
-            this.AddDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // label6
-            // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
-            // 
-            // tabControlMy1
-            // 
-            resources.ApplyResources(this.tabControlMy1, "tabControlMy1");
-            this.tabControlMy1.Controls.Add(this.tabQCManage);
-            this.tabControlMy1.Controls.Add(this.tabQCCurve);
-            this.tabControlMy1.Name = "tabControlMy1";
-            this.tabControlMy1.SelectedIndex = 0;
-            this.tabControlMy1.SelectedIndexChanged += new System.EventHandler(this.tabControlMy1_SelectedIndexChanged);
-            // 
             // frmQC
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.tabControlMy1);
+            this.Controls.Add(this.panel1);
             this.Name = "frmQC";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmQC_Load);
             this.SizeChanged += new System.EventHandler(this.frmQC_SizeChanged);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            this.tabControlMy1.ResumeLayout(false);
+            this.tabQCManage.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvQCInfo)).EndInit();
             this.tabQCCurve.ResumeLayout(false);
             this.tabQCCurve.PerformLayout();
             this.groupBox5.ResumeLayout(false);
@@ -1013,14 +1020,6 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.tabQCManage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvQCInfo)).EndInit();
-            this.tabControlMy1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1028,9 +1027,42 @@
 
         #endregion
 
+        private System.Windows.Forms.Panel panel1;
+        private CustomControl.FunctionButton fbtnQCQuery;
+        private CustomControl.FunctionButton fbtnReturn;
+        private CustomControl.FunctionButton fbtnScalingQuery;
+        private CustomControl.TabControlMy tabControlMy1;
+        private System.Windows.Forms.TabPage tabQCManage;
         private System.Windows.Forms.TabPage tabQCCurve;
-        private System.Windows.Forms.RichTextBox rtxtLoseControl;
-        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DateTimePicker dtpValidity;
+        private System.Windows.Forms.DateTimePicker dtpAddDate;
+        private System.Windows.Forms.ComboBox cmbBype;
+        private CustomControl.FunctionButton btnSaveQC;
+        private CustomControl.FunctionButton btnDeleteQC;
+        private CustomControl.FunctionButton btnModifyQC;
+        private CustomControl.FunctionButton btnAddQC;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox chk41s;
+        private System.Windows.Forms.CheckBox chk10x;
+        private System.Windows.Forms.CheckBox chk22s;
+        private System.Windows.Forms.CheckBox chk13s;
+        private System.Windows.Forms.CheckBox chk12s;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtOperator;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label1;
+        private BioBaseCLIA.CustomControl.userNumTextBox txtXValue;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private BioBaseCLIA.CustomControl.userNumTextBox txtSD;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtBatch;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView dgvQCInfo;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.DataGridView dgvQCValue;
         private System.Windows.Forms.GroupBox groupBox4;
@@ -1045,22 +1077,21 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private CustomControl.FunctionButton fbtnDelete;
         private CustomControl.FunctionButton fbtnModify;
-        private CustomControl.userNumTextBox txtQCNewValue;
         private CustomControl.FunctionButton fbtnAdd;
-        private CustomControl.userNumTextBox txtQCValue;
+        private BioBaseCLIA.CustomControl.userNumTextBox txtQCNewValue;
+        private BioBaseCLIA.CustomControl.userNumTextBox txtQCValue;
         private System.Windows.Forms.Label lbQCValueNew;
         private System.Windows.Forms.Label lbQCValue;
         private System.Windows.Forms.DateTimePicker dtpQCTime;
         private System.Windows.Forms.Label lbQCTime;
         private System.Windows.Forms.GroupBox groupBox6;
-        private CustomControl.FunctionButton functionButton1;
         private CustomControl.FunctionButton fbtnPrint;
         private System.Windows.Forms.ComboBox cmbQClevel;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DateTimePicker dtpEnd;
-        private CustomControl.userNumTextBox textSDc;
+        private BioBaseCLIA.CustomControl.userNumTextBox textSDc;
         private System.Windows.Forms.DateTimePicker dtpStart;
-        private CustomControl.userNumTextBox txtMean;
+        private BioBaseCLIA.CustomControl.userNumTextBox txtMean;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label lbDifferenceValue;
         private System.Windows.Forms.Label label12;
@@ -1069,42 +1100,10 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox cmbItem;
         private System.Windows.Forms.Label label14;
-        private CustomControl.FunctionButton fbtnReturn;
-        private CustomControl.FunctionButton fbtnScalingQuery;
-        private CustomControl.FunctionButton fbtnQCQuery;
-        private System.Windows.Forms.Panel panel1;
-        private CustomControl.FunctionButton btnModifyQC;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.CheckBox chk13s;
-        private System.Windows.Forms.CheckBox chk12s;
         private System.Windows.Forms.ComboBox cmbProName;
-        private System.Windows.Forms.DateTimePicker dtpValidity;
-        private System.Windows.Forms.DateTimePicker dtpAddDate;
-        private System.Windows.Forms.ComboBox cmbBype;
-        private CustomControl.FunctionButton btnSaveQC;
-        private CustomControl.FunctionButton btnDeleteQC;
-        private CustomControl.FunctionButton btnAddQC;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox chk41s;
-        private System.Windows.Forms.CheckBox chk10x;
-        private System.Windows.Forms.CheckBox chk22s;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txtOperator;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label1;
-        private CustomControl.userNumTextBox txtXValue;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private CustomControl.userNumTextBox txtSD;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtBatch;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TabPage tabQCManage;
-        private System.Windows.Forms.DataGridView dgvQCInfo;
-        private System.Windows.Forms.Label label6;
-        private CustomControl.TabControlMy tabControlMy1;
-        private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.RichTextBox rtxtLoseControl;
+        private CustomControl.FunctionButton functionButton1;
         private System.Windows.Forms.DataGridViewTextBoxColumn QCID;
         private System.Windows.Forms.DataGridViewTextBoxColumn QCNO;
         private System.Windows.Forms.DataGridViewTextBoxColumn QCBatch;

@@ -36,7 +36,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public int GetMaxId()
 		{
-		return DbHelperOleDb.GetMaxID(connType, "ReagentID", "tbReagent"); 
+			return DbHelperOleDb.GetMaxID(connType, "ReagentID", "tbReagent");
 		}
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Exists(int ReagentID)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select count(1) from tbReagent");
 			strSql.Append(" where ReagentID=@ReagentID");
 			OleDbParameter[] parameters = {
@@ -52,7 +52,7 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = ReagentID;
 
-			return DbHelperOleDb.Exists(connType, strSql.ToString(),parameters);
+			return DbHelperOleDb.Exists(connType, strSql.ToString(), parameters);
 		}
 
 
@@ -61,7 +61,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Add(BioBaseCLIA.Model.tbReagent model)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("insert into tbReagent(");
 			strSql.Append("ReagentNumber,ReagentName,Batch,BarCode,Status,AllTestNumber,leftoverTestR1,leftoverTestR2,leftoverTestR3,leftoverTestR4,ValidDate,AddDate,Postion)");
 			strSql.Append(" values (");
@@ -94,7 +94,7 @@ namespace BioBaseCLIA.DAL
 			parameters[11].Value = model.AddDate;
 			parameters[12].Value = model.Postion;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -109,7 +109,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Update(BioBaseCLIA.Model.tbReagent model)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("update tbReagent set ");
 			strSql.Append("ReagentNumber=@ReagentNumber,");
 			strSql.Append("ReagentName=@ReagentName,");
@@ -155,7 +155,7 @@ namespace BioBaseCLIA.DAL
 			parameters[12].Value = model.Postion;
 			parameters[13].Value = model.ReagentID;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -165,22 +165,22 @@ namespace BioBaseCLIA.DAL
 				return false;
 			}
 		}
-        /// <summary>
-        /// 更新一条数据中的部分数据
-        /// </summary>
-        public bool UpdatePart(BioBaseCLIA.Model.tbReagent model)
-        {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("update tbReagent set ");
-            strSql.Append("ReagentName=@ReagentName,");
-            strSql.Append("Batch=@Batch,");
-            strSql.Append("BarCode=@BarCode,");
-            strSql.Append("Status=@Status,");
-            strSql.Append("AllTestNumber=@AllTestNumber,");
-            strSql.Append("leftoverTestR1=@leftoverTestR1,");
-            strSql.Append("Postion=@Postion");
-            strSql.Append(" where ReagentID=@ReagentID");
-            OleDbParameter[] parameters = {
+		/// <summary>
+		/// 更新一条数据中的部分数据
+		/// </summary>
+		public bool UpdatePart(BioBaseCLIA.Model.tbReagent model)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("update tbReagent set ");
+			strSql.Append("ReagentName=@ReagentName,");
+			strSql.Append("Batch=@Batch,");
+			strSql.Append("BarCode=@BarCode,");
+			strSql.Append("Status=@Status,");
+			strSql.Append("AllTestNumber=@AllTestNumber,");
+			strSql.Append("leftoverTestR1=@leftoverTestR1,");
+			strSql.Append("Postion=@Postion");
+			strSql.Append(" where ReagentID=@ReagentID");
+			OleDbParameter[] parameters = {
 					new OleDbParameter("@ReagentName", OleDbType.VarChar,30),
 					new OleDbParameter("@Batch", OleDbType.VarChar,30),
 					new OleDbParameter("@BarCode", OleDbType.VarChar,30),
@@ -189,32 +189,32 @@ namespace BioBaseCLIA.DAL
 					new OleDbParameter("@leftoverTestR1", OleDbType.Integer,4),
 					new OleDbParameter("@Postion", OleDbType.VarChar,30),
 					new OleDbParameter("@ReagentID", OleDbType.Integer,4)};
-            parameters[0].Value = model.ReagentName;
-            parameters[1].Value = model.Batch;
-            parameters[2].Value = model.BarCode;
-            parameters[3].Value = model.Status;
-            parameters[4].Value = model.AllTestNumber;
-            parameters[5].Value = model.leftoverTestR1;
-            parameters[6].Value = model.Postion;
-            parameters[7].Value = model.ReagentID;
+			parameters[0].Value = model.ReagentName;
+			parameters[1].Value = model.Batch;
+			parameters[2].Value = model.BarCode;
+			parameters[3].Value = model.Status;
+			parameters[4].Value = model.AllTestNumber;
+			parameters[5].Value = model.leftoverTestR1;
+			parameters[6].Value = model.Postion;
+			parameters[7].Value = model.ReagentID;
 
-            int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
-            if (rows > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
+			if (rows > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 		/// <summary>
 		/// 删除一条数据
 		/// </summary>
 		public bool Delete(int ReagentID)
 		{
-			
-			StringBuilder strSql=new StringBuilder();
+
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("delete from tbReagent ");
 			strSql.Append(" where ReagentID=@ReagentID");
 			OleDbParameter[] parameters = {
@@ -222,7 +222,7 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = ReagentID;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -235,12 +235,12 @@ namespace BioBaseCLIA.DAL
 		/// <summary>
 		/// 批量删除数据
 		/// </summary>
-		public bool DeleteList(string ReagentIDlist )
+		public bool DeleteList(string ReagentIDlist)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("delete from tbReagent ");
-			strSql.Append(" where ReagentID in ("+ReagentIDlist + ")  ");
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString());
+			strSql.Append(" where ReagentID in (" + ReagentIDlist + ")  ");
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString());
 			if (rows > 0)
 			{
 				return true;
@@ -257,8 +257,8 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public BioBaseCLIA.Model.tbReagent GetModel(int ReagentID)
 		{
-			
-			StringBuilder strSql=new StringBuilder();
+
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select ReagentID,ReagentNumber,ReagentName,Batch,BarCode,Status,AllTestNumber,leftoverTestR1,leftoverTestR2,leftoverTestR3,leftoverTestR4,ValidDate,AddDate,Postion from tbReagent ");
 			strSql.Append(" where ReagentID=@ReagentID");
 			OleDbParameter[] parameters = {
@@ -266,9 +266,9 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = ReagentID;
 
-			BioBaseCLIA.Model.tbReagent model=new BioBaseCLIA.Model.tbReagent();
-			DataSet ds=DbHelperOleDb.Query(connType, strSql.ToString(),parameters);
-			if(ds.Tables[0].Rows.Count>0)
+			BioBaseCLIA.Model.tbReagent model = new BioBaseCLIA.Model.tbReagent();
+			DataSet ds = DbHelperOleDb.Query(connType, strSql.ToString(), parameters);
+			if (ds.Tables[0].Rows.Count > 0)
 			{
 				return DataRowToModel(ds.Tables[0].Rows[0]);
 			}
@@ -284,64 +284,64 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public BioBaseCLIA.Model.tbReagent DataRowToModel(DataRow row)
 		{
-			BioBaseCLIA.Model.tbReagent model=new BioBaseCLIA.Model.tbReagent();
+			BioBaseCLIA.Model.tbReagent model = new BioBaseCLIA.Model.tbReagent();
 			if (row != null)
 			{
-				if(row["ReagentID"]!=null && row["ReagentID"].ToString()!="")
+				if (row["ReagentID"] != null && row["ReagentID"].ToString() != "")
 				{
-					model.ReagentID=int.Parse(row["ReagentID"].ToString());
+					model.ReagentID = int.Parse(row["ReagentID"].ToString());
 				}
-				if(row["ReagentNumber"]!=null)
+				if (row["ReagentNumber"] != null)
 				{
-					model.ReagentNumber=row["ReagentNumber"].ToString();
+					model.ReagentNumber = row["ReagentNumber"].ToString();
 				}
-				if(row["ReagentName"]!=null)
+				if (row["ReagentName"] != null)
 				{
-					model.ReagentName=row["ReagentName"].ToString();
+					model.ReagentName = row["ReagentName"].ToString();
 				}
-				if(row["Batch"]!=null)
+				if (row["Batch"] != null)
 				{
-					model.Batch=row["Batch"].ToString();
+					model.Batch = row["Batch"].ToString();
 				}
-				if(row["BarCode"]!=null)
+				if (row["BarCode"] != null)
 				{
-					model.BarCode=row["BarCode"].ToString();
+					model.BarCode = row["BarCode"].ToString();
 				}
-				if(row["Status"]!=null)
+				if (row["Status"] != null)
 				{
-					model.Status=row["Status"].ToString();
+					model.Status = row["Status"].ToString();
 				}
-				if(row["AllTestNumber"]!=null && row["AllTestNumber"].ToString()!="")
+				if (row["AllTestNumber"] != null && row["AllTestNumber"].ToString() != "")
 				{
-					model.AllTestNumber=int.Parse(row["AllTestNumber"].ToString());
+					model.AllTestNumber = int.Parse(row["AllTestNumber"].ToString());
 				}
-				if(row["leftoverTestR1"]!=null && row["leftoverTestR1"].ToString()!="")
+				if (row["leftoverTestR1"] != null && row["leftoverTestR1"].ToString() != "")
 				{
-					model.leftoverTestR1=int.Parse(row["leftoverTestR1"].ToString());
+					model.leftoverTestR1 = int.Parse(row["leftoverTestR1"].ToString());
 				}
-				if(row["leftoverTestR2"]!=null && row["leftoverTestR2"].ToString()!="")
+				if (row["leftoverTestR2"] != null && row["leftoverTestR2"].ToString() != "")
 				{
-					model.leftoverTestR2=int.Parse(row["leftoverTestR2"].ToString());
+					model.leftoverTestR2 = int.Parse(row["leftoverTestR2"].ToString());
 				}
-				if(row["leftoverTestR3"]!=null && row["leftoverTestR3"].ToString()!="")
+				if (row["leftoverTestR3"] != null && row["leftoverTestR3"].ToString() != "")
 				{
-					model.leftoverTestR3=int.Parse(row["leftoverTestR3"].ToString());
+					model.leftoverTestR3 = int.Parse(row["leftoverTestR3"].ToString());
 				}
-				if(row["leftoverTestR4"]!=null && row["leftoverTestR4"].ToString()!="")
+				if (row["leftoverTestR4"] != null && row["leftoverTestR4"].ToString() != "")
 				{
-					model.leftoverTestR4=int.Parse(row["leftoverTestR4"].ToString());
+					model.leftoverTestR4 = int.Parse(row["leftoverTestR4"].ToString());
 				}
-				if(row["ValidDate"]!=null)
+				if (row["ValidDate"] != null)
 				{
-					model.ValidDate=row["ValidDate"].ToString();
+					model.ValidDate = row["ValidDate"].ToString();
 				}
-				if(row["AddDate"]!=null)
+				if (row["AddDate"] != null)
 				{
-					model.AddDate=row["AddDate"].ToString();
+					model.AddDate = row["AddDate"].ToString();
 				}
-				if(row["Postion"]!=null)
+				if (row["Postion"] != null)
 				{
-					model.Postion=row["Postion"].ToString();
+					model.Postion = row["Postion"].ToString();
 				}
 			}
 			return model;
@@ -352,12 +352,12 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public DataSet GetList(string strWhere)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select ReagentID,ReagentNumber,ReagentName,Batch,BarCode,Status,AllTestNumber,leftoverTestR1,leftoverTestR2,leftoverTestR3,leftoverTestR4,ValidDate,AddDate,Postion ");
 			strSql.Append(" FROM tbReagent ");
-			if(strWhere.Trim()!="")
+			if (strWhere.Trim() != "")
 			{
-				strSql.Append(" where "+strWhere);
+				strSql.Append(" where " + strWhere);
 			}
 			return DbHelperOleDb.Query(connType, strSql.ToString());
 		}
@@ -367,11 +367,11 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public int GetRecordCount(string strWhere)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select count(1) FROM tbReagent ");
-			if(strWhere.Trim()!="")
+			if (strWhere.Trim() != "")
 			{
-				strSql.Append(" where "+strWhere);
+				strSql.Append(" where " + strWhere);
 			}
 			object obj = DbHelperSQL.GetSingle(connType, strSql.ToString());
 			if (obj == null)
@@ -388,12 +388,12 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("SELECT * FROM ( ");
 			strSql.Append(" SELECT ROW_NUMBER() OVER (");
 			if (!string.IsNullOrEmpty(orderby.Trim()))
 			{
-				strSql.Append("order by T." + orderby );
+				strSql.Append("order by T." + orderby);
 			}
 			else
 			{

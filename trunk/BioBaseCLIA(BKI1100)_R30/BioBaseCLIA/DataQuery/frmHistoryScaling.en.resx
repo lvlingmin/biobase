@@ -212,4 +212,13 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Historical Calibration</value>
   </data>
+  <data name="FrmMessageHead" xml:space="preserve">
+    <value>Historical Calibration</value>
+  </data>
+  <data name="FrmMessageText" xml:space="preserve">
+    <value>The function was calculated incorrectly. It is possible that the data does not fit the regression model</value>
+  </data>
+  <data name="Is" xml:space="preserve">
+    <value>OK</value>
+  </data>
 </root>

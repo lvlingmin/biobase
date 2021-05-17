@@ -32,20 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTestResult));
             this.label1 = new System.Windows.Forms.Label();
             this.dgvResultData = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.fbtnTestResult = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.btnWorkList = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.fbtnReturn = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.btnLoadSample = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.btnLoadReagent = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.fbtnClearResult = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.fbtnTestAgain = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.fbtnRCalculatResult = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.fbtnRSelectCurve = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.fbtnPrint = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.fbtnExportData = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.fbtnSaveResult = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.SampleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.No = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SampleNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,6 +48,20 @@
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sco = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SubstratePipe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.fbtnTestResult = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.btnWorkList = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.fbtnReturn = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.btnLoadSample = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.btnLoadReagent = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.functionButton1 = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.fbtnTestAgain = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.fbtnRCalculatResult = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.fbtnRSelectCurve = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.fbtnPrint = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.fbtnExportData = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.fbtnSaveResult = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultData)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -76,9 +76,10 @@
             // 
             this.dgvResultData.AllowUserToAddRows = false;
             this.dgvResultData.AllowUserToDeleteRows = false;
+            this.dgvResultData.AllowUserToResizeColumns = false;
             this.dgvResultData.AllowUserToResizeRows = false;
-            this.dgvResultData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvResultData.BackgroundColor = System.Drawing.Color.White;
+            this.dgvResultData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvResultData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SampleID,
             this.No,
@@ -103,6 +104,154 @@
             this.dgvResultData.RowTemplate.Height = 23;
             this.dgvResultData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvResultData.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvResultData_RowsAdded);
+            // 
+            // SampleID
+            // 
+            this.SampleID.DataPropertyName = "SampleID";
+            resources.ApplyResources(this.SampleID, "SampleID");
+            this.SampleID.Name = "SampleID";
+            this.SampleID.ReadOnly = true;
+            this.SampleID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // No
+            // 
+            this.No.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.No.DataPropertyName = "TestID";
+            this.No.FillWeight = 56.87672F;
+            resources.ApplyResources(this.No, "No");
+            this.No.Name = "No";
+            this.No.ReadOnly = true;
+            this.No.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // SampleNo
+            // 
+            this.SampleNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SampleNo.DataPropertyName = "SampleNo";
+            this.SampleNo.FillWeight = 160.1993F;
+            resources.ApplyResources(this.SampleNo, "SampleNo");
+            this.SampleNo.Name = "SampleNo";
+            this.SampleNo.ReadOnly = true;
+            this.SampleNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Position
+            // 
+            this.Position.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Position.DataPropertyName = "SamplePos";
+            this.Position.FillWeight = 54.45811F;
+            resources.ApplyResources(this.Position, "Position");
+            this.Position.Name = "Position";
+            this.Position.ReadOnly = true;
+            this.Position.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // SampleType
+            // 
+            this.SampleType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SampleType.DataPropertyName = "SampleType";
+            this.SampleType.FillWeight = 91.20197F;
+            resources.ApplyResources(this.SampleType, "SampleType");
+            this.SampleType.Name = "SampleType";
+            this.SampleType.ReadOnly = true;
+            this.SampleType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ItemName
+            // 
+            this.ItemName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ItemName.DataPropertyName = "ItemName";
+            this.ItemName.FillWeight = 88.6668F;
+            resources.ApplyResources(this.ItemName, "ItemName");
+            this.ItemName.Name = "ItemName";
+            this.ItemName.ReadOnly = true;
+            this.ItemName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // PMT
+            // 
+            this.PMT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PMT.DataPropertyName = "PMT";
+            this.PMT.FillWeight = 77.78355F;
+            resources.ApplyResources(this.PMT, "PMT");
+            this.PMT.Name = "PMT";
+            this.PMT.ReadOnly = true;
+            this.PMT.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Concentration
+            // 
+            this.Concentration.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Concentration.DataPropertyName = "Concentration";
+            this.Concentration.FillWeight = 76.11167F;
+            resources.ApplyResources(this.Concentration, "Concentration");
+            this.Concentration.Name = "Concentration";
+            this.Concentration.ReadOnly = true;
+            this.Concentration.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Unit
+            // 
+            this.Unit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Unit.DataPropertyName = "Unit";
+            this.Unit.FillWeight = 50.51753F;
+            resources.ApplyResources(this.Unit, "Unit");
+            this.Unit.Name = "Unit";
+            this.Unit.ReadOnly = true;
+            this.Unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Result
+            // 
+            this.Result.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Result.DataPropertyName = "Result";
+            this.Result.FillWeight = 58.18436F;
+            resources.ApplyResources(this.Result, "Result");
+            this.Result.Name = "Result";
+            this.Result.ReadOnly = true;
+            this.Result.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Range1
+            // 
+            this.Range1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Range1.DataPropertyName = "Range1";
+            resources.ApplyResources(this.Range1, "Range1");
+            this.Range1.Name = "Range1";
+            this.Range1.ReadOnly = true;
+            this.Range1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Range2
+            // 
+            this.Range2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Range2.DataPropertyName = "Range2";
+            resources.ApplyResources(this.Range2, "Range2");
+            this.Range2.Name = "Range2";
+            this.Range2.ReadOnly = true;
+            this.Range2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ReagentBeach
+            // 
+            this.ReagentBeach.DataPropertyName = "ReagentBeach";
+            resources.ApplyResources(this.ReagentBeach, "ReagentBeach");
+            this.ReagentBeach.Name = "ReagentBeach";
+            this.ReagentBeach.ReadOnly = true;
+            this.ReagentBeach.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Status
+            // 
+            this.Status.DataPropertyName = "Status";
+            resources.ApplyResources(this.Status, "Status");
+            this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
+            this.Status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // sco
+            // 
+            this.sco.DataPropertyName = "sco";
+            resources.ApplyResources(this.sco, "sco");
+            this.sco.Name = "sco";
+            this.sco.ReadOnly = true;
+            this.sco.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // SubstratePipe
+            // 
+            this.SubstratePipe.DataPropertyName = "SubstratePipe";
+            resources.ApplyResources(this.SubstratePipe, "SubstratePipe");
+            this.SubstratePipe.Name = "SubstratePipe";
+            this.SubstratePipe.ReadOnly = true;
+            this.SubstratePipe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // panel1
             // 
@@ -180,7 +329,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.fbtnClearResult);
+            this.groupBox1.Controls.Add(this.functionButton1);
             this.groupBox1.Controls.Add(this.fbtnTestAgain);
             this.groupBox1.Controls.Add(this.fbtnRCalculatResult);
             this.groupBox1.Controls.Add(this.fbtnRSelectCurve);
@@ -191,18 +340,18 @@
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
-            // fbtnClearResult
+            // functionButton1
             // 
-            this.fbtnClearResult.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.fbtnClearResult, "fbtnClearResult");
-            this.fbtnClearResult.EnabledSet = true;
-            this.fbtnClearResult.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.fbtnClearResult.FlatAppearance.BorderSize = 0;
-            this.fbtnClearResult.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.fbtnClearResult.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.fbtnClearResult.Name = "fbtnClearResult";
-            this.fbtnClearResult.UseVisualStyleBackColor = false;
-            this.fbtnClearResult.Click += new System.EventHandler(this.fbtnClearResult_Click);
+            this.functionButton1.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.functionButton1, "functionButton1");
+            this.functionButton1.EnabledSet = true;
+            this.functionButton1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.functionButton1.FlatAppearance.BorderSize = 0;
+            this.functionButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.functionButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.functionButton1.Name = "functionButton1";
+            this.functionButton1.UseVisualStyleBackColor = false;
+            this.functionButton1.Click += new System.EventHandler(this.functionButton1_Click);
             // 
             // fbtnTestAgain
             // 
@@ -282,153 +431,6 @@
             this.fbtnSaveResult.UseVisualStyleBackColor = false;
             this.fbtnSaveResult.Click += new System.EventHandler(this.fbtnSaveResult_Click);
             // 
-            // SampleID
-            // 
-            this.SampleID.DataPropertyName = "SampleID";
-            resources.ApplyResources(this.SampleID, "SampleID");
-            this.SampleID.Name = "SampleID";
-            this.SampleID.ReadOnly = true;
-            this.SampleID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // No
-            // 
-            this.No.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.No.DataPropertyName = "TestID";
-            this.No.FillWeight = 59.16241F;
-            resources.ApplyResources(this.No, "No");
-            this.No.Name = "No";
-            this.No.ReadOnly = true;
-            this.No.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // SampleNo
-            // 
-            this.SampleNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SampleNo.DataPropertyName = "SampleNo";
-            this.SampleNo.FillWeight = 130F;
-            resources.ApplyResources(this.SampleNo, "SampleNo");
-            this.SampleNo.Name = "SampleNo";
-            this.SampleNo.ReadOnly = true;
-            this.SampleNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Position
-            // 
-            this.Position.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Position.DataPropertyName = "SamplePos";
-            this.Position.FillWeight = 54.06357F;
-            resources.ApplyResources(this.Position, "Position");
-            this.Position.Name = "Position";
-            this.Position.ReadOnly = true;
-            this.Position.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // SampleType
-            // 
-            this.SampleType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SampleType.DataPropertyName = "SampleType";
-            this.SampleType.FillWeight = 90.73582F;
-            resources.ApplyResources(this.SampleType, "SampleType");
-            this.SampleType.Name = "SampleType";
-            this.SampleType.ReadOnly = true;
-            this.SampleType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ItemName
-            // 
-            this.ItemName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ItemName.DataPropertyName = "ItemName";
-            this.ItemName.FillWeight = 90.45197F;
-            resources.ApplyResources(this.ItemName, "ItemName");
-            this.ItemName.Name = "ItemName";
-            this.ItemName.ReadOnly = true;
-            this.ItemName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // PMT
-            // 
-            this.PMT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PMT.DataPropertyName = "PMT";
-            this.PMT.FillWeight = 76.11166F;
-            resources.ApplyResources(this.PMT, "PMT");
-            this.PMT.Name = "PMT";
-            this.PMT.ReadOnly = true;
-            this.PMT.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Concentration
-            // 
-            this.Concentration.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Concentration.DataPropertyName = "Concentration";
-            this.Concentration.FillWeight = 76.46441F;
-            resources.ApplyResources(this.Concentration, "Concentration");
-            this.Concentration.Name = "Concentration";
-            this.Concentration.ReadOnly = true;
-            this.Concentration.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Unit
-            // 
-            this.Unit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Unit.DataPropertyName = "Unit";
-            resources.ApplyResources(this.Unit, "Unit");
-            this.Unit.Name = "Unit";
-            this.Unit.ReadOnly = true;
-            this.Unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Result
-            // 
-            this.Result.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Result.DataPropertyName = "Result";
-            this.Result.FillWeight = 58.13639F;
-            resources.ApplyResources(this.Result, "Result");
-            this.Result.Name = "Result";
-            this.Result.ReadOnly = true;
-            this.Result.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Range1
-            // 
-            this.Range1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Range1.DataPropertyName = "Range1";
-            resources.ApplyResources(this.Range1, "Range1");
-            this.Range1.Name = "Range1";
-            this.Range1.ReadOnly = true;
-            this.Range1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Range2
-            // 
-            this.Range2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Range2.DataPropertyName = "Range2";
-            resources.ApplyResources(this.Range2, "Range2");
-            this.Range2.Name = "Range2";
-            this.Range2.ReadOnly = true;
-            this.Range2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ReagentBeach
-            // 
-            this.ReagentBeach.DataPropertyName = "ReagentBeach";
-            resources.ApplyResources(this.ReagentBeach, "ReagentBeach");
-            this.ReagentBeach.Name = "ReagentBeach";
-            this.ReagentBeach.ReadOnly = true;
-            this.ReagentBeach.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Status
-            // 
-            this.Status.DataPropertyName = "Status";
-            resources.ApplyResources(this.Status, "Status");
-            this.Status.Name = "Status";
-            this.Status.ReadOnly = true;
-            this.Status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // sco
-            // 
-            this.sco.DataPropertyName = "sco";
-            resources.ApplyResources(this.sco, "sco");
-            this.sco.Name = "sco";
-            this.sco.ReadOnly = true;
-            this.sco.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // SubstratePipe
-            // 
-            this.SubstratePipe.DataPropertyName = "SubstratePipe";
-            resources.ApplyResources(this.SubstratePipe, "SubstratePipe");
-            this.SubstratePipe.Name = "SubstratePipe";
-            this.SubstratePipe.ReadOnly = true;
-            this.SubstratePipe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
             // frmTestResult
             // 
             resources.ApplyResources(this, "$this");
@@ -466,7 +468,7 @@
         private CustomControl.FunctionButton fbtnRCalculatResult;
         private CustomControl.FunctionButton fbtnRSelectCurve;
         private CustomControl.FunctionButton fbtnTestAgain;
-        private CustomControl.FunctionButton fbtnClearResult;
+        private CustomControl.FunctionButton functionButton1;
         private System.Windows.Forms.DataGridViewTextBoxColumn SampleID;
         private System.Windows.Forms.DataGridViewTextBoxColumn No;
         private System.Windows.Forms.DataGridViewTextBoxColumn SampleNo;

@@ -119,29 +119,8 @@ namespace BioBaseCLIA.SysMaintenance
 
         private void frmInstruGroupTest_Load(object sender, EventArgs e)
         {
-            #region 下拉列表赋值
-            //样本盘
-            cmbTakeSamPos.Items.Clear();
-            for (int i = 1; i <= SampleNum; i++)
-            {
-                cmbTakeSamPos.Items.Add(i);
-            }
-            //试剂盘
-            cmbReagentPos.Items.Clear();
-            for (int i = 1; i <= RegentNum; i++)
-            {
-                cmbReagentPos.Items.Add(i);
-            }
-            //温育盘
-            cmbReactStartPos.Items.Clear();
-            for (int i = 1; i <= ReactTrayNum; i++)
-            {
-                cmbReactStartPos.Items.Add(i);
-            }
-            #endregion
             NetCom3.Instance.ReceiveHandel += new Action<string>(Instance_ReceiveHandel);
             ///通讯连接
-            
             #region 移管手
             chbTakeTube.Checked = true;
             chbPutTube.Checked = true;
@@ -161,7 +140,6 @@ namespace BioBaseCLIA.SysMaintenance
             cmbRegentType.SelectedIndex = 0;
             cmbSamCupType.SelectedIndex = 0;
             QueryTubePos();
-            
             #endregion
 
             #region 清洗检测盘
@@ -2197,7 +2175,7 @@ namespace BioBaseCLIA.SysMaintenance
         /// </summary>
         bool reactTrayTubeClear()
         {
-            for (int i = 1; i < frmParent.ReactTrayNum+1; i++)
+            for (int i = 1; i < ReactTrayNum+1; i++)
             {
                 if (isNewWashEnd()) return false;  //lyq add 20190822
                 //if (CancellationToken)
@@ -2208,7 +2186,7 @@ namespace BioBaseCLIA.SysMaintenance
                 if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
                 {
                     MessageBox.Show("抓管出现异常，请确认仪器是否运行故障！");
-                    return false ;
+                    return false;
                 }
                 //修改反应盘信息
                 OperateIniFile.WriteIniData("ReactTrayInfo", "no" + i.ToString(), "0", iniPathReactTrayInfo);
@@ -2324,7 +2302,7 @@ namespace BioBaseCLIA.SysMaintenance
                 int CleanTray = 0;
                 if (cbCleanTray.Checked)
                 {
-                    CleanTray=1;
+                    CleanTray = 1;
                 }
                 if (LeftCount1 < numericUpDown3.Value + CleanTray)
                 {
@@ -2372,7 +2350,7 @@ namespace BioBaseCLIA.SysMaintenance
                     LogFile.Instance.Write(string.Format("***{0}->:{1}***", "取放管时间: " + DateTime.Now.ToString("HH:mm:ss:fff"), "管孔位置: " + tubeHoleNum));
                     if (!NetCom3.Instance.MoveQuery()&&NetCom3.Instance.MoverrorFlag!=(int)ErrorState.IsNull)
                     {
-                        NewWashEnd();
+                        NewWashEnd(1);
                         return;
                     }
                     if (isNewWashEnd()) return;  //lyq add 20190822
@@ -2385,7 +2363,7 @@ namespace BioBaseCLIA.SysMaintenance
                     tubeHoleNum = tubeHoleNum - 1; 
                     if (!NetCom3.Instance.WashQuery())
                     {
-                        NewWashEnd();
+                        NewWashEnd(3);
                         return;
                     }
                     if (isNewWashEnd()) return;  //lyq add 20190822
@@ -2401,12 +2379,13 @@ namespace BioBaseCLIA.SysMaintenance
             NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 03 02 " + (starhole).ToString("X2")), 2);
             if (!NetCom3.Instance.WashQuery())
             {
-                NewWashEnd();
+                NewWashEnd(3);
                 return;
             }
             CleanTray tray = new CleanTray(starhole);
             int temptubenum = tubeNum;
             int tempread = 1;
+            int tubecount = 1;
             for (int i = 0; i < 30 + tubeNum; i++)
             {
                 if (isNewWashEnd()) return;
@@ -2429,7 +2408,7 @@ namespace BioBaseCLIA.SysMaintenance
                         NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 06"), 1);
                         if (!NetCom3.Instance.MoveQuery())
                         {
-                            NewWashEnd();
+                            NewWashEnd(1);
                             return;
                         }
                         //int nextpos = plate*88 + (column-1)*11 + hole +1;
@@ -2454,7 +2433,7 @@ namespace BioBaseCLIA.SysMaintenance
                     NetCom3.Instance.Send(NetCom3.Cover(tray.GetWashOrder(flow[2],flow[3],flow[4],whichPipe)), 2);
                     if (!NetCom3.Instance.WashQuery())
                     {
-                        NewWashEnd();
+                        NewWashEnd(3);
                         return;
                     }
                     else
@@ -2473,7 +2452,7 @@ namespace BioBaseCLIA.SysMaintenance
                             NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 03 03 00 00 00 11"), 2);
                             if (!NetCom3.Instance.WashQuery())
                             {
-                                NewWashEnd();
+                                NewWashEnd(3);
                                 return;
                             }
                         }
@@ -2484,19 +2463,21 @@ namespace BioBaseCLIA.SysMaintenance
                 if (isNewWashEnd()) return;  //lyq add 20190822
                 if (flow[5] && tray.pointer[10].Value[1] == 1)
                 {
+                    TExtAppend("正在从清洗盘扔第" + tubecount + "个管。");
                     NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 04 01"), 1);
                     if (!NetCom3.Instance.MoveQuery()&&NetCom3.Instance.MoverrorFlag!=(int)ErrorState.IsNull)
                     {
-                        NewWashEnd();
+                        NewWashEnd(1);
                         return;
                     }
+                    tubecount++;
                     tray.pointer[10].Value[1] = 0;
                 }
                 if (isNewWashEnd()) return;
                 NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 03 01 " + (1).ToString("X2")), 2);
                 if (!NetCom3.Instance.WashQuery())
                 {
-                    NewWashEnd();
+                    NewWashEnd(3);
                     return;
                 }
                 tray.PoninterMoveOnePace();
@@ -2691,8 +2672,32 @@ namespace BioBaseCLIA.SysMaintenance
             }
             else return false;
         }
-        void NewWashEnd()
+        void NewWashEnd(int errorflag=0)
         {
+            if (errorflag == 1)
+            {
+                if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked)
+                    TExtAppend("抓手在取管位置发生了撞管。");
+                else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.putKnocked)
+                    TExtAppend("抓手在放管位置发生了撞管。");
+                else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.LackTube)
+                    TExtAppend("理杯机位置缺管。");
+                else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.OverTime)
+                    TExtAppend("移管手指令接收超时。");
+
+            }
+            else if (errorflag == 3)
+            {
+                if (NetCom3.Instance.WasherrorFlag == (int)ErrorState.OverTime)
+                    TExtAppend("清洗指令接收超时。");
+            }
+            else if (errorflag == 2)
+            {
+                if (NetCom3.Instance.AdderrorFlag == (int)ErrorState.OverTime)
+                    TExtAppend("加样指令接收超时。");
+                else if (NetCom3.Instance.AdderrorFlag == (int)ErrorState.IsKnocked)
+                    TExtAppend("加样针加样时发生撞针。");
+            }
             isNewWashRun = false;
             CancellationToken = true; //lyq add 20190822
             //CancellationToken = false;
@@ -2867,7 +2872,7 @@ namespace BioBaseCLIA.SysMaintenance
                 {
                     functionButton1.Enabled = true;
                     return;
-                }
+                } 
                 NetCom3.Instance.Send(NetCom3.Cover("EB 90 11 07 07"), 5);
                 if (!NetCom3.Instance.SingleQuery() && NetCom3.Instance.errorFlag != (int)ErrorState.ReadySend)
                 {
@@ -2899,7 +2904,7 @@ namespace BioBaseCLIA.SysMaintenance
                 bLoopRun = true;
                 CancellationToken = false;
                 substrateNum1 = int.Parse(OperateIniFile.ReadIniData("Substrate1", "LeftCount", "0", iniPathSubstrateTube));
-                substrateNum2 = int.Parse(OperateIniFile.ReadIniData("Substrate2", "LeftCount", "0", iniPathSubstrateTube));
+                //substrateNum2 = int.Parse(OperateIniFile.ReadIniData("Substrate2", "LeftCount", "0", iniPathSubstrateTube));
 
                 if (!bLoopRun) return;
                 if (numericUpDown5.Value.ToString().Trim() == "0")
@@ -2914,7 +2919,7 @@ namespace BioBaseCLIA.SysMaintenance
                 if (int.Parse(numericUpDown5.Value.ToString().Trim()) > substrateNum1)
                 {
                     frmMessageShow f = new frmMessageShow();
-                    f.MessageShow("温馨提示", "底物不足,请装载底物！");
+                    f.MessageShow("温馨提示", "底物不足，请从新装载底物！");
                     functionButton6.Enabled = true;
                     functionButton6.Text = "循环灌注";
                     bLoopRun = true;
@@ -2927,12 +2932,18 @@ namespace BioBaseCLIA.SysMaintenance
                     Loopthread = new Thread(new ThreadStart(TestLoopRun));
                     Loopthread.IsBackground = true;
                     Loopthread.Start();
-                    //functionButton6.Enabled = true;
                 }
             }
             else
-            {
-                CancellationToken = true;
+            {               
+                //for(int i=0;i<5;i++)
+                //{
+                    if (Loopthread != null && Loopthread.ThreadState != ThreadState.Stopped)
+                    {
+                        Loopthread.Abort();
+                        //NetCom3.Delay(4000);
+                    }
+                //}
                 functionButton6.Text = "循环灌注";
                 bLoopRun = false;
                 functionButton6.Enabled = true;
@@ -2975,14 +2986,14 @@ namespace BioBaseCLIA.SysMaintenance
             TExtAppend("清洗盘清管完成。。。\n");
             if (!bLoopRun)
             {
-                BeginInvoke(new Action(() => { functionButton6.Text = "循环灌注"; }));
+                functionButton6.Text = "循环灌注";
                 bLoopRun = false;
                 functionButton6.Enabled = true;
                 return;
             }
             if (!AddTubeInCleanTray())
             {
-                BeginInvoke(new Action(() => { functionButton6.Text = "循环灌注"; }));
+                functionButton6.Text = "循环灌注";
                 bLoopRun = false;
                 functionButton6.Enabled = true;
                 return;
@@ -2991,14 +3002,14 @@ namespace BioBaseCLIA.SysMaintenance
             CleanTrayMovePace(5);
             if (!bLoopRun)
             {
-                BeginInvoke(new Action(() => { functionButton6.Text = "循环灌注"; }));
+                functionButton6.Text = "循环灌注";
                 bLoopRun = false;
                 functionButton6.Enabled = true;
                 return;
             }
             if (!AddTubeInCleanTray())
             {
-                BeginInvoke(new Action(() => { functionButton6.Text = "循环灌注"; }));
+                functionButton6.Text = "循环灌注";
                 bLoopRun = false;
                 functionButton6.Enabled = true;
                 return;
@@ -3007,14 +3018,14 @@ namespace BioBaseCLIA.SysMaintenance
             CleanTrayMovePace(4);
             if (!bLoopRun)
             {
-                BeginInvoke(new Action(() => { functionButton6.Text = "循环灌注"; }));
+                functionButton6.Text = "循环灌注";
                 bLoopRun = false;
                 functionButton6.Enabled = true;
                 return;
             }
             if (!AddTubeInCleanTray())
             {
-                BeginInvoke(new Action(() => { functionButton6.Text = "循环灌注"; }));
+                functionButton6.Text = "循环灌注";
                 bLoopRun = false;
                 functionButton6.Enabled = true;
                 return;
@@ -3023,14 +3034,14 @@ namespace BioBaseCLIA.SysMaintenance
             CleanTrayMovePace(4);
             if (!bLoopRun)
             {
-                BeginInvoke(new Action(() => { functionButton6.Text = "循环灌注"; }));
+                functionButton6.Text = "循环灌注";
                 bLoopRun = false;
                 functionButton6.Enabled = true;
                 return;
             }
             if (!AddTubeInCleanTray())
             {
-                BeginInvoke(new Action(() => { functionButton6.Text = "循环灌注"; }));
+                functionButton6.Text = "循环灌注";
                 bLoopRun = false;
                 functionButton6.Enabled = true;
                 return;
@@ -3039,7 +3050,7 @@ namespace BioBaseCLIA.SysMaintenance
             CleanTrayMovePace(5 + isNewCleanTray);
             if (!bLoopRun)
             {
-                BeginInvoke(new Action(() => { functionButton6.Text = "循环灌注"; }));
+                functionButton6.Text = "循环灌注";
                 bLoopRun = false;
                 functionButton6.Enabled = true;
                 return;
@@ -3047,14 +3058,12 @@ namespace BioBaseCLIA.SysMaintenance
             for (int i = 0; i < LoopPourinto; i++)
             {
                 if (isNewWashEnd()) return;  //lyq add 20190822
-                if (bLoopRun)
-                    BeginInvoke(new Action(() => { numericUpDown5.Value = LoopPourinto - i; }));
                 //底物灌注改为1次
                 for (int index = 0; index < 1; index++)
                 {
                     if (!bLoopRun)
                     {
-                        BeginInvoke(new Action(() => { functionButton6.Text = "循环灌注"; }));
+                        functionButton6.Text = "循环灌注";
                         bLoopRun = false;
                         functionButton6.Enabled = true;
                         return;
@@ -3070,7 +3079,7 @@ namespace BioBaseCLIA.SysMaintenance
             TExtAppend("灌注完成开始扔管。。。\n");
             if (!bLoopRun)
             {
-                BeginInvoke(new Action(() => { functionButton6.Text = "循环灌注"; }));
+                functionButton6.Text = "循环灌注";
                 bLoopRun = false;
                 functionButton6.Enabled = true;
                 return;
@@ -3078,15 +3087,15 @@ namespace BioBaseCLIA.SysMaintenance
             CleanTrayMovePace(-5 - isNewCleanTray);
             if (!RemoveTubeOutCleanTray())
             {
-                BeginInvoke(new Action(() => { functionButton6.Text = "循环灌注"; }));
+                functionButton6.Text = "循环灌注";
                 bLoopRun = false;
                 functionButton6.Enabled = true;
                 return;
             }
-            TExtAppend("扔第1个新管完成。。。\n");
+            TExtAppend("扔第1个管完成。。。\n");
             if (!bLoopRun)
             {
-                BeginInvoke(new Action(() => { functionButton6.Text = "循环灌注"; }));
+                functionButton6.Text = "循环灌注";
                 bLoopRun = false;
                 functionButton6.Enabled = true;
                 return;
@@ -3094,44 +3103,44 @@ namespace BioBaseCLIA.SysMaintenance
             CleanTrayMovePace(-4);
             if (!RemoveTubeOutCleanTray())
             {
-                BeginInvoke(new Action(() => { functionButton6.Text = "循环灌注"; }));
+                functionButton6.Text = "循环灌注";
                 bLoopRun = false;
                 functionButton6.Enabled = true;
                 return;
             }
-            TExtAppend("扔第2个新管完成。。。\n");
+            TExtAppend("扔第2个管完成。。。\n");
             CleanTrayMovePace(-4);
             if (!bLoopRun)
             {
-                BeginInvoke(new Action(() => { functionButton6.Text = "循环灌注"; }));
+                functionButton6.Text = "循环灌注";
                 bLoopRun = false;
                 functionButton6.Enabled = true;
                 return;
             }
             if (!RemoveTubeOutCleanTray())
             {
-                BeginInvoke(new Action(() => { functionButton6.Text = "循环灌注"; }));
+                functionButton6.Text = "循环灌注";
                 bLoopRun = false;
                 functionButton6.Enabled = true;
                 return;
             }
-            TExtAppend("扔第3个新管完成。。。\n");
+            TExtAppend("扔第3个管完成。。。\n");
             CleanTrayMovePace(-5);
             if (!bLoopRun)
             {
-                BeginInvoke(new Action(() => { functionButton6.Text = "循环灌注"; }));
+                functionButton6.Text = "循环灌注";
                 bLoopRun = false;
                 functionButton6.Enabled = true;
                 return;
             }
             if (!RemoveTubeOutCleanTray())
             {
-                BeginInvoke(new Action(() => { functionButton6.Text = "循环灌注"; }));
+                functionButton6.Text = "循环灌注";
                 bLoopRun = false;
                 functionButton6.Enabled = true;
                 return;
             }
-            TExtAppend("扔第4个新管完成。。。\n");
+            TExtAppend("扔第4个管完成。。。\n");
             //frmMessageShow fm = new frmMessageShow();
             //fm.MessageShow("温馨提示", "循环灌注完成！");
             BeginInvoke(new Action(() => { numericUpDown5.Value = 0;}));
@@ -3163,12 +3172,6 @@ namespace BioBaseCLIA.SysMaintenance
                         DialogResult tempresult = MessageBox.Show("移管手抓新管抓空！实验将停止运行！", "移管手错误！", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                         return false;
                     }
-                }
-                else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.LackTube)
-                {
-                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手在管架向温育盘抓管时多次抓空!实验停止进行加样！");
-                    DialogResult tempresult = MessageBox.Show("理杯机缺管！实验将停止运行！", "移管手错误！", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                    return false;
                 }
                 else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.Sendfailure)
                 {
@@ -3294,23 +3297,11 @@ namespace BioBaseCLIA.SysMaintenance
             if (oneOrTwo == 1)
             {
                 substrateNum1 = int.Parse(OperateIniFile.ReadIniData("Substrate1", "LeftCount", "", iniPathSubstrateTube));
-                //string LeftCount2 = OperateIniFile.ReadIniData("Substrate2", "LeftCount", "", iniPathSubstrateTube);
-                //if (int.Parse(LeftCount1) > 0)
-                //{
-                //    if (int.Parse(LeftCount1) > int.Parse(LeftCount2) && int.Parse(LeftCount2) > 0)
-                //        substratePipe = "2";
-                //    else
-                //        substratePipe = "1";
-                //}
-                //else
-                //{
-                //    substratePipe = "2";
-                //}
                 order = "EB 90 31 03 03 00 11 11 10";
             }
             else if (oneOrTwo == 2)
             {
-                order = "EB 90 31 03 03 01 00 00 00";
+                order = "EB 90 31 03 03 01 00 00 10";
             }
             else
             {
@@ -3337,16 +3328,8 @@ namespace BioBaseCLIA.SysMaintenance
             {
                 if (oneOrTwo == 1)
                 {
-                    //if (substratePipe == "1")
-                    //{
-                        OperateIniFile.WriteIniData("Substrate1", "LeftCount", (substrateNum1 - 1).ToString(), iniPathSubstrateTube);
-                        substrateNum1--;
-                    //}
-                    //else
-                    //{
-                    //    OperateIniFile.WriteIniData("Substrate2", "LeftCount", (substrateNum2 - 1).ToString(), iniPathSubstrateTube);
-                    //    substrateNum2--;
-                    //}
+                    OperateIniFile.WriteIniData("Substrate1", "LeftCount", (substrateNum1 - 1).ToString(), iniPathSubstrateTube);
+                    substrateNum1--;
                 }
             }
         }

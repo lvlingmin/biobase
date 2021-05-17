@@ -57,7 +57,7 @@ namespace Maticsoft.DBUtility
 
 
         #region 公用方法
-
+       
         public static int GetMaxID(int conntype, string FieldName, string TableName)
         {
             string strsql = "select max(" + FieldName + ")+1 from " + TableName;

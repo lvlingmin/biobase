@@ -25,11 +25,6 @@ namespace BioBaseCLIA.SysMaintenance
             MessageBox.Show("要初始化配置文件，请重新输入账号密码进行验证。");
         }
 
-        private void fbtnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void fbtnConfirm_Click(object sender, EventArgs e)
         {
             if (txtUserName.Text.Trim() == "" || txtUserPassword.Text.Trim() == "")
@@ -74,6 +69,11 @@ namespace BioBaseCLIA.SysMaintenance
 
 
             fbtnConfirm.Enabled = true;
+            this.Close();
+        }
+
+        private void fbtnCancel_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
 

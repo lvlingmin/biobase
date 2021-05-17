@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using Maticsoft.DBUtility;
 using BioBaseCLIA.DataQuery;
+using Common;
+using System.IO;
 
 namespace BioBaseCLIA.Run
 {
@@ -32,7 +34,10 @@ namespace BioBaseCLIA.Run
         /// 已装载实验供应品需求信息
         /// </summary>
         private static DataTable dtItemInfoNoStat;
-
+        /// <summary>
+        /// 试剂盘配置文件地址
+        /// </summary>
+        string iniPathReagentTrayInfo = Directory.GetCurrentDirectory() + "\\ReagentTrayInfo.ini";
         public static DataTable DtItemInfoNoStat
         {
             get { return dtItemInfoNoStat; }
@@ -63,23 +68,32 @@ namespace BioBaseCLIA.Run
             }
             for (int j = 0; j < dtRgInfo.Rows.Count; j++)
             {
-                if (Convert.ToInt32(dtRgInfo.Rows[j]["leftoverTestR1"]) < frmReagentLoad.WarnReagent || Convert.ToInt32(dtRgInfo.Rows[j]["leftoverTestR2"]) < frmReagentLoad.WarnReagent || Convert.ToInt32(dtRgInfo.Rows[j]["leftoverTestR3"]) < frmReagentLoad.WarnReagent || Convert.ToInt32(dtRgInfo.Rows[j]["leftoverTestR4"]) < frmReagentLoad.WarnReagent)
+                string DiuFlag = OperateIniFile.ReadIniData("ReagentPos" + dtRgInfo.Rows[j]["Postion"].ToString(), "DiuFlag", "", iniPathReagentTrayInfo);
+                if (DiuFlag == "1")
                 {
-                    if (Convert.ToInt32(dtRgInfo.Rows[j]["leftoverTestR1"]) == 0 || Convert.ToInt32(dtRgInfo.Rows[j]["leftoverTestR2"]) == 0 || Convert.ToInt32(dtRgInfo.Rows[j]["leftoverTestR3"]) == 0 || Convert.ToInt32(dtRgInfo.Rows[j]["leftoverTestR4"]) == 0)
+                    srdReagent.RgColor[int.Parse(dtRgInfo.Rows[j]["Postion"].ToString()) - 1] = Color.Purple;
+                    srdReagent.RgColor[int.Parse(dtRgInfo.Rows[j]["Postion"].ToString()) - 1] = Color.Purple;
+                }
+                else
+                { 
+                    if (Convert.ToInt32(dtRgInfo.Rows[j]["leftoverTestR1"]) < frmReagentLoad.WarnReagent || Convert.ToInt32(dtRgInfo.Rows[j]["leftoverTestR2"]) < frmReagentLoad.WarnReagent || Convert.ToInt32(dtRgInfo.Rows[j]["leftoverTestR3"]) < frmReagentLoad.WarnReagent || Convert.ToInt32(dtRgInfo.Rows[j]["leftoverTestR4"]) < frmReagentLoad.WarnReagent)
                     {
-                        srdReagent.RgColor[int.Parse(dtRgInfo.Rows[j]["Postion"].ToString()) - 1] = srdReagent.CRgAlarm;
-                        srdReagent.BdColor[int.Parse(dtRgInfo.Rows[j]["Postion"].ToString()) - 1] = srdReagent.CBeedsAlarm;
+                        if (Convert.ToInt32(dtRgInfo.Rows[j]["leftoverTestR1"]) == 0 || Convert.ToInt32(dtRgInfo.Rows[j]["leftoverTestR2"]) == 0 || Convert.ToInt32(dtRgInfo.Rows[j]["leftoverTestR3"]) == 0 || Convert.ToInt32(dtRgInfo.Rows[j]["leftoverTestR4"]) == 0)
+                        {
+                            srdReagent.RgColor[int.Parse(dtRgInfo.Rows[j]["Postion"].ToString()) - 1] = srdReagent.CRgAlarm;
+                            srdReagent.BdColor[int.Parse(dtRgInfo.Rows[j]["Postion"].ToString()) - 1] = srdReagent.CBeedsAlarm;
+                        }
+                        else
+                        {
+                            srdReagent.RgColor[int.Parse(dtRgInfo.Rows[j]["Postion"].ToString()) - 1] = Color.Orange;
+                            srdReagent.BdColor[int.Parse(dtRgInfo.Rows[j]["Postion"].ToString()) - 1] = Color.Orange;
+                        }
                     }
                     else
                     {
-                        srdReagent.RgColor[int.Parse(dtRgInfo.Rows[j]["Postion"].ToString()) - 1] = Color.Orange;
-                        srdReagent.BdColor[int.Parse(dtRgInfo.Rows[j]["Postion"].ToString()) - 1] = Color.Orange;
+                        srdReagent.RgColor[int.Parse(dtRgInfo.Rows[j]["Postion"].ToString()) - 1] = srdReagent.CRgLoaded;
+                        srdReagent.BdColor[int.Parse(dtRgInfo.Rows[j]["Postion"].ToString()) - 1] = srdReagent.CBeedsLoaded;
                     }
-                }
-                else
-                {
-                    srdReagent.RgColor[int.Parse(dtRgInfo.Rows[j]["Postion"].ToString()) - 1] = srdReagent.CRgLoaded;
-                    srdReagent.BdColor[int.Parse(dtRgInfo.Rows[j]["Postion"].ToString()) - 1] = srdReagent.CBeedsLoaded;
                 }
             }
             #endregion
@@ -246,6 +260,31 @@ namespace BioBaseCLIA.Run
 
         private void btnWorkList_Click(object sender, EventArgs e)
         {
+            //DbHelperOleDb db = new DbHelperOleDb(0);
+            // //生成工作列表时，已有的样本信息先存放到dtSampleRunInfo表中，方便取用。LYN add 20171114
+            //if (dtSampleRunInfo.Rows.Count == 0)
+            //{
+            //    for (int i = 0; i < dgvSpInfoList.Rows.Count; i++)
+            //    {
+            //        string[] ItemNames = dgvSpInfoList.Rows[i].Cells[4].Value.ToString().Split(' ');
+            //        for (int j = 0; j < ItemNames.Length; j++)
+            //        {
+            //            if (ItemNames[j] == "")
+            //            {
+            //                continue;
+            //            }
+            //            object ob = DbHelperOleDb.GetSingle(@"select DiluteCount from tbProject where ShortName 
+            //                                                                 = '" + ItemNames[j] + "'");
+            //            string DilutionTimes = ob == null ? "" : ob.ToString();
+            //            ob = DbHelperOleDb.GetSingle(@"select DiluteName from tbProject where ShortName 
+            //                                                                 = '" + ItemNames[j] + "'");
+            //            string DilutionName = ob == null ? "" : ob.ToString();
+            //            dtSampleRunInfo.Rows.Add(dgvSpInfoList.Rows[i].Cells[0].Value, dgvSpInfoList.Rows[i].Cells[1].Value, 
+            //                dgvSpInfoList.Rows[i].Cells["SampleType"].Value, ItemNames[j],
+            //                dgvSpInfoList.Rows[i].Cells[6].Value, DilutionTimes, DilutionName);
+            //        }
+            //    }
+            //}
             btnWorkList.Enabled = false;
 
             if (CheckFormIsOpen("frmWorkList") && frmWorkList.RunFlag == (int)RunFlagStart.IsRuning)
@@ -264,14 +303,41 @@ namespace BioBaseCLIA.Run
             CaculatingFlag = true;
             NetCom3.ComWait.Reset();
 
-            while (EmergencySample != null && EmergencySample.GetInvocationList().Length > 1)
+            while (EmergencySample != null && EmergencySample.GetInvocationList().Length > 1)//保证只有一个委托 
             {
                 EmergencySample -= (Action)EmergencySample.GetInvocationList()[0];
             }
 
             EmergencySample();
-            
+
             btnWorkList.Enabled = true;
+            //if (!CheckFormIsOpen("frmWorkList"))
+            //{
+            //    frmWorkList frmWL = new frmWorkList();
+            //    frmWL.TopLevel = false;
+            //    frmWL.Parent = this.Parent;
+            //    frmWL.Show();
+            //}
+            //else
+            //{
+            //    frmWorkList frmWL = (frmWorkList)Application.OpenForms["frmWorkList"];
+            //    frmWL.Show();
+            //    frmWL.BringToFront(); 
+            //}
+
+            //2018-10-15 zlx mod
+            //if (EmergencySample != null && frmAddSample.newSample == true)
+            //{
+            //    CaculatingFlag = true;
+
+            //    NetCom3.ComWait.Reset();
+            //    EmergencySample();
+            //}
+            //else
+            //{  //2018-06-15 zlx add
+            //    frmWorkList.EmergencyFlag = false;
+            //    frmWorkList.addOrdinaryFlag = false;
+            //}
         }
 
         private void fbtnTestResult_Click(object sender, EventArgs e)
@@ -384,14 +450,13 @@ namespace BioBaseCLIA.Run
             //    return;
             //}
             string samplePos = dgvSpInfoList.CurrentRow.Cells["Position"].Value.ToString();
-            //string SampleNo = dgvSpInfoList.CurrentRow.Cells["SampleNo"].Value.ToString();
+            string SpNo = dgvSpInfoList.CurrentRow.Cells["SampleNo"].Value.ToString();
             #region 获取样本信息表中对应的病人ID 
             DataTable dtSampleInfo = new DataTable();
-            //2018-08-16 zlx add
-            DbHelperOleDb DB = new DbHelperOleDb(1);
-            dtSampleInfo = bllsp.GetList("[Position]= '" + samplePos + "'  and SendDateTime>=#" + DateTime.Now.Date.ToString("yyyy/M/d H:mm:ss") + "# and SendDateTime<#" + DateTime.Now.AddDays(1).ToString("yyyy/M/d H:mm:ss") + "# ").Tables[0];//and Status = 0
+            //dtSampleInfo = bllsp.GetList("[Position]= '" + samplePos + "'  and SendDateTime>=#" + DateTime.Now.Date.ToString("yyyy/M/d H:mm:ss") + "# and SendDateTime<#" + DateTime.Now.AddDays(1).ToString("yyyy/M/d H:mm:ss") + "# ").Tables[0];//and Status = 0
             //dtSampleInfo = bllsp.GetList("[Position]= '" + samplePos + "'  and SendDateTime>=#" + DateTime.Now.Date + "# and SendDateTime<#" + DateTime.Now.AddDays(1) + "# ").Tables[0];//and Status = 0
             //dtSampleInfo = bllsp.GetList("[SampleNo]= '" + SampleNo + "' and Status = 0").Tables[0];
+            dtSampleInfo = bllsp.GetList("[SampleNo]= '" + SpNo + "' and [Position]= '" + samplePos + "'").Tables[0];//lyq
             string SampleID = dtSampleInfo.Rows[0]["SampleID"].ToString();
             #endregion
             frmPI.SampleID = int.Parse(SampleID);
@@ -527,5 +592,9 @@ namespace BioBaseCLIA.Run
             frmPI.ShowDialog();
         }
 
+        private void btnLoadSample_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

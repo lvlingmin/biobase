@@ -598,12 +598,6 @@
   <data name="fbtnPrintCurve.Text" xml:space="preserve">
     <value>Print The Curve</value>
   </data>
-  <data name="colScalPoint.HeaderText" xml:space="preserve">
-    <value>No.</value>
-  </data>
-  <data name="colConcentration.HeaderText" xml:space="preserve">
-    <value>Concentration</value>
-  </data>
   <data name="groupBox2.Text" xml:space="preserve">
     <value>Calibration Data</value>
   </data>
@@ -646,6 +640,12 @@
   <data name="ExpiryDate.HeaderText" xml:space="preserve">
     <value>Exp.Date</value>
   </data>
+  <data name="colScalPoint.HeaderText" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="colConcentration.HeaderText" xml:space="preserve">
+    <value>Concentration</value>
+  </data>
   <data name="keywordText.Calibration" xml:space="preserve">
     <value>Calibration</value>
   </data>
@@ -675,14 +675,5 @@
   </data>
   <data name="keywordText.TwoPoint" xml:space="preserve">
     <value>Two Point</value>
-  </data>
-  <data name="label6.Text1" xml:space="preserve">
-    <value>Calibration </value>
-  </data>
-  <data name="lblEquation.Text1" xml:space="preserve">
-    <value>Formula：</value>
-  </data>
-  <data name="lblR.Text1" xml:space="preserve">
-    <value>Correlation Coefficient</value>
   </data>
 </root>

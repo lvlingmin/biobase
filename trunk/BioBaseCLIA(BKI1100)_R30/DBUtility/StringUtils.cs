@@ -44,7 +44,7 @@ namespace DBUtility
                 }
             }
 
-            //lyq add 20190813 针对定标浓度和发光值 的小数点转化问题
+            // 针对定标浓度和发光值 的小数点转化问题
             string str = new string(chs);
             if (chs[0] >= 3)
             {
@@ -52,6 +52,19 @@ namespace DBUtility
             }
             return str;
             //return new string(chs);
+        }
+        public string reverseDate(char oriDate)
+        {
+            string date = "";
+            if (oriDate >= '0' && oriDate <= '9')
+            {
+                date = oriDate.ToString();
+            }
+            else
+            {
+                date = ((oriDate - 'A') + 10).ToString();
+            }
+            return date;
         }
         #endregion
     }

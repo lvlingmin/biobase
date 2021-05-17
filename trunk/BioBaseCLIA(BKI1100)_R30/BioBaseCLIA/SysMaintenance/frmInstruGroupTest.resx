@@ -212,7 +212,7 @@
     <value>fbtnGroupTest</value>
   </data>
   <data name="&gt;&gt;fbtnGroupTest.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fbtnGroupTest.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -309,7 +309,7 @@
     <value>fbtnReturn</value>
   </data>
   <data name="&gt;&gt;fbtnReturn.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fbtnReturn.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -406,7 +406,7 @@
     <value>fbtnInstruDiagnost</value>
   </data>
   <data name="&gt;&gt;fbtnInstruDiagnost.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fbtnInstruDiagnost.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -503,7 +503,7 @@
     <value>fbtnInstruMaintenance</value>
   </data>
   <data name="&gt;&gt;fbtnInstruMaintenance.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fbtnInstruMaintenance.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -678,7 +678,7 @@
     <value>fbtnMoveStop</value>
   </data>
   <data name="&gt;&gt;fbtnMoveStop.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fbtnMoveStop.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -799,7 +799,7 @@
     <value>fbtnMoveStart</value>
   </data>
   <data name="&gt;&gt;fbtnMoveStart.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fbtnMoveStart.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -893,7 +893,7 @@
     <value>fbtnMoveClearTube</value>
   </data>
   <data name="&gt;&gt;fbtnMoveClearTube.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fbtnMoveClearTube.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -917,7 +917,7 @@
     <value>txtTubeLoopNum</value>
   </data>
   <data name="&gt;&gt;txtTubeLoopNum.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtTubeLoopNum.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -1397,7 +1397,7 @@
     <value>Vertical</value>
   </data>
   <data name="txtArmShowInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 64</value>
+    <value>257, 64</value>
   </data>
   <data name="txtArmShowInfo.TabIndex" type="System.Int32, mscorlib">
     <value>55</value>
@@ -1527,7 +1527,7 @@
     <value>fbtnArmClearTube</value>
   </data>
   <data name="&gt;&gt;fbtnArmClearTube.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fbtnArmClearTube.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -1621,7 +1621,7 @@
     <value>fbtnArmStop</value>
   </data>
   <data name="&gt;&gt;fbtnArmStop.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fbtnArmStop.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -1715,7 +1715,7 @@
     <value>fbtnArmStart</value>
   </data>
   <data name="&gt;&gt;fbtnArmStart.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fbtnArmStart.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -1739,7 +1739,7 @@
     <value>txtArmLoopNum</value>
   </data>
   <data name="&gt;&gt;txtArmLoopNum.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtArmLoopNum.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -1773,6 +1773,246 @@
   </data>
   <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="cmbReactStartPos.Items" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cmbReactStartPos.Items1" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cmbReactStartPos.Items2" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cmbReactStartPos.Items3" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="cmbReactStartPos.Items4" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="cmbReactStartPos.Items5" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="cmbReactStartPos.Items6" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="cmbReactStartPos.Items7" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="cmbReactStartPos.Items8" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="cmbReactStartPos.Items9" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="cmbReactStartPos.Items10" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="cmbReactStartPos.Items11" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="cmbReactStartPos.Items12" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="cmbReactStartPos.Items13" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="cmbReactStartPos.Items14" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="cmbReactStartPos.Items15" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="cmbReactStartPos.Items16" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="cmbReactStartPos.Items17" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="cmbReactStartPos.Items18" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="cmbReactStartPos.Items19" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="cmbReactStartPos.Items20" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="cmbReactStartPos.Items21" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="cmbReactStartPos.Items22" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="cmbReactStartPos.Items23" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="cmbReactStartPos.Items24" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="cmbReactStartPos.Items25" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="cmbReactStartPos.Items26" xml:space="preserve">
+    <value>27</value>
+  </data>
+  <data name="cmbReactStartPos.Items27" xml:space="preserve">
+    <value>28</value>
+  </data>
+  <data name="cmbReactStartPos.Items28" xml:space="preserve">
+    <value>29</value>
+  </data>
+  <data name="cmbReactStartPos.Items29" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="cmbReactStartPos.Items30" xml:space="preserve">
+    <value>31</value>
+  </data>
+  <data name="cmbReactStartPos.Items31" xml:space="preserve">
+    <value>32</value>
+  </data>
+  <data name="cmbReactStartPos.Items32" xml:space="preserve">
+    <value>33</value>
+  </data>
+  <data name="cmbReactStartPos.Items33" xml:space="preserve">
+    <value>34</value>
+  </data>
+  <data name="cmbReactStartPos.Items34" xml:space="preserve">
+    <value>35</value>
+  </data>
+  <data name="cmbReactStartPos.Items35" xml:space="preserve">
+    <value>36</value>
+  </data>
+  <data name="cmbReactStartPos.Items36" xml:space="preserve">
+    <value>37</value>
+  </data>
+  <data name="cmbReactStartPos.Items37" xml:space="preserve">
+    <value>38</value>
+  </data>
+  <data name="cmbReactStartPos.Items38" xml:space="preserve">
+    <value>39</value>
+  </data>
+  <data name="cmbReactStartPos.Items39" xml:space="preserve">
+    <value>40</value>
+  </data>
+  <data name="cmbReactStartPos.Items40" xml:space="preserve">
+    <value>41</value>
+  </data>
+  <data name="cmbReactStartPos.Items41" xml:space="preserve">
+    <value>42</value>
+  </data>
+  <data name="cmbReactStartPos.Items42" xml:space="preserve">
+    <value>43</value>
+  </data>
+  <data name="cmbReactStartPos.Items43" xml:space="preserve">
+    <value>44</value>
+  </data>
+  <data name="cmbReactStartPos.Items44" xml:space="preserve">
+    <value>45</value>
+  </data>
+  <data name="cmbReactStartPos.Items45" xml:space="preserve">
+    <value>46</value>
+  </data>
+  <data name="cmbReactStartPos.Items46" xml:space="preserve">
+    <value>47</value>
+  </data>
+  <data name="cmbReactStartPos.Items47" xml:space="preserve">
+    <value>48</value>
+  </data>
+  <data name="cmbReactStartPos.Items48" xml:space="preserve">
+    <value>49</value>
+  </data>
+  <data name="cmbReactStartPos.Items49" xml:space="preserve">
+    <value>50</value>
+  </data>
+  <data name="cmbReactStartPos.Items50" xml:space="preserve">
+    <value>51</value>
+  </data>
+  <data name="cmbReactStartPos.Items51" xml:space="preserve">
+    <value>52</value>
+  </data>
+  <data name="cmbReactStartPos.Items52" xml:space="preserve">
+    <value>53</value>
+  </data>
+  <data name="cmbReactStartPos.Items53" xml:space="preserve">
+    <value>54</value>
+  </data>
+  <data name="cmbReactStartPos.Items54" xml:space="preserve">
+    <value>55</value>
+  </data>
+  <data name="cmbReactStartPos.Items55" xml:space="preserve">
+    <value>56</value>
+  </data>
+  <data name="cmbReactStartPos.Items56" xml:space="preserve">
+    <value>57</value>
+  </data>
+  <data name="cmbReactStartPos.Items57" xml:space="preserve">
+    <value>58</value>
+  </data>
+  <data name="cmbReactStartPos.Items58" xml:space="preserve">
+    <value>59</value>
+  </data>
+  <data name="cmbReactStartPos.Items59" xml:space="preserve">
+    <value>60</value>
+  </data>
+  <data name="cmbReactStartPos.Items60" xml:space="preserve">
+    <value>61</value>
+  </data>
+  <data name="cmbReactStartPos.Items61" xml:space="preserve">
+    <value>62</value>
+  </data>
+  <data name="cmbReactStartPos.Items62" xml:space="preserve">
+    <value>63</value>
+  </data>
+  <data name="cmbReactStartPos.Items63" xml:space="preserve">
+    <value>64</value>
+  </data>
+  <data name="cmbReactStartPos.Items64" xml:space="preserve">
+    <value>65</value>
+  </data>
+  <data name="cmbReactStartPos.Items65" xml:space="preserve">
+    <value>66</value>
+  </data>
+  <data name="cmbReactStartPos.Items66" xml:space="preserve">
+    <value>67</value>
+  </data>
+  <data name="cmbReactStartPos.Items67" xml:space="preserve">
+    <value>68</value>
+  </data>
+  <data name="cmbReactStartPos.Items68" xml:space="preserve">
+    <value>69</value>
+  </data>
+  <data name="cmbReactStartPos.Items69" xml:space="preserve">
+    <value>70</value>
+  </data>
+  <data name="cmbReactStartPos.Items70" xml:space="preserve">
+    <value>71</value>
+  </data>
+  <data name="cmbReactStartPos.Items71" xml:space="preserve">
+    <value>72</value>
+  </data>
+  <data name="cmbReactStartPos.Items72" xml:space="preserve">
+    <value>73</value>
+  </data>
+  <data name="cmbReactStartPos.Items73" xml:space="preserve">
+    <value>74</value>
+  </data>
+  <data name="cmbReactStartPos.Items74" xml:space="preserve">
+    <value>75</value>
+  </data>
+  <data name="cmbReactStartPos.Items75" xml:space="preserve">
+    <value>76</value>
+  </data>
+  <data name="cmbReactStartPos.Items76" xml:space="preserve">
+    <value>77</value>
+  </data>
+  <data name="cmbReactStartPos.Items77" xml:space="preserve">
+    <value>78</value>
+  </data>
+  <data name="cmbReactStartPos.Items78" xml:space="preserve">
+    <value>79</value>
+  </data>
+  <data name="cmbReactStartPos.Items79" xml:space="preserve">
+    <value>80</value>
   </data>
   <data name="cmbReactStartPos.Location" type="System.Drawing.Point, System.Drawing">
     <value>111, 275</value>
@@ -1957,6 +2197,66 @@
   <data name="&gt;&gt;chbR2.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="cmbReagentPos.Items" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cmbReagentPos.Items1" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cmbReagentPos.Items2" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cmbReagentPos.Items3" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="cmbReagentPos.Items4" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="cmbReagentPos.Items5" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="cmbReagentPos.Items6" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="cmbReagentPos.Items7" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="cmbReagentPos.Items8" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="cmbReagentPos.Items9" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="cmbReagentPos.Items10" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="cmbReagentPos.Items11" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="cmbReagentPos.Items12" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="cmbReagentPos.Items13" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="cmbReagentPos.Items14" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="cmbReagentPos.Items15" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="cmbReagentPos.Items16" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="cmbReagentPos.Items17" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="cmbReagentPos.Items18" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="cmbReagentPos.Items19" xml:space="preserve">
+    <value>20</value>
+  </data>
   <data name="cmbReagentPos.Location" type="System.Drawing.Point, System.Drawing">
     <value>78, 20</value>
   </data>
@@ -2036,7 +2336,7 @@
     <value>7, 114</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 142</value>
+    <value>257, 142</value>
   </data>
   <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2375,7 +2675,7 @@
     <value>7, 17</value>
   </data>
   <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 91</value>
+    <value>257, 91</value>
   </data>
   <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2399,7 +2699,7 @@
     <value>296, 47</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 463</value>
+    <value>269, 463</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>48</value>
@@ -2418,27 +2718,6 @@
   </data>
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="numDwPourin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 84</value>
-  </data>
-  <data name="numDwPourin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 21</value>
-  </data>
-  <data name="numDwPourin.TabIndex" type="System.Int32, mscorlib">
-    <value>75</value>
-  </data>
-  <data name="&gt;&gt;numDwPourin.Name" xml:space="preserve">
-    <value>numDwPourin</value>
-  </data>
-  <data name="&gt;&gt;numDwPourin.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numDwPourin.Parent" xml:space="preserve">
-    <value>panel4</value>
-  </data>
-  <data name="&gt;&gt;numDwPourin.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="numericUpDown5.Location" type="System.Drawing.Point, System.Drawing">
     <value>86, 121</value>
@@ -2459,7 +2738,7 @@
     <value>panel4</value>
   </data>
   <data name="&gt;&gt;numericUpDown5.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="functionButton6.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2550,13 +2829,13 @@
     <value>functionButton6</value>
   </data>
   <data name="&gt;&gt;functionButton6.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;functionButton6.Parent" xml:space="preserve">
     <value>panel4</value>
   </data>
   <data name="&gt;&gt;functionButton6.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="label23.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2586,7 +2865,7 @@
     <value>panel4</value>
   </data>
   <data name="&gt;&gt;label23.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="numericUpDown4.Location" type="System.Drawing.Point, System.Drawing">
     <value>86, 93</value>
@@ -2607,7 +2886,7 @@
     <value>panel4</value>
   </data>
   <data name="&gt;&gt;numericUpDown4.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="functionButton1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2698,13 +2977,13 @@
     <value>functionButton1</value>
   </data>
   <data name="&gt;&gt;functionButton1.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;functionButton1.Parent" xml:space="preserve">
     <value>panel4</value>
   </data>
   <data name="&gt;&gt;functionButton1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="textBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 266</value>
@@ -2731,7 +3010,7 @@
     <value>panel4</value>
   </data>
   <data name="&gt;&gt;textBox1.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="functionButton5.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2822,13 +3101,13 @@
     <value>functionButton5</value>
   </data>
   <data name="&gt;&gt;functionButton5.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;functionButton5.Parent" xml:space="preserve">
     <value>panel4</value>
   </data>
   <data name="&gt;&gt;functionButton5.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="functionButton4.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2919,13 +3198,13 @@
     <value>functionButton4</value>
   </data>
   <data name="&gt;&gt;functionButton4.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;functionButton4.Parent" xml:space="preserve">
     <value>panel4</value>
   </data>
   <data name="&gt;&gt;functionButton4.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="functionButton3.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -3001,7 +3280,7 @@
     <value>NoControl</value>
   </data>
   <data name="functionButton3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 57</value>
+    <value>117, 57</value>
   </data>
   <data name="functionButton3.Size" type="System.Drawing.Size, System.Drawing">
     <value>31, 36</value>
@@ -3016,13 +3295,13 @@
     <value>functionButton3</value>
   </data>
   <data name="&gt;&gt;functionButton3.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;functionButton3.Parent" xml:space="preserve">
     <value>panel4</value>
   </data>
   <data name="&gt;&gt;functionButton3.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="comboBox2.Items" xml:space="preserve">
     <value>1</value>
@@ -3133,7 +3412,7 @@
     <value>panel4</value>
   </data>
   <data name="&gt;&gt;comboBox2.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="numericUpDown3.Location" type="System.Drawing.Point, System.Drawing">
     <value>63, 27</value>
@@ -3154,7 +3433,7 @@
     <value>panel4</value>
   </data>
   <data name="&gt;&gt;numericUpDown3.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="label22.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3184,7 +3463,7 @@
     <value>panel4</value>
   </data>
   <data name="&gt;&gt;label22.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="numericUpDown2.Location" type="System.Drawing.Point, System.Drawing">
     <value>63, 55</value>
@@ -3205,7 +3484,7 @@
     <value>panel4</value>
   </data>
   <data name="&gt;&gt;numericUpDown2.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="label21.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3232,7 +3511,7 @@
     <value>panel4</value>
   </data>
   <data name="&gt;&gt;label21.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="label20.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3259,7 +3538,28 @@
     <value>panel4</value>
   </data>
   <data name="&gt;&gt;label20.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>14</value>
+  </data>
+  <data name="numDwPourin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>68, 79</value>
+  </data>
+  <data name="numDwPourin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 21</value>
+  </data>
+  <data name="numDwPourin.TabIndex" type="System.Int32, mscorlib">
+    <value>75</value>
+  </data>
+  <data name="&gt;&gt;numDwPourin.Name" xml:space="preserve">
+    <value>numDwPourin</value>
+  </data>
+  <data name="&gt;&gt;numDwPourin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numDwPourin.Parent" xml:space="preserve">
+    <value>groupBox7</value>
+  </data>
+  <data name="&gt;&gt;numDwPourin.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="cbCleanTray.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3268,7 +3568,7 @@
     <value>NoControl</value>
   </data>
   <data name="cbCleanTray.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 216</value>
+    <value>5, 216</value>
   </data>
   <data name="cbCleanTray.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 16</value>
@@ -3289,7 +3589,7 @@
     <value>groupBox7</value>
   </data>
   <data name="&gt;&gt;cbCleanTray.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="checkBox7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3298,7 +3598,7 @@
     <value>NoControl</value>
   </data>
   <data name="checkBox7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 81</value>
+    <value>5, 81</value>
   </data>
   <data name="checkBox7.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 16</value>
@@ -3319,7 +3619,7 @@
     <value>groupBox7</value>
   </data>
   <data name="&gt;&gt;checkBox7.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="cbClearTray.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3328,7 +3628,7 @@
     <value>NoControl</value>
   </data>
   <data name="cbClearTray.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 15</value>
+    <value>5, 15</value>
   </data>
   <data name="cbClearTray.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 16</value>
@@ -3349,7 +3649,7 @@
     <value>groupBox7</value>
   </data>
   <data name="&gt;&gt;cbClearTray.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="chkDelay.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3361,7 +3661,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkDelay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 37</value>
+    <value>5, 37</value>
   </data>
   <data name="chkDelay.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 16</value>
@@ -3382,7 +3682,7 @@
     <value>groupBox7</value>
   </data>
   <data name="&gt;&gt;chkDelay.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="checkBox6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3391,7 +3691,7 @@
     <value>NoControl</value>
   </data>
   <data name="checkBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 59</value>
+    <value>5, 59</value>
   </data>
   <data name="checkBox6.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 16</value>
@@ -3412,13 +3712,13 @@
     <value>groupBox7</value>
   </data>
   <data name="&gt;&gt;checkBox6.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="checkBox5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="checkBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 191</value>
+    <value>5, 191</value>
   </data>
   <data name="checkBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 16</value>
@@ -3439,7 +3739,7 @@
     <value>groupBox7</value>
   </data>
   <data name="&gt;&gt;checkBox5.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="checkBox1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3448,7 +3748,7 @@
     <value>NoControl</value>
   </data>
   <data name="checkBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 103</value>
+    <value>5, 103</value>
   </data>
   <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 16</value>
@@ -3469,13 +3769,13 @@
     <value>groupBox7</value>
   </data>
   <data name="&gt;&gt;checkBox1.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="checkBox4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="checkBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 169</value>
+    <value>5, 169</value>
   </data>
   <data name="checkBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 16</value>
@@ -3496,13 +3796,13 @@
     <value>groupBox7</value>
   </data>
   <data name="&gt;&gt;checkBox4.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="checkBox2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="checkBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 125</value>
+    <value>5, 125</value>
   </data>
   <data name="checkBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 16</value>
@@ -3523,13 +3823,13 @@
     <value>groupBox7</value>
   </data>
   <data name="&gt;&gt;checkBox2.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="checkBox3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="checkBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 147</value>
+    <value>5, 147</value>
   </data>
   <data name="checkBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 16</value>
@@ -3550,13 +3850,13 @@
     <value>groupBox7</value>
   </data>
   <data name="&gt;&gt;checkBox3.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="groupBox7.Location" type="System.Drawing.Point, System.Drawing">
     <value>150, 5</value>
   </data>
   <data name="groupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 250</value>
+    <value>107, 250</value>
   </data>
   <data name="groupBox7.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -3574,13 +3874,13 @@
     <value>panel4</value>
   </data>
   <data name="&gt;&gt;groupBox7.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>15</value>
   </data>
   <data name="panel4.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 15</value>
   </data>
   <data name="panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 441</value>
+    <value>258, 441</value>
   </data>
   <data name="panel4.TabIndex" type="System.Int32, mscorlib">
     <value>49</value>
@@ -3683,7 +3983,7 @@
     <value>functionButton2</value>
   </data>
   <data name="&gt;&gt;functionButton2.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;functionButton2.Parent" xml:space="preserve">
     <value>groupBox3</value>
@@ -3780,7 +4080,7 @@
     <value>fbtnWashEX</value>
   </data>
   <data name="&gt;&gt;fbtnWashEX.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fbtnWashEX.Parent" xml:space="preserve">
     <value>groupBox3</value>
@@ -3975,7 +4275,7 @@
     <value>txtWashLoopNum</value>
   </data>
   <data name="&gt;&gt;txtWashLoopNum.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtWashLoopNum.Parent" xml:space="preserve">
     <value>groupBox3</value>
@@ -4150,7 +4450,7 @@
     <value>fbtnWashClearTube</value>
   </data>
   <data name="&gt;&gt;fbtnWashClearTube.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fbtnWashClearTube.Parent" xml:space="preserve">
     <value>groupBox3</value>
@@ -4244,7 +4544,7 @@
     <value>fbtnWashStop</value>
   </data>
   <data name="&gt;&gt;fbtnWashStop.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fbtnWashStop.Parent" xml:space="preserve">
     <value>groupBox3</value>
@@ -4338,7 +4638,7 @@
     <value>fbtnWashStart</value>
   </data>
   <data name="&gt;&gt;fbtnWashStart.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fbtnWashStart.Parent" xml:space="preserve">
     <value>groupBox3</value>
@@ -4551,10 +4851,10 @@
     <value>13</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>566, 49</value>
+    <value>568, 49</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 461</value>
+    <value>270, 461</value>
   </data>
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>48</value>
@@ -4763,6 +5063,6 @@
     <value>frmInstruGroupTest</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>BioBaseCLIA.frmParent, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.frmParent, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

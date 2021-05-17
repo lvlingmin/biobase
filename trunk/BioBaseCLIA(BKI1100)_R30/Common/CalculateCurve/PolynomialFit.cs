@@ -13,7 +13,7 @@ namespace BioBaseCLIA.CalculateCurve
         private int _len;
         private FMatrix _Mt;
         public PolynomialFit(int len)
-        {
+        { 
             _len=len;
             _pars = new double[len + 1];
             _Mt = new FMatrix(len + 1, len + 2);

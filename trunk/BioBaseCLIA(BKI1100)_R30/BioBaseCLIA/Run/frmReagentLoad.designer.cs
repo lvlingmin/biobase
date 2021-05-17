@@ -30,16 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmReagentLoad));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -48,6 +48,8 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBox8 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -70,10 +72,14 @@
             this.ValidDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NoUsePro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.labUnit2 = new System.Windows.Forms.Label();
+            this.labUnit = new System.Windows.Forms.Label();
+            this.dateValidDate = new System.Windows.Forms.DateTimePicker();
+            this.LabValidDate = new System.Windows.Forms.Label();
+            this.cmbProType = new System.Windows.Forms.ComboBox();
             this.btnAddD = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.label16 = new System.Windows.Forms.Label();
-            this.txtDiluteVol = new BioBaseCLIA.CustomControl.userNumTextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.btnLoopAddR = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.txtRgBatch = new BioBaseCLIA.CustomControl.userTextBoxBase();
             this.label7 = new System.Windows.Forms.Label();
             this.chkManualInput = new System.Windows.Forms.CheckBox();
@@ -157,6 +163,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label16);
+            this.groupBox3.Controls.Add(this.textBox8);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.label10);
@@ -168,6 +176,18 @@
             resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
+            // 
+            // label16
+            // 
+            resources.ApplyResources(this.label16, "label16");
+            this.label16.Name = "label16";
+            // 
+            // textBox8
+            // 
+            this.textBox8.BackColor = System.Drawing.Color.Purple;
+            this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox8, "textBox8");
+            this.textBox8.Name = "textBox8";
             // 
             // label8
             // 
@@ -223,17 +243,17 @@
             this.dgvRgInfoList.AllowUserToAddRows = false;
             this.dgvRgInfoList.AllowUserToDeleteRows = false;
             this.dgvRgInfoList.AllowUserToResizeRows = false;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgvRgInfoList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvRgInfoList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvRgInfoList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRgInfoList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRgInfoList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvRgInfoList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvRgInfoList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.RgPosition,
@@ -248,26 +268,26 @@
             this.LeftRg4,
             this.ValidDate,
             this.NoUsePro});
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRgInfoList.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRgInfoList.DefaultCellStyle = dataGridViewCellStyle9;
             resources.ApplyResources(this.dgvRgInfoList, "dgvRgInfoList");
             this.dgvRgInfoList.MultiSelect = false;
             this.dgvRgInfoList.Name = "dgvRgInfoList";
             this.dgvRgInfoList.ReadOnly = true;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRgInfoList.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRgInfoList.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvRgInfoList.RowHeadersVisible = false;
             this.dgvRgInfoList.RowTemplate.Height = 23;
             this.dgvRgInfoList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -277,8 +297,8 @@
             // RgPosition
             // 
             this.RgPosition.DataPropertyName = "Postion";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.RgPosition.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.RgPosition.DefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(this.RgPosition, "RgPosition");
             this.RgPosition.Name = "RgPosition";
             this.RgPosition.ReadOnly = true;
@@ -286,8 +306,8 @@
             // RgName
             // 
             this.RgName.DataPropertyName = "RgName";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.RgName.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.RgName.DefaultCellStyle = dataGridViewCellStyle4;
             resources.ApplyResources(this.RgName, "RgName");
             this.RgName.Name = "RgName";
             this.RgName.ReadOnly = true;
@@ -295,8 +315,8 @@
             // RgCode
             // 
             this.RgCode.DataPropertyName = "BarCode";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.RgCode.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.RgCode.DefaultCellStyle = dataGridViewCellStyle5;
             this.RgCode.FillWeight = 150F;
             resources.ApplyResources(this.RgCode, "RgCode");
             this.RgCode.Name = "RgCode";
@@ -305,8 +325,8 @@
             // RgAllTest
             // 
             this.RgAllTest.DataPropertyName = "AllTestNumber";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.RgAllTest.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.RgAllTest.DefaultCellStyle = dataGridViewCellStyle6;
             resources.ApplyResources(this.RgAllTest, "RgAllTest");
             this.RgAllTest.Name = "RgAllTest";
             this.RgAllTest.ReadOnly = true;
@@ -314,8 +334,8 @@
             // RgLastTest
             // 
             this.RgLastTest.DataPropertyName = "leftoverTestR1";
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.RgLastTest.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.RgLastTest.DefaultCellStyle = dataGridViewCellStyle7;
             this.RgLastTest.FillWeight = 120F;
             resources.ApplyResources(this.RgLastTest, "RgLastTest");
             this.RgLastTest.Name = "RgLastTest";
@@ -324,8 +344,8 @@
             // RgStatic
             // 
             this.RgStatic.DataPropertyName = "Status";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.RgStatic.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.RgStatic.DefaultCellStyle = dataGridViewCellStyle8;
             resources.ApplyResources(this.RgStatic, "RgStatic");
             this.RgStatic.Name = "RgStatic";
             this.RgStatic.ReadOnly = true;
@@ -374,10 +394,14 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.labUnit2);
+            this.groupBox2.Controls.Add(this.labUnit);
+            this.groupBox2.Controls.Add(this.dateValidDate);
+            this.groupBox2.Controls.Add(this.LabValidDate);
+            this.groupBox2.Controls.Add(this.cmbProType);
             this.groupBox2.Controls.Add(this.btnAddD);
-            this.groupBox2.Controls.Add(this.label16);
-            this.groupBox2.Controls.Add(this.txtDiluteVol);
             this.groupBox2.Controls.Add(this.label15);
+            this.groupBox2.Controls.Add(this.btnLoopAddR);
             this.groupBox2.Controls.Add(this.txtRgBatch);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.chkManualInput);
@@ -398,6 +422,40 @@
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
+            // labUnit2
+            // 
+            resources.ApplyResources(this.labUnit2, "labUnit2");
+            this.labUnit2.Name = "labUnit2";
+            // 
+            // labUnit
+            // 
+            resources.ApplyResources(this.labUnit, "labUnit");
+            this.labUnit.Name = "labUnit";
+            // 
+            // dateValidDate
+            // 
+            resources.ApplyResources(this.dateValidDate, "dateValidDate");
+            this.dateValidDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateValidDate.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
+            this.dateValidDate.Name = "dateValidDate";
+            this.dateValidDate.Value = new System.DateTime(2021, 5, 2, 0, 0, 0, 0);
+            // 
+            // LabValidDate
+            // 
+            resources.ApplyResources(this.LabValidDate, "LabValidDate");
+            this.LabValidDate.Name = "LabValidDate";
+            // 
+            // cmbProType
+            // 
+            this.cmbProType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbProType.FormattingEnabled = true;
+            this.cmbProType.Items.AddRange(new object[] {
+            resources.GetString("cmbProType.Items"),
+            resources.GetString("cmbProType.Items1")});
+            resources.ApplyResources(this.cmbProType, "cmbProType");
+            this.cmbProType.Name = "cmbProType";
+            this.cmbProType.SelectedIndexChanged += new System.EventHandler(this.cmbProType_SelectedIndexChanged);
+            // 
             // btnAddD
             // 
             this.btnAddD.BackColor = System.Drawing.Color.Transparent;
@@ -411,31 +469,23 @@
             this.btnAddD.UseVisualStyleBackColor = false;
             this.btnAddD.Click += new System.EventHandler(this.btnAddD_Click);
             // 
-            // label16
-            // 
-            resources.ApplyResources(this.label16, "label16");
-            this.label16.Name = "label16";
-            // 
-            // txtDiluteVol
-            // 
-            this.txtDiluteVol.IsNull = false;
-            resources.ApplyResources(this.txtDiluteVol, "txtDiluteVol");
-            this.txtDiluteVol.MaxValue = new decimal(new int[] {
-            30000,
-            0,
-            0,
-            0});
-            this.txtDiluteVol.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtDiluteVol.Name = "txtDiluteVol";
-            // 
             // label15
             // 
             resources.ApplyResources(this.label15, "label15");
             this.label15.Name = "label15";
+            // 
+            // btnLoopAddR
+            // 
+            this.btnLoopAddR.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.btnLoopAddR, "btnLoopAddR");
+            this.btnLoopAddR.EnabledSet = true;
+            this.btnLoopAddR.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnLoopAddR.FlatAppearance.BorderSize = 0;
+            this.btnLoopAddR.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnLoopAddR.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnLoopAddR.Name = "btnLoopAddR";
+            this.btnLoopAddR.UseVisualStyleBackColor = false;
+            this.btnLoopAddR.Click += new System.EventHandler(this.btnLoopAddR_Click);
             // 
             // txtRgBatch
             // 
@@ -470,8 +520,8 @@
             // 
             // txtRgLastTest
             // 
-            this.txtRgLastTest.IsNull = false;
             resources.ApplyResources(this.txtRgLastTest, "txtRgLastTest");
+            this.txtRgLastTest.IsNull = false;
             this.txtRgLastTest.MaxValue = new decimal(new int[] {
             1000,
             0,
@@ -486,8 +536,8 @@
             // 
             // txtRgAllTest
             // 
-            this.txtRgAllTest.IsNull = false;
             resources.ApplyResources(this.txtRgAllTest, "txtRgAllTest");
+            this.txtRgAllTest.IsNull = false;
             this.txtRgAllTest.MaxValue = new decimal(new int[] {
             1000,
             0,
@@ -687,7 +737,7 @@
         System.Drawing.Color.White,
         System.Drawing.Color.White,
         System.Drawing.Color.White,
-        System.Drawing.Color.White,
+        System.Drawing.Color.Green,
         System.Drawing.Color.Green,
         System.Drawing.Color.Green,
         System.Drawing.Color.Green,
@@ -723,217 +773,16 @@
         " ",
         " ",
         "  ",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
         " ",
         " ",
         " ",
@@ -1345,9 +1194,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ValidDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn NoUsePro;
         private CustomControl.FunctionButton btnAddD;
-        private System.Windows.Forms.Label label16;
-        private CustomControl.userNumTextBox txtDiluteVol;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Timer timer1;
+        private CustomControl.FunctionButton btnLoopAddR;
+        private System.Windows.Forms.ComboBox cmbProType;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.DateTimePicker dateValidDate;
+        private System.Windows.Forms.Label LabValidDate;
+        private System.Windows.Forms.Label labUnit2;
+        private System.Windows.Forms.Label labUnit;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox textBox8;
     }
 }

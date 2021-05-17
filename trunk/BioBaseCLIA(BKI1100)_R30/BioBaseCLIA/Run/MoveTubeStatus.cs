@@ -19,7 +19,7 @@ namespace BioBaseCLIA.Run
         /// </summary>
         public int StepNum { get; set; }
         /// <summary>
-        /// 取管位置(编写方法0-x),0代表管架，1代表反应盘，2代表清洗盘，x代表取管的位置
+        /// 取管位置(编写方法0-x),0代表暂存盘，1代表反应盘，2代表清洗盘，x代表取管的位置
         /// </summary>
         public string TakeTubePos{ get; set; }
         /// <summary>

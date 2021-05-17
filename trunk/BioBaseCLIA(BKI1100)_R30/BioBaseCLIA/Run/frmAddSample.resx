@@ -238,7 +238,7 @@
     <value>loadNum</value>
   </data>
   <data name="&gt;&gt;loadNum.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;loadNum.Parent" xml:space="preserve">
     <value>groupBoxLoad</value>
@@ -262,7 +262,7 @@
     <value>loadStar</value>
   </data>
   <data name="&gt;&gt;loadStar.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;loadStar.Parent" xml:space="preserve">
     <value>groupBoxLoad</value>
@@ -389,7 +389,7 @@
     <value>fbLoadClose</value>
   </data>
   <data name="&gt;&gt;fbLoadClose.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fbLoadClose.Parent" xml:space="preserve">
     <value>groupBoxLoad</value>
@@ -486,7 +486,7 @@
     <value>fbLoadRun</value>
   </data>
   <data name="&gt;&gt;fbLoadRun.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fbLoadRun.Parent" xml:space="preserve">
     <value>groupBoxLoad</value>
@@ -583,7 +583,7 @@
     <value>fbLoadAll</value>
   </data>
   <data name="&gt;&gt;fbLoadAll.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fbLoadAll.Parent" xml:space="preserve">
     <value>groupBoxLoad</value>
@@ -619,7 +619,7 @@
     <value>0</value>
   </data>
   <data name="definePanalLoad.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>1, 0</value>
   </data>
   <data name="definePanalLoad.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 213</value>
@@ -634,7 +634,7 @@
     <value>definePanalLoad</value>
   </data>
   <data name="&gt;&gt;definePanalLoad.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.definePanal, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.definePanal, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;definePanalLoad.Parent" xml:space="preserve">
     <value>groupBox6</value>
@@ -824,7 +824,7 @@
     <value>btnUnloadSP</value>
   </data>
   <data name="&gt;&gt;btnUnloadSP.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnUnloadSP.Parent" xml:space="preserve">
     <value>groupBox6</value>
@@ -921,7 +921,7 @@
     <value>btnMoreDelete</value>
   </data>
   <data name="&gt;&gt;btnMoreDelete.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnMoreDelete.Parent" xml:space="preserve">
     <value>groupBox6</value>
@@ -978,7 +978,7 @@
     <value>txtMoreSpRepetitions</value>
   </data>
   <data name="&gt;&gt;txtMoreSpRepetitions.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtMoreSpRepetitions.Parent" xml:space="preserve">
     <value>groupBox6</value>
@@ -1138,7 +1138,7 @@
     <value>btnMoreSave</value>
   </data>
   <data name="&gt;&gt;btnMoreSave.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnMoreSave.Parent" xml:space="preserve">
     <value>groupBox6</value>
@@ -1235,7 +1235,7 @@
     <value>btnMoreAdd</value>
   </data>
   <data name="&gt;&gt;btnMoreAdd.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnMoreAdd.Parent" xml:space="preserve">
     <value>groupBox6</value>
@@ -1289,7 +1289,7 @@
     <value>txtSpStartPos</value>
   </data>
   <data name="&gt;&gt;txtSpStartPos.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtSpStartPos.Parent" xml:space="preserve">
     <value>groupBox6</value>
@@ -1376,7 +1376,7 @@
     <value>txtSpNum</value>
   </data>
   <data name="&gt;&gt;txtSpNum.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtSpNum.Parent" xml:space="preserve">
     <value>groupBox6</value>
@@ -1430,7 +1430,7 @@
     <value>txtSpCode2</value>
   </data>
   <data name="&gt;&gt;txtSpCode2.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.userTextBoxBase, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.userTextBoxBase, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtSpCode2.Parent" xml:space="preserve">
     <value>groupBox6</value>
@@ -1484,7 +1484,7 @@
     <value>txtSpCode1</value>
   </data>
   <data name="&gt;&gt;txtSpCode1.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.userTextBoxBase, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.userTextBoxBase, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtSpCode1.Parent" xml:space="preserve">
     <value>groupBox6</value>
@@ -1516,6 +1516,60 @@
   <data name="&gt;&gt;groupBox6.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="txtScanEndNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>146, 60</value>
+  </data>
+  <data name="txtScanEndNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 21</value>
+  </data>
+  <data name="txtScanEndNo.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <data name="txtScanEndNo.Text" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="txtScanEndNo.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;txtScanEndNo.Name" xml:space="preserve">
+    <value>txtScanEndNo</value>
+  </data>
+  <data name="&gt;&gt;txtScanEndNo.Type" xml:space="preserve">
+    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtScanEndNo.Parent" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;txtScanEndNo.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="txtScanStartNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>82, 60</value>
+  </data>
+  <data name="txtScanStartNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 21</value>
+  </data>
+  <data name="txtScanStartNo.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="txtScanStartNo.Text" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="txtScanStartNo.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;txtScanStartNo.Name" xml:space="preserve">
+    <value>txtScanStartNo</value>
+  </data>
+  <data name="&gt;&gt;txtScanStartNo.Type" xml:space="preserve">
+    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtScanStartNo.Parent" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;txtScanStartNo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="AutoUploadAndUnload1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1544,7 +1598,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;AutoUploadAndUnload1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="cmbBatch.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1574,7 +1628,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;cmbBatch.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="lblBatch.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1604,7 +1658,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;lblBatch.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="chkScanSampleCode.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1634,40 +1688,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;chkScanSampleCode.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="label12.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>34, 63</value>
-  </data>
-  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 12</value>
-  </data>
-  <data name="label12.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
-  </data>
-  <data name="label12.Text" xml:space="preserve">
-    <value>孔位：</value>
-  </data>
-  <data name="label12.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;label12.Name" xml:space="preserve">
-    <value>label12</value>
-  </data>
-  <data name="&gt;&gt;label12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label12.Parent" xml:space="preserve">
-    <value>groupBox5</value>
-  </data>
-  <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="label13.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1700,55 +1721,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="txtScanEndNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>146, 60</value>
-  </data>
-  <data name="txtScanEndNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 21</value>
-  </data>
-  <data name="txtScanEndNo.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
-  </data>
-  <data name="txtScanEndNo.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;txtScanEndNo.Name" xml:space="preserve">
-    <value>txtScanEndNo</value>
-  </data>
-  <data name="&gt;&gt;txtScanEndNo.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtScanEndNo.Parent" xml:space="preserve">
-    <value>groupBox5</value>
-  </data>
-  <data name="&gt;&gt;txtScanEndNo.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="txtScanStartNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 60</value>
-  </data>
-  <data name="txtScanStartNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 21</value>
-  </data>
-  <data name="txtScanStartNo.TabIndex" type="System.Int32, mscorlib">
-    <value>33</value>
-  </data>
-  <data name="txtScanStartNo.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;txtScanStartNo.Name" xml:space="preserve">
-    <value>txtScanStartNo</value>
-  </data>
-  <data name="&gt;&gt;txtScanStartNo.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtScanStartNo.Parent" xml:space="preserve">
-    <value>groupBox5</value>
-  </data>
-  <data name="&gt;&gt;txtScanStartNo.ZOrder" xml:space="preserve">
-    <value>7</value>
   </data>
   <data name="label14.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1781,7 +1754,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="txtSpPosition.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1799,13 +1772,13 @@
     <value>txtSpPosition</value>
   </data>
   <data name="&gt;&gt;txtSpPosition.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtSpPosition.Parent" xml:space="preserve">
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;txtSpPosition.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="chkEmergency.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1838,7 +1811,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;chkEmergency.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1868,7 +1841,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="txtSpBarCode.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1886,13 +1859,13 @@
     <value>txtSpBarCode</value>
   </data>
   <data name="&gt;&gt;txtSpBarCode.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.userTextBoxBase, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.userTextBoxBase, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtSpBarCode.Parent" xml:space="preserve">
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;txtSpBarCode.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="btnDelete.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1983,13 +1956,13 @@
     <value>btnDelete</value>
   </data>
   <data name="&gt;&gt;btnDelete.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnDelete.Parent" xml:space="preserve">
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2019,7 +1992,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="btnModify.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2110,13 +2083,13 @@
     <value>btnModify</value>
   </data>
   <data name="&gt;&gt;btnModify.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnModify.Parent" xml:space="preserve">
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;btnModify.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>14</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2146,7 +2119,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>15</value>
   </data>
   <data name="btnAdd.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2237,13 +2210,13 @@
     <value>btnAdd</value>
   </data>
   <data name="&gt;&gt;btnAdd.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnAdd.Parent" xml:space="preserve">
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;btnAdd.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>16</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2273,7 +2246,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>17</value>
   </data>
   <data name="cmbPipeType.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2303,7 +2276,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;cmbPipeType.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>18</value>
   </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2333,7 +2306,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>19</value>
   </data>
   <data name="cmbSpType.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2408,7 +2381,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;cmbSpType.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>20</value>
   </data>
   <data name="txtSpRepetitions.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2429,13 +2402,13 @@
     <value>txtSpRepetitions</value>
   </data>
   <data name="&gt;&gt;txtSpRepetitions.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.userNumTextBox, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtSpRepetitions.Parent" xml:space="preserve">
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;txtSpRepetitions.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>21</value>
   </data>
   <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 13</value>
@@ -2550,7 +2523,7 @@
     <value>btnReturn</value>
   </data>
   <data name="&gt;&gt;btnReturn.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnReturn.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -2763,7 +2736,7 @@
     <value>crysDgGroupPro</value>
   </data>
   <data name="&gt;&gt;crysDgGroupPro.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.CRYSDg, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.CRYSDg, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;crysDgGroupPro.Parent" xml:space="preserve">
     <value>groupBox3</value>
@@ -2860,7 +2833,7 @@
     <value>button1</value>
   </data>
   <data name="&gt;&gt;button1.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;button1.Parent" xml:space="preserve">
     <value>groupBox3</value>
@@ -2957,7 +2930,7 @@
     <value>btnAddtoProgram</value>
   </data>
   <data name="&gt;&gt;btnAddtoProgram.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnAddtoProgram.Parent" xml:space="preserve">
     <value>groupBox3</value>
@@ -3301,6 +3274,6 @@
     <value>frmAddSample</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>BioBaseCLIA.frmSmallParent, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.frmSmallParent, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

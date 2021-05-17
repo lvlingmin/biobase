@@ -331,11 +331,11 @@ namespace BioBaseCLIA.InfoSetting
             return startMessage + MSH() + MSA()+ endMessage;
         }
         private static tbSampleInfo _sampleInfo=new tbSampleInfo();
-        public tbSampleInfo GetSampleInfo(tbSampleInfo sampleInfo)
+        public tbSampleInfo GetSampleInfo(tbSampleInfo modelSp)
         {
            if (p != null)
                 {
-                    _sampleInfo = sampleInfo;
+                    _sampleInfo = modelSp;
                     try
                     {
                         _sampleInfo.Age = Convert.ToDouble(p.Age);
