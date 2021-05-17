@@ -291,7 +291,7 @@ namespace BioBaseCLIA.DataQuery
         {
             if (e.KeyCode != Keys.Enter)
                 return;
-            if (txtSubstrateCode.Text.Length != 15 || !judgeSubBarCode(txtSubstrateCode.Text.Trim()))
+            if (txtSubstrateCode.Text.Length != 12 || !judgeSubBarCode(txtSubstrateCode.Text.Trim()))
             {
                 Invoke(new Action(() =>
                 {
@@ -320,22 +320,16 @@ namespace BioBaseCLIA.DataQuery
                 return false;
             }
 
-            string batchDate = decryption.Substring(1, 3);//批号日期
-            string productDate = decryption.Substring(4,3);//生产日期
-            int testN = Convert.ToInt32(decryption.Substring(7, 3), 16);//测试次数
-            int serialNum = Convert.ToInt32(decryption.Substring(10, 4), 16);//流水号
+            string date = decryption.Substring(1, 3);//生产日期
+            int testN = Convert.ToInt32(decryption.Substring(4, 3), 16);//测试次数
+            int serialNum = Convert.ToInt32(decryption.Substring(7, 4), 16);//流水号
 
             string year = "", month = "", day = "";
-            string year2 = "", month2 = "", day2 = "";
             try
             {
-                year = StringUtils.instance.reverseDate(batchDate.Substring(0, 1).ToCharArray()[0]);
-                month = StringUtils.instance.reverseDate(batchDate.Substring(1, 1).ToCharArray()[0]);
-                day = StringUtils.instance.reverseDate(batchDate.Substring(2, 1).ToCharArray()[0]);
-
-                year2 = StringUtils.instance.reverseDate(productDate.Substring(0, 1).ToCharArray()[0]);
-                month2 = StringUtils.instance.reverseDate(productDate.Substring(1, 1).ToCharArray()[0]);
-                day2 = StringUtils.instance.reverseDate(productDate.Substring(2, 1).ToCharArray()[0]);
+                year = StringUtils.instance.reverseDate(date.Substring(0, 1).ToCharArray()[0]);
+                month = StringUtils.instance.reverseDate(date.Substring(1, 1).ToCharArray()[0]);
+                day = StringUtils.instance.reverseDate(date.Substring(2, 1).ToCharArray()[0]);
             }
             catch
             {
@@ -355,25 +349,10 @@ namespace BioBaseCLIA.DataQuery
                 day = day.Insert(0, "0");
             }
 
-            while (year2.Length < 4)
-            {
-                year2 = year2.Insert(0, "20");
-            }
-            while (month2.Length < 2)
-            {
-                month2 = month2.Insert(0, "0");
-            }
-            while (day2.Length < 2)
-            {
-                day2 = day2.Insert(0, "0");
-            }
+            int time = int.Parse(year + month + day);
+            int check = (10 + time + testN + serialNum) % 7;
 
-            int batchTime = int.Parse(year + month + day);
-            int productTime = int.Parse(year2 + month2 + day2);
-            
-            int check = (10 + batchTime + productTime + testN + serialNum) % 7;
-
-            if (decryption.Substring(14, 1) != check.ToString())
+            if (decryption.Substring(11, 1) != check.ToString())
             {
                 return false;
             }
@@ -381,7 +360,7 @@ namespace BioBaseCLIA.DataQuery
             testNum = testN.ToString();
             try
             {
-                dtime = DateTime.ParseExact(productTime.ToString(), "yyyyMMdd", null, System.Globalization.DateTimeStyles.AllowWhiteSpaces);
+                dtime = DateTime.ParseExact(time.ToString(), "yyyyMMdd", null, System.Globalization.DateTimeStyles.AllowWhiteSpaces);
             }
             catch
             {
@@ -407,7 +386,7 @@ namespace BioBaseCLIA.DataQuery
                     txtSubstrateAllTest.Text = dt.Rows[0]["AllTestNumber"].ToString();
                     txtSubstrateLastTest.Text = dt.Rows[0]["leftoverTest"].ToString();
                     //对比生产日期后一年 和 数据库的有效期
-                    DateTime dt1 = dtime.AddYears(1).AddDays(-1);
+                    DateTime dt1 = dtime.AddYears(1);
                     DateTime dt2 = DateTime.ParseExact(dt.Rows[0]["ValidDate"].ToString().Replace("-", ""), "yyyyMMdd", null, System.Globalization.DateTimeStyles.AllowWhiteSpaces);
                     if (DateTime.Compare(dt1, dt2) <= 0)//使用两个最小的作为有效期
                     {
@@ -428,19 +407,16 @@ namespace BioBaseCLIA.DataQuery
                     txtSubstrateAllTest.Text = testNum;
                     txtSubstrateLastTest.Text = testNum;
                     //对比生产日期后一年 和 今天装载日期后一月
-                    DateTime dt1 = dtime.AddYears(1).AddDays(-1);
-                    ValidDate.Value = dt1;
-                    #region 暂使用试剂盒有效期
-                    //DateTime dt2 = DateTime.Now.AddMonths(1);
-                    //if (DateTime.Compare(dt1, dt2) <= 0)//使用两个最小的作为有效期
-                    //{
-                    //    ValidDate.Value = dt1;
-                    //}
-                    //else
-                    //{
-                    //    ValidDate.Value = dt2;
-                    //}
-                    #endregion
+                    DateTime dt1 = dtime.AddYears(1);
+                    DateTime dt2 = DateTime.Now.AddMonths(1);
+                    if (DateTime.Compare(dt1, dt2) <= 0)//使用两个最小的作为有效期
+                    {
+                        ValidDate.Value = dt1;
+                    }
+                    else
+                    {
+                        ValidDate.Value = dt2;
+                    }
                 }));
             }
             fillFlag = true;
