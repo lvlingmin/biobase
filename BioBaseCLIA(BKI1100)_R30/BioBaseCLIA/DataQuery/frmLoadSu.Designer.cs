@@ -38,8 +38,9 @@
             this.txtSubstrateAllTest = new BioBaseCLIA.CustomControl.userNumTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.ValidDate = new System.Windows.Forms.DateTimePicker();
+            this.chkManualInput = new System.Windows.Forms.CheckBox();
+            this.btnDelSubstrate = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.btnLoadSubstrate = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.btnChangeSubstrate = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.SuspendLayout();
             // 
             // label7
@@ -61,6 +62,7 @@
             // 
             resources.ApplyResources(this.txtSubstrateCode, "txtSubstrateCode");
             this.txtSubstrateCode.Name = "txtSubstrateCode";
+            this.txtSubstrateCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSubstrateCode_KeyDown);
             // 
             // txtSubstrateLastTest
             // 
@@ -106,10 +108,30 @@
             this.ValidDate.Name = "ValidDate";
             this.ValidDate.Value = new System.DateTime(2018, 10, 17, 0, 0, 0, 0);
             // 
+            // chkManualInput
+            // 
+            resources.ApplyResources(this.chkManualInput, "chkManualInput");
+            this.chkManualInput.Name = "chkManualInput";
+            this.chkManualInput.UseVisualStyleBackColor = true;
+            this.chkManualInput.CheckedChanged += new System.EventHandler(this.chkManualInput_CheckedChanged);
+            // 
+            // btnDelSubstrate
+            // 
+            this.btnDelSubstrate.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.btnDelSubstrate, "btnDelSubstrate");
+            this.btnDelSubstrate.EnabledSet = true;
+            this.btnDelSubstrate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnDelSubstrate.FlatAppearance.BorderSize = 0;
+            this.btnDelSubstrate.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnDelSubstrate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnDelSubstrate.Name = "btnDelSubstrate";
+            this.btnDelSubstrate.UseVisualStyleBackColor = false;
+            this.btnDelSubstrate.Click += new System.EventHandler(this.btnDelSubstrate_Click);
+            // 
             // btnLoadSubstrate
             // 
-            resources.ApplyResources(this.btnLoadSubstrate, "btnLoadSubstrate");
             this.btnLoadSubstrate.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.btnLoadSubstrate, "btnLoadSubstrate");
             this.btnLoadSubstrate.EnabledSet = true;
             this.btnLoadSubstrate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnLoadSubstrate.FlatAppearance.BorderSize = 0;
@@ -119,34 +141,23 @@
             this.btnLoadSubstrate.UseVisualStyleBackColor = false;
             this.btnLoadSubstrate.Click += new System.EventHandler(this.btnLoadSubstrate_Click);
             // 
-            // btnChangeSubstrate
-            // 
-            resources.ApplyResources(this.btnChangeSubstrate, "btnChangeSubstrate");
-            this.btnChangeSubstrate.BackColor = System.Drawing.Color.Transparent;
-            this.btnChangeSubstrate.EnabledSet = true;
-            this.btnChangeSubstrate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnChangeSubstrate.FlatAppearance.BorderSize = 0;
-            this.btnChangeSubstrate.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnChangeSubstrate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnChangeSubstrate.Name = "btnChangeSubstrate";
-            this.btnChangeSubstrate.UseVisualStyleBackColor = false;
-            this.btnChangeSubstrate.Click += new System.EventHandler(this.btnChangeSubstrate_Click);
-            // 
             // frmLoadSu
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.Controls.Add(this.chkManualInput);
+            this.Controls.Add(this.btnDelSubstrate);
+            this.Controls.Add(this.btnLoadSubstrate);
             this.Controls.Add(this.ValidDate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtSubstrateAllTest);
             this.Controls.Add(this.txtSubstrateLastTest);
-            this.Controls.Add(this.btnLoadSubstrate);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.btnChangeSubstrate);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtSubstrateCode);
             this.Name = "frmLoadSu";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmLoadSu_FormClosed);
             this.Load += new System.EventHandler(this.frmLoadSu_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -154,16 +165,16 @@
         }
 
         #endregion
-
-        private CustomControl.FunctionButton btnLoadSubstrate;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private CustomControl.FunctionButton btnChangeSubstrate;
         private System.Windows.Forms.Label label8;
         private CustomControl.userTextBoxBase txtSubstrateCode;
         private CustomControl.userNumTextBox txtSubstrateLastTest;
         private CustomControl.userNumTextBox txtSubstrateAllTest;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker ValidDate;
+        private System.Windows.Forms.CheckBox chkManualInput;
+        private CustomControl.FunctionButton btnDelSubstrate;
+        private CustomControl.FunctionButton btnLoadSubstrate;
     }
 }

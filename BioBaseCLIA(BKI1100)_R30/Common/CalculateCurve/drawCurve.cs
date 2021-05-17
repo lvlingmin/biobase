@@ -70,12 +70,16 @@ namespace BioBaseCLIA.CalculateCurve
             //#endregion
             #region lyn add 2016.09.19 显示最新30个点的值
             datacopy = dataSoure.Copy();
-            if (datacopy.Rows.Count > 30)
+            //if (datacopy.Rows.Count > 30)
+            //{
+            //    for (int i = 0; i < dataSoure.Rows.Count - 30; i++)
+            //        datacopy.Rows.RemoveAt(0);
+            //}
+            if (datacopy.Rows.Count > 31)  //31点 屏蔽后面的新点 
             {
-                for (int i = 0; i < dataSoure.Rows.Count - 30; i++)
-                    datacopy.Rows.RemoveAt(0);
+                for (int i = 0; i < dataSoure.Rows.Count - 31; i++)
+                    datacopy.Rows.RemoveAt(31);
             }
-
 
             #endregion
             string tempStr = "";
@@ -85,7 +89,7 @@ namespace BioBaseCLIA.CalculateCurve
                 {
                     tempStr = datacopy.Rows[i][0].ToString();
                     tempNum++;
-                    if (tempNum > 30)
+                    if (tempNum > 31)
                         break;
                 }
                 DataRow dr = dt.NewRow();
@@ -106,7 +110,7 @@ namespace BioBaseCLIA.CalculateCurve
 
             //AVG = double.IsNaN(AVG) || AVG == 0 ? AVGVALUE : AVG;
             //SD = double.IsNaN(SD) || SD == 0 ? DifferenceValue : SD;
-            x = (double)(con.Width - 120) / 30;
+            x = (double)(con.Width - 120) / 31;
             y = (double)(con.Height - 40) / ((DifferenceValue * 8) * 1000);
             yy = (con.Height - 40) / 2 + 20;//中心数所在的位置
             perYValue = AVGVALUE / 7D;
@@ -116,24 +120,24 @@ namespace BioBaseCLIA.CalculateCurve
             Bitmap bmp = new Bitmap(con.Width, con.Height);
             Graphics g = Graphics.FromImage(bmp);
             //Graphics g = con.CreateGraphics();
-            g.DrawLine(new Pen(Color.Black, 2), zzQC(0, AVGVALUE - 4 * DifferenceValue), zzQC(30, 20, AVGVALUE - 4 * DifferenceValue, 0));
-            g.DrawString("＞", new Font("Arial", 8), br, zzQC(30, 15, AVGVALUE - 4 * DifferenceValue, 7));
+            g.DrawLine(new Pen(Color.Black, 2), zzQC(0, AVGVALUE - 4 * DifferenceValue), zzQC(31, 20, AVGVALUE - 4 * DifferenceValue, 0));
+            g.DrawString("＞", new Font("Arial", 8), br, zzQC(31, 15, AVGVALUE - 4 * DifferenceValue, 7));
             g.DrawLine(new Pen(Color.Black, 2), zzQC(0, (AVGVALUE - DifferenceValue * 4)), zzQC(0, 0, (AVGVALUE + DifferenceValue * 4), 0));
             g.DrawString("＾", new Font("Arial", 20), br, zzQC(0, -18, (AVGVALUE + DifferenceValue * 4), 6));
             if (dt.Rows.Count > 2)
             {
-                g.DrawString("N:" + dt.Rows.Count.ToString(), new Font("Arial", 8), br, zzQC(6, 34, AVGVALUE + 3 * DifferenceValue, 9 + 20));
+                g.DrawString("N:" + dataSoure.Rows.Count.ToString(), new Font("Arial", 8), br, zzQC(6, 34, AVGVALUE + 3 * DifferenceValue, 9 + 20));
                 g.DrawString("X:" + AVGVALUE.ToString("0.###"), new Font("Arial", 8), br, zzQC(9, 34, AVGVALUE + 3 * DifferenceValue, 9 + 20));
                 g.DrawString("SD:" + DifferenceValue.ToString("0.###"), new Font("Arial", 8), br, zzQC(14, 34, AVGVALUE + 3 * DifferenceValue, 9 + 20));
                 g.DrawString("CV:" + (DifferenceValue / AVGVALUE).ToString("0.###"), new Font("Arial", 8), br, zzQC(18, 34, AVGVALUE + 3 * DifferenceValue, 9 + 20));
             }
-            g.DrawLine(new Pen(Color.Blue, 1), zzQC(0, 0, AVGVALUE, -0), zzQC(30, 10, AVGVALUE, -0));
-            g.DrawLine(new Pen(Color.Red, 1), zzQC(0, 0, AVGVALUE + 3 * DifferenceValue, -0), zzQC(30, 10, AVGVALUE + 3 * DifferenceValue, -0));
-            g.DrawLine(new Pen(Color.Orange, 1), zzQC(0, 0, AVGVALUE + 2 * DifferenceValue, -0), zzQC(30, 10, AVGVALUE + 2 * DifferenceValue, -0));
-            g.DrawLine(new Pen(Color.Green, 1), zzQC(0, 0, AVGVALUE + 1 * DifferenceValue, -0), zzQC(30, 10, AVGVALUE + 1 * DifferenceValue, -0));
-            g.DrawLine(new Pen(Color.Red, 1), zzQC(0, 0, AVGVALUE - 3 * DifferenceValue, -0), zzQC(30, 10, AVGVALUE - 3 * DifferenceValue, -0));
-            g.DrawLine(new Pen(Color.Orange, 1), zzQC(0, 0, AVGVALUE - 2 * DifferenceValue, -0), zzQC(30, 10, AVGVALUE - 2 * DifferenceValue, -0));
-            g.DrawLine(new Pen(Color.Green, 1), zzQC(0, 0, AVGVALUE - DifferenceValue, -0), zzQC(30, 10, AVGVALUE - DifferenceValue, -0));
+            g.DrawLine(new Pen(Color.Blue, 1), zzQC(0, 0, AVGVALUE, -0), zzQC(31, 10, AVGVALUE, -0));
+            g.DrawLine(new Pen(Color.Red, 1), zzQC(0, 0, AVGVALUE + 3 * DifferenceValue, -0), zzQC(31, 10, AVGVALUE + 3 * DifferenceValue, -0));
+            g.DrawLine(new Pen(Color.Orange, 1), zzQC(0, 0, AVGVALUE + 2 * DifferenceValue, -0), zzQC(31, 10, AVGVALUE + 2 * DifferenceValue, -0));
+            g.DrawLine(new Pen(Color.Green, 1), zzQC(0, 0, AVGVALUE + 1 * DifferenceValue, -0), zzQC(31, 10, AVGVALUE + 1 * DifferenceValue, -0));
+            g.DrawLine(new Pen(Color.Red, 1), zzQC(0, 0, AVGVALUE - 3 * DifferenceValue, -0), zzQC(31, 10, AVGVALUE - 3 * DifferenceValue, -0));
+            g.DrawLine(new Pen(Color.Orange, 1), zzQC(0, 0, AVGVALUE - 2 * DifferenceValue, -0), zzQC(31, 10, AVGVALUE - 2 * DifferenceValue, -0));
+            g.DrawLine(new Pen(Color.Green, 1), zzQC(0, 0, AVGVALUE - DifferenceValue, -0), zzQC(31, 10, AVGVALUE - DifferenceValue, -0));
 
             g.DrawString("+3SD", new Font("Arial", 8), br, zzQC(0, -34, AVGVALUE + 3 * DifferenceValue, 9 - 0));
             g.DrawString("+2SD", new Font("Arial", 8), br, zzQC(0, -34, AVGVALUE + 2 * DifferenceValue, 9 - 0));
@@ -144,17 +148,18 @@ namespace BioBaseCLIA.CalculateCurve
             g.DrawString("-3SD", new Font("Arial", 8), br, zzQC(0, -34, AVGVALUE - 3 * DifferenceValue, 9 - 0));
             //g.DrawString("AAA", new Font("Arial", 8), br, zzQC(1, -34, 52.7, 9 - 0));
 
-            g.DrawString(Convert.ToDouble(AVGVALUE + 3 * DifferenceValue).ToString("0.###"), new Font("Arial", 8), br, zzQC(30, 24, AVGVALUE + 3 * DifferenceValue, 9 - 0));
-            g.DrawString(Convert.ToDouble(AVGVALUE + 2 * DifferenceValue).ToString("0.###"), new Font("Arial", 8), br, zzQC(30, 24, AVGVALUE + 2 * DifferenceValue, 9 - 0));
-            g.DrawString(Convert.ToDouble(AVGVALUE + 1 * DifferenceValue).ToString("0.###"), new Font("Arial", 8), br, zzQC(30, 24, AVGVALUE + 1 * DifferenceValue, 9 - 0));
-            g.DrawString(Convert.ToDouble(AVGVALUE).ToString("0.###"), new Font("Arial", 8), br, zzQC(30, 24, AVGVALUE, 9 - 0));
-            g.DrawString(Convert.ToDouble(AVGVALUE - 1 * DifferenceValue).ToString("0.###"), new Font("Arial", 8), br, zzQC(30, 24, AVGVALUE - 1 * DifferenceValue, 9 - 0));
-            g.DrawString(Convert.ToDouble(AVGVALUE - 2 * DifferenceValue).ToString("0.###"), new Font("Arial", 8), br, zzQC(30, 24, AVGVALUE - 2 * DifferenceValue, 9 - 0));
-            g.DrawString(Convert.ToDouble(AVGVALUE - 3 * DifferenceValue).ToString("0.###"), new Font("Arial", 8), br, zzQC(30, 24, AVGVALUE - 3 * DifferenceValue, 9 - 0));
+            g.DrawString(Convert.ToDouble(AVGVALUE + 3 * DifferenceValue).ToString("0.###"), new Font("Arial", 8), br, zzQC(31, 24, AVGVALUE + 3 * DifferenceValue, 9 - 0));
+            g.DrawString(Convert.ToDouble(AVGVALUE + 2 * DifferenceValue).ToString("0.###"), new Font("Arial", 8), br, zzQC(31, 24, AVGVALUE + 2 * DifferenceValue, 9 - 0));
+            g.DrawString(Convert.ToDouble(AVGVALUE + 1 * DifferenceValue).ToString("0.###"), new Font("Arial", 8), br, zzQC(31, 24, AVGVALUE + 1 * DifferenceValue, 9 - 0));
+            g.DrawString(Convert.ToDouble(AVGVALUE).ToString("0.###"), new Font("Arial", 8), br, zzQC(31, 24, AVGVALUE, 9 - 0));
+            g.DrawString(Convert.ToDouble(AVGVALUE - 1 * DifferenceValue).ToString("0.###"), new Font("Arial", 8), br, zzQC(31, 24, AVGVALUE - 1 * DifferenceValue, 9 - 0));
+            g.DrawString(Convert.ToDouble(AVGVALUE - 2 * DifferenceValue).ToString("0.###"), new Font("Arial", 8), br, zzQC(31, 24, AVGVALUE - 2 * DifferenceValue, 9 - 0));
+            g.DrawString(Convert.ToDouble(AVGVALUE - 3 * DifferenceValue).ToString("0.###"), new Font("Arial", 8), br, zzQC(31, 24, AVGVALUE - 3 * DifferenceValue, 9 - 0));
 
 
             //g.DrawString("0", new Font("Arial", 8), br, zzQC(0, -8, 0, -1));
-            for (int i = 1; i < 31; i++)
+            //for (int i = 1; i < 31; i++)  
+            for (int i = 1; i < 32; i++)
             {
                 g.DrawLine(pn, zzOptical(i * 1, 0, AVGVALUE - 4 * DifferenceValue, 2), zzOptical(i * 1, 0, AVGVALUE - 4 * DifferenceValue, 8));//竖线
                 if (i % 2 == 0)

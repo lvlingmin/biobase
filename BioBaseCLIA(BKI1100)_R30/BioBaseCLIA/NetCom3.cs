@@ -279,6 +279,7 @@ namespace BioBaseCLIA
         public bool CheckMyIp_Port_Link()
         {
             string myip = GetIP();
+            //string[] myiparray = myip.Split('.');
             if (!CheckNetWorkLink())
             {
                 frmMessageShow frmMS = new frmMessageShow();
@@ -385,6 +386,23 @@ namespace BioBaseCLIA
                         }
                     }
                 }
+                /*
+                else
+                {
+                    if (NetCom3.Instance.CheckMyIp_Port_Link())
+                    {
+                        NetCom3.Instance.ConnectServer();
+                    }
+                    if (isConnect)
+                        return;
+                    else 
+                    {
+                        frmMessageShow frmMS = new frmMessageShow();
+                        frmMS.MessageShow("连接服务器消息", "服务器断开重新连接失败！");
+                        frmMS.Dispose();
+                    }
+                }
+                 */
             }
         }
 
@@ -634,6 +652,12 @@ namespace BioBaseCLIA
                                         break;
                                 }
                             }
+                            //if (!totalOrderFlag)
+                            //{
+                            //    byte[] byteData2 = cmd.HexStringToByteArray(waitOrder);
+                            //    client.BeginSend(byteData2, 0, byteData2.Length, 0, new AsyncCallback(OtherSendCallback), client);
+                            //    LogFile.Instance.Write(string.Format("{0}->:{1}", DateTime.Now.ToString("HH:mm:ss:fff"), order));
+                            //}
                         }));
                         waitAndAgainSend.IsBackground = true;
                         waitAndAgainSend.Start(order);
@@ -720,6 +744,7 @@ namespace BioBaseCLIA
                     }
                 }
             }
+
         }
         public void iapSend(String order, int orderType)
         {
@@ -962,6 +987,7 @@ namespace BioBaseCLIA
         {
             try
             {
+                //dw2018.12.24
                 // 从状态对象检索套接字。    
                 Socket client = (Socket)ar.AsyncState;
                 // 完成向下位机发送数据     
@@ -1238,9 +1264,51 @@ namespace BioBaseCLIA
                         LogFile.Instance.Write(string.Format("{0}<-:{1}", DateTime.Now.ToString("HH:mm:ss:fff"), state.sb.ToString()));
                         //2018-10-11 zlx mod
                         ReciveData = new string[state.sb.Length / 48];
-                        for (int i = 0; i < state.sb.Length / 48; i++)
+                        //for (int i = 0; i < state.sb.Length / 48; i++)
+                        //{
+                        //    ReciveData[i] = response.Substring(i * 48, 48);
+                        //}
+                        if (response.Contains("EB 90 CA"))
                         {
-                            ReciveData[i] = response.Substring(i * 48, 48);
+                            if (response.Contains("EB 90 CA A1 00 00 00") || response.Contains("EB 90 CA A2 00 00 00"))
+                            {
+                                ReciveData = new string[state.sb.Length / 48];
+                                for (int i = 0; i < state.sb.Length / 48; i++)
+                                {
+                                    ReciveData[i] = response.Substring(i * 48, 48);
+                                }
+                            }
+                            else if (response.Contains("EB 90 CA F1 FF"))
+                            {
+                                ReciveData = new string[state.sb.Length / 48];
+                                for (int i = 0; i < state.sb.Length / 48; i++)
+                                {
+                                    ReciveData[i] = response.Substring(i * 48, 48);
+                                }
+                            }
+                            else
+                            {
+                                int len = Convert.ToInt32(response.Substring(response.IndexOf("EB 90 CA"), 14).Substring(12, 2), 16);
+                                if (len < 11)
+                                    len = 11;
+                                len = (len + 5) * 3;
+
+                                ReciveData = new string[state.sb.Length / (len - 1)];
+                                //ReciveData[0] = response.Substring(0, len);
+                                for (int i = 0; i < state.sb.Length / (len - 1); i++)
+                                {
+                                    ReciveData[i] = response.Substring(i * len, len);
+                                }
+                                //MessageBox.Show("state.sb.Length:" + state.sb.Length + "----len:" + len + "\nReciveData[0]:" + ReciveData[0] + "\nReciveData[1]" + ReciveData[1]);
+                            }
+                        }
+                        else
+                        {
+                            ReciveData = new string[state.sb.Length / 48];
+                            for (int i = 0; i < state.sb.Length / 48; i++)
+                            {
+                                ReciveData[i] = response.Substring(i * 48, 48);
+                            }
                         }
                         response = string.Empty;
                         foreach (string tempResponse in ReciveData)
@@ -1252,7 +1320,7 @@ namespace BioBaseCLIA
                                 string orderTemp = tempResponse.Substring(tempResponse.ToString().IndexOf("EB 90") + 6, 5);     //"xx xx"
                                 string orderTemp2 = tempResponse.Substring(tempResponse.ToString().IndexOf("EB 90") + 6, 4); //"XX X"
                                 string orderTemp3 = tempResponse.Substring(tempResponse.ToString().IndexOf("EB 90") + 6, 8); //"XX XX XX"
-                                if (orderTemp == "CA F1" || orderTemp == "11 FF" || orderTemp == "11 AF" || orderTemp == "01 A0" || orderTemp == "11 A0" //"CA F1"射频读卡器初始化返回//"11 FF"版本号返回指令//仪器调教指令处理//仪器调试收到查询温度
+                                if (orderTemp.Substring(0, 2) == "CA" || orderTemp == "CA F1" || orderTemp == "11 FF" || orderTemp == "11 AF" || orderTemp == "01 A0" || orderTemp == "11 A0" //"CA F1"射频读卡器初始化返回//"11 FF"版本号返回指令//仪器调教指令处理//仪器调试收到查询温度
                                     || orderTemp == "A1 03" || orderTemp == "F1 01" || orderTemp == "F1 02" || orderTemp == "F1 03")//心跳包上下位机握手动作完毕//仪器初始化完毕   y modify 20180802  zlx mod 2018-08-16
                                 {
                                     if (orderTemp == "01 A0") 

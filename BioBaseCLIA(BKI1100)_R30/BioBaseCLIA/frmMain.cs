@@ -561,7 +561,7 @@ namespace BioBaseCLIA
                 frmWorkList.btnRunStatus += new Action(RunBtnStatus);
                 frmWorkList.dbtnRackStatus -= new Action(dbtnRackStatus);
                 frmWorkList.dbtnRackStatus += new Action(dbtnRackStatus);
-                
+
                 LogFile.Instance.Write("btnRunClick委托个数:" + btnRunClick.GetInvocationList().Count());
                 while (btnRunClick != null && btnRunClick.GetInvocationList().Length > 1)//保证只有一个委托 
                 {
@@ -1586,8 +1586,8 @@ namespace BioBaseCLIA
 
         private void btnVersion_Click(object sender, EventArgs e)
         {
-            frmVersion frm = new frmVersion();
-            frm.Show();
+            frmVersion frmVersion = new frmVersion();
+            frmVersion.Show();
             //Type tempType = Type.GetTypeFromProgID("Shell.Application");
             //object oleObject = System.Activator.CreateInstance(tempType);
             //tempType.InvokeMember("ToggleDesktop", BindingFlags.InvokeMethod, null, oleObject, null);

@@ -72,7 +72,7 @@
     <Compile Include="CalculateCurve\drawCurve.cs" />
     <Compile Include="CalculateCurve\FourPL.cs" />
     <Compile Include="CalculateCurve\FourPLForSandwichMethod.cs" />
-    <Compile Include="CalculateCurve\Linear.cs" />
+    <Compile Include="CalculateCurve\LinearFitting.cs" />
     <Compile Include="CalculateCurve\newFourPL.cs" />
     <Compile Include="CalculateCurve\PolynomialFit.cs" />
     <Compile Include="CalculateCurve\report.cs" />

@@ -38,7 +38,7 @@ namespace Common
         /// 中间变量，曲线类型
         /// </summary>
         int tempCurveType;
-        string PointNum;
+        string PointNum ="";
         #endregion
         /// <summary>
         /// 六参构造函数
@@ -94,25 +94,32 @@ namespace Common
             tempCurveType = CurveType;
             foreach (string qcRuleSingle in qcRule)
             {
+                if (qcRuleSingle == "1")
+                {
+                    if (one2s(Mean, SD))
+                    {
+                        Info += PointNum + "号点违反1-2s质控规则" + Environment.NewLine + Environment.NewLine;
+                    }
+                }
                 if (qcRuleSingle == "2")
                 {
                     if (one3S(Mean, SD))
                     {
-                        Info += PointNum + "号点违反1-3s质控规则" + Environment.NewLine;
+                        Info += PointNum + "号点违反1-3s质控规则" + Environment.NewLine + Environment.NewLine;
                     }
                 }
                 else if (qcRuleSingle == "3")
                 {
                     if (two2S(Mean, SD))
                     {
-                        Info += PointNum + "号点违反2-2s质控规则" + Environment.NewLine;
+                        Info += PointNum + "号点违反2-2s质控规则" + Environment.NewLine + Environment.NewLine;
                     }
                 }
                 else if (qcRuleSingle == "4")
                 {
                     if (four1S(Mean, SD))
                     {
-                        Info += PointNum + "号点违反4-1s质控规则" + Environment.NewLine;
+                        Info += PointNum + "号点违反4-1s质控规则" + Environment.NewLine + Environment.NewLine;
                     }
 
                 }
@@ -120,7 +127,7 @@ namespace Common
                 {
                     if (tenX(Mean, SD))
                     {
-                        Info += PointNum + "号点违反10x质控规则" + Environment.NewLine;
+                        Info += PointNum + "号点违反10x质控规则" + Environment.NewLine + Environment.NewLine;
                     }
                 }
             }
@@ -217,7 +224,6 @@ namespace Common
             colorPoint = "1";
             foreach (string qcRuleSingle in qcRule)
             {
-
                 if (qcRuleSingle == "2")
                 {
                     if (one3S(Mean, SD))
@@ -258,11 +264,34 @@ namespace Common
         /// <returns>是否违反1-2s规则</returns>
         bool one2s(double Mean, double SD)
         {
-            if ((QCCurrentValue > Mean + 2 * SD))
+            //if ((QCCurrentValue > Mean + 2 * SD))
+            //{
+            //    return true;
+            //}
+            //return false;
+
+            
+            bool flag = false; 
+            PointNum = ""; 
+            DataTable dt = new DataTable();
+            if (tempCurveType == 0) //标准质控图
             {
-                return true;
+                dt = dtQCValues;
             }
-            return false;
+            else                //相对质控图
+            {
+                dt = dtQCValuesDay;
+            }
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                double QCCurrentValue = double.Parse(dt.Rows[i]["Concentration"].ToString());
+                if (QCCurrentValue > Mean + 2 * SD || QCCurrentValue < Mean - 2 * SD)
+                { 
+                    PointNum += "(" + (i + 1).ToString() + ")";
+                    flag = true;                       
+                }
+            }
+            return flag;
         }
 
         /// <summary>
@@ -273,13 +302,14 @@ namespace Common
         /// <returns>是否违反1-3s规则</returns>
         bool one3S(double Mean, double SD)
         {
-
+            bool flag = false;  
+            PointNum = "";  
             DataTable dt = new DataTable();
-            if (tempCurveType == 0)
+            if (tempCurveType == 0) //标准质控图
             {
                 dt = dtQCValues;
             }
-            else
+            else                //相对质控图
             {
                 dt = dtQCValuesDay;
             }
@@ -288,11 +318,15 @@ namespace Common
                 double QCCurrentValue = double.Parse(dt.Rows[i]["Concentration"].ToString());
                 if (QCCurrentValue > Mean + 3 * SD || QCCurrentValue < Mean - 3 * SD)
                 {
-                    PointNum = (i + 1).ToString(); ;
-                    return true;
+                     
+                    //PointNum = (i + 1).ToString() ;  
+                    PointNum += "("+ (i + 1).ToString() + ")"; 
+                    flag = true;
+                    //return true;     
                 }
             }
-            return false;
+            return flag;
+            //return false;
 
         }
 
@@ -304,18 +338,20 @@ namespace Common
         /// <returns></returns>
         bool two2S(double Mean, double SD)
         {
+            bool flag = false;  
+            PointNum = "";  
             DataTable dtTempQCValues = new DataTable();
             if (tempCurveType == 0)
             {
-                dtTempQCValues = dtQCValues;
+                dtTempQCValues = dtQCValues;  // 标准质控图
             }
             else
             {
-                dtTempQCValues = dtQCValuesDay;
+                dtTempQCValues = dtQCValuesDay;  //相对质控图
             }
-            if (dtTempQCValues.Rows.Count < 2)
+            if (dtTempQCValues.Rows.Count < 2)  //两个点都不够 条件不允许违背22s规则
             {
-                return false;
+                return flag;
             }
             else
             {
@@ -326,14 +362,14 @@ namespace Common
                         (double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) > Mean + 2 * SD ||
                         double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) < Mean - 2 * SD))
                     {
-                        PointNum = (i + 1).ToString() + "," + (i + 2).ToString();
-                        return true;
+                        PointNum += "(" + (i + 1).ToString() + "," + (i + 2).ToString() + ")";
+                        flag = true;
+                        //return true;
                     }
                 }
-
             }
-            return false;
-
+            //return false;
+            return flag;
         }
 
         /// <summary>
@@ -344,51 +380,60 @@ namespace Common
         /// <returns></returns>
         bool four1S(double Mean, double SD)
         {
+            bool flag = false;  
+            PointNum = "";  
             DataTable dtTempQCValues = new DataTable();
             if (tempCurveType == 0)
             {
-                dtTempQCValues = dtQCValues;
+                dtTempQCValues = dtQCValues; 
             }
             else
             {
                 dtTempQCValues = dtQCValuesDay;
             }
 
-            if (dtTempQCValues.Rows.Count < 4)
+            if (dtTempQCValues.Rows.Count < 4) //不够4个点，办不到41s
             {
-                return false;
+                return flag;
             }
             else
             {
                 for (int i = 0; i < dtTempQCValues.Rows.Count - 3; i++)
                 {
-                    if (((double.Parse(dtTempQCValues.Rows[i][1].ToString()) > Mean + 1 * SD ||
+                    //if (((double.Parse(dtTempQCValues.Rows[i][1].ToString()) > Mean + 1 * SD ||
+                    //    double.Parse(dtTempQCValues.Rows[i][1].ToString()) < Mean - 1 * SD) &&
+                    //    (double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) > Mean + 1 * SD ||
+                    //    double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) < Mean - 1 * SD) ||
+                    //    (double.Parse(dtTempQCValues.Rows[i + 2][1].ToString()) > Mean + 1 * SD ||
+                    //    double.Parse(dtTempQCValues.Rows[i + 2][1].ToString()) < Mean - 1 * SD) &&
+                    //    (double.Parse(dtTempQCValues.Rows[i + 3][1].ToString()) > Mean + 1 * SD ||
+                    //    double.Parse(dtTempQCValues.Rows[i + 3][1].ToString()) < Mean - 1 * SD)) &&
+                    //    (
+                    //    (double.Parse(dtTempQCValues.Rows[i][1].ToString()) > Mean + 2 * SD ||
+                    //    double.Parse(dtTempQCValues.Rows[i][1].ToString()) < Mean - 2 * SD) &&
+                    //    (double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) > Mean + 2 * SD ||
+                    //    double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) < Mean - 2 * SD) ||
+                    //    (double.Parse(dtTempQCValues.Rows[i + 2][1].ToString()) > Mean + 2 * SD ||
+                    //    double.Parse(dtTempQCValues.Rows[i + 2][1].ToString()) < Mean - 2 * SD) &&
+                    //    (double.Parse(dtTempQCValues.Rows[i + 3][1].ToString()) > Mean + 2 * SD ||
+                    //    double.Parse(dtTempQCValues.Rows[i + 3][1].ToString()) < Mean - 2 * SD)
+                    //    )
+                    //    )
+                    if ((double.Parse(dtTempQCValues.Rows[i][1].ToString()) > Mean + 1 * SD ||
                         double.Parse(dtTempQCValues.Rows[i][1].ToString()) < Mean - 1 * SD) &&
                         (double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) > Mean + 1 * SD ||
-                        double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) < Mean - 1 * SD) ||
+                        double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) < Mean - 1 * SD) &&
                         (double.Parse(dtTempQCValues.Rows[i + 2][1].ToString()) > Mean + 1 * SD ||
                         double.Parse(dtTempQCValues.Rows[i + 2][1].ToString()) < Mean - 1 * SD) &&
                         (double.Parse(dtTempQCValues.Rows[i + 3][1].ToString()) > Mean + 1 * SD ||
-                        double.Parse(dtTempQCValues.Rows[i + 3][1].ToString()) < Mean - 1 * SD)) &&
-                        (
-                        (double.Parse(dtTempQCValues.Rows[i][1].ToString()) > Mean + 2 * SD ||
-                        double.Parse(dtTempQCValues.Rows[i][1].ToString()) < Mean - 2 * SD) &&
-                        (double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) > Mean + 2 * SD ||
-                        double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) < Mean - 2 * SD) ||
-                        (double.Parse(dtTempQCValues.Rows[i + 2][1].ToString()) > Mean + 2 * SD ||
-                        double.Parse(dtTempQCValues.Rows[i + 2][1].ToString()) < Mean - 2 * SD) &&
-                        (double.Parse(dtTempQCValues.Rows[i + 3][1].ToString()) > Mean + 2 * SD ||
-                        double.Parse(dtTempQCValues.Rows[i + 3][1].ToString()) < Mean - 2 * SD)
-                        )
-                        )
+                        double.Parse(dtTempQCValues.Rows[i + 3][1].ToString()) < Mean - 1 * SD))
                     {
-                        PointNum = (i + 1).ToString() + "," + (i + 2).ToString() + "," + (i + 3).ToString() + "," + (i + 4).ToString();
-                        return true;
+                        PointNum +="("+ (i + 1).ToString() + "," + (i + 2).ToString() + "," + (i + 3).ToString() + "," + (i + 4).ToString() + ")";
+                        flag = true;
                     }
                 }
-
             }
-            return false;
+            return flag;
         }
 
         /// <summary>
@@ -399,7 +444,9 @@ namespace Common
         /// <returns></returns>
         bool tenX(double Mean, double SD)
         {
-            DataTable dtTempQCValues = new DataTable();
+            bool flag = false;  
+            PointNum = "";  
+            DataTable dtTempQCValues = new DataTable();            
             if (tempCurveType == 0)
             {
                 dtTempQCValues = dtQCValues;
@@ -408,80 +455,99 @@ namespace Common
             {
                 dtTempQCValues = dtQCValuesDay;
             }
-            if (dtTempQCValues.Rows.Count < 10)
+            if (dtTempQCValues.Rows.Count < 10) 
             {
-                return false;
+                return flag;
             }
             else
             {
-
                 for (int i = 0; i < dtTempQCValues.Rows.Count - 9; i++)
                 {
+                    #region
+                    //     if ((double.Parse(dtTempQCValues.Rows[i][1].ToString()) > Mean
+                    //    && double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) > Mean
+                    //    && double.Parse(dtTempQCValues.Rows[i + 2][1].ToString()) > Mean
+                    //    && double.Parse(dtTempQCValues.Rows[i + 3][1].ToString()) > Mean
+                    //    && double.Parse(dtTempQCValues.Rows[i + 4][1].ToString()) > Mean
+                    //    && double.Parse(dtTempQCValues.Rows[i + 5][1].ToString()) > Mean
+                    //    && double.Parse(dtTempQCValues.Rows[i + 6][1].ToString()) > Mean
+                    //    && double.Parse(dtTempQCValues.Rows[i + 7][1].ToString()) > Mean
+                    //    && double.Parse(dtTempQCValues.Rows[i + 8][1].ToString()) > Mean
+                    //    && double.Parse(dtTempQCValues.Rows[i + 9][1].ToString()) > Mean)
+                    //    && (
+                    //    double.Parse(dtTempQCValues.Rows[i][1].ToString()) > Mean + 2 * SD
+                    //    || double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) > Mean + 2 * SD
+                    //    || double.Parse(dtTempQCValues.Rows[i + 2][1].ToString()) > Mean + 2 * SD
+                    //    || double.Parse(dtTempQCValues.Rows[i + 3][1].ToString()) > Mean + 2 * SD
+                    //    || double.Parse(dtTempQCValues.Rows[i + 4][1].ToString()) > Mean + 2 * SD
+                    //    || double.Parse(dtTempQCValues.Rows[i + 5][1].ToString()) > Mean + 2 * SD
+                    //    || double.Parse(dtTempQCValues.Rows[i + 6][1].ToString()) > Mean + 2 * SD
+                    //    || double.Parse(dtTempQCValues.Rows[i + 7][1].ToString()) > Mean + 2 * SD
+                    //    || double.Parse(dtTempQCValues.Rows[i + 8][1].ToString()) > Mean + 2 * SD
+                    //    || double.Parse(dtTempQCValues.Rows[i + 9][1].ToString()) > Mean + 2 * SD
+                    //    )
+                    //)
+                    //     {
+                    //         PointNum = (i + 1).ToString() + "," + (i + 2).ToString() + "," + (i + 3).ToString() + "," + (i + 4).ToString() + ","
+                    //             + (i + 5).ToString() + "," + (i + 6).ToString() + "," + (i + 7).ToString() + "," + (i + 8).ToString() + ","
+                    //             + (i + 9).ToString() + "," + (i + 10).ToString() ;
+                    //         return true;
+                    //     }
+                    //     else if ((double.Parse(dtTempQCValues.Rows[i][1].ToString()) < Mean
+                    //    && double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) < Mean
+                    //    && double.Parse(dtTempQCValues.Rows[i + 2][1].ToString()) < Mean
+                    //    && double.Parse(dtTempQCValues.Rows[i + 3][1].ToString()) < Mean
+                    //    && double.Parse(dtTempQCValues.Rows[i + 4][1].ToString()) < Mean
+                    //    && double.Parse(dtTempQCValues.Rows[i + 5][1].ToString()) < Mean
+                    //    && double.Parse(dtTempQCValues.Rows[i + 6][1].ToString()) < Mean
+                    //    && double.Parse(dtTempQCValues.Rows[i + 7][1].ToString()) < Mean
+                    //    && double.Parse(dtTempQCValues.Rows[i + 8][1].ToString()) < Mean
+                    //    && double.Parse(dtTempQCValues.Rows[i + 9][1].ToString()) < Mean)
+                    //    && (
+                    //    double.Parse(dtTempQCValues.Rows[i][1].ToString()) < Mean - 2 * SD
+                    //    || double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) < Mean - 2 * SD
+                    //    || double.Parse(dtTempQCValues.Rows[i + 2][1].ToString()) < Mean - 2 * SD
+                    //    || double.Parse(dtTempQCValues.Rows[i + 3][1].ToString()) < Mean - 2 * SD
+                    //    || double.Parse(dtTempQCValues.Rows[i + 4][1].ToString()) < Mean - 2 * SD
+                    //    || double.Parse(dtTempQCValues.Rows[i + 5][1].ToString()) < Mean - 2 * SD
+                    //    || double.Parse(dtTempQCValues.Rows[i + 6][1].ToString()) < Mean - 2 * SD
+                    //    || double.Parse(dtTempQCValues.Rows[i + 7][1].ToString()) < Mean - 2 * SD
+                    //   || double.Parse(dtTempQCValues.Rows[i + 8][1].ToString()) < Mean - 2 * SD
+                    //    || double.Parse(dtTempQCValues.Rows[i + 9][1].ToString()) < Mean - 2 * SD
+                    //    )
+                    //)
+                    #endregion
                     if ((double.Parse(dtTempQCValues.Rows[i][1].ToString()) > Mean
-                   && double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) > Mean
-                   && double.Parse(dtTempQCValues.Rows[i + 2][1].ToString()) > Mean
-                   && double.Parse(dtTempQCValues.Rows[i + 3][1].ToString()) > Mean
-                   && double.Parse(dtTempQCValues.Rows[i + 4][1].ToString()) > Mean
-                   && double.Parse(dtTempQCValues.Rows[i + 5][1].ToString()) > Mean
-                   && double.Parse(dtTempQCValues.Rows[i + 6][1].ToString()) > Mean
-                   && double.Parse(dtTempQCValues.Rows[i + 7][1].ToString()) > Mean
-                   && double.Parse(dtTempQCValues.Rows[i + 8][1].ToString()) > Mean
-                   && double.Parse(dtTempQCValues.Rows[i + 9][1].ToString()) > Mean)
-                   && (
-                   double.Parse(dtTempQCValues.Rows[i][1].ToString()) > Mean + 2 * SD
-                   || double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) > Mean + 2 * SD
-                   || double.Parse(dtTempQCValues.Rows[i + 2][1].ToString()) > Mean + 2 * SD
-                   || double.Parse(dtTempQCValues.Rows[i + 3][1].ToString()) > Mean + 2 * SD
-                   || double.Parse(dtTempQCValues.Rows[i + 4][1].ToString()) > Mean + 2 * SD
-                   || double.Parse(dtTempQCValues.Rows[i + 5][1].ToString()) > Mean + 2 * SD
-                   || double.Parse(dtTempQCValues.Rows[i + 6][1].ToString()) > Mean + 2 * SD
-                   || double.Parse(dtTempQCValues.Rows[i + 7][1].ToString()) > Mean + 2 * SD
-                  || double.Parse(dtTempQCValues.Rows[i + 8][1].ToString()) > Mean + 2 * SD
-                   || double.Parse(dtTempQCValues.Rows[i + 9][1].ToString()) > Mean + 2 * SD
-                   )
-
-               )
+                        && double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) > Mean
+                        && double.Parse(dtTempQCValues.Rows[i + 2][1].ToString()) > Mean
+                        && double.Parse(dtTempQCValues.Rows[i + 3][1].ToString()) > Mean
+                        && double.Parse(dtTempQCValues.Rows[i + 4][1].ToString()) > Mean
+                        && double.Parse(dtTempQCValues.Rows[i + 5][1].ToString()) > Mean
+                        && double.Parse(dtTempQCValues.Rows[i + 6][1].ToString()) > Mean
+                        && double.Parse(dtTempQCValues.Rows[i + 7][1].ToString()) > Mean
+                        && double.Parse(dtTempQCValues.Rows[i + 8][1].ToString()) > Mean
+                        && double.Parse(dtTempQCValues.Rows[i + 9][1].ToString()) > Mean)
+                        ||(double.Parse(dtTempQCValues.Rows[i][1].ToString()) < Mean
+                        && double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) < Mean
+                        && double.Parse(dtTempQCValues.Rows[i + 2][1].ToString()) < Mean
+                        && double.Parse(dtTempQCValues.Rows[i + 3][1].ToString()) < Mean
+                        && double.Parse(dtTempQCValues.Rows[i + 4][1].ToString()) < Mean
+                        && double.Parse(dtTempQCValues.Rows[i + 5][1].ToString()) < Mean
+                        && double.Parse(dtTempQCValues.Rows[i + 6][1].ToString()) < Mean
+                        && double.Parse(dtTempQCValues.Rows[i + 7][1].ToString()) < Mean
+                        && double.Parse(dtTempQCValues.Rows[i + 8][1].ToString()) < Mean
+                        && double.Parse(dtTempQCValues.Rows[i + 9][1].ToString()) < Mean))
                     {
-                        PointNum = (i + 1).ToString() + "," + (i + 2).ToString() + "," + (i + 3).ToString() + "," + (i + 4).ToString() + ","
+                        PointNum += "(" + (i + 1).ToString() + "," + (i + 2).ToString() + "," + (i + 3).ToString() + "," + (i + 4).ToString() + ","
                             + (i + 5).ToString() + "," + (i + 6).ToString() + "," + (i + 7).ToString() + "," + (i + 8).ToString() + ","
-                            + (i + 9).ToString() + "," + (i + 10).ToString();
-                        return true;
+                            + (i + 9).ToString() + "," + (i + 10).ToString() + ")";
+                        flag = true;
+                        //return true;
                     }
-                    else if ((double.Parse(dtTempQCValues.Rows[i][1].ToString()) < Mean
-                   && double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) < Mean
-                   && double.Parse(dtTempQCValues.Rows[i + 2][1].ToString()) < Mean
-                   && double.Parse(dtTempQCValues.Rows[i + 3][1].ToString()) < Mean
-                   && double.Parse(dtTempQCValues.Rows[i + 4][1].ToString()) < Mean
-                   && double.Parse(dtTempQCValues.Rows[i + 5][1].ToString()) < Mean
-                   && double.Parse(dtTempQCValues.Rows[i + 6][1].ToString()) < Mean
-                   && double.Parse(dtTempQCValues.Rows[i + 7][1].ToString()) < Mean
-                   && double.Parse(dtTempQCValues.Rows[i + 8][1].ToString()) < Mean
-                   && double.Parse(dtTempQCValues.Rows[i + 9][1].ToString()) < Mean)
-                   && (
-                   double.Parse(dtTempQCValues.Rows[i][1].ToString()) < Mean - 2 * SD
-                   || double.Parse(dtTempQCValues.Rows[i + 1][1].ToString()) < Mean - 2 * SD
-                   || double.Parse(dtTempQCValues.Rows[i + 2][1].ToString()) < Mean - 2 * SD
-                   || double.Parse(dtTempQCValues.Rows[i + 3][1].ToString()) < Mean - 2 * SD
-                   || double.Parse(dtTempQCValues.Rows[i + 4][1].ToString()) < Mean - 2 * SD
-                   || double.Parse(dtTempQCValues.Rows[i + 5][1].ToString()) < Mean - 2 * SD
-                   || double.Parse(dtTempQCValues.Rows[i + 6][1].ToString()) < Mean - 2 * SD
-                   || double.Parse(dtTempQCValues.Rows[i + 7][1].ToString()) < Mean - 2 * SD
-                  || double.Parse(dtTempQCValues.Rows[i + 8][1].ToString()) < Mean - 2 * SD
-                   || double.Parse(dtTempQCValues.Rows[i + 9][1].ToString()) < Mean - 2 * SD
-                   )
-
-               )
-                    {
-                        PointNum = (i + 1).ToString() + "," + (i + 2).ToString() + "," + (i + 3).ToString() + "," + (i + 4).ToString() + ","
-                            + (i + 5).ToString() + "," + (i + 6).ToString() + "," + (i + 7).ToString() + "," + (i + 8).ToString() + ","
-                            + (i + 9).ToString() + "," + (i + 10).ToString();
-                        return true;
-                    }
-                }
-               
-
+                }                     
             }
-            return false;
+            return flag;
+            //return false;
 
         }
     }

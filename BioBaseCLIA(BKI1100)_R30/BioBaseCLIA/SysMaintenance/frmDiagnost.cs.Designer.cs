@@ -70,6 +70,7 @@
             this.cmbAsArmZ = new System.Windows.Forms.ComboBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.gbStepOrder = new System.Windows.Forms.GroupBox();
+            this.btnOrderCancel = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.textStepOrder = new BioBaseCLIA.CustomControl.userTextBoxBase();
             this.btnOrderSend = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnregentReset = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
@@ -167,6 +168,11 @@
             this.label46 = new System.Windows.Forms.Label();
             this.tabWashTray = new System.Windows.Forms.TabPage();
             this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.groupBox44 = new System.Windows.Forms.GroupBox();
+            this.numDrainageB = new System.Windows.Forms.NumericUpDown();
+            this.endDrainageB = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.startDrainageB = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.label101 = new System.Windows.Forms.Label();
             this.groupBox39 = new System.Windows.Forms.GroupBox();
             this.btnWashMix = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.cmbWashMix = new System.Windows.Forms.ComboBox();
@@ -384,6 +390,7 @@
             this.rdbRackWash = new System.Windows.Forms.RadioButton();
             this.versionQuery = new System.Windows.Forms.TabPage();
             this.groupBox43 = new System.Windows.Forms.GroupBox();
+            this.fbtnInitSpReadCard = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnInitIni = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.groupBox40 = new System.Windows.Forms.GroupBox();
             this.txtTrayVersion = new BioBaseCLIA.CustomControl.userTextBoxBase();
@@ -412,10 +419,10 @@
             this.txtbox2 = new BioBaseCLIA.CustomControl.userNumTextBox();
             this.label73 = new System.Windows.Forms.Label();
             this.fbtnExportToOldFile = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.fbtnexp = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.fbtnTestsStop = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.cmbTestName = new System.Windows.Forms.ComboBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.fbtnexp = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.untxtReadNum = new BioBaseCLIA.CustomControl.userNumTextBox();
             this.label87 = new System.Windows.Forms.Label();
             this.untxtSamplePos = new BioBaseCLIA.CustomControl.userNumTextBox();
@@ -429,7 +436,6 @@
             this.label84 = new System.Windows.Forms.Label();
             this.label88 = new System.Windows.Forms.Label();
             this.label89 = new System.Windows.Forms.Label();
-            this.fbtnInitSpReadCard = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.panel1.SuspendLayout();
             this.tabControlMy1.SuspendLayout();
             this.tabAddSample.SuspendLayout();
@@ -458,6 +464,8 @@
             this.groupBox33.SuspendLayout();
             this.tabWashTray.SuspendLayout();
             this.groupBox20.SuspendLayout();
+            this.groupBox44.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numDrainageB)).BeginInit();
             this.groupBox39.SuspendLayout();
             this.groupBox32.SuspendLayout();
             this.groupBox25.SuspendLayout();
@@ -535,10 +543,10 @@
             this.btnBQLiquaid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBQLiquaid.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnBQLiquaid.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBQLiquaid.Location = new System.Drawing.Point(25, 337);
+            this.btnBQLiquaid.Location = new System.Drawing.Point(25, 346);
             this.btnBQLiquaid.Name = "btnBQLiquaid";
             this.btnBQLiquaid.Size = new System.Drawing.Size(130, 60);
-            this.btnBQLiquaid.TabIndex = 26;
+            this.btnBQLiquaid.TabIndex = 25;
             this.btnBQLiquaid.Text = "打开报警查询";
             this.btnBQLiquaid.UseVisualStyleBackColor = false;
             this.btnBQLiquaid.Click += new System.EventHandler(this.btnBQLiquaid_Click);
@@ -556,7 +564,7 @@
             this.fbtnGroupTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fbtnGroupTest.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold);
             this.fbtnGroupTest.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.fbtnGroupTest.Location = new System.Drawing.Point(25, 233);
+            this.fbtnGroupTest.Location = new System.Drawing.Point(25, 239);
             this.fbtnGroupTest.Name = "fbtnGroupTest";
             this.fbtnGroupTest.Size = new System.Drawing.Size(130, 60);
             this.fbtnGroupTest.TabIndex = 24;
@@ -599,13 +607,12 @@
             this.fbtnInstruDiagnost.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fbtnInstruDiagnost.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold);
             this.fbtnInstruDiagnost.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.fbtnInstruDiagnost.Location = new System.Drawing.Point(25, 129);
+            this.fbtnInstruDiagnost.Location = new System.Drawing.Point(25, 132);
             this.fbtnInstruDiagnost.Name = "fbtnInstruDiagnost";
             this.fbtnInstruDiagnost.Size = new System.Drawing.Size(130, 60);
             this.fbtnInstruDiagnost.TabIndex = 19;
             this.fbtnInstruDiagnost.Text = "仪器调试";
             this.fbtnInstruDiagnost.UseVisualStyleBackColor = false;
-            this.fbtnInstruDiagnost.Click += new System.EventHandler(this.fbtnInstruDiagnost_Click);
             // 
             // fbtnInstruMaintenance
             // 
@@ -958,20 +965,41 @@
             // 
             // gbStepOrder
             // 
+            this.gbStepOrder.Controls.Add(this.btnOrderCancel);
             this.gbStepOrder.Controls.Add(this.textStepOrder);
             this.gbStepOrder.Controls.Add(this.btnOrderSend);
-            this.gbStepOrder.Location = new System.Drawing.Point(19, 187);
+            this.gbStepOrder.Location = new System.Drawing.Point(19, 166);
             this.gbStepOrder.Name = "gbStepOrder";
-            this.gbStepOrder.Size = new System.Drawing.Size(300, 60);
+            this.gbStepOrder.Size = new System.Drawing.Size(300, 81);
             this.gbStepOrder.TabIndex = 16;
             this.gbStepOrder.TabStop = false;
             this.gbStepOrder.Text = "单步命令发送";
+            // 
+            // btnOrderCancel
+            // 
+            this.btnOrderCancel.BackColor = System.Drawing.Color.Transparent;
+            this.btnOrderCancel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnOrderCancel.BackgroundImage")));
+            this.btnOrderCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnOrderCancel.Enabled = false;
+            this.btnOrderCancel.EnabledSet = true;
+            this.btnOrderCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnOrderCancel.FlatAppearance.BorderSize = 0;
+            this.btnOrderCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnOrderCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnOrderCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOrderCancel.Location = new System.Drawing.Point(202, 52);
+            this.btnOrderCancel.Name = "btnOrderCancel";
+            this.btnOrderCancel.Size = new System.Drawing.Size(92, 23);
+            this.btnOrderCancel.TabIndex = 19;
+            this.btnOrderCancel.Text = "取消";
+            this.btnOrderCancel.UseVisualStyleBackColor = false;
+            this.btnOrderCancel.Click += new System.EventHandler(this.btnOrderCancel_Click);
             // 
             // textStepOrder
             // 
             this.textStepOrder.Location = new System.Drawing.Point(14, 19);
             this.textStepOrder.Name = "textStepOrder";
-            this.textStepOrder.Size = new System.Drawing.Size(147, 23);
+            this.textStepOrder.Size = new System.Drawing.Size(280, 23);
             this.textStepOrder.TabIndex = 17;
             this.textStepOrder.Text = "0";
             // 
@@ -986,7 +1014,7 @@
             this.btnOrderSend.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnOrderSend.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnOrderSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOrderSend.Location = new System.Drawing.Point(176, 19);
+            this.btnOrderSend.Location = new System.Drawing.Point(14, 52);
             this.btnOrderSend.Name = "btnOrderSend";
             this.btnOrderSend.Size = new System.Drawing.Size(92, 23);
             this.btnOrderSend.TabIndex = 1;
@@ -1006,7 +1034,7 @@
             this.fbtnregentReset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.fbtnregentReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fbtnregentReset.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.fbtnregentReset.Location = new System.Drawing.Point(19, 159);
+            this.fbtnregentReset.Location = new System.Drawing.Point(19, 135);
             this.fbtnregentReset.Name = "fbtnregentReset";
             this.fbtnregentReset.Size = new System.Drawing.Size(100, 25);
             this.fbtnregentReset.TabIndex = 14;
@@ -1026,7 +1054,7 @@
             this.fbtnSamReset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.fbtnSamReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fbtnSamReset.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.fbtnSamReset.Location = new System.Drawing.Point(170, 105);
+            this.fbtnSamReset.Location = new System.Drawing.Point(170, 81);
             this.fbtnSamReset.Name = "fbtnSamReset";
             this.fbtnSamReset.Size = new System.Drawing.Size(100, 25);
             this.fbtnSamReset.TabIndex = 13;
@@ -1046,7 +1074,7 @@
             this.fbtnAsMixArm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.fbtnAsMixArm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fbtnAsMixArm.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.fbtnAsMixArm.Location = new System.Drawing.Point(170, 159);
+            this.fbtnAsMixArm.Location = new System.Drawing.Point(170, 135);
             this.fbtnAsMixArm.Name = "fbtnAsMixArm";
             this.fbtnAsMixArm.Size = new System.Drawing.Size(100, 25);
             this.fbtnAsMixArm.TabIndex = 12;
@@ -1067,7 +1095,7 @@
             this.fbtnAsXReset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.fbtnAsXReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fbtnAsXReset.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.fbtnAsXReset.Location = new System.Drawing.Point(170, 50);
+            this.fbtnAsXReset.Location = new System.Drawing.Point(170, 26);
             this.fbtnAsXReset.Name = "fbtnAsXReset";
             this.fbtnAsXReset.Size = new System.Drawing.Size(100, 25);
             this.fbtnAsXReset.TabIndex = 5;
@@ -1087,7 +1115,7 @@
             this.fbtnAsZReset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.fbtnAsZReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fbtnAsZReset.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.fbtnAsZReset.Location = new System.Drawing.Point(19, 105);
+            this.fbtnAsZReset.Location = new System.Drawing.Point(19, 81);
             this.fbtnAsZReset.Name = "fbtnAsZReset";
             this.fbtnAsZReset.Size = new System.Drawing.Size(100, 25);
             this.fbtnAsZReset.TabIndex = 3;
@@ -1107,7 +1135,7 @@
             this.fbtnAsAllReset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.fbtnAsAllReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fbtnAsAllReset.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.fbtnAsAllReset.Location = new System.Drawing.Point(19, 51);
+            this.fbtnAsAllReset.Location = new System.Drawing.Point(19, 27);
             this.fbtnAsAllReset.Name = "fbtnAsAllReset";
             this.fbtnAsAllReset.Size = new System.Drawing.Size(100, 25);
             this.fbtnAsAllReset.TabIndex = 2;
@@ -1151,10 +1179,10 @@
             this.fbtnASSave2.Location = new System.Drawing.Point(184, 147);
             this.fbtnASSave2.Name = "fbtnASSave2";
             this.fbtnASSave2.Size = new System.Drawing.Size(86, 23);
-            this.fbtnASSave2.TabIndex = 79;
+            this.fbtnASSave2.TabIndex = 78;
             this.fbtnASSave2.Text = "保存已有数据";
             this.fbtnASSave2.UseVisualStyleBackColor = false;
-            this.fbtnASSave2.Click += new System.EventHandler(this.fbtnASSave2_Click);
+            this.fbtnASSave2.Click += new System.EventHandler(this.fbtnASSave2_Click_1);
             // 
             // txtASIncrem
             // 
@@ -1276,6 +1304,7 @@
             this.cmbASElecMachine.Name = "cmbASElecMachine";
             this.cmbASElecMachine.Size = new System.Drawing.Size(160, 22);
             this.cmbASElecMachine.TabIndex = 2;
+            this.cmbASElecMachine.SelectedIndexChanged += new System.EventHandler(this.cmbASElecMachine_SelectedIndexChanged);
             // 
             // label8
             // 
@@ -1757,7 +1786,7 @@
             this.btnSaveHand2.Location = new System.Drawing.Point(184, 147);
             this.btnSaveHand2.Name = "btnSaveHand2";
             this.btnSaveHand2.Size = new System.Drawing.Size(86, 23);
-            this.btnSaveHand2.TabIndex = 79;
+            this.btnSaveHand2.TabIndex = 78;
             this.btnSaveHand2.Text = "保存已有数据";
             this.btnSaveHand2.UseVisualStyleBackColor = false;
             this.btnSaveHand2.Click += new System.EventHandler(this.btnSaveHand2_Click);
@@ -1882,6 +1911,7 @@
             this.cmbHElecMachine.Name = "cmbHElecMachine";
             this.cmbHElecMachine.Size = new System.Drawing.Size(160, 22);
             this.cmbHElecMachine.TabIndex = 2;
+            this.cmbHElecMachine.SelectedIndexChanged += new System.EventHandler(this.cmbHElecMachine_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -2068,7 +2098,7 @@
             this.txtMoveInHoleNum.IsNull = false;
             this.txtMoveInHoleNum.Location = new System.Drawing.Point(83, 32);
             this.txtMoveInHoleNum.MaxValue = new decimal(new int[] {
-            50,
+            80,
             0,
             0,
             0});
@@ -2302,10 +2332,10 @@
             this.btnISave2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnISave2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnISave2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnISave2.Location = new System.Drawing.Point(184, 147);
+            this.btnISave2.Location = new System.Drawing.Point(193, 147);
             this.btnISave2.Name = "btnISave2";
             this.btnISave2.Size = new System.Drawing.Size(86, 23);
-            this.btnISave2.TabIndex = 79;
+            this.btnISave2.TabIndex = 78;
             this.btnISave2.Text = "保存已有数据";
             this.btnISave2.UseVisualStyleBackColor = false;
             this.btnISave2.Click += new System.EventHandler(this.btnISave2_Click);
@@ -2429,6 +2459,7 @@
             this.cmbIElecMachine.Name = "cmbIElecMachine";
             this.cmbIElecMachine.Size = new System.Drawing.Size(160, 22);
             this.cmbIElecMachine.TabIndex = 2;
+            this.cmbIElecMachine.SelectedIndexChanged += new System.EventHandler(this.cmbIElecMachine_SelectedIndexChanged);
             // 
             // label45
             // 
@@ -2478,6 +2509,7 @@
             // 
             // groupBox20
             // 
+            this.groupBox20.Controls.Add(this.groupBox44);
             this.groupBox20.Controls.Add(this.groupBox39);
             this.groupBox20.Controls.Add(this.groupBox32);
             this.groupBox20.Controls.Add(this.groupBox25);
@@ -2490,14 +2522,91 @@
             this.groupBox20.TabStop = false;
             this.groupBox20.Text = "移动操作";
             // 
+            // groupBox44
+            // 
+            this.groupBox44.Controls.Add(this.numDrainageB);
+            this.groupBox44.Controls.Add(this.endDrainageB);
+            this.groupBox44.Controls.Add(this.startDrainageB);
+            this.groupBox44.Controls.Add(this.label101);
+            this.groupBox44.Location = new System.Drawing.Point(7, 350);
+            this.groupBox44.Name = "groupBox44";
+            this.groupBox44.Size = new System.Drawing.Size(423, 66);
+            this.groupBox44.TabIndex = 22;
+            this.groupBox44.TabStop = false;
+            this.groupBox44.Text = "磁珠抽液泵";
+            // 
+            // numDrainageB
+            // 
+            this.numDrainageB.Font = new System.Drawing.Font("宋体", 11.25F);
+            this.numDrainageB.Location = new System.Drawing.Point(79, 25);
+            this.numDrainageB.Name = "numDrainageB";
+            this.numDrainageB.Size = new System.Drawing.Size(85, 25);
+            this.numDrainageB.TabIndex = 67;
+            this.numDrainageB.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // endDrainageB
+            // 
+            this.endDrainageB.BackColor = System.Drawing.Color.Transparent;
+            this.endDrainageB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("endDrainageB.BackgroundImage")));
+            this.endDrainageB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.endDrainageB.Enabled = false;
+            this.endDrainageB.EnabledSet = true;
+            this.endDrainageB.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.endDrainageB.FlatAppearance.BorderSize = 0;
+            this.endDrainageB.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.endDrainageB.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.endDrainageB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.endDrainageB.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.endDrainageB.Location = new System.Drawing.Point(267, 27);
+            this.endDrainageB.Name = "endDrainageB";
+            this.endDrainageB.Size = new System.Drawing.Size(65, 24);
+            this.endDrainageB.TabIndex = 15;
+            this.endDrainageB.Text = "停止";
+            this.endDrainageB.UseVisualStyleBackColor = false;
+            this.endDrainageB.Click += new System.EventHandler(this.endDrainageB_Click);
+            // 
+            // startDrainageB
+            // 
+            this.startDrainageB.BackColor = System.Drawing.Color.Transparent;
+            this.startDrainageB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("startDrainageB.BackgroundImage")));
+            this.startDrainageB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.startDrainageB.EnabledSet = true;
+            this.startDrainageB.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.startDrainageB.FlatAppearance.BorderSize = 0;
+            this.startDrainageB.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.startDrainageB.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.startDrainageB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.startDrainageB.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.startDrainageB.Location = new System.Drawing.Point(186, 27);
+            this.startDrainageB.Name = "startDrainageB";
+            this.startDrainageB.Size = new System.Drawing.Size(64, 23);
+            this.startDrainageB.TabIndex = 14;
+            this.startDrainageB.Text = "开始";
+            this.startDrainageB.UseVisualStyleBackColor = false;
+            this.startDrainageB.Click += new System.EventHandler(this.startDrainageB_Click);
+            // 
+            // label101
+            // 
+            this.label101.AutoSize = true;
+            this.label101.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label101.Location = new System.Drawing.Point(6, 30);
+            this.label101.Name = "label101";
+            this.label101.Size = new System.Drawing.Size(70, 14);
+            this.label101.TabIndex = 2;
+            this.label101.Text = "抽液次数:";
+            // 
             // groupBox39
             // 
             this.groupBox39.Controls.Add(this.btnWashMix);
             this.groupBox39.Controls.Add(this.cmbWashMix);
             this.groupBox39.Controls.Add(this.label36);
-            this.groupBox39.Location = new System.Drawing.Point(7, 272);
+            this.groupBox39.Location = new System.Drawing.Point(7, 227);
             this.groupBox39.Name = "groupBox39";
-            this.groupBox39.Size = new System.Drawing.Size(423, 70);
+            this.groupBox39.Size = new System.Drawing.Size(423, 60);
             this.groupBox39.TabIndex = 20;
             this.groupBox39.TabStop = false;
             this.groupBox39.Text = "混匀电机";
@@ -2514,9 +2623,9 @@
             this.btnWashMix.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnWashMix.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnWashMix.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnWashMix.Location = new System.Drawing.Point(319, 21);
+            this.btnWashMix.Location = new System.Drawing.Point(319, 22);
             this.btnWashMix.Name = "btnWashMix";
-            this.btnWashMix.Size = new System.Drawing.Size(87, 34);
+            this.btnWashMix.Size = new System.Drawing.Size(64, 23);
             this.btnWashMix.TabIndex = 18;
             this.btnWashMix.Text = "执行";
             this.btnWashMix.UseVisualStyleBackColor = false;
@@ -2529,7 +2638,7 @@
             this.cmbWashMix.Items.AddRange(new object[] {
             "正转",
             "反转"});
-            this.cmbWashMix.Location = new System.Drawing.Point(72, 28);
+            this.cmbWashMix.Location = new System.Drawing.Point(72, 22);
             this.cmbWashMix.Name = "cmbWashMix";
             this.cmbWashMix.Size = new System.Drawing.Size(210, 22);
             this.cmbWashMix.TabIndex = 16;
@@ -2538,7 +2647,7 @@
             // 
             this.label36.AutoSize = true;
             this.label36.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label36.Location = new System.Drawing.Point(16, 31);
+            this.label36.Location = new System.Drawing.Point(16, 26);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(49, 14);
             this.label36.TabIndex = 17;
@@ -2555,7 +2664,7 @@
             this.groupBox32.Controls.Add(this.label40);
             this.groupBox32.Location = new System.Drawing.Point(7, 19);
             this.groupBox32.Name = "groupBox32";
-            this.groupBox32.Size = new System.Drawing.Size(423, 98);
+            this.groupBox32.Size = new System.Drawing.Size(423, 77);
             this.groupBox32.TabIndex = 4;
             this.groupBox32.TabStop = false;
             this.groupBox32.Text = "孔位移动";
@@ -2572,17 +2681,17 @@
             this.btnLoopTurn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnLoopTurn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLoopTurn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnLoopTurn.Location = new System.Drawing.Point(337, 67);
+            this.btnLoopTurn.Location = new System.Drawing.Point(337, 50);
             this.btnLoopTurn.Name = "btnLoopTurn";
             this.btnLoopTurn.Size = new System.Drawing.Size(80, 23);
-            this.btnLoopTurn.TabIndex = 21;
+            this.btnLoopTurn.TabIndex = 20;
             this.btnLoopTurn.Text = "循环执行";
             this.btnLoopTurn.UseVisualStyleBackColor = false;
             this.btnLoopTurn.Click += new System.EventHandler(this.btnLoopTurn_Click);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(103, 66);
+            this.textBox1.Location = new System.Drawing.Point(103, 49);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 23);
             this.textBox1.TabIndex = 18;
@@ -2600,7 +2709,7 @@
             this.functionButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.functionButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.functionButton1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.functionButton1.Location = new System.Drawing.Point(256, 67);
+            this.functionButton1.Location = new System.Drawing.Point(256, 50);
             this.functionButton1.Name = "functionButton1";
             this.functionButton1.Size = new System.Drawing.Size(64, 23);
             this.functionButton1.TabIndex = 17;
@@ -2612,7 +2721,7 @@
             // 
             this.label41.AutoSize = true;
             this.label41.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label41.Location = new System.Drawing.Point(16, 69);
+            this.label41.Location = new System.Drawing.Point(16, 52);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(49, 14);
             this.label41.TabIndex = 15;
@@ -2672,9 +2781,9 @@
             this.groupBox25.Controls.Add(this.fbtnWashPressCupEx);
             this.groupBox25.Controls.Add(this.cmbWashPressCup);
             this.groupBox25.Controls.Add(this.label55);
-            this.groupBox25.Location = new System.Drawing.Point(7, 195);
+            this.groupBox25.Location = new System.Drawing.Point(7, 164);
             this.groupBox25.Name = "groupBox25";
-            this.groupBox25.Size = new System.Drawing.Size(423, 70);
+            this.groupBox25.Size = new System.Drawing.Size(423, 61);
             this.groupBox25.TabIndex = 2;
             this.groupBox25.TabStop = false;
             this.groupBox25.Text = "压杯电机";
@@ -2691,9 +2800,9 @@
             this.fbtnWashPressCupEx.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.fbtnWashPressCupEx.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fbtnWashPressCupEx.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.fbtnWashPressCupEx.Location = new System.Drawing.Point(319, 27);
+            this.fbtnWashPressCupEx.Location = new System.Drawing.Point(319, 22);
             this.fbtnWashPressCupEx.Name = "fbtnWashPressCupEx";
-            this.fbtnWashPressCupEx.Size = new System.Drawing.Size(87, 34);
+            this.fbtnWashPressCupEx.Size = new System.Drawing.Size(64, 23);
             this.fbtnWashPressCupEx.TabIndex = 18;
             this.fbtnWashPressCupEx.Text = "执行";
             this.fbtnWashPressCupEx.UseVisualStyleBackColor = false;
@@ -2706,7 +2815,7 @@
             this.cmbWashPressCup.Items.AddRange(new object[] {
             "压杯开始位置",
             "压杯最低位置"});
-            this.cmbWashPressCup.Location = new System.Drawing.Point(72, 34);
+            this.cmbWashPressCup.Location = new System.Drawing.Point(72, 22);
             this.cmbWashPressCup.Name = "cmbWashPressCup";
             this.cmbWashPressCup.Size = new System.Drawing.Size(210, 22);
             this.cmbWashPressCup.TabIndex = 16;
@@ -2715,7 +2824,7 @@
             // 
             this.label55.AutoSize = true;
             this.label55.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label55.Location = new System.Drawing.Point(16, 37);
+            this.label55.Location = new System.Drawing.Point(16, 26);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(49, 14);
             this.label55.TabIndex = 17;
@@ -2726,9 +2835,9 @@
             this.groupBox24.Controls.Add(this.fbtnWashZEx);
             this.groupBox24.Controls.Add(this.cmbWashZ);
             this.groupBox24.Controls.Add(this.label54);
-            this.groupBox24.Location = new System.Drawing.Point(7, 121);
+            this.groupBox24.Location = new System.Drawing.Point(7, 98);
             this.groupBox24.Name = "groupBox24";
-            this.groupBox24.Size = new System.Drawing.Size(423, 76);
+            this.groupBox24.Size = new System.Drawing.Size(423, 64);
             this.groupBox24.TabIndex = 1;
             this.groupBox24.TabStop = false;
             this.groupBox24.Text = "Z轴电机";
@@ -2747,7 +2856,7 @@
             this.fbtnWashZEx.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.fbtnWashZEx.Location = new System.Drawing.Point(319, 25);
             this.fbtnWashZEx.Name = "fbtnWashZEx";
-            this.fbtnWashZEx.Size = new System.Drawing.Size(87, 34);
+            this.fbtnWashZEx.Size = new System.Drawing.Size(64, 23);
             this.fbtnWashZEx.TabIndex = 15;
             this.fbtnWashZEx.Text = "执行";
             this.fbtnWashZEx.UseVisualStyleBackColor = false;
@@ -2760,7 +2869,7 @@
             this.cmbWashZ.Items.AddRange(new object[] {
             "夹管开始位置",
             "夹管最低位置"});
-            this.cmbWashZ.Location = new System.Drawing.Point(71, 32);
+            this.cmbWashZ.Location = new System.Drawing.Point(71, 25);
             this.cmbWashZ.Name = "cmbWashZ";
             this.cmbWashZ.Size = new System.Drawing.Size(210, 22);
             this.cmbWashZ.TabIndex = 4;
@@ -2769,7 +2878,7 @@
             // 
             this.label54.AutoSize = true;
             this.label54.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label54.Location = new System.Drawing.Point(16, 35);
+            this.label54.Location = new System.Drawing.Point(16, 29);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(49, 14);
             this.label54.TabIndex = 5;
@@ -2781,9 +2890,9 @@
             this.groupBox23.Controls.Add(this.fbtnPeristalticPSave);
             this.groupBox23.Controls.Add(this.fbtnPeristalticPEx);
             this.groupBox23.Controls.Add(this.label53);
-            this.groupBox23.Location = new System.Drawing.Point(7, 346);
+            this.groupBox23.Location = new System.Drawing.Point(7, 289);
             this.groupBox23.Name = "groupBox23";
-            this.groupBox23.Size = new System.Drawing.Size(423, 70);
+            this.groupBox23.Size = new System.Drawing.Size(423, 59);
             this.groupBox23.TabIndex = 0;
             this.groupBox23.TabStop = false;
             this.groupBox23.Text = "磁珠清洗泵";
@@ -2795,7 +2904,7 @@
             this.cmbPeristalticPVol.Items.AddRange(new object[] {
             "归零",
             "350"});
-            this.cmbPeristalticPVol.Location = new System.Drawing.Point(91, 37);
+            this.cmbPeristalticPVol.Location = new System.Drawing.Point(91, 25);
             this.cmbPeristalticPVol.Name = "cmbPeristalticPVol";
             this.cmbPeristalticPVol.Size = new System.Drawing.Size(121, 22);
             this.cmbPeristalticPVol.TabIndex = 16;
@@ -2812,13 +2921,12 @@
             this.fbtnPeristalticPSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.fbtnPeristalticPSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fbtnPeristalticPSave.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.fbtnPeristalticPSave.Location = new System.Drawing.Point(319, 35);
+            this.fbtnPeristalticPSave.Location = new System.Drawing.Point(319, 23);
             this.fbtnPeristalticPSave.Name = "fbtnPeristalticPSave";
             this.fbtnPeristalticPSave.Size = new System.Drawing.Size(65, 24);
             this.fbtnPeristalticPSave.TabIndex = 15;
             this.fbtnPeristalticPSave.Text = "保存";
             this.fbtnPeristalticPSave.UseVisualStyleBackColor = false;
-            this.fbtnPeristalticPSave.Visible = false;
             this.fbtnPeristalticPSave.Click += new System.EventHandler(this.fbtnPeristalticPSave_Click);
             // 
             // fbtnPeristalticPEx
@@ -2833,7 +2941,7 @@
             this.fbtnPeristalticPEx.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.fbtnPeristalticPEx.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fbtnPeristalticPEx.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.fbtnPeristalticPEx.Location = new System.Drawing.Point(234, 36);
+            this.fbtnPeristalticPEx.Location = new System.Drawing.Point(234, 24);
             this.fbtnPeristalticPEx.Name = "fbtnPeristalticPEx";
             this.fbtnPeristalticPEx.Size = new System.Drawing.Size(64, 23);
             this.fbtnPeristalticPEx.TabIndex = 14;
@@ -2845,7 +2953,7 @@
             // 
             this.label53.AutoSize = true;
             this.label53.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label53.Location = new System.Drawing.Point(6, 39);
+            this.label53.Location = new System.Drawing.Point(6, 27);
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(56, 14);
             this.label53.TabIndex = 2;
@@ -2997,7 +3105,7 @@
             this.fbtnWashSave2.Location = new System.Drawing.Point(184, 147);
             this.fbtnWashSave2.Name = "fbtnWashSave2";
             this.fbtnWashSave2.Size = new System.Drawing.Size(86, 23);
-            this.fbtnWashSave2.TabIndex = 79;
+            this.fbtnWashSave2.TabIndex = 78;
             this.fbtnWashSave2.Text = "保存已有数据";
             this.fbtnWashSave2.UseVisualStyleBackColor = false;
             this.fbtnWashSave2.Click += new System.EventHandler(this.fbtnWashSave2_Click);
@@ -3121,6 +3229,7 @@
             this.cmbWashElecMachine.Name = "cmbWashElecMachine";
             this.cmbWashElecMachine.Size = new System.Drawing.Size(160, 22);
             this.cmbWashElecMachine.TabIndex = 2;
+            this.cmbWashElecMachine.SelectedIndexChanged += new System.EventHandler(this.cmbWashElecMachine_SelectedIndexChanged);
             // 
             // label51
             // 
@@ -3333,7 +3442,7 @@
             this.cmbConnDelay.Location = new System.Drawing.Point(107, 66);
             this.cmbConnDelay.Name = "cmbConnDelay";
             this.cmbConnDelay.Size = new System.Drawing.Size(100, 22);
-            this.cmbConnDelay.TabIndex = 21;
+            this.cmbConnDelay.TabIndex = 25;
             // 
             // label100
             // 
@@ -3341,7 +3450,7 @@
             this.label100.Location = new System.Drawing.Point(12, 69);
             this.label100.Name = "label100";
             this.label100.Size = new System.Drawing.Size(98, 14);
-            this.label100.TabIndex = 22;
+            this.label100.TabIndex = 26;
             this.label100.Text = "重连等待(ms):";
             // 
             // cmbSendDelay
@@ -3356,7 +3465,7 @@
             this.cmbSendDelay.Location = new System.Drawing.Point(334, 66);
             this.cmbSendDelay.Name = "cmbSendDelay";
             this.cmbSendDelay.Size = new System.Drawing.Size(100, 22);
-            this.cmbSendDelay.TabIndex = 20;
+            this.cmbSendDelay.TabIndex = 24;
             // 
             // label99
             // 
@@ -3364,7 +3473,7 @@
             this.label99.Location = new System.Drawing.Point(238, 69);
             this.label99.Name = "label99";
             this.label99.Size = new System.Drawing.Size(98, 14);
-            this.label99.TabIndex = 19;
+            this.label99.TabIndex = 23;
             this.label99.Text = "传输延迟(ms):";
             // 
             // txtFilePath
@@ -3373,7 +3482,7 @@
             this.txtFilePath.Name = "txtFilePath";
             this.txtFilePath.ReadOnly = true;
             this.txtFilePath.Size = new System.Drawing.Size(306, 23);
-            this.txtFilePath.TabIndex = 14;
+            this.txtFilePath.TabIndex = 15;
             // 
             // cmbZhenID
             // 
@@ -3388,10 +3497,10 @@
             "报警模组",
             "制冷模组",
             "温育模组"});
-            this.cmbZhenID.Location = new System.Drawing.Point(85, 31);
+            this.cmbZhenID.Location = new System.Drawing.Point(81, 31);
             this.cmbZhenID.Name = "cmbZhenID";
             this.cmbZhenID.Size = new System.Drawing.Size(128, 22);
-            this.cmbZhenID.TabIndex = 13;
+            this.cmbZhenID.TabIndex = 14;
             // 
             // lblDescribe
             // 
@@ -4114,7 +4223,6 @@
             series4.Name = "diwu";
             series4.XValueMember = "Time";
             series4.YValueMembers = "Diwu";
-            series4.YValuesPerPoint = 2;
             series5.BorderWidth = 2;
             series5.ChartArea = "ChartArea1";
             series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -4124,7 +4232,6 @@
             series5.MarkerColor = System.Drawing.Color.Black;
             series5.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Diamond;
             series5.Name = "qxgl";
-            series5.YValuesPerPoint = 2;
             series6.ChartArea = "ChartArea1";
             series6.IsVisibleInLegend = false;
             series6.Legend = "Legend1";
@@ -5311,7 +5418,7 @@
             this.txtTestErrorShow.Location = new System.Drawing.Point(437, 284);
             this.txtTestErrorShow.Name = "txtTestErrorShow";
             this.txtTestErrorShow.Size = new System.Drawing.Size(346, 166);
-            this.txtTestErrorShow.TabIndex = 9;
+            this.txtTestErrorShow.TabIndex = 10;
             this.txtTestErrorShow.Text = "";
             this.txtTestErrorShow.TextChanged += new System.EventHandler(this.TxtTestErrorShow_TextChanged);
             // 
@@ -5324,7 +5431,7 @@
             this.txtAgingInfoShow.Name = "txtAgingInfoShow";
             this.txtAgingInfoShow.ReadOnly = true;
             this.txtAgingInfoShow.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.txtAgingInfoShow.Size = new System.Drawing.Size(414, 166);
+            this.txtAgingInfoShow.Size = new System.Drawing.Size(413, 166);
             this.txtAgingInfoShow.TabIndex = 7;
             this.txtAgingInfoShow.Text = "";
             this.txtAgingInfoShow.TextChanged += new System.EventHandler(this.TxtAgingInfoShow_TextChanged);
@@ -5443,6 +5550,26 @@
             this.cmbArmRegentPos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbArmRegentPos.FormattingEnabled = true;
             this.cmbArmRegentPos.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
             ""});
             this.cmbArmRegentPos.Location = new System.Drawing.Point(102, 83);
             this.cmbArmRegentPos.Name = "cmbArmRegentPos";
@@ -5745,6 +5872,25 @@
             this.groupBox43.TabStop = false;
             this.groupBox43.Text = "工具按钮";
             // 
+            // fbtnInitSpReadCard
+            // 
+            this.fbtnInitSpReadCard.BackColor = System.Drawing.Color.Transparent;
+            this.fbtnInitSpReadCard.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("fbtnInitSpReadCard.BackgroundImage")));
+            this.fbtnInitSpReadCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.fbtnInitSpReadCard.EnabledSet = true;
+            this.fbtnInitSpReadCard.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.fbtnInitSpReadCard.FlatAppearance.BorderSize = 0;
+            this.fbtnInitSpReadCard.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.fbtnInitSpReadCard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.fbtnInitSpReadCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.fbtnInitSpReadCard.Location = new System.Drawing.Point(22, 66);
+            this.fbtnInitSpReadCard.Name = "fbtnInitSpReadCard";
+            this.fbtnInitSpReadCard.Size = new System.Drawing.Size(129, 23);
+            this.fbtnInitSpReadCard.TabIndex = 63;
+            this.fbtnInitSpReadCard.Text = "初始化射频读卡器";
+            this.fbtnInitSpReadCard.UseVisualStyleBackColor = false;
+            this.fbtnInitSpReadCard.Click += new System.EventHandler(this.fbtnInitSpReadCard_Click);
+            // 
             // fbtnInitIni
             // 
             this.fbtnInitIni.BackColor = System.Drawing.Color.Transparent;
@@ -5796,7 +5942,7 @@
             this.txtTrayVersion.Name = "txtTrayVersion";
             this.txtTrayVersion.ReadOnly = true;
             this.txtTrayVersion.Size = new System.Drawing.Size(100, 23);
-            this.txtTrayVersion.TabIndex = 76;
+            this.txtTrayVersion.TabIndex = 60;
             // 
             // txtRefrigerationVersion
             // 
@@ -5804,7 +5950,7 @@
             this.txtRefrigerationVersion.Name = "txtRefrigerationVersion";
             this.txtRefrigerationVersion.ReadOnly = true;
             this.txtRefrigerationVersion.Size = new System.Drawing.Size(100, 23);
-            this.txtRefrigerationVersion.TabIndex = 75;
+            this.txtRefrigerationVersion.TabIndex = 59;
             // 
             // txtAlertVersion
             // 
@@ -5812,7 +5958,7 @@
             this.txtAlertVersion.Name = "txtAlertVersion";
             this.txtAlertVersion.ReadOnly = true;
             this.txtAlertVersion.Size = new System.Drawing.Size(100, 23);
-            this.txtAlertVersion.TabIndex = 74;
+            this.txtAlertVersion.TabIndex = 58;
             // 
             // txtWashVersion
             // 
@@ -5820,7 +5966,7 @@
             this.txtWashVersion.Name = "txtWashVersion";
             this.txtWashVersion.ReadOnly = true;
             this.txtWashVersion.Size = new System.Drawing.Size(100, 23);
-            this.txtWashVersion.TabIndex = 73;
+            this.txtWashVersion.TabIndex = 57;
             // 
             // txtSimpleVersion
             // 
@@ -5828,7 +5974,7 @@
             this.txtSimpleVersion.Name = "txtSimpleVersion";
             this.txtSimpleVersion.ReadOnly = true;
             this.txtSimpleVersion.Size = new System.Drawing.Size(100, 23);
-            this.txtSimpleVersion.TabIndex = 72;
+            this.txtSimpleVersion.TabIndex = 56;
             // 
             // txtGripperVersion
             // 
@@ -5836,7 +5982,7 @@
             this.txtGripperVersion.Name = "txtGripperVersion";
             this.txtGripperVersion.ReadOnly = true;
             this.txtGripperVersion.Size = new System.Drawing.Size(100, 23);
-            this.txtGripperVersion.TabIndex = 71;
+            this.txtGripperVersion.TabIndex = 55;
             // 
             // label90
             // 
@@ -5844,7 +5990,7 @@
             this.label90.Location = new System.Drawing.Point(29, 39);
             this.label90.Name = "label90";
             this.label90.Size = new System.Drawing.Size(91, 14);
-            this.label90.TabIndex = 61;
+            this.label90.TabIndex = 45;
             this.label90.Text = "计数器模组：";
             // 
             // txtCommunicationVersion
@@ -5853,7 +5999,7 @@
             this.txtCommunicationVersion.Name = "txtCommunicationVersion";
             this.txtCommunicationVersion.ReadOnly = true;
             this.txtCommunicationVersion.Size = new System.Drawing.Size(100, 23);
-            this.txtCommunicationVersion.TabIndex = 70;
+            this.txtCommunicationVersion.TabIndex = 54;
             // 
             // label91
             // 
@@ -5861,8 +6007,8 @@
             this.label91.Location = new System.Drawing.Point(29, 69);
             this.label91.Name = "label91";
             this.label91.Size = new System.Drawing.Size(77, 14);
-            this.label91.TabIndex = 62;
-            this.label91.Text = "通讯模组：";
+            this.label91.TabIndex = 46;
+            this.label91.Text = "通信模组：";
             // 
             // txtPhotonVersion
             // 
@@ -5870,7 +6016,7 @@
             this.txtPhotonVersion.Name = "txtPhotonVersion";
             this.txtPhotonVersion.ReadOnly = true;
             this.txtPhotonVersion.Size = new System.Drawing.Size(100, 23);
-            this.txtPhotonVersion.TabIndex = 69;
+            this.txtPhotonVersion.TabIndex = 53;
             // 
             // label92
             // 
@@ -5878,7 +6024,7 @@
             this.label92.Location = new System.Drawing.Point(29, 99);
             this.label92.Name = "label92";
             this.label92.Size = new System.Drawing.Size(91, 14);
-            this.label92.TabIndex = 63;
+            this.label92.TabIndex = 47;
             this.label92.Text = "理杯机模组：";
             // 
             // label97
@@ -5887,7 +6033,7 @@
             this.label97.Location = new System.Drawing.Point(29, 249);
             this.label97.Name = "label97";
             this.label97.Size = new System.Drawing.Size(77, 14);
-            this.label97.TabIndex = 68;
+            this.label97.TabIndex = 52;
             this.label97.Text = "温育模组：";
             // 
             // label93
@@ -5896,7 +6042,7 @@
             this.label93.Location = new System.Drawing.Point(29, 129);
             this.label93.Name = "label93";
             this.label93.Size = new System.Drawing.Size(91, 14);
-            this.label93.TabIndex = 64;
+            this.label93.TabIndex = 48;
             this.label93.Text = "加样机模组：";
             // 
             // label96
@@ -5905,7 +6051,7 @@
             this.label96.Location = new System.Drawing.Point(29, 219);
             this.label96.Name = "label96";
             this.label96.Size = new System.Drawing.Size(77, 14);
-            this.label96.TabIndex = 67;
+            this.label96.TabIndex = 51;
             this.label96.Text = "制冷模组：";
             // 
             // label94
@@ -5914,7 +6060,7 @@
             this.label94.Location = new System.Drawing.Point(29, 159);
             this.label94.Name = "label94";
             this.label94.Size = new System.Drawing.Size(77, 14);
-            this.label94.TabIndex = 65;
+            this.label94.TabIndex = 49;
             this.label94.Text = "清洗模组：";
             // 
             // label95
@@ -5923,8 +6069,8 @@
             this.label95.Location = new System.Drawing.Point(29, 189);
             this.label95.Name = "label95";
             this.label95.Size = new System.Drawing.Size(77, 14);
-            this.label95.TabIndex = 66;
-            this.label95.Text = "报警模组：";
+            this.label95.TabIndex = 50;
+            this.label95.Text = "加热模组：";
             // 
             // btnVersion
             // 
@@ -5965,10 +6111,10 @@
             this.groupBox41.Controls.Add(this.txtbox2);
             this.groupBox41.Controls.Add(this.label73);
             this.groupBox41.Controls.Add(this.fbtnExportToOldFile);
+            this.groupBox41.Controls.Add(this.fbtnexp);
+            this.groupBox41.Controls.Add(this.textBox3);
             this.groupBox41.Controls.Add(this.fbtnTestsStop);
             this.groupBox41.Controls.Add(this.cmbTestName);
-            this.groupBox41.Controls.Add(this.textBox3);
-            this.groupBox41.Controls.Add(this.fbtnexp);
             this.groupBox41.Controls.Add(this.untxtReadNum);
             this.groupBox41.Controls.Add(this.label87);
             this.groupBox41.Controls.Add(this.untxtSamplePos);
@@ -5985,14 +6131,14 @@
             this.groupBox41.Location = new System.Drawing.Point(6, 37);
             this.groupBox41.Name = "groupBox41";
             this.groupBox41.Size = new System.Drawing.Size(796, 332);
-            this.groupBox41.TabIndex = 15;
+            this.groupBox41.TabIndex = 17;
             this.groupBox41.TabStop = false;
             this.groupBox41.Text = "检验规范测试";
             // 
             // untxtInjection
             // 
             this.untxtInjection.IsNull = false;
-            this.untxtInjection.Location = new System.Drawing.Point(286, 74);
+            this.untxtInjection.Location = new System.Drawing.Point(274, 77);
             this.untxtInjection.MaxValue = new decimal(new int[] {
             12,
             0,
@@ -6005,24 +6151,24 @@
             0});
             this.untxtInjection.Name = "untxtInjection";
             this.untxtInjection.Size = new System.Drawing.Size(99, 23);
-            this.untxtInjection.TabIndex = 31;
+            this.untxtInjection.TabIndex = 29;
             this.untxtInjection.Text = "1";
             this.untxtInjection.Visible = false;
             // 
             // label98
             // 
             this.label98.AutoSize = true;
-            this.label98.Location = new System.Drawing.Point(219, 77);
+            this.label98.Location = new System.Drawing.Point(207, 80);
             this.label98.Name = "label98";
             this.label98.Size = new System.Drawing.Size(77, 14);
-            this.label98.TabIndex = 30;
+            this.label98.TabIndex = 28;
             this.label98.Text = "测试组数：";
             this.label98.Visible = false;
             // 
             // untxtSamplePos2
             // 
             this.untxtSamplePos2.IsNull = false;
-            this.untxtSamplePos2.Location = new System.Drawing.Point(127, 74);
+            this.untxtSamplePos2.Location = new System.Drawing.Point(127, 77);
             this.untxtSamplePos2.MaxValue = new decimal(new int[] {
             100,
             0,
@@ -6035,24 +6181,24 @@
             0});
             this.untxtSamplePos2.Name = "untxtSamplePos2";
             this.untxtSamplePos2.Size = new System.Drawing.Size(25, 23);
-            this.untxtSamplePos2.TabIndex = 29;
+            this.untxtSamplePos2.TabIndex = 25;
             this.untxtSamplePos2.Text = "1";
             this.untxtSamplePos2.Visible = false;
             // 
             // label82
             // 
             this.label82.AutoSize = true;
-            this.label82.Location = new System.Drawing.Point(106, 77);
+            this.label82.Location = new System.Drawing.Point(106, 80);
             this.label82.Name = "label82";
             this.label82.Size = new System.Drawing.Size(21, 14);
-            this.label82.TabIndex = 28;
+            this.label82.TabIndex = 24;
             this.label82.Text = "到";
             this.label82.Visible = false;
             // 
             // txtbox2
             // 
             this.txtbox2.IsNull = false;
-            this.txtbox2.Location = new System.Drawing.Point(176, 109);
+            this.txtbox2.Location = new System.Drawing.Point(176, 112);
             this.txtbox2.MaxValue = new decimal(new int[] {
             100,
             0,
@@ -6065,17 +6211,17 @@
             0});
             this.txtbox2.Name = "txtbox2";
             this.txtbox2.Size = new System.Drawing.Size(25, 23);
-            this.txtbox2.TabIndex = 27;
+            this.txtbox2.TabIndex = 23;
             this.txtbox2.Text = "1";
             this.txtbox2.Visible = false;
             // 
             // label73
             // 
             this.label73.AutoSize = true;
-            this.label73.Location = new System.Drawing.Point(111, 112);
+            this.label73.Location = new System.Drawing.Point(111, 115);
             this.label73.Name = "label73";
             this.label73.Size = new System.Drawing.Size(77, 14);
-            this.label73.TabIndex = 26;
+            this.label73.TabIndex = 22;
             this.label73.Text = "取样次数：";
             this.label73.Visible = false;
             // 
@@ -6093,10 +6239,39 @@
             this.fbtnExportToOldFile.Location = new System.Drawing.Point(706, 244);
             this.fbtnExportToOldFile.Name = "fbtnExportToOldFile";
             this.fbtnExportToOldFile.Size = new System.Drawing.Size(75, 23);
-            this.fbtnExportToOldFile.TabIndex = 20;
+            this.fbtnExportToOldFile.TabIndex = 21;
             this.fbtnExportToOldFile.Text = "导出记录";
             this.fbtnExportToOldFile.UseVisualStyleBackColor = false;
             this.fbtnExportToOldFile.Click += new System.EventHandler(this.FbtnExportToOldFile_Click);
+            // 
+            // fbtnexp
+            // 
+            this.fbtnexp.BackColor = System.Drawing.Color.Transparent;
+            this.fbtnexp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("fbtnexp.BackgroundImage")));
+            this.fbtnexp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.fbtnexp.EnabledSet = true;
+            this.fbtnexp.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.fbtnexp.FlatAppearance.BorderSize = 0;
+            this.fbtnexp.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.fbtnexp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.fbtnexp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.fbtnexp.Location = new System.Drawing.Point(625, 244);
+            this.fbtnexp.Name = "fbtnexp";
+            this.fbtnexp.Size = new System.Drawing.Size(75, 23);
+            this.fbtnexp.TabIndex = 20;
+            this.fbtnexp.Text = "导出文件";
+            this.fbtnexp.UseVisualStyleBackColor = false;
+            this.fbtnexp.Click += new System.EventHandler(this.Fbtnexp_Click);
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(399, 22);
+            this.textBox3.Multiline = true;
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox3.Size = new System.Drawing.Size(382, 211);
+            this.textBox3.TabIndex = 18;
+            this.textBox3.TextChanged += new System.EventHandler(this.TextBox3_TextChanged);
             // 
             // fbtnTestsStop
             // 
@@ -6110,7 +6285,7 @@
             this.fbtnTestsStop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.fbtnTestsStop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.fbtnTestsStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.fbtnTestsStop.Location = new System.Drawing.Point(211, 275);
+            this.fbtnTestsStop.Location = new System.Drawing.Point(211, 239);
             this.fbtnTestsStop.Name = "fbtnTestsStop";
             this.fbtnTestsStop.Size = new System.Drawing.Size(75, 23);
             this.fbtnTestsStop.TabIndex = 17;
@@ -6134,40 +6309,11 @@
             this.cmbTestName.TabIndex = 0;
             this.cmbTestName.SelectedIndexChanged += new System.EventHandler(this.CmbTestName_SelectedIndexChanged);
             // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(399, 22);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox3.Size = new System.Drawing.Size(382, 221);
-            this.textBox3.TabIndex = 16;
-            this.textBox3.TextChanged += new System.EventHandler(this.TextBox3_TextChanged);
-            // 
-            // fbtnexp
-            // 
-            this.fbtnexp.BackColor = System.Drawing.Color.Transparent;
-            this.fbtnexp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("fbtnexp.BackgroundImage")));
-            this.fbtnexp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.fbtnexp.EnabledSet = true;
-            this.fbtnexp.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.fbtnexp.FlatAppearance.BorderSize = 0;
-            this.fbtnexp.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.fbtnexp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.fbtnexp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.fbtnexp.Location = new System.Drawing.Point(625, 244);
-            this.fbtnexp.Name = "fbtnexp";
-            this.fbtnexp.Size = new System.Drawing.Size(75, 23);
-            this.fbtnexp.TabIndex = 19;
-            this.fbtnexp.Text = "导出文件";
-            this.fbtnexp.UseVisualStyleBackColor = false;
-            this.fbtnexp.Click += new System.EventHandler(this.Fbtnexp_Click);
-            // 
             // untxtReadNum
             // 
             this.untxtReadNum.Enabled = false;
             this.untxtReadNum.IsNull = false;
-            this.untxtReadNum.Location = new System.Drawing.Point(84, 141);
+            this.untxtReadNum.Location = new System.Drawing.Point(84, 147);
             this.untxtReadNum.MaxValue = new decimal(new int[] {
             100,
             0,
@@ -6186,7 +6332,7 @@
             // label87
             // 
             this.label87.AutoSize = true;
-            this.label87.Location = new System.Drawing.Point(22, 144);
+            this.label87.Location = new System.Drawing.Point(22, 150);
             this.label87.Name = "label87";
             this.label87.Size = new System.Drawing.Size(70, 14);
             this.label87.TabIndex = 15;
@@ -6196,7 +6342,7 @@
             // 
             this.untxtSamplePos.Enabled = false;
             this.untxtSamplePos.IsNull = false;
-            this.untxtSamplePos.Location = new System.Drawing.Point(79, 74);
+            this.untxtSamplePos.Location = new System.Drawing.Point(79, 77);
             this.untxtSamplePos.MaxValue = new decimal(new int[] {
             50,
             0,
@@ -6215,7 +6361,7 @@
             // label85
             // 
             this.label85.AutoSize = true;
-            this.label85.Location = new System.Drawing.Point(22, 77);
+            this.label85.Location = new System.Drawing.Point(22, 80);
             this.label85.Name = "label85";
             this.label85.Size = new System.Drawing.Size(63, 14);
             this.label85.TabIndex = 12;
@@ -6225,7 +6371,7 @@
             // 
             this.untxtSampleVol.Enabled = false;
             this.untxtSampleVol.IsNull = false;
-            this.untxtSampleVol.Location = new System.Drawing.Point(77, 109);
+            this.untxtSampleVol.Location = new System.Drawing.Point(77, 112);
             this.untxtSampleVol.MaxValue = new decimal(new int[] {
             100,
             0,
@@ -6252,7 +6398,7 @@
             this.fbtnTestS.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.fbtnTestS.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.fbtnTestS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.fbtnTestS.Location = new System.Drawing.Point(93, 275);
+            this.fbtnTestS.Location = new System.Drawing.Point(93, 239);
             this.fbtnTestS.Name = "fbtnTestS";
             this.fbtnTestS.Size = new System.Drawing.Size(75, 23);
             this.fbtnTestS.TabIndex = 10;
@@ -6272,7 +6418,7 @@
             // cbChange
             // 
             this.cbChange.AutoSize = true;
-            this.cbChange.Location = new System.Drawing.Point(25, 223);
+            this.cbChange.Location = new System.Drawing.Point(25, 187);
             this.cbChange.Name = "cbChange";
             this.cbChange.Size = new System.Drawing.Size(82, 18);
             this.cbChange.TabIndex = 9;
@@ -6284,7 +6430,7 @@
             // 
             this.untxtPos1.Enabled = false;
             this.untxtPos1.IsNull = false;
-            this.untxtPos1.Location = new System.Drawing.Point(317, 41);
+            this.untxtPos1.Location = new System.Drawing.Point(313, 41);
             this.untxtPos1.MaxValue = new decimal(new int[] {
             50,
             0,
@@ -6304,9 +6450,9 @@
             // 
             this.untxtPos2.Enabled = false;
             this.untxtPos2.IsNull = false;
-            this.untxtPos2.Location = new System.Drawing.Point(365, 41);
+            this.untxtPos2.Location = new System.Drawing.Point(361, 41);
             this.untxtPos2.MaxValue = new decimal(new int[] {
-            50,
+            80,
             0,
             0,
             0});
@@ -6323,7 +6469,7 @@
             // label84
             // 
             this.label84.AutoSize = true;
-            this.label84.Location = new System.Drawing.Point(22, 112);
+            this.label84.Location = new System.Drawing.Point(22, 115);
             this.label84.Name = "label84";
             this.label84.Size = new System.Drawing.Size(63, 14);
             this.label84.TabIndex = 3;
@@ -6332,7 +6478,7 @@
             // label88
             // 
             this.label88.AutoSize = true;
-            this.label88.Location = new System.Drawing.Point(344, 44);
+            this.label88.Location = new System.Drawing.Point(340, 44);
             this.label88.Name = "label88";
             this.label88.Size = new System.Drawing.Size(21, 14);
             this.label88.TabIndex = 6;
@@ -6341,30 +6487,11 @@
             // label89
             // 
             this.label89.AutoSize = true;
-            this.label89.Location = new System.Drawing.Point(219, 44);
+            this.label89.Location = new System.Drawing.Point(208, 44);
             this.label89.Name = "label89";
             this.label89.Size = new System.Drawing.Size(112, 14);
             this.label89.TabIndex = 4;
             this.label89.Text = "温育盘放管孔位:";
-            // 
-            // fbtnInitSpReadCard
-            // 
-            this.fbtnInitSpReadCard.BackColor = System.Drawing.Color.Transparent;
-            this.fbtnInitSpReadCard.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("fbtnInitSpReadCard.BackgroundImage")));
-            this.fbtnInitSpReadCard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.fbtnInitSpReadCard.EnabledSet = true;
-            this.fbtnInitSpReadCard.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.fbtnInitSpReadCard.FlatAppearance.BorderSize = 0;
-            this.fbtnInitSpReadCard.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.fbtnInitSpReadCard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.fbtnInitSpReadCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.fbtnInitSpReadCard.Location = new System.Drawing.Point(22, 69);
-            this.fbtnInitSpReadCard.Name = "fbtnInitSpReadCard";
-            this.fbtnInitSpReadCard.Size = new System.Drawing.Size(129, 23);
-            this.fbtnInitSpReadCard.TabIndex = 62;
-            this.fbtnInitSpReadCard.Text = "初始化射频读卡器";
-            this.fbtnInitSpReadCard.UseVisualStyleBackColor = false;
-            this.fbtnInitSpReadCard.Click += new System.EventHandler(this.fbtnInitSpReadCard_Click);
             // 
             // frmDiagnost
             // 
@@ -6421,6 +6548,9 @@
             this.groupBox33.PerformLayout();
             this.tabWashTray.ResumeLayout(false);
             this.groupBox20.ResumeLayout(false);
+            this.groupBox44.ResumeLayout(false);
+            this.groupBox44.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numDrainageB)).EndInit();
             this.groupBox39.ResumeLayout(false);
             this.groupBox39.PerformLayout();
             this.groupBox32.ResumeLayout(false);
@@ -6843,8 +6973,9 @@
         private System.Windows.Forms.TextBox textBox3;
         private CustomControl.FunctionButton fbtnexp;
         private CustomControl.FunctionButton fbtnExportToOldFile;
-        private System.Windows.Forms.ComboBox cmbZhenID;
         private CustomControl.userTextBoxBase txtFilePath;
+        private System.Windows.Forms.ComboBox cmbZhenID;
+        private CustomControl.FunctionButton btnHandClose;
         private CustomControl.userTextBoxBase txtTrayVersion;
         private CustomControl.userTextBoxBase txtRefrigerationVersion;
         private CustomControl.userTextBoxBase txtAlertVersion;
@@ -6862,24 +6993,29 @@
         private System.Windows.Forms.Label label94;
         private System.Windows.Forms.Label label95;
         private CustomControl.FunctionButton btnBQLiquaid;
-        private CustomControl.userNumTextBox untxtSamplePos2;
-        private System.Windows.Forms.Label label82;
         private CustomControl.userNumTextBox txtbox2;
         private System.Windows.Forms.Label label73;
-        private CustomControl.FunctionButton btnHandClose;
+        private CustomControl.userNumTextBox untxtSamplePos2;
+        private System.Windows.Forms.Label label82;
         private CustomControl.userNumTextBox untxtInjection;
         private System.Windows.Forms.Label label98;
         private CustomControl.FunctionButton btnLoopTurn;
-        private System.Windows.Forms.ComboBox cmbConnDelay;
-        private System.Windows.Forms.Label label100;
-        private System.Windows.Forms.ComboBox cmbSendDelay;
-        private System.Windows.Forms.Label label99;
         private CustomControl.FunctionButton fbtnASSave2;
         private CustomControl.FunctionButton btnSaveHand2;
         private CustomControl.FunctionButton btnISave2;
         private CustomControl.FunctionButton fbtnWashSave2;
+        private System.Windows.Forms.ComboBox cmbConnDelay;
+        private System.Windows.Forms.Label label100;
+        private System.Windows.Forms.ComboBox cmbSendDelay;
+        private System.Windows.Forms.Label label99;
         private System.Windows.Forms.GroupBox groupBox43;
         private CustomControl.FunctionButton fbtnInitIni;
         private CustomControl.FunctionButton fbtnInitSpReadCard;
+        private CustomControl.FunctionButton btnOrderCancel;
+        private System.Windows.Forms.GroupBox groupBox44;
+        private System.Windows.Forms.NumericUpDown numDrainageB;
+        private CustomControl.FunctionButton endDrainageB;
+        private CustomControl.FunctionButton startDrainageB;
+        private System.Windows.Forms.Label label101;
     }
 }

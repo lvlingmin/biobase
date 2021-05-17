@@ -8,13 +8,11 @@ using System.Text;
 using System.Windows.Forms;
 using Maticsoft.DBUtility;
 using System.Threading;
-using System.IO;
 using Common;
+using System.IO;
 
 namespace BioBaseCLIA.Run
 {
-   
-
     /// <summary>
     ///  运行信息修改窗体，可修改实验所做样本的稀释信息和急诊信息，LYN add 20171114
     /// </summary>
@@ -22,17 +20,17 @@ namespace BioBaseCLIA.Run
     {
         public string SPSampleNo;
         /// <summary>
-        /// 试剂盘配置文件地址
+        /// 稀释样本后弃体积
         /// </summary>
-        string iniPathReagentTrayInfo = Directory.GetCurrentDirectory() + "\\ReagentTrayInfo.ini";
+        int DiuLeftVol = 40;
         /// <summary>
-        /// 稀释液获取不到的体积/ul
+        /// 稀释液获取不到的体积/ul 2019-04-12 zlx add
         /// </summary>
         int DiuNoUsePro = 2000;
         /// <summary>
-        /// 稀释过程获取不到的稀释液体积
+        /// 试剂盘配置文件地址
         /// </summary>
-        int DiuLeftVol = 40;
+        string iniPathReagentTrayInfo = Directory.GetCurrentDirectory() + "\\ReagentTrayInfo.ini";
         public frmRunInfoModify()
         {
             InitializeComponent();
@@ -81,7 +79,7 @@ namespace BioBaseCLIA.Run
                 if (!diu)
                     count = count + int.Parse(ddr["TestRg"].ToString());
                 else
-                    count = count + int.Parse(ddr["TestDiu"].ToString()) - DiuNoUsePro;
+                    count = count + int.Parse(ddr["TestDiu"].ToString());
             }
             return count;
         }
@@ -95,10 +93,11 @@ namespace BioBaseCLIA.Run
         private int ReadRegetInfo(string ItemName, bool diu, string RgPos)
         {
             int count = 0;
-            if (diu)
-                count = int.Parse(OperateIniFile.ReadIniData("ReagentPos" + RgPos, "leftDiuVol", "", iniPathReagentTrayInfo));
-            else
-                count = int.Parse(OperateIniFile.ReadIniData("ReagentPos" + RgPos, "LeftReagent1", "", iniPathReagentTrayInfo));
+            //if (diu)
+            //    count = int.Parse(OperateIniFile.ReadIniData("ReagentPos" + RgPos, "leftDiuVol", "", iniPathReagentTrayInfo));
+            //else
+            //    count = int.Parse(OperateIniFile.ReadIniData("ReagentPos" + RgPos, "LeftReagent1", "", iniPathReagentTrayInfo));
+            count = int.Parse(OperateIniFile.ReadIniData("ReagentPos" + RgPos, "LeftReagent1", "", iniPathReagentTrayInfo));
             return count;
         }
         /// <summary>
@@ -199,37 +198,129 @@ namespace BioBaseCLIA.Run
                 frmMessageShow frmMsg = new frmMessageShow();
                 frmMsg.MessageShow("运行信息修改", "请选择需要修改的样本！");
             }
-             string ItemName=dgvSpRunInfoList.SelectedRows[0].Cells["ItemName"].Value.ToString();
-             int ODiuCount=int.Parse(dgvSpRunInfoList.SelectedRows[0].Cells["DilutionTimes"].Value.ToString());
-             int NDiuCount=int.Parse(txtDilutionTimes.Text)*int.Parse(cmbDilutionTimes.SelectedItem.ToString());
-             int OldDiuVol=GetSumDiuVol(ItemName, ODiuCount);
-             int NewDiuVol=GetSumDiuVol(ItemName, NDiuCount);
-             int AddDiuVol=NewDiuVol-OldDiuVol;
-             var dr = frmParent.dtSampleRunInfo.Select("SampleNo='" + SampleNo + "'");
-             DataRow[] drRunInfo = frmParent.dtSpInfo.Select("Status = '0'and SampleNo='" + SPSampleNo + "'");
-             int RepeatCount = int.Parse(drRunInfo[0]["RepeatCount"].ToString()); 
-             if(AddDiuVol>0)
-             {
-                int sdiuvol=SelectDtRgInfoNoStat(ItemName,true);
+            if (dgvSpRunInfoList.SelectedRows.Count == 0)
+            {
+                frmMessageShow frmMsg = new frmMessageShow();
+                frmMsg.MessageShow("运行信息修改", "请选择需要修改的样本！");
+            }
+            string ItemName = dgvSpRunInfoList.SelectedRows[0].Cells["ItemName"].Value.ToString();
+            int ODiuCount = int.Parse(dgvSpRunInfoList.SelectedRows[0].Cells["DilutionTimes"].Value.ToString());
+            int NDiuCount = int.Parse(txtDilutionTimes.Text) * int.Parse(cmbDilutionTimes.SelectedItem.ToString());
+            int OldDiuVol = GetSumDiuVol(ItemName, ODiuCount);
+            int NewDiuVol = GetSumDiuVol(ItemName, NDiuCount);
+            int AddDiuVol = NewDiuVol - OldDiuVol;
+            var dr = frmParent.dtSampleRunInfo.Select("SampleNo='" + SampleNo + "'");
+            DataRow[] drRunInfo = frmParent.dtSpInfo.Select("Status = '0'and SampleNo='" + SPSampleNo + "'");
+            int RepeatCount = int.Parse(drRunInfo[0]["RepeatCount"].ToString());
+            int DiuVolleft = 0;
+            string DiuName = "";
+            if (AddDiuVol > 0)
+            {
+
                 DataRow[] drRegion = frmParent.dtRgInfo.Select("RgName='" + ItemName + "'");
-                int DiuVolleft = 0;
                 foreach (DataRow ddr in drRegion)
                 {
-                    DiuVolleft = DiuVolleft + ReadRegetInfo(ItemName, true,  ddr["Postion"].ToString())-DiuNoUsePro;
+                    string diuPos = OperateIniFile.ReadIniData("ReagentPos" + ddr["Postion"].ToString(), "DiuPos", "", iniPathReagentTrayInfo);
+                    if (diuPos != "")
+                    {
+                        DiuName = OperateIniFile.ReadIniData("ReagentPos" + diuPos, "ItemName", "", iniPathReagentTrayInfo);
+                        DataRow[] drDiu = frmParent.dtRgInfo.Select("RgName='" + DiuName + "'");
+                        foreach (DataRow drr in drDiu)
+                        {
+                            DiuVolleft = DiuVolleft + ReadRegetInfo(DiuName, true, drr["Postion"].ToString()) - DiuNoUsePro;
+                        }
+                        break;
+                    }
                 }
-                if(AddDiuVol * RepeatCount>DiuVolleft)
+                //foreach (DataRow ddr in drRegion)
+                //{
+                //    DiuVolleft = DiuVolleft + ReadRegetInfo(ItemName, true, ddr["Postion"].ToString()) - DiuNoUsePro;
+                //}
+                int sdiuvol = SelectDtRgInfoNoStat(DiuName, true);
+                if (sdiuvol + AddDiuVol * RepeatCount > DiuVolleft)
                 {
-                   frmMessageShow frmMsg = new frmMessageShow();
-                   frmMsg.MessageShow("运行信息修改", ItemName+"项目稀释液不足！");
-                   return;
+                    frmMessageShow frmMsg = new frmMessageShow();
+                    frmMsg.MessageShow("运行信息修改", DiuName + "稀释液不足！");
+                    return;
                 }
                 else
                 {
-                    UpdadteDtRgInfoNoStat(ItemName, 0, (AddDiuVol * RepeatCount));
+                    
+                    UpdadteDtRgInfoNoStat(DiuName, 0, (AddDiuVol * RepeatCount));
                 }
-             }
-             else
-                 UpdadteDtRgInfoNoStat(ItemName, 0, (AddDiuVol * RepeatCount));
+            }
+            else
+            {
+                DataRow[] drRegion = frmParent.dtRgInfo.Select("RgName='" + ItemName + "'");
+                foreach (DataRow ddr in drRegion)
+                {
+                    string diuPos = OperateIniFile.ReadIniData("ReagentPos" + ddr["Postion"].ToString(), "DiuPos", "", iniPathReagentTrayInfo);
+                    if (diuPos != "")
+                    {
+                        DiuName = OperateIniFile.ReadIniData("ReagentPos" + diuPos, "ItemName", "", iniPathReagentTrayInfo);
+                        break;
+                    }
+                }
+                UpdadteDtRgInfoNoStat(DiuName, 0, (AddDiuVol * RepeatCount));
+            }
+                
+            foreach (DataGridViewRow row in dgvSpRunInfoList.SelectedRows)
+            {
+                //string sampleNo = frmParent.dtSampleRunInfo.Rows[row.Index]["SampleNo"].ToString();
+                string sampleNo = SPSampleNo;
+                int rowIndex = 0;
+                for (int i = 0; i < frmSampleLoad.dtSpInfo.Rows.Count; i++)
+                {
+                    if (frmSampleLoad.dtSpInfo.Rows[i]["SampleNo"].ToString() == sampleNo)
+                    {
+                        rowIndex = i;
+                        break;
+                    }
+                }
+                int RinfoIndex = 0;
+                for (int i = 0; i < frmParent.dtSampleRunInfo.Rows.Count; i++)
+                {
+                    if (frmParent.dtSampleRunInfo.Rows[i]["SampleNo"].ToString() == sampleNo && frmParent.dtSampleRunInfo.Rows[i]["ItemName"].ToString() == dgvSpRunInfoList.SelectedRows[0].Cells["ItemName"].Value.ToString())
+                    {
+                        RinfoIndex = i;
+                        break;
+                    }
+                }
+                DbHelperOleDb db = new DbHelperOleDb(0);
+                object DiluteCount = DbHelperOleDb.GetSingle(0,@"select DiluteCount from tbProject where ShortName 
+                                                                             = '" + dgvSpRunInfoList.SelectedRows[0].Cells["ItemName"].Value.ToString() + "'");//frmParent.dtSampleRunInfo.Rows[row.Index]["ItemName"].ToString()
+                try
+                {
+                    if (cmbDilutionTimes.SelectedItem.ToString() != null && cmbDilutionTimes.SelectedItem.ToString() != "")
+                    {
+                        dgvSpRunInfoList.SelectedRows[0].Cells["DilutionTimes"].Value = frmParent.dtSampleRunInfo.Rows[RinfoIndex]["DilutionTimes"] = int.Parse(cmbDilutionTimes.SelectedItem.ToString()) * int.Parse(DiluteCount.ToString());
+                    }
+                }
+                catch (Exception ee)
+                {
+                    dgvSpRunInfoList.SelectedRows[0].Cells["DilutionTimes"].Value = frmParent.dtSampleRunInfo.Rows[RinfoIndex]["DilutionTimes"] = cmbDilutionTimes.Text;
+                }
+                if (chkEmergency.Checked)
+                {
+                    //修改样本运行信息表的急诊信息
+                    frmParent.dtSampleRunInfo.Rows[RinfoIndex]["Emergency"] = "是";
+                    //修改样本装载界面的控件急诊信息
+                    frmSampleLoad.dtSpInfo.Rows[rowIndex]["Emergency"] = "是";
+                }
+                else
+                {
+                    frmParent.dtSampleRunInfo.Rows[RinfoIndex]["Emergency"] = "否";
+                    frmSampleLoad.dtSpInfo.Rows[rowIndex]["Emergency"] = "否";
+                }
+            }
+            cmbDilutionTimes.Enabled = false;
+            chkEmergency.Enabled = false;
+            frmAddSample.newSample = true;
+            fbtnOK.Enabled = false;//y add 20180426
+            fbtnModify_Click(sender, e);
+            //frmRunInfoModify_Load(sender,e);
+            #region 屏蔽原有代码
+            /*
             foreach (DataGridViewRow row in dgvSpRunInfoList.SelectedRows)
             {
                 //string sampleNo = frmParent.dtSampleRunInfo.Rows[row.Index]["SampleNo"].ToString();
@@ -253,7 +344,7 @@ namespace BioBaseCLIA.Run
                     }
                 }
                 DbHelperOleDb db = new DbHelperOleDb(0);
-                object DiluteCount = DbHelperOleDb.GetSingle(0,@"select DiluteCount from tbProject where ShortName 
+                object DiluteCount = DbHelperOleDb.GetSingle(@"select DiluteCount from tbProject where ShortName 
                                                                              = '" + dgvSpRunInfoList.SelectedRows[0].Cells["ItemName"].Value.ToString()+"'");//frmParent.dtSampleRunInfo.Rows[row.Index]["ItemName"].ToString()
                 try
                 {
@@ -285,6 +376,8 @@ namespace BioBaseCLIA.Run
             fbtnOK.Enabled = false;//y add 20180426
             fbtnModify_Click(sender,e);
             //frmRunInfoModify_Load(sender,e);
+            */
+            #endregion
         }
 
         private void frmRunInfoModify_Load(object sender, EventArgs e)
@@ -300,13 +393,13 @@ namespace BioBaseCLIA.Run
             //}
             if (frmWorkList.RunFlag==(int)RunFlagStart.IsRuning && frmWorkList.EmergencyFlag)
             {
-                rows = frmParent.dtSampleRunInfo.Select("SampleNo='"+SPSampleNo+"' ");
+                rows = frmParent.dtSampleRunInfo.Select("SampleNo='" + SPSampleNo + "' ");
                 foreach (DataRow row in rows)
                 {
                     DbHelperOleDb db = new DbHelperOleDb(0);
-//                    object DiluteCount = DbHelperOleDb.GetSingle(@"select DiluteCount from tbProject where ShortName 
-//                                                                             = '" + row["ItemName"].ToString() + "'");
-                    row["DilutionTimes"] = int.Parse(row["DilutionTimes"].ToString());// int.Parse(DiluteCount.ToString());
+                    //object DiluteCount = DbHelperOleDb.GetSingle(@"select DiluteCount from tbProject where ShortName 
+                    //                                                         = '" + row["ItemName"].ToString() + "'");
+                    row["DilutionTimes"] = int.Parse(row["DilutionTimes"].ToString());//int.Parse(DiluteCount.ToString());
                     dtSpInfoRun.ImportRow(row);
                 }
                 dgvSpRunInfoList.DataSource = dtSpInfoRun;

@@ -102,7 +102,7 @@ namespace BioBaseCLIA.ScalingQC
             dtScalResult = bllscalResult.GetList("").Tables[0];
             DataTable dtMainScalCurve = bllMainCurve.GetAllList().Tables[0];
             db = new DbHelperOleDb(3);
-            DataTable dtt = bllregent.GetList("").Tables[0]; //获得数据库该表全部数据            
+            DataTable dtt = bllregent.GetList("Status= '1'").Tables[0]; //获得数据库该表全部数据            
             if (dtScalResult.Rows.Count > 0)
             {
                 foreach (DataRow drScal in dtScalResult.Rows)
@@ -125,61 +125,6 @@ namespace BioBaseCLIA.ScalingQC
                     }
                 }
             }
-            #region 屏蔽原有代码  
-            /*
-            if (dtProject != null)
-            {
-                for (int i = 0; i < dtProject.Rows.Count; i++)
-                {
-                    //lyq mod 20191009
-                    //db = new DbHelperOleDb(3);
-                    //DataTable dt = bllregent.GetList(" ReagentName = '" + dtProject.Rows[i]["ShortName"].ToString() + "'").Tables[0];  
-                    string shortName = dtProject.Rows[i]["ShortName"].ToString();
-                    var expiryDate = dtProject.Rows[i]["ExpiryDate"];
-
-                    DataRow[] drr = dtt.Select(" ReagentName = '" + shortName + "'");
-                    DataTable dt = new DataTable();
-                    if (drr.Length > 0)
-                        dt = drr.CopyToDataTable();
-
-                    if (dt.Rows.Count > 0)
-                    {
-                        for (int j = 0; j < dt.Rows.Count; j++)
-                        {
-                            string batch = dt.Rows[j]["Batch"].ToString();
-                            if (batch == "") continue;
-
-                            //lyq mod 20191009
-                            //db = new DbHelperOleDb(1);
-                            //bool ExitsMainCurve = bllMainCurve.ExistsCurve(dtProject.Rows[i]["ShortName"].ToString(), dt.Rows[j]["Batch"].ToString());                            
-                            bool ExitsMainCurve = dtMainScalCurve.Select("ItemName='" + shortName + " ' AND RegentBatch='" + batch + "'").Length > 0;
-
-                            DataRow[] ScalCurve = dtScalResult.Select("ItemName = '" + shortName
-                                + "' and RegentBatch = '" + batch + "' and Status = 1");
-                            if (ScalCurve.Length == 0) continue;
-                            string ScalType = "";
-                            string ActiveDate = "";
-                            if (ScalCurve.Length > 0)
-                            {
-                                ScalType = ScalCurve[0][3].ToString() == "6" ? "六点定标" : "两点校准";
-                                ActiveDate = Convert.ToDateTime(ScalCurve[0]["ActiveDate"]).ToString("yyyy-MM-dd");
-                            }
-                            dtScalInfo.Rows.Add(shortName, batch,
-                                ExitsMainCurve ? "Y" : "N", ScalCurve.Length > 0 ? "Y" : "N", ScalType,
-                                ActiveDate,(Convert.ToDateTime(ActiveDate).AddDays(Convert.ToInt32(expiryDate))).ToString("yyyy-MM-dd"), Convert.ToInt32(expiryDate));//2018-11-14 zlx add
-                            //dt.Rows[j]["AddDate"]
-                        }
-                    }
-                    else
-                    {
-                        dtScalInfo.Rows.Add(shortName, "",
-                                   "N", "N", "",
-                                  "", "", Convert.ToInt32(expiryDate));//2018-07-30 zlx add
-                    }
-                }
-            }
-             */
-            #endregion
             if (dtScalInfo.Rows.Count > 1)
                 dtScalInfo = Distinct(dtScalInfo, "ItemName", "RegentBatch");
 
@@ -282,9 +227,9 @@ namespace BioBaseCLIA.ScalingQC
             dtMain.Columns.Add("PMT", typeof(float));
             MainltData = new List<Data_Value>();
             #endregion
-            dc = new drawCurve();            
+            dc = new drawCurve();
             //数据库项目表中查询定标方程选择字段
-            int CalMode = int.Parse(DbHelperOleDb.GetSingle(0,@"select CalMode from tbProject where ShortName = '"+ itemname + "'").ToString());
+            int CalMode = int.Parse(DbHelperOleDb.GetSingle(0, @"select CalMode from tbProject where ShortName = '" + itemname + "'").ToString());
             er = ft.getCaler(CalMode);
             //定义主曲线变量储存画曲线用的点的数据
             er1 = ft.getCaler(CalMode);
@@ -326,73 +271,73 @@ namespace BioBaseCLIA.ScalingQC
             //if (chbShowMainCurve.Checked)
             //{
 
-                for (int i = MainltData.Count - 2; i >= 0; i--)
+            for (int i = MainltData.Count - 2; i >= 0; i--)
+            {
+                Data_Value v2 = MainltData[i + 1];
+                Data_Value v1 = MainltData[i];
+                if (v2.Data == v1.Data)
                 {
-                    Data_Value v2 = MainltData[i + 1];
-                    Data_Value v1 = MainltData[i];
-                    if (v2.Data == v1.Data)
-                    {
-                        v1.DataValue = (v1.DataValue + v2.DataValue) / 2;
-                        MainltData.RemoveAt(i + 1);
-                    }
-
+                    v1.DataValue = (v1.DataValue + v2.DataValue) / 2;
+                    MainltData.RemoveAt(i + 1);
                 }
 
-                if (MainltData.Count > 0)//ltData标准品
+            }
+
+            if (MainltData.Count > 0)//ltData标准品
+            {
+                for (int i = 0; i < MainltData.Count; i++)
                 {
-                    for (int i = 0; i < MainltData.Count; i++)
+
+                    if (MainltData[i].Data == 0)
                     {
-
-                        if (MainltData[i].Data == 0)
-                        {
-                            MainltData[i].Data = 0.0001;
-                        }
-                        if (MainltData[i].Data == 1)
-                        {
-                            MainltData[i].Data = 0.999999;
-                        }
-                        if (MainltData[i].DataValue == 0)
-                        {
-                            MainltData[i].DataValue = 0.0001;
-                        }
+                        MainltData[i].Data = 0.0001;
                     }
-                    for (int i = 0; i < MainltData.Count; i++)
+                    if (MainltData[i].Data == 1)
                     {
-                        //对处理过的数据进行纠错
-                        if (double.IsNaN(MainltData[i].Data) || double.IsNaN(MainltData[i].DataValue))
-                        {
-                            MessageBox.Show(getString("keywordText.FuncCalcError"), getString("keywordText.Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-
-                        }
+                        MainltData[i].Data = 0.999999;
                     }
-                    //将画定标曲线的点赋值给dt
-                    foreach (Data_Value dv in MainltData)
+                    if (MainltData[i].DataValue == 0)
                     {
-                        dtMain.Rows.Add(dv.Data, dv.DataValue);
+                        MainltData[i].DataValue = 0.0001;
                     }
-
-                    //计算定标曲线的系数
-                    //for (int i = 0; i < MainltData.Count; i++)
-                    //{
-
-                        er1.AddData(MainltData);
-                        er1.Fit();
-                    //}
-                    foreach (double par in er1._pars)
-                    {
-                        if (double.IsNaN(par) || double.IsInfinity(par))
-                        {
-                            MessageBox.Show(getString("keywordText.RegressionCalcError"), getString("keywordText.Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                        }
-                    }
-
                 }
-            //}
-            #endregion
-            #endregion
-            noNeedMainScal:
+                for (int i = 0; i < MainltData.Count; i++)
+                {
+                    //对处理过的数据进行纠错
+                    if (double.IsNaN(MainltData[i].Data) || double.IsNaN(MainltData[i].DataValue))
+                    {
+                        MessageBox.Show(getString("keywordText.FuncCalcError"), getString("keywordText.Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+
+                    }
+                }
+                //将画定标曲线的点赋值给dt
+                foreach (Data_Value dv in MainltData)
+                {
+                    dtMain.Rows.Add(dv.Data, dv.DataValue);
+                }
+
+                //计算定标曲线的系数
+                //for (int i = 0; i < MainltData.Count; i++)
+                //{
+
+                er1.AddData(MainltData);
+                er1.Fit();
+                //}
+                foreach (double par in er1._pars)
+                {
+                    if (double.IsNaN(par) || double.IsInfinity(par))
+                    {
+                        MessageBox.Show(getString("keywordText.RegressionCalcError"), getString("keywordText.Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    }
+                }
+
+            }
+        //}
+        #endregion
+        #endregion
+        noNeedMainScal:
             if (ScalCurve.Length == 0)
             {
                 clearData();
@@ -415,7 +360,7 @@ namespace BioBaseCLIA.ScalingQC
                     dgvScalingData.Rows.Add("S" + (i+1).ToString(), pointsData[0].Substring(1), pointsData[1].Substring(0, pointsData[1].IndexOf(")")));
                 }
                 #endregion
-               if (dgvScalingData.Rows.Count == 2)
+                if (dgvScalingData.Rows.Count == 2)
                 {
                     //两点定标数据存储
                     DataTable tempdt = new DataTable();
@@ -504,9 +449,8 @@ namespace BioBaseCLIA.ScalingQC
                     //计算定标曲线的系数
                     //for (int i = 0; i < ltData.Count; i++)
                     //{
-
-                        er.AddData(ltData);
-                        er.Fit();
+                    er.AddData(ltData);
+                    er.Fit();
                     //}
                     foreach (double par in er._pars)
                     {
@@ -518,15 +462,9 @@ namespace BioBaseCLIA.ScalingQC
                     }
                     EquationCurve(er, dt, CalMode);
                 }
-                   
-                
-
             }
             //在definePanal1中画出定标曲线
-            dc.paintEliseScaling(definePanal1, dt, chbShowMainCurve.Checked?dtMain:new DataTable(), er.GetResult, er1.GetResult, "", 0);
-
-
-
+            dc.paintEliseScaling(definePanal1, dt, chbShowMainCurve.Checked ? dtMain : new DataTable(), er.GetResult, er1.GetResult, "", 0);
         }
         /// <summary>
         /// 获取两点校正后的六个点坐标值（浓度与发光值）

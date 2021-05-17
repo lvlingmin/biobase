@@ -103,6 +103,7 @@
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.numDwPourin = new System.Windows.Forms.NumericUpDown();
             this.cbCleanTray = new System.Windows.Forms.CheckBox();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
             this.cbClearTray = new System.Windows.Forms.CheckBox();
@@ -133,7 +134,6 @@
             this.chbRead = new System.Windows.Forms.CheckBox();
             this.chbAddSu = new System.Windows.Forms.CheckBox();
             this.chbWash = new System.Windows.Forms.CheckBox();
-            this.numDwPourin = new System.Windows.Forms.NumericUpDown();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -148,9 +148,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numDwPourin)).BeginInit();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDwPourin)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -515,6 +515,87 @@
             // 
             this.cmbReactStartPos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbReactStartPos.FormattingEnabled = true;
+            this.cmbReactStartPos.Items.AddRange(new object[] {
+            resources.GetString("cmbReactStartPos.Items"),
+            resources.GetString("cmbReactStartPos.Items1"),
+            resources.GetString("cmbReactStartPos.Items2"),
+            resources.GetString("cmbReactStartPos.Items3"),
+            resources.GetString("cmbReactStartPos.Items4"),
+            resources.GetString("cmbReactStartPos.Items5"),
+            resources.GetString("cmbReactStartPos.Items6"),
+            resources.GetString("cmbReactStartPos.Items7"),
+            resources.GetString("cmbReactStartPos.Items8"),
+            resources.GetString("cmbReactStartPos.Items9"),
+            resources.GetString("cmbReactStartPos.Items10"),
+            resources.GetString("cmbReactStartPos.Items11"),
+            resources.GetString("cmbReactStartPos.Items12"),
+            resources.GetString("cmbReactStartPos.Items13"),
+            resources.GetString("cmbReactStartPos.Items14"),
+            resources.GetString("cmbReactStartPos.Items15"),
+            resources.GetString("cmbReactStartPos.Items16"),
+            resources.GetString("cmbReactStartPos.Items17"),
+            resources.GetString("cmbReactStartPos.Items18"),
+            resources.GetString("cmbReactStartPos.Items19"),
+            resources.GetString("cmbReactStartPos.Items20"),
+            resources.GetString("cmbReactStartPos.Items21"),
+            resources.GetString("cmbReactStartPos.Items22"),
+            resources.GetString("cmbReactStartPos.Items23"),
+            resources.GetString("cmbReactStartPos.Items24"),
+            resources.GetString("cmbReactStartPos.Items25"),
+            resources.GetString("cmbReactStartPos.Items26"),
+            resources.GetString("cmbReactStartPos.Items27"),
+            resources.GetString("cmbReactStartPos.Items28"),
+            resources.GetString("cmbReactStartPos.Items29"),
+            resources.GetString("cmbReactStartPos.Items30"),
+            resources.GetString("cmbReactStartPos.Items31"),
+            resources.GetString("cmbReactStartPos.Items32"),
+            resources.GetString("cmbReactStartPos.Items33"),
+            resources.GetString("cmbReactStartPos.Items34"),
+            resources.GetString("cmbReactStartPos.Items35"),
+            resources.GetString("cmbReactStartPos.Items36"),
+            resources.GetString("cmbReactStartPos.Items37"),
+            resources.GetString("cmbReactStartPos.Items38"),
+            resources.GetString("cmbReactStartPos.Items39"),
+            resources.GetString("cmbReactStartPos.Items40"),
+            resources.GetString("cmbReactStartPos.Items41"),
+            resources.GetString("cmbReactStartPos.Items42"),
+            resources.GetString("cmbReactStartPos.Items43"),
+            resources.GetString("cmbReactStartPos.Items44"),
+            resources.GetString("cmbReactStartPos.Items45"),
+            resources.GetString("cmbReactStartPos.Items46"),
+            resources.GetString("cmbReactStartPos.Items47"),
+            resources.GetString("cmbReactStartPos.Items48"),
+            resources.GetString("cmbReactStartPos.Items49"),
+            resources.GetString("cmbReactStartPos.Items50"),
+            resources.GetString("cmbReactStartPos.Items51"),
+            resources.GetString("cmbReactStartPos.Items52"),
+            resources.GetString("cmbReactStartPos.Items53"),
+            resources.GetString("cmbReactStartPos.Items54"),
+            resources.GetString("cmbReactStartPos.Items55"),
+            resources.GetString("cmbReactStartPos.Items56"),
+            resources.GetString("cmbReactStartPos.Items57"),
+            resources.GetString("cmbReactStartPos.Items58"),
+            resources.GetString("cmbReactStartPos.Items59"),
+            resources.GetString("cmbReactStartPos.Items60"),
+            resources.GetString("cmbReactStartPos.Items61"),
+            resources.GetString("cmbReactStartPos.Items62"),
+            resources.GetString("cmbReactStartPos.Items63"),
+            resources.GetString("cmbReactStartPos.Items64"),
+            resources.GetString("cmbReactStartPos.Items65"),
+            resources.GetString("cmbReactStartPos.Items66"),
+            resources.GetString("cmbReactStartPos.Items67"),
+            resources.GetString("cmbReactStartPos.Items68"),
+            resources.GetString("cmbReactStartPos.Items69"),
+            resources.GetString("cmbReactStartPos.Items70"),
+            resources.GetString("cmbReactStartPos.Items71"),
+            resources.GetString("cmbReactStartPos.Items72"),
+            resources.GetString("cmbReactStartPos.Items73"),
+            resources.GetString("cmbReactStartPos.Items74"),
+            resources.GetString("cmbReactStartPos.Items75"),
+            resources.GetString("cmbReactStartPos.Items76"),
+            resources.GetString("cmbReactStartPos.Items77"),
+            resources.GetString("cmbReactStartPos.Items78"),
+            resources.GetString("cmbReactStartPos.Items79")});
             resources.ApplyResources(this.cmbReactStartPos, "cmbReactStartPos");
             this.cmbReactStartPos.Name = "cmbReactStartPos";
             this.cmbReactStartPos.SelectedIndexChanged += new System.EventHandler(this.cmbReactStartPos_SelectedIndexChanged);
@@ -577,6 +658,27 @@
             // 
             this.cmbReagentPos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbReagentPos.FormattingEnabled = true;
+            this.cmbReagentPos.Items.AddRange(new object[] {
+            resources.GetString("cmbReagentPos.Items"),
+            resources.GetString("cmbReagentPos.Items1"),
+            resources.GetString("cmbReagentPos.Items2"),
+            resources.GetString("cmbReagentPos.Items3"),
+            resources.GetString("cmbReagentPos.Items4"),
+            resources.GetString("cmbReagentPos.Items5"),
+            resources.GetString("cmbReagentPos.Items6"),
+            resources.GetString("cmbReagentPos.Items7"),
+            resources.GetString("cmbReagentPos.Items8"),
+            resources.GetString("cmbReagentPos.Items9"),
+            resources.GetString("cmbReagentPos.Items10"),
+            resources.GetString("cmbReagentPos.Items11"),
+            resources.GetString("cmbReagentPos.Items12"),
+            resources.GetString("cmbReagentPos.Items13"),
+            resources.GetString("cmbReagentPos.Items14"),
+            resources.GetString("cmbReagentPos.Items15"),
+            resources.GetString("cmbReagentPos.Items16"),
+            resources.GetString("cmbReagentPos.Items17"),
+            resources.GetString("cmbReagentPos.Items18"),
+            resources.GetString("cmbReagentPos.Items19")});
             resources.ApplyResources(this.cmbReagentPos, "cmbReagentPos");
             this.cmbReagentPos.Name = "cmbReagentPos";
             // 
@@ -718,7 +820,6 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.numDwPourin);
             this.panel4.Controls.Add(this.numericUpDown5);
             this.panel4.Controls.Add(this.functionButton6);
             this.panel4.Controls.Add(this.label23);
@@ -919,6 +1020,7 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.numDwPourin);
             this.groupBox7.Controls.Add(this.cbCleanTray);
             this.groupBox7.Controls.Add(this.checkBox7);
             this.groupBox7.Controls.Add(this.cbClearTray);
@@ -932,6 +1034,16 @@
             resources.ApplyResources(this.groupBox7, "groupBox7");
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.TabStop = false;
+            // 
+            // numDwPourin
+            // 
+            resources.ApplyResources(this.numDwPourin, "numDwPourin");
+            this.numDwPourin.Name = "numDwPourin";
+            this.numDwPourin.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             // 
             // cbCleanTray
             // 
@@ -1211,21 +1323,6 @@
             this.chbWash.Name = "chbWash";
             this.chbWash.UseVisualStyleBackColor = true;
             // 
-            // numDwPourin
-            // 
-            resources.ApplyResources(this.numDwPourin, "numDwPourin");
-            this.numDwPourin.Maximum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.numDwPourin.Name = "numDwPourin";
-            this.numDwPourin.Value = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            // 
             // frmInstruGroupTest
             // 
             resources.ApplyResources(this, "$this");
@@ -1263,10 +1360,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numDwPourin)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDwPourin)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

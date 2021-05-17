@@ -36,7 +36,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public int GetMaxId()
 		{
-		return DbHelperOleDb.GetMaxID(connType, "ProjectGroupID", "tbProjectGroup"); 
+			return DbHelperOleDb.GetMaxID(connType, "ProjectGroupID", "tbProjectGroup");
 		}
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Exists(int ProjectGroupID)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select count(1) from tbProjectGroup");
 			strSql.Append(" where ProjectGroupID=@ProjectGroupID");
 			OleDbParameter[] parameters = {
@@ -52,7 +52,7 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = ProjectGroupID;
 
-			return DbHelperOleDb.Exists(connType, strSql.ToString(),parameters);
+			return DbHelperOleDb.Exists(connType, strSql.ToString(), parameters);
 		}
 
 
@@ -61,7 +61,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Add(BioBaseCLIA.Model.tbProjectGroup model)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("insert into tbProjectGroup(");
 			strSql.Append("ProjectGroupNumber,ProjectNumber,GroupContent)");
 			strSql.Append(" values (");
@@ -74,7 +74,7 @@ namespace BioBaseCLIA.DAL
 			parameters[1].Value = model.ProjectNumber;
 			parameters[2].Value = model.GroupContent;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -89,7 +89,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Update(BioBaseCLIA.Model.tbProjectGroup model)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("update tbProjectGroup set ");
 			strSql.Append("ProjectGroupNumber=@ProjectGroupNumber,");
 			strSql.Append("ProjectNumber=@ProjectNumber,");
@@ -105,7 +105,7 @@ namespace BioBaseCLIA.DAL
 			parameters[2].Value = model.GroupContent;
 			parameters[3].Value = model.ProjectGroupID;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -121,8 +121,8 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Delete(int ProjectGroupID)
 		{
-			
-			StringBuilder strSql=new StringBuilder();
+
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("delete from tbProjectGroup ");
 			strSql.Append(" where ProjectGroupID=@ProjectGroupID");
 			OleDbParameter[] parameters = {
@@ -130,7 +130,7 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = ProjectGroupID;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -143,12 +143,12 @@ namespace BioBaseCLIA.DAL
 		/// <summary>
 		/// 批量删除数据
 		/// </summary>
-		public bool DeleteList(string ProjectGroupIDlist )
+		public bool DeleteList(string ProjectGroupIDlist)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("delete from tbProjectGroup ");
-			strSql.Append(" where ProjectGroupID in ("+ProjectGroupIDlist + ")  ");
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString());
+			strSql.Append(" where ProjectGroupID in (" + ProjectGroupIDlist + ")  ");
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString());
 			if (rows > 0)
 			{
 				return true;
@@ -165,8 +165,8 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public BioBaseCLIA.Model.tbProjectGroup GetModel(int ProjectGroupID)
 		{
-			
-			StringBuilder strSql=new StringBuilder();
+
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select ProjectGroupID,ProjectGroupNumber,ProjectNumber,GroupContent from tbProjectGroup ");
 			strSql.Append(" where ProjectGroupID=@ProjectGroupID");
 			OleDbParameter[] parameters = {
@@ -174,9 +174,9 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = ProjectGroupID;
 
-			BioBaseCLIA.Model.tbProjectGroup model=new BioBaseCLIA.Model.tbProjectGroup();
-			DataSet ds=DbHelperOleDb.Query(connType, strSql.ToString(),parameters);
-			if(ds.Tables[0].Rows.Count>0)
+			BioBaseCLIA.Model.tbProjectGroup model = new BioBaseCLIA.Model.tbProjectGroup();
+			DataSet ds = DbHelperOleDb.Query(connType, strSql.ToString(), parameters);
+			if (ds.Tables[0].Rows.Count > 0)
 			{
 				return DataRowToModel(ds.Tables[0].Rows[0]);
 			}
@@ -192,24 +192,24 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public BioBaseCLIA.Model.tbProjectGroup DataRowToModel(DataRow row)
 		{
-			BioBaseCLIA.Model.tbProjectGroup model=new BioBaseCLIA.Model.tbProjectGroup();
+			BioBaseCLIA.Model.tbProjectGroup model = new BioBaseCLIA.Model.tbProjectGroup();
 			if (row != null)
 			{
-				if(row["ProjectGroupID"]!=null && row["ProjectGroupID"].ToString()!="")
+				if (row["ProjectGroupID"] != null && row["ProjectGroupID"].ToString() != "")
 				{
-					model.ProjectGroupID=int.Parse(row["ProjectGroupID"].ToString());
+					model.ProjectGroupID = int.Parse(row["ProjectGroupID"].ToString());
 				}
-				if(row["ProjectGroupNumber"]!=null)
+				if (row["ProjectGroupNumber"] != null)
 				{
-					model.ProjectGroupNumber=row["ProjectGroupNumber"].ToString();
+					model.ProjectGroupNumber = row["ProjectGroupNumber"].ToString();
 				}
-				if(row["ProjectNumber"]!=null && row["ProjectNumber"].ToString()!="")
+				if (row["ProjectNumber"] != null && row["ProjectNumber"].ToString() != "")
 				{
-					model.ProjectNumber=int.Parse(row["ProjectNumber"].ToString());
+					model.ProjectNumber = int.Parse(row["ProjectNumber"].ToString());
 				}
-				if(row["GroupContent"]!=null)
+				if (row["GroupContent"] != null)
 				{
-					model.GroupContent=row["GroupContent"].ToString();
+					model.GroupContent = row["GroupContent"].ToString();
 				}
 			}
 			return model;
@@ -220,12 +220,12 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public DataSet GetList(string strWhere)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select ProjectGroupID,ProjectGroupNumber,ProjectNumber,GroupContent ");
 			strSql.Append(" FROM tbProjectGroup ");
-			if(strWhere.Trim()!="")
+			if (strWhere.Trim() != "")
 			{
-				strSql.Append(" where "+strWhere);
+				strSql.Append(" where " + strWhere);
 			}
 			return DbHelperOleDb.Query(connType, strSql.ToString());
 		}
@@ -235,11 +235,11 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public int GetRecordCount(string strWhere)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select count(1) FROM tbProjectGroup ");
-			if(strWhere.Trim()!="")
+			if (strWhere.Trim() != "")
 			{
-				strSql.Append(" where "+strWhere);
+				strSql.Append(" where " + strWhere);
 			}
 			object obj = DbHelperSQL.GetSingle(connType, strSql.ToString());
 			if (obj == null)
@@ -256,12 +256,12 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("SELECT * FROM ( ");
 			strSql.Append(" SELECT ROW_NUMBER() OVER (");
 			if (!string.IsNullOrEmpty(orderby.Trim()))
 			{
-				strSql.Append("order by T." + orderby );
+				strSql.Append("order by T." + orderby);
 			}
 			else
 			{

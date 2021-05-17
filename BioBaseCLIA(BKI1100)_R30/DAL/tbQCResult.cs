@@ -36,7 +36,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public int GetMaxId()
 		{
-		return DbHelperOleDb.GetMaxID(connType, "QCResultID", "tbQCResult"); 
+			return DbHelperOleDb.GetMaxID(connType, "QCResultID", "tbQCResult");
 		}
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Exists(int QCResultID)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select count(1) from tbQCResult");
 			strSql.Append(" where QCResultID=@QCResultID");
 			OleDbParameter[] parameters = {
@@ -52,7 +52,7 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = QCResultID;
 
-			return DbHelperOleDb.Exists(connType, strSql.ToString(),parameters);
+			return DbHelperOleDb.Exists(connType, strSql.ToString(), parameters);
 		}
 
 
@@ -61,7 +61,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Add(BioBaseCLIA.Model.tbQCResult model)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("insert into tbQCResult(");
 			strSql.Append("QCID,ItemName,ConcLevel,Source,PMTCounter,Batch,Concentration,ConcSPEC,Unit,TestDate)");
 			strSql.Append(" values (");
@@ -88,7 +88,7 @@ namespace BioBaseCLIA.DAL
 			parameters[8].Value = model.Unit;
 			parameters[9].Value = model.TestDate;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -103,7 +103,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Update(BioBaseCLIA.Model.tbQCResult model)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("update tbQCResult set ");
 			strSql.Append("QCID=@QCID,");
 			strSql.Append("ItemName=@ItemName,");
@@ -140,7 +140,7 @@ namespace BioBaseCLIA.DAL
 			parameters[9].Value = model.TestDate;
 			parameters[10].Value = model.QCResultID;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -156,8 +156,8 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Delete(int QCResultID)
 		{
-			
-			StringBuilder strSql=new StringBuilder();
+
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("delete from tbQCResult ");
 			strSql.Append(" where QCResultID=@QCResultID");
 			OleDbParameter[] parameters = {
@@ -165,7 +165,7 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = QCResultID;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -178,12 +178,12 @@ namespace BioBaseCLIA.DAL
 		/// <summary>
 		/// 批量删除数据
 		/// </summary>
-		public bool DeleteList(string QCResultIDlist )
+		public bool DeleteList(string QCResultIDlist)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("delete from tbQCResult ");
-			strSql.Append(" where QCResultID in ("+QCResultIDlist + ")  ");
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString());
+			strSql.Append(" where QCResultID in (" + QCResultIDlist + ")  ");
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString());
 			if (rows > 0)
 			{
 				return true;
@@ -200,8 +200,8 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public BioBaseCLIA.Model.tbQCResult GetModel(int QCResultID)
 		{
-			
-			StringBuilder strSql=new StringBuilder();
+
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select QCResultID,QCID,ItemName,ConcLevel,Source,PMTCounter,Batch,Concentration,ConcSPEC,Unit,TestDate from tbQCResult ");
 			strSql.Append(" where QCResultID=@QCResultID");
 			OleDbParameter[] parameters = {
@@ -209,9 +209,9 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = QCResultID;
 
-			BioBaseCLIA.Model.tbQCResult model=new BioBaseCLIA.Model.tbQCResult();
-			DataSet ds=DbHelperOleDb.Query(connType, strSql.ToString(),parameters);
-			if(ds.Tables[0].Rows.Count>0)
+			BioBaseCLIA.Model.tbQCResult model = new BioBaseCLIA.Model.tbQCResult();
+			DataSet ds = DbHelperOleDb.Query(connType, strSql.ToString(), parameters);
+			if (ds.Tables[0].Rows.Count > 0)
 			{
 				return DataRowToModel(ds.Tables[0].Rows[0]);
 			}
@@ -227,49 +227,49 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public BioBaseCLIA.Model.tbQCResult DataRowToModel(DataRow row)
 		{
-			BioBaseCLIA.Model.tbQCResult model=new BioBaseCLIA.Model.tbQCResult();
+			BioBaseCLIA.Model.tbQCResult model = new BioBaseCLIA.Model.tbQCResult();
 			if (row != null)
 			{
-				if(row["QCResultID"]!=null && row["QCResultID"].ToString()!="")
+				if (row["QCResultID"] != null && row["QCResultID"].ToString() != "")
 				{
-					model.QCResultID=int.Parse(row["QCResultID"].ToString());
+					model.QCResultID = int.Parse(row["QCResultID"].ToString());
 				}
-				if(row["QCID"]!=null && row["QCID"].ToString()!="")
+				if (row["QCID"] != null && row["QCID"].ToString() != "")
 				{
-					model.QCID=int.Parse(row["QCID"].ToString());
+					model.QCID = int.Parse(row["QCID"].ToString());
 				}
-				if(row["ItemName"]!=null)
+				if (row["ItemName"] != null)
 				{
-					model.ItemName=row["ItemName"].ToString();
+					model.ItemName = row["ItemName"].ToString();
 				}
-				if(row["ConcLevel"]!=null && row["ConcLevel"].ToString()!="")
+				if (row["ConcLevel"] != null && row["ConcLevel"].ToString() != "")
 				{
-					model.ConcLevel=int.Parse(row["ConcLevel"].ToString());
+					model.ConcLevel = int.Parse(row["ConcLevel"].ToString());
 				}
-				if(row["Source"]!=null && row["Source"].ToString()!="")
+				if (row["Source"] != null && row["Source"].ToString() != "")
 				{
-					model.Source=int.Parse(row["Source"].ToString());
+					model.Source = int.Parse(row["Source"].ToString());
 				}
-				if(row["PMTCounter"]!=null && row["PMTCounter"].ToString()!="")
+				if (row["PMTCounter"] != null && row["PMTCounter"].ToString() != "")
 				{
-					model.PMTCounter=int.Parse(row["PMTCounter"].ToString());
+					model.PMTCounter = int.Parse(row["PMTCounter"].ToString());
 				}
-				if(row["Batch"]!=null)
+				if (row["Batch"] != null)
 				{
-					model.Batch=row["Batch"].ToString();
+					model.Batch = row["Batch"].ToString();
 				}
-					//model.Concentration=row["Concentration"].ToString();
-				if(row["ConcSPEC"]!=null)
+				//model.Concentration=row["Concentration"].ToString();
+				if (row["ConcSPEC"] != null)
 				{
-					model.ConcSPEC=row["ConcSPEC"].ToString();
+					model.ConcSPEC = row["ConcSPEC"].ToString();
 				}
-				if(row["Unit"]!=null)
+				if (row["Unit"] != null)
 				{
-					model.Unit=row["Unit"].ToString();
+					model.Unit = row["Unit"].ToString();
 				}
-				if(row["TestDate"]!=null && row["TestDate"].ToString()!="")
+				if (row["TestDate"] != null && row["TestDate"].ToString() != "")
 				{
-					model.TestDate=DateTime.Parse(row["TestDate"].ToString());
+					model.TestDate = DateTime.Parse(row["TestDate"].ToString());
 				}
 			}
 			return model;
@@ -280,12 +280,12 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public DataSet GetList(string strWhere)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select QCResultID,QCID,ItemName,ConcLevel,Source,PMTCounter,Batch,Concentration,ConcSPEC,Unit,TestDate ");
 			strSql.Append(" FROM tbQCResult ");
-			if(strWhere.Trim()!="")
+			if (strWhere.Trim() != "")
 			{
-				strSql.Append(" where "+strWhere);
+				strSql.Append(" where " + strWhere);
 			}
 			return DbHelperOleDb.Query(connType, strSql.ToString());
 		}
@@ -295,11 +295,11 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public int GetRecordCount(string strWhere)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select count(1) FROM tbQCResult ");
-			if(strWhere.Trim()!="")
+			if (strWhere.Trim() != "")
 			{
-				strSql.Append(" where "+strWhere);
+				strSql.Append(" where " + strWhere);
 			}
 			object obj = DbHelperSQL.GetSingle(connType, strSql.ToString());
 			if (obj == null)
@@ -316,12 +316,12 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("SELECT * FROM ( ");
 			strSql.Append(" SELECT ROW_NUMBER() OVER (");
 			if (!string.IsNullOrEmpty(orderby.Trim()))
 			{
-				strSql.Append("order by T." + orderby );
+				strSql.Append("order by T." + orderby);
 			}
 			else
 			{

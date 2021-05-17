@@ -330,7 +330,7 @@
     <value>8, 19</value>
   </data>
   <data name="&gt;&gt;showScanConc.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>更新项目信息</value>
@@ -366,7 +366,7 @@
     <value>312, 27</value>
   </data>
   <data name="&gt;&gt;codeTextBox.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.userTextBoxBase, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.userTextBoxBase, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="functionButton2.Location" type="System.Drawing.Point, System.Drawing">
     <value>235, 405</value>
@@ -566,13 +566,13 @@
     <value>dgvTestPro</value>
   </data>
   <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="functionButton1.Text" xml:space="preserve">
     <value>更新</value>
   </data>
   <data name="&gt;&gt;functionButton1.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
     <value>groupBox3</value>
@@ -638,7 +638,7 @@
     <value>11</value>
   </data>
   <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dgvScaling.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -653,7 +653,7 @@
     <value>False</value>
   </data>
   <data name="&gt;&gt;btnScanTestPro.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
     <value>btnOK</value>
@@ -831,7 +831,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>BioBaseCLIA.frmSmallParent, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.frmSmallParent, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
@@ -1227,7 +1227,7 @@
     <value>283, 333</value>
   </data>
   <data name="&gt;&gt;functionButton2.Type" xml:space="preserve">
-    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>BioBaseCLIA.CustomControl.FunctionButton, BioBaseCLIA, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;groupBox4.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1272,10 +1272,10 @@
     <value>添加曲线</value>
   </data>
   <data name="keywordText.AddCurveAucceeded" xml:space="preserve">
-    <value>添加定标曲线成功！</value>
+    <value>添加主曲线成功！</value>
   </data>
   <data name="keywordText.AddCurveFailed" xml:space="preserve">
-    <value>添加定标曲线失败！</value>
+    <value>添加主曲线失败！</value>
   </data>
   <data name="keywordText.FindNone" xml:space="preserve">
     <value>没有在主曲线表查找到该批号字段</value>

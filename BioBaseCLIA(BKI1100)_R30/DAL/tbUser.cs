@@ -36,7 +36,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public int GetMaxId()
 		{
-		return DbHelperOleDb.GetMaxID(connType, "UserID", "tbUser"); 
+			return DbHelperOleDb.GetMaxID(connType, "UserID", "tbUser");
 		}
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Exists(int UserID)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select count(1) from tbUser");
 			strSql.Append(" where UserID=@UserID");
 			OleDbParameter[] parameters = {
@@ -52,7 +52,7 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = UserID;
 
-			return DbHelperOleDb.Exists(connType, strSql.ToString(),parameters);
+			return DbHelperOleDb.Exists(connType, strSql.ToString(), parameters);
 		}
 
 
@@ -61,7 +61,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Add(BioBaseCLIA.Model.tbUser model)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("insert into tbUser(");
 			strSql.Append("UserName,UserPassword,RoleType,defaultValue)");
 			strSql.Append(" values (");
@@ -76,7 +76,7 @@ namespace BioBaseCLIA.DAL
 			parameters[2].Value = model.RoleType;
 			parameters[3].Value = model.defaultValue;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -91,7 +91,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Update(BioBaseCLIA.Model.tbUser model)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("update tbUser set ");
 			strSql.Append("UserName=@UserName,");
 			strSql.Append("UserPassword=@UserPassword,");
@@ -110,7 +110,7 @@ namespace BioBaseCLIA.DAL
 			parameters[3].Value = model.defaultValue;
 			parameters[4].Value = model.UserID;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -126,8 +126,8 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Delete(int UserID)
 		{
-			
-			StringBuilder strSql=new StringBuilder();
+
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("delete from tbUser ");
 			strSql.Append(" where UserID=@UserID");
 			OleDbParameter[] parameters = {
@@ -135,7 +135,7 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = UserID;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -148,12 +148,12 @@ namespace BioBaseCLIA.DAL
 		/// <summary>
 		/// 批量删除数据
 		/// </summary>
-		public bool DeleteList(string UserIDlist )
+		public bool DeleteList(string UserIDlist)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("delete from tbUser ");
-			strSql.Append(" where UserID in ("+UserIDlist + ")  ");
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString());
+			strSql.Append(" where UserID in (" + UserIDlist + ")  ");
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString());
 			if (rows > 0)
 			{
 				return true;
@@ -170,8 +170,8 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public BioBaseCLIA.Model.tbUser GetModel(int UserID)
 		{
-			
-			StringBuilder strSql=new StringBuilder();
+
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select UserID,UserName,UserPassword,RoleType,defaultValue from tbUser ");
 			strSql.Append(" where UserID=@UserID");
 			OleDbParameter[] parameters = {
@@ -179,9 +179,9 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = UserID;
 
-			BioBaseCLIA.Model.tbUser model=new BioBaseCLIA.Model.tbUser();
-			DataSet ds=DbHelperOleDb.Query(connType, strSql.ToString(),parameters);
-			if(ds.Tables[0].Rows.Count>0)
+			BioBaseCLIA.Model.tbUser model = new BioBaseCLIA.Model.tbUser();
+			DataSet ds = DbHelperOleDb.Query(connType, strSql.ToString(), parameters);
+			if (ds.Tables[0].Rows.Count > 0)
 			{
 				return DataRowToModel(ds.Tables[0].Rows[0]);
 			}
@@ -197,28 +197,28 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public BioBaseCLIA.Model.tbUser DataRowToModel(DataRow row)
 		{
-			BioBaseCLIA.Model.tbUser model=new BioBaseCLIA.Model.tbUser();
+			BioBaseCLIA.Model.tbUser model = new BioBaseCLIA.Model.tbUser();
 			if (row != null)
 			{
-				if(row["UserID"]!=null && row["UserID"].ToString()!="")
+				if (row["UserID"] != null && row["UserID"].ToString() != "")
 				{
-					model.UserID=int.Parse(row["UserID"].ToString());
+					model.UserID = int.Parse(row["UserID"].ToString());
 				}
-				if(row["UserName"]!=null)
+				if (row["UserName"] != null)
 				{
-					model.UserName=row["UserName"].ToString();
+					model.UserName = row["UserName"].ToString();
 				}
-				if(row["UserPassword"]!=null)
+				if (row["UserPassword"] != null)
 				{
-					model.UserPassword=row["UserPassword"].ToString();
+					model.UserPassword = row["UserPassword"].ToString();
 				}
-				if(row["RoleType"]!=null && row["RoleType"].ToString()!="")
+				if (row["RoleType"] != null && row["RoleType"].ToString() != "")
 				{
-					model.RoleType=int.Parse(row["RoleType"].ToString());
+					model.RoleType = int.Parse(row["RoleType"].ToString());
 				}
-				if(row["defaultValue"]!=null && row["defaultValue"].ToString()!="")
+				if (row["defaultValue"] != null && row["defaultValue"].ToString() != "")
 				{
-					model.defaultValue=int.Parse(row["defaultValue"].ToString());
+					model.defaultValue = int.Parse(row["defaultValue"].ToString());
 				}
 			}
 			return model;
@@ -229,12 +229,12 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public DataSet GetList(string strWhere)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select UserID,UserName,UserPassword,RoleType,defaultValue ");
 			strSql.Append(" FROM tbUser ");
-			if(strWhere.Trim()!="")
+			if (strWhere.Trim() != "")
 			{
-				strSql.Append(" where "+strWhere);
+				strSql.Append(" where " + strWhere);
 			}
 			return DbHelperOleDb.Query(connType, strSql.ToString());
 		}
@@ -244,11 +244,11 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public int GetRecordCount(string strWhere)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select count(1) FROM tbUser ");
-			if(strWhere.Trim()!="")
+			if (strWhere.Trim() != "")
 			{
-				strSql.Append(" where "+strWhere);
+				strSql.Append(" where " + strWhere);
 			}
 			object obj = DbHelperSQL.GetSingle(connType, strSql.ToString());
 			if (obj == null)
@@ -265,12 +265,12 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("SELECT * FROM ( ");
 			strSql.Append(" SELECT ROW_NUMBER() OVER (");
 			if (!string.IsNullOrEmpty(orderby.Trim()))
 			{
-				strSql.Append("order by T." + orderby );
+				strSql.Append("order by T." + orderby);
 			}
 			else
 			{

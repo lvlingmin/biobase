@@ -38,53 +38,53 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public int GetMaxId()
 		{
-		return DbHelperOleDb.GetMaxID(connType, "ProjectID", "tbProject"); 
+			return DbHelperOleDb.GetMaxID(connType, "ProjectID", "tbProject");
 		}
 
 		/// <summary>
-        /// 是否存在该记录（ShrotName）
+		/// 是否存在该记录（ShrotName）
 		/// </summary>
-        public bool Exists_(string ShrotName)
+		public bool Exists_(string ShrotName)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select count(1) from tbProject");
 			strSql.Append(" where ShortName =@ShortName");
 			OleDbParameter[] parameters = {
 					new OleDbParameter("@ShortName", OleDbType.VarChar,30)
 			};
-            parameters[0].Value = ShrotName;
-			return DbHelperOleDb.Exists(connType, strSql.ToString(),parameters);
+			parameters[0].Value = ShrotName;
+			return DbHelperOleDb.Exists(connType, strSql.ToString(), parameters);
 		}
 
-        /// <summary>
-        /// 是否存在该记录
-        /// </summary>
-        public bool Exists(int ProjectID)
-        {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("select count(1) from tbProject");
-            strSql.Append(" where ProjectID=@ProjectID");
-            OleDbParameter[] parameters = {
+		/// <summary>
+		/// 是否存在该记录
+		/// </summary>
+		public bool Exists(int ProjectID)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("select count(1) from tbProject");
+			strSql.Append(" where ProjectID=@ProjectID");
+			OleDbParameter[] parameters = {
 					new OleDbParameter("@ProjectID", OleDbType.Integer,4)
 			};
-            parameters[0].Value = ProjectID;
+			parameters[0].Value = ProjectID;
 
-            return DbHelperOleDb.Exists(connType, strSql.ToString(), parameters);
-        }
+			return DbHelperOleDb.Exists(connType, strSql.ToString(), parameters);
+		}
 
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-        public bool Add(BioBaseCLIA.Model.tbProject model)
-        {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("insert into tbProject(");
-            strSql.Append("ProjectNumber,ShortName,FullName,ProjectType,DiluteName,DiluteCount,RangeType,ValueRange1,ValueRange2,ValueUnit,MinValue,MaxValue,"+
-                "CalPointNumber,CalPointConc,QCPointNumber,QCPoints,ProjectProcedure,CalMode,CalMethod,CalculateMethod,LoadType,ActiveStatus,ExpiryDate,NoUsePro,VRangeType )");
-            strSql.Append(" values (");
-            strSql.Append("@ProjectNumber,@ShortName,@FullName,@ProjectType,@DiluteName,@DiluteCount,@RangeType,@ValueRange1,@ValueRange2,@ValueUnit,@MinValue,@MaxValue,"+
-                "@CalPointNumber,@CalPointConc,@QCPointNumber,@QCPoints,@ProjectProcedure,@CalMode,@CalMethod,@CalculateMethod,@LoadType,@ActiveStatus,@ExpiryDate,@NoUsePro,@VRangeType)");
-            OleDbParameter[] parameters = {
+		public bool Add(BioBaseCLIA.Model.tbProject model)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("insert into tbProject(");
+			strSql.Append("ProjectNumber,ShortName,FullName,ProjectType,DiluteName,DiluteCount,RangeType,ValueRange1,ValueRange2,ValueUnit,MinValue,MaxValue," +
+				"CalPointNumber,CalPointConc,QCPointNumber,QCPoints,ProjectProcedure,CalMode,CalMethod,CalculateMethod,LoadType,ActiveStatus,ExpiryDate,NoUsePro,VRangeType )");
+			strSql.Append(" values (");
+			strSql.Append("@ProjectNumber,@ShortName,@FullName,@ProjectType,@DiluteName,@DiluteCount,@RangeType,@ValueRange1,@ValueRange2,@ValueUnit,@MinValue,@MaxValue," +
+				"@CalPointNumber,@CalPointConc,@QCPointNumber,@QCPoints,@ProjectProcedure,@CalMode,@CalMethod,@CalculateMethod,@LoadType,@ActiveStatus,@ExpiryDate,@NoUsePro,@VRangeType)");
+			OleDbParameter[] parameters = {
 					new OleDbParameter("@ProjectNumber", OleDbType.VarChar,30),
 					new OleDbParameter("@ShortName", OleDbType.VarChar,30),
 					new OleDbParameter("@FullName", OleDbType.VarChar,30),
@@ -107,50 +107,50 @@ namespace BioBaseCLIA.DAL
 					new OleDbParameter("@CalculateMethod", OleDbType.VarChar,30),
 					new OleDbParameter("@LoadType", OleDbType.Integer,4),
 					new OleDbParameter("@ActiveStatus", OleDbType.Integer,4),
-                    new OleDbParameter("@ExpiryDate", OleDbType.Integer,4),//2018-08-02 zlx add
+					new OleDbParameter("@ExpiryDate", OleDbType.Integer,4),//2018-08-02 zlx add
                     new OleDbParameter("@NoUsePro", OleDbType.VarChar,30),//2018-10-13 zlx add 
                     new OleDbParameter("@VRangeType", OleDbType.VarChar,30)};
-            parameters[0].Value = model.ProjectNumber;
-            parameters[1].Value = model.ShortName;
-            parameters[2].Value = model.FullName;
-            parameters[3].Value = model.ProjectType;
-            parameters[4].Value = model.DiluteName;
-            parameters[5].Value = model.DiluteCount;
-            parameters[6].Value = model.RangeType;
-            parameters[7].Value = model.ValueRange1;
-            parameters[8].Value = model.ValueRange2;
-            parameters[9].Value = model.ValueUnit;
-            parameters[10].Value = model.MinValue;
-            parameters[11].Value = model.MaxValue;
-            parameters[12].Value = model.CalPointNumber;
-            parameters[13].Value = model.CalPointConc;
-            parameters[14].Value = model.QCPointNumber;
-            parameters[15].Value = model.QCPoints;
-            parameters[16].Value = model.ProjectProcedure;
-            parameters[17].Value = model.CalMode;
-            parameters[18].Value = model.CalMethod;
-            parameters[19].Value = model.CalculateMethod;
-            parameters[20].Value = model.LoadType;
-            parameters[21].Value = model.ActiveStatus;
-            parameters[22].Value = model.ExpiryDate;//2018-08-02 zlx add
-            parameters[23].Value = model.NoUsePro;//2018-10-13 zlx mod
-            parameters[24].Value = model.VRangeType;//2018-10-13 zlx add 
-            int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
-            if (rows > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+			parameters[0].Value = model.ProjectNumber;
+			parameters[1].Value = model.ShortName;
+			parameters[2].Value = model.FullName;
+			parameters[3].Value = model.ProjectType;
+			parameters[4].Value = model.DiluteName;
+			parameters[5].Value = model.DiluteCount;
+			parameters[6].Value = model.RangeType;
+			parameters[7].Value = model.ValueRange1;
+			parameters[8].Value = model.ValueRange2;
+			parameters[9].Value = model.ValueUnit;
+			parameters[10].Value = model.MinValue;
+			parameters[11].Value = model.MaxValue;
+			parameters[12].Value = model.CalPointNumber;
+			parameters[13].Value = model.CalPointConc;
+			parameters[14].Value = model.QCPointNumber;
+			parameters[15].Value = model.QCPoints;
+			parameters[16].Value = model.ProjectProcedure;
+			parameters[17].Value = model.CalMode;
+			parameters[18].Value = model.CalMethod;
+			parameters[19].Value = model.CalculateMethod;
+			parameters[20].Value = model.LoadType;
+			parameters[21].Value = model.ActiveStatus;
+			parameters[22].Value = model.ExpiryDate;//2018-08-02 zlx add
+			parameters[23].Value = model.NoUsePro;//2018-10-13 zlx mod
+			parameters[24].Value = model.VRangeType;//2018-10-13 zlx add 
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
+			if (rows > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
 		public bool Update(BioBaseCLIA.Model.tbProject model)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("update tbProject set ");
 			strSql.Append("ProjectNumber=@ProjectNumber,");
 			strSql.Append("ShortName=@ShortName,");
@@ -180,7 +180,7 @@ namespace BioBaseCLIA.DAL
 					new OleDbParameter("@ShortName", OleDbType.VarChar,30),
 					new OleDbParameter("@FullName", OleDbType.VarChar,30),
 					new OleDbParameter("@ProjectType", OleDbType.VarChar,30),
-                    new OleDbParameter("@DiluteName", OleDbType.VarChar,30),//2018-07-30 
+					new OleDbParameter("@DiluteName", OleDbType.VarChar,30),//2018-07-30 
 					new OleDbParameter("@DiluteCount", OleDbType.Integer,4),
 					new OleDbParameter("@RangeType", OleDbType.VarChar,30),
 					new OleDbParameter("@ValueRange1", OleDbType.VarChar,30),
@@ -203,7 +203,7 @@ namespace BioBaseCLIA.DAL
 			parameters[1].Value = model.ShortName;
 			parameters[2].Value = model.FullName;
 			parameters[3].Value = model.ProjectType;
-            parameters[4].Value = model.DiluteName;
+			parameters[4].Value = model.DiluteName;
 			parameters[5].Value = model.DiluteCount;
 			parameters[6].Value = model.RangeType;
 			parameters[7].Value = model.ValueRange1;
@@ -223,7 +223,7 @@ namespace BioBaseCLIA.DAL
 			parameters[21].Value = model.ActiveStatus;
 			parameters[22].Value = model.ProjectID;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -239,8 +239,8 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Delete(int ProjectID)
 		{
-			
-			StringBuilder strSql=new StringBuilder();
+
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("delete from tbProject ");
 			strSql.Append(" where ProjectID=@ProjectID");
 			OleDbParameter[] parameters = {
@@ -248,7 +248,7 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = ProjectID;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -258,40 +258,40 @@ namespace BioBaseCLIA.DAL
 				return false;
 			}
 		}
-        /// <summary>
-        /// 删除一条数据
-        /// </summary>
-        public bool Delete_(string ShortName)
-        {
+		/// <summary>
+		/// 删除一条数据
+		/// </summary>
+		public bool Delete_(string ShortName)
+		{
 
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("delete from tbProject ");
-            strSql.Append(" where ShortName=@ShortName");
-            OleDbParameter[] parameters = {
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("delete from tbProject ");
+			strSql.Append(" where ShortName=@ShortName");
+			OleDbParameter[] parameters = {
 					new OleDbParameter("@ShortName", OleDbType.VarChar,30)
 			};
-            parameters[0].Value = ShortName;
+			parameters[0].Value = ShortName;
 
-            int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
-            if (rows > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
+			if (rows > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 
 		/// <summary>
 		/// 批量删除数据
 		/// </summary>
-		public bool DeleteList(string ProjectIDlist )
+		public bool DeleteList(string ProjectIDlist)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("delete from tbProject ");
-			strSql.Append(" where ProjectID in ("+ProjectIDlist + ")  ");
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString());
+			strSql.Append(" where ProjectID in (" + ProjectIDlist + ")  ");
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString());
 			if (rows > 0)
 			{
 				return true;
@@ -308,8 +308,8 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public BioBaseCLIA.Model.tbProject GetModel(int ProjectID)
 		{
-			
-			StringBuilder strSql=new StringBuilder();
+
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select ProjectID,ProjectNumber,ShortName,FullName,ProjectType,DiluteName,DiluteCount,RangeType,ValueRange1,ValueRange2,ValueUnit,MinValue,MaxValue,CalPointNumber,CalPointConc,QCPointNumber,QCPoints,ProjectProcedure,CalMode,CalMethod,CalculateMethod,LoadType,ActiveStatus from tbProject ");
 			strSql.Append(" where ProjectID=@ProjectID");
 			OleDbParameter[] parameters = {
@@ -317,9 +317,9 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = ProjectID;
 
-			BioBaseCLIA.Model.tbProject model=new BioBaseCLIA.Model.tbProject();
-			DataSet ds=DbHelperOleDb.Query(connType, strSql.ToString(),parameters);
-			if(ds.Tables[0].Rows.Count>0)
+			BioBaseCLIA.Model.tbProject model = new BioBaseCLIA.Model.tbProject();
+			DataSet ds = DbHelperOleDb.Query(connType, strSql.ToString(), parameters);
+			if (ds.Tables[0].Rows.Count > 0)
 			{
 				return DataRowToModel(ds.Tables[0].Rows[0]);
 			}
@@ -335,94 +335,94 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public BioBaseCLIA.Model.tbProject DataRowToModel(DataRow row)
 		{
-			BioBaseCLIA.Model.tbProject model=new BioBaseCLIA.Model.tbProject();
+			BioBaseCLIA.Model.tbProject model = new BioBaseCLIA.Model.tbProject();
 			if (row != null)
 			{
-				if(row["ProjectID"]!=null && row["ProjectID"].ToString()!="")
+				if (row["ProjectID"] != null && row["ProjectID"].ToString() != "")
 				{
-					model.ProjectID=int.Parse(row["ProjectID"].ToString());
+					model.ProjectID = int.Parse(row["ProjectID"].ToString());
 				}
-				if(row["ProjectNumber"]!=null)
+				if (row["ProjectNumber"] != null)
 				{
-					model.ProjectNumber=row["ProjectNumber"].ToString();
+					model.ProjectNumber = row["ProjectNumber"].ToString();
 				}
-				if(row["ShortName"]!=null)
+				if (row["ShortName"] != null)
 				{
-					model.ShortName=row["ShortName"].ToString();
+					model.ShortName = row["ShortName"].ToString();
 				}
-				if(row["FullName"]!=null)
+				if (row["FullName"] != null)
 				{
-					model.FullName=row["FullName"].ToString();
+					model.FullName = row["FullName"].ToString();
 				}
-				if(row["ProjectType"]!=null)
+				if (row["ProjectType"] != null)
 				{
-					model.ProjectType=row["ProjectType"].ToString();
+					model.ProjectType = row["ProjectType"].ToString();
 				}
-				if(row["DiluteName"]!=null)
+				if (row["DiluteName"] != null)
 				{
-					model.DiluteName=row["DiluteName"].ToString();
+					model.DiluteName = row["DiluteName"].ToString();
 				}
-				if(row["DiluteCount"]!=null && row["DiluteCount"].ToString()!="")
+				if (row["DiluteCount"] != null && row["DiluteCount"].ToString() != "")
 				{
-					model.DiluteCount=int.Parse(row["DiluteCount"].ToString());
+					model.DiluteCount = int.Parse(row["DiluteCount"].ToString());
 				}
-				if(row["RangeType"]!=null)
+				if (row["RangeType"] != null)
 				{
-					model.RangeType=row["RangeType"].ToString();
+					model.RangeType = row["RangeType"].ToString();
 				}
-				if(row["ValueRange1"]!=null)
+				if (row["ValueRange1"] != null)
 				{
-					model.ValueRange1=row["ValueRange1"].ToString();
+					model.ValueRange1 = row["ValueRange1"].ToString();
 				}
-				if(row["ValueRange2"]!=null)
+				if (row["ValueRange2"] != null)
 				{
-					model.ValueRange2=row["ValueRange2"].ToString();
+					model.ValueRange2 = row["ValueRange2"].ToString();
 				}
-				if(row["ValueUnit"]!=null)
+				if (row["ValueUnit"] != null)
 				{
-					model.ValueUnit=row["ValueUnit"].ToString();
+					model.ValueUnit = row["ValueUnit"].ToString();
 				}
-					//model.MinValue=row["MinValue"].ToString();
-					//model.MaxValue=row["MaxValue"].ToString();
-				if(row["CalPointNumber"]!=null && row["CalPointNumber"].ToString()!="")
+				//model.MinValue=row["MinValue"].ToString();
+				//model.MaxValue=row["MaxValue"].ToString();
+				if (row["CalPointNumber"] != null && row["CalPointNumber"].ToString() != "")
 				{
-					model.CalPointNumber=int.Parse(row["CalPointNumber"].ToString());
+					model.CalPointNumber = int.Parse(row["CalPointNumber"].ToString());
 				}
-				if(row["CalPointConc"]!=null)
+				if (row["CalPointConc"] != null)
 				{
-					model.CalPointConc=row["CalPointConc"].ToString();
+					model.CalPointConc = row["CalPointConc"].ToString();
 				}
-				if(row["QCPointNumber"]!=null && row["QCPointNumber"].ToString()!="")
+				if (row["QCPointNumber"] != null && row["QCPointNumber"].ToString() != "")
 				{
-					model.QCPointNumber=int.Parse(row["QCPointNumber"].ToString());
+					model.QCPointNumber = int.Parse(row["QCPointNumber"].ToString());
 				}
-				if(row["QCPoints"]!=null)
+				if (row["QCPoints"] != null)
 				{
-					model.QCPoints=row["QCPoints"].ToString();
+					model.QCPoints = row["QCPoints"].ToString();
 				}
-				if(row["ProjectProcedure"]!=null)
+				if (row["ProjectProcedure"] != null)
 				{
-					model.ProjectProcedure=row["ProjectProcedure"].ToString();
+					model.ProjectProcedure = row["ProjectProcedure"].ToString();
 				}
-				if(row["CalMode"]!=null && row["CalMode"].ToString()!="")
+				if (row["CalMode"] != null && row["CalMode"].ToString() != "")
 				{
-					model.CalMode=int.Parse(row["CalMode"].ToString());
+					model.CalMode = int.Parse(row["CalMode"].ToString());
 				}
-				if(row["CalMethod"]!=null && row["CalMethod"].ToString()!="")
+				if (row["CalMethod"] != null && row["CalMethod"].ToString() != "")
 				{
-					model.CalMethod=int.Parse(row["CalMethod"].ToString());
+					model.CalMethod = int.Parse(row["CalMethod"].ToString());
 				}
-				if(row["CalculateMethod"]!=null)
+				if (row["CalculateMethod"] != null)
 				{
-					model.CalculateMethod=row["CalculateMethod"].ToString();
+					model.CalculateMethod = row["CalculateMethod"].ToString();
 				}
-				if(row["LoadType"]!=null && row["LoadType"].ToString()!="")
+				if (row["LoadType"] != null && row["LoadType"].ToString() != "")
 				{
-					model.LoadType=int.Parse(row["LoadType"].ToString());
+					model.LoadType = int.Parse(row["LoadType"].ToString());
 				}
-				if(row["ActiveStatus"]!=null && row["ActiveStatus"].ToString()!="")
+				if (row["ActiveStatus"] != null && row["ActiveStatus"].ToString() != "")
 				{
-					model.ActiveStatus=int.Parse(row["ActiveStatus"].ToString());
+					model.ActiveStatus = int.Parse(row["ActiveStatus"].ToString());
 				}
 			}
 			return model;
@@ -433,14 +433,14 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public DataSet GetList(string strWhere)
 		{
-			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select ProjectID,ProjectNumber,ShortName,FullName,ProjectType,DiluteName,DiluteCount,RangeType,ValueRange1,ValueRange2,"+
-                "ValueUnit,MinValue,MaxValue,CalPointNumber,CalPointConc,QCPointNumber,QCPoints,ProjectProcedure,CalMode,CalMethod,CalculateMethod,"+
-                "LoadType,ActiveStatus,ExpiryDate,NoUsePro,VRangeType ");//2018-10-13 zlx mod
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("select ProjectID,ProjectNumber,ShortName,FullName,ProjectType,DiluteName,DiluteCount,RangeType,ValueRange1,ValueRange2," +
+				"ValueUnit,MinValue,MaxValue,CalPointNumber,CalPointConc,QCPointNumber,QCPoints,ProjectProcedure,CalMode,CalMethod,CalculateMethod," +
+				"LoadType,ActiveStatus,ExpiryDate,NoUsePro,VRangeType ");//2018-10-13 zlx mod
 			strSql.Append(" FROM tbProject ");
-			if(strWhere.Trim()!="")
+			if (strWhere.Trim() != "")
 			{
-				strSql.Append(" where "+strWhere);
+				strSql.Append(" where " + strWhere);
 			}
 			return DbHelperOleDb.Query(connType, strSql.ToString());
 		}
@@ -450,11 +450,11 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public int GetRecordCount(string strWhere)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select count(1) FROM tbProject ");
-			if(strWhere.Trim()!="")
+			if (strWhere.Trim() != "")
 			{
-				strSql.Append(" where "+strWhere);
+				strSql.Append(" where " + strWhere);
 			}
 			object obj = DbHelperSQL.GetSingle(connType, strSql.ToString());
 			if (obj == null)
@@ -471,12 +471,12 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("SELECT * FROM ( ");
 			strSql.Append(" SELECT ROW_NUMBER() OVER (");
 			if (!string.IsNullOrEmpty(orderby.Trim()))
 			{
-				strSql.Append("order by T." + orderby );
+				strSql.Append("order by T." + orderby);
 			}
 			else
 			{
@@ -521,6 +521,6 @@ namespace BioBaseCLIA.DAL
 		#region  ExtensionMethod
 
 		#endregion  ExtensionMethod
-    }
+	}
 }
 

@@ -78,6 +78,14 @@ namespace BioBaseCLIA
         /// 实验过程中正在加载试剂标志 2019-03-06 zlx add
         /// </summary>
         public static bool ReagentCaculatingFlag = false;
+        /// <summary>
+        /// 稀释液位置列表
+        /// </summary>
+        public static List<int> DiuPosList = new List<int>();
+        /// <summary>
+        ///试剂开封有效期(天)
+        /// </summary>
+        public const int ValidDate = 30;
         public frmParent()
         {
             InitializeComponent();

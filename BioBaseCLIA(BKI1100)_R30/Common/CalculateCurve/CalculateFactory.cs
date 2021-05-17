@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BioBaseCLIA.CalculateCurve;
+using Common.CalculateCurve;
 
 namespace BioBaseCLIA.CalculateCurve
 {
@@ -11,10 +12,8 @@ namespace BioBaseCLIA.CalculateCurve
         public Calculater getCaler(int calType)
         {
             Calculater er = null;
-
             switch (calType)
             {
-
                 case 0:
                     er = new FourPL();
                     break;
@@ -22,19 +21,15 @@ namespace BioBaseCLIA.CalculateCurve
                     er = new newFourPL();
                     break;
                 case 2:
-                    er = new newFourPL();
+                    er = new FourPLForSandwichMethod();
                     break;
-
             }
-                   
             return er;
         }
-        public Calculater getCaler( List<double> pars)
+        public Calculater getCaler(List<double> pars)
         {
             Calculater er = null;
-           
-           er = new FourPL(pars);//四参数
-                    
+            er = new FourPL(pars);//四参数
             return er;
         }
     }

@@ -33,8 +33,8 @@ namespace BioBaseCLIA.DAL
             strSql.Append("select count(1) from tbDilute");
             strSql.Append(" where DiluteNumber=@DiluteNumber");
             OleDbParameter[] parameters = {
-					new OleDbParameter("@DiluteNumber", OleDbType.Integer,4)
-			};
+                    new OleDbParameter("@DiluteNumber", OleDbType.Integer,4)
+            };
             parameters[0].Value = DiluteNumber;
 
             return DbHelperOleDb.Exists(connType, strSql.ToString(), parameters);
@@ -52,14 +52,14 @@ namespace BioBaseCLIA.DAL
             strSql.Append(" values (");
             strSql.Append("@DiluteNumber,@DilutePos,@AllDiuVol,@LeftDiuVol,@Unit,@AddData,@ValiData ,@State)");
             OleDbParameter[] parameters = {
-					new OleDbParameter("@DiluteNumber", OleDbType.VarChar,30),
-					new OleDbParameter("@DilutePos", OleDbType.Integer,4),
-					new OleDbParameter("@AllDiuVol", OleDbType.Integer,4),
-					new OleDbParameter("@LeftDiuVol", OleDbType.Integer,4),
-					new OleDbParameter("@Unit", OleDbType.VarChar,30),
-					new OleDbParameter("@AddData", OleDbType.VarChar,30),
-					new OleDbParameter("@ValiData", OleDbType.VarChar,30),
-					new OleDbParameter("@State", OleDbType.Integer,4)};
+                    new OleDbParameter("@DiluteNumber", OleDbType.VarChar,30),
+                    new OleDbParameter("@DilutePos", OleDbType.Integer,4),
+                    new OleDbParameter("@AllDiuVol", OleDbType.Integer,4),
+                    new OleDbParameter("@LeftDiuVol", OleDbType.Integer,4),
+                    new OleDbParameter("@Unit", OleDbType.VarChar,30),
+                    new OleDbParameter("@AddData", OleDbType.VarChar,30),
+                    new OleDbParameter("@ValiData", OleDbType.VarChar,30),
+                    new OleDbParameter("@State", OleDbType.Integer,4)};
             parameters[0].Value = model.DiluteNumber;
             parameters[1].Value = model.DilutePos;
             parameters[2].Value = model.AllDiuVol;
@@ -96,14 +96,14 @@ namespace BioBaseCLIA.DAL
             strSql.Append("State=@State");
             strSql.Append(" where ID=@ID");
             OleDbParameter[] parameters = {
-				new OleDbParameter("@DiluteNumber", OleDbType.VarChar,30),
-					new OleDbParameter("@DilutePos", OleDbType.Integer,4),
-					new OleDbParameter("@AllDiuVol", OleDbType.Integer,4),
-					new OleDbParameter("@LeftDiuVol", OleDbType.Integer,4),
-					new OleDbParameter("@Unit", OleDbType.VarChar,30),
-					new OleDbParameter("@AddData", OleDbType.VarChar,30),
-					new OleDbParameter("@ValiData", OleDbType.VarChar,30),
-					new OleDbParameter("@State", OleDbType.Integer,4),
+                new OleDbParameter("@DiluteNumber", OleDbType.VarChar,30),
+                    new OleDbParameter("@DilutePos", OleDbType.Integer,4),
+                    new OleDbParameter("@AllDiuVol", OleDbType.Integer,4),
+                    new OleDbParameter("@LeftDiuVol", OleDbType.Integer,4),
+                    new OleDbParameter("@Unit", OleDbType.VarChar,30),
+                    new OleDbParameter("@AddData", OleDbType.VarChar,30),
+                    new OleDbParameter("@ValiData", OleDbType.VarChar,30),
+                    new OleDbParameter("@State", OleDbType.Integer,4),
                     new OleDbParameter("@ID", OleDbType.Integer,10)};
             parameters[0].Value = model.DiluteNumber;
             parameters[1].Value = model.DilutePos;
@@ -136,8 +136,8 @@ namespace BioBaseCLIA.DAL
             strSql.Append("delete from tbDilute ");
             strSql.Append(" where DilutePos=@DilutePos");
             OleDbParameter[] parameters = {
-					new OleDbParameter("@DilutePos", OleDbType.Integer,30)
-			};
+                    new OleDbParameter("@DilutePos", OleDbType.Integer,30)
+            };
             parameters[0].Value = DilutePos;
 
             int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
@@ -180,8 +180,8 @@ namespace BioBaseCLIA.DAL
             strSql.Append("select DiluteNumber,DilutePos,AllDiuVol,LeftDiuVol,Unit,AddData,ValiData ,State from tbDilute ");
             strSql.Append(" where DiluteNumber=@DiluteNumber");
             OleDbParameter[] parameters = {
-					new OleDbParameter("@DiluteNumber", OleDbType.Integer,4)
-			};
+                    new OleDbParameter("@DiluteNumber", OleDbType.Integer,4)
+            };
             parameters[0].Value = DiluteNumber;
 
             BioBaseCLIA.Model.tbDilute model = new BioBaseCLIA.Model.tbDilute();

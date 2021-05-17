@@ -34,7 +34,7 @@ namespace BioBaseCLIA
                     MessageBox.Show(Res.Running, Res.Tips, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
+                
                 LanguageManager.LanguageName = Localization.Language.getLanName();//当前语言
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
@@ -58,19 +58,19 @@ namespace BioBaseCLIA
                     Application.Exit();
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) 
             {
                 string str = "";
-                string strDateInfo = Res.UnhandledException + ": " + DateTime.Now.ToString() + "\r\n";
+                string strDateInfo = Res.UnhandledException+": " + DateTime.Now.ToString() + "\r\n";
                 if (ex != null)
                 {
-                    str = string.Format(strDateInfo + Res.ExceptionType +
-                        "{0}\r\n" + Res.ExceptionMsg + ":{1}\r\n" + Res.ExceptionInfo + ":{2}\r\n",
+                    str = string.Format(strDateInfo + Res.ExceptionType + 
+                        "{0}\r\n"+Res.ExceptionMsg+":{1}\r\n"+Res.ExceptionInfo+":{2}\r\n",
                          ex.GetType().Name, ex.Message, ex.StackTrace);
                 }
                 else
                 {
-                    str = string.Format(Res.ExceptionInfo + "{0}", ex);
+                    str = string.Format(Res.ExceptionInfo+"{0}", ex);
                 }
                 writeLog(str);
                 MessageBox.Show(Res.SystemException, Res.Tips, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -85,10 +85,10 @@ namespace BioBaseCLIA
         {
             string str = "";
             Exception error = e.ExceptionObject as Exception;
-            string strDateInfo = Res.UnhandledException + "：" + DateTime.Now.ToString() + "\r\n";
+            string strDateInfo =Res.UnhandledException+ "：" + DateTime.Now.ToString() + "\r\n";
             if (error != null)
             {
-                str = string.Format(strDateInfo + "Application UnhandledException:{0};\n\r" + Res.ExceptionInfo + ":{1}", error.Message, error.StackTrace);
+                str = string.Format(strDateInfo + "Application UnhandledException:{0};\n\r"+Res.ExceptionInfo+":{1}", error.Message, error.StackTrace);
             }
             else
             {
@@ -96,24 +96,24 @@ namespace BioBaseCLIA
             }
 
             writeLog(str);
-            MessageBox.Show(Res.SystemException, Res.Tips, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(Res.SystemException , Res.Tips, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
         {
             string str = "";
-            string strDateInfo = Res.UnhandledException + "：" + DateTime.Now.ToString() + "\r\n";
+            string strDateInfo =Res.UnhandledException +"：" + DateTime.Now.ToString() + "\r\n";
             Exception error = e.Exception as Exception;
             if (error != null)
             {
-                str = string.Format(strDateInfo + Res.ExceptionType + "：{0}\r\n" + Res.ExceptionMsg + "：{1}\r\n" + Res.ExceptionInfo + "：{2}\r\n",
+                str = string.Format(strDateInfo +Res.ExceptionType +"：{0}\r\n"+Res.ExceptionMsg+"：{1}\r\n"+Res.ExceptionInfo+"：{2}\r\n",
                      error.GetType().Name, error.Message, error.StackTrace);
             }
             else
             {
-                str = string.Format(Res.ExceptionInfo + ":{0}", e);
+                str = string.Format(Res.ExceptionInfo+":{0}", e);
             }
             writeLog(str);
-            MessageBox.Show(Res.SystemException, Res.Tips, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(Res.SystemException,Res.Tips , MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         /// <summary>

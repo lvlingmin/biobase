@@ -21,7 +21,6 @@ namespace Common
         private static extern long GetPrivateProfileString(string section, string key,
             string def, StringBuilder retVal, int size, string filePath);
 
-
         #endregion
 
         #region 读Ini文件
@@ -61,7 +60,7 @@ namespace Common
                 return null;
             }
 
-            using (FileStream wfile = new FileStream(iniFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (FileStream wfile = new FileStream(iniFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) 
             {
                 StreamReader sr = new StreamReader(wfile);
                 try
@@ -162,7 +161,7 @@ namespace Common
         /// <returns></returns>
         public static bool WriteConfigToFile(string section, string iniFilePath, DataTable dt)
         {
-            using (FileStream wfile = new FileStream(iniFilePath, FileMode.Open, FileAccess.Write, FileShare.Read))
+            using (FileStream wfile = new FileStream(iniFilePath, FileMode.Open, FileAccess.Write, FileShare.Read)) 
             {
                 StreamWriter sw = new StreamWriter(wfile);
                 try

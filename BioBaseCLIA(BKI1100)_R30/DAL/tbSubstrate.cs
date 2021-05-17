@@ -36,7 +36,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public int GetMaxId()
 		{
-		return DbHelperOleDb.GetMaxID(connType, "SubstrateID", "tbSubstrate"); 
+			return DbHelperOleDb.GetMaxID(connType, "SubstrateID", "tbSubstrate");
 		}
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Exists(int SubstrateID)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select count(1) from tbSubstrate");
 			strSql.Append(" where SubstrateID=@SubstrateID");
 			OleDbParameter[] parameters = {
@@ -52,7 +52,7 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = SubstrateID;
 
-			return DbHelperOleDb.Exists(connType, strSql.ToString(),parameters);
+			return DbHelperOleDb.Exists(connType, strSql.ToString(), parameters);
 		}
 
 
@@ -61,7 +61,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Add(BioBaseCLIA.Model.tbSubstrate model)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("insert into tbSubstrate(");
 			strSql.Append("SubstrateNumber,Batch,BarCode,Status,AllTestNumber,leftoverTest,ExtraTest,ValidDate,AddDate,Postion)");
 			strSql.Append(" values (");
@@ -88,7 +88,7 @@ namespace BioBaseCLIA.DAL
 			parameters[8].Value = model.AddDate;
 			parameters[9].Value = model.Postion;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -103,7 +103,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Update(BioBaseCLIA.Model.tbSubstrate model)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("update tbSubstrate set ");
 			strSql.Append("SubstrateNumber=@SubstrateNumber,");
 			strSql.Append("Batch=@Batch,");
@@ -140,7 +140,7 @@ namespace BioBaseCLIA.DAL
 			parameters[9].Value = model.Postion;
 			parameters[10].Value = model.SubstrateID;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -156,8 +156,8 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Delete(int SubstrateID)
 		{
-			
-			StringBuilder strSql=new StringBuilder();
+
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("delete from tbSubstrate ");
 			strSql.Append(" where SubstrateID=@SubstrateID");
 			OleDbParameter[] parameters = {
@@ -165,7 +165,7 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = SubstrateID;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -178,12 +178,12 @@ namespace BioBaseCLIA.DAL
 		/// <summary>
 		/// 批量删除数据
 		/// </summary>
-		public bool DeleteList(string SubstrateIDlist )
+		public bool DeleteList(string SubstrateIDlist)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("delete from tbSubstrate ");
-			strSql.Append(" where SubstrateID in ("+SubstrateIDlist + ")  ");
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString());
+			strSql.Append(" where SubstrateID in (" + SubstrateIDlist + ")  ");
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString());
 			if (rows > 0)
 			{
 				return true;
@@ -200,8 +200,8 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public BioBaseCLIA.Model.tbSubstrate GetModel(int SubstrateID)
 		{
-			
-			StringBuilder strSql=new StringBuilder();
+
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select SubstrateID,SubstrateNumber,Batch,BarCode,Status,AllTestNumber,leftoverTest,ExtraTest,ValidDate,AddDate,Postion from tbSubstrate ");
 			strSql.Append(" where SubstrateID=@SubstrateID");
 			OleDbParameter[] parameters = {
@@ -209,9 +209,9 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = SubstrateID;
 
-			BioBaseCLIA.Model.tbSubstrate model=new BioBaseCLIA.Model.tbSubstrate();
-			DataSet ds=DbHelperOleDb.Query(connType, strSql.ToString(),parameters);
-			if(ds.Tables[0].Rows.Count>0)
+			BioBaseCLIA.Model.tbSubstrate model = new BioBaseCLIA.Model.tbSubstrate();
+			DataSet ds = DbHelperOleDb.Query(connType, strSql.ToString(), parameters);
+			if (ds.Tables[0].Rows.Count > 0)
 			{
 				return DataRowToModel(ds.Tables[0].Rows[0]);
 			}
@@ -227,52 +227,52 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public BioBaseCLIA.Model.tbSubstrate DataRowToModel(DataRow row)
 		{
-			BioBaseCLIA.Model.tbSubstrate model=new BioBaseCLIA.Model.tbSubstrate();
+			BioBaseCLIA.Model.tbSubstrate model = new BioBaseCLIA.Model.tbSubstrate();
 			if (row != null)
 			{
-				if(row["SubstrateID"]!=null && row["SubstrateID"].ToString()!="")
+				if (row["SubstrateID"] != null && row["SubstrateID"].ToString() != "")
 				{
-					model.SubstrateID=int.Parse(row["SubstrateID"].ToString());
+					model.SubstrateID = int.Parse(row["SubstrateID"].ToString());
 				}
-				if(row["SubstrateNumber"]!=null)
+				if (row["SubstrateNumber"] != null)
 				{
-					model.SubstrateNumber=row["SubstrateNumber"].ToString();
+					model.SubstrateNumber = row["SubstrateNumber"].ToString();
 				}
-				if(row["Batch"]!=null)
+				if (row["Batch"] != null)
 				{
-					model.Batch=row["Batch"].ToString();
+					model.Batch = row["Batch"].ToString();
 				}
-				if(row["BarCode"]!=null)
+				if (row["BarCode"] != null)
 				{
-					model.BarCode=row["BarCode"].ToString();
+					model.BarCode = row["BarCode"].ToString();
 				}
-				if(row["Status"]!=null)
+				if (row["Status"] != null)
 				{
-					model.Status=row["Status"].ToString();
+					model.Status = row["Status"].ToString();
 				}
-				if(row["AllTestNumber"]!=null && row["AllTestNumber"].ToString()!="")
+				if (row["AllTestNumber"] != null && row["AllTestNumber"].ToString() != "")
 				{
-					model.AllTestNumber=int.Parse(row["AllTestNumber"].ToString());
+					model.AllTestNumber = int.Parse(row["AllTestNumber"].ToString());
 				}
-				if(row["leftoverTest"]!=null && row["leftoverTest"].ToString()!="")
+				if (row["leftoverTest"] != null && row["leftoverTest"].ToString() != "")
 				{
-					model.leftoverTest=int.Parse(row["leftoverTest"].ToString());
+					model.leftoverTest = int.Parse(row["leftoverTest"].ToString());
 				}
-				if(row["ExtraTest"]!=null && row["ExtraTest"].ToString()!="")
+				if (row["ExtraTest"] != null && row["ExtraTest"].ToString() != "")
 				{
-					model.ExtraTest=int.Parse(row["ExtraTest"].ToString());
+					model.ExtraTest = int.Parse(row["ExtraTest"].ToString());
 				}
-				if(row["ValidDate"]!=null)
+				if (row["ValidDate"] != null)
 				{
-					model.ValidDate=row["ValidDate"].ToString();
+					model.ValidDate = row["ValidDate"].ToString();
 				}
-				if(row["AddDate"]!=null)
+				if (row["AddDate"] != null)
 				{
-					model.AddDate=row["AddDate"].ToString();
+					model.AddDate = row["AddDate"].ToString();
 				}
-				if(row["Postion"]!=null)
+				if (row["Postion"] != null)
 				{
-					model.Postion=row["Postion"].ToString();
+					model.Postion = row["Postion"].ToString();
 				}
 			}
 			return model;
@@ -283,12 +283,12 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public DataSet GetList(string strWhere)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select SubstrateID,SubstrateNumber,Batch,BarCode,Status,AllTestNumber,leftoverTest,ExtraTest,ValidDate,AddDate,Postion ");
 			strSql.Append(" FROM tbSubstrate ");
-			if(strWhere.Trim()!="")
+			if (strWhere.Trim() != "")
 			{
-				strSql.Append(" where "+strWhere);
+				strSql.Append(" where " + strWhere);
 			}
 			return DbHelperOleDb.Query(connType, strSql.ToString());
 		}
@@ -298,11 +298,11 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public int GetRecordCount(string strWhere)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select count(1) FROM tbSubstrate ");
-			if(strWhere.Trim()!="")
+			if (strWhere.Trim() != "")
 			{
-				strSql.Append(" where "+strWhere);
+				strSql.Append(" where " + strWhere);
 			}
 			object obj = DbHelperSQL.GetSingle(connType, strSql.ToString());
 			if (obj == null)
@@ -319,12 +319,12 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("SELECT * FROM ( ");
 			strSql.Append(" SELECT ROW_NUMBER() OVER (");
 			if (!string.IsNullOrEmpty(orderby.Trim()))
 			{
-				strSql.Append("order by T." + orderby );
+				strSql.Append("order by T." + orderby);
 			}
 			else
 			{

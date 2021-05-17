@@ -36,7 +36,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public int GetMaxId()
 		{
-		return DbHelperOleDb.GetMaxID(connType, "MainCurveID", "tbMainScalCurve"); 
+			return DbHelperOleDb.GetMaxID(connType, "MainCurveID", "tbMainScalCurve");
 		}
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Exists(int MainCurveID)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select count(1) from tbMainScalCurve");
 			strSql.Append(" where MainCurveID=@MainCurveID");
 			OleDbParameter[] parameters = {
@@ -52,34 +52,34 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = MainCurveID;
 
-			return DbHelperOleDb.Exists(connType, strSql.ToString(),parameters);
+			return DbHelperOleDb.Exists(connType, strSql.ToString(), parameters);
 		}
 
 
-        /// <summary>
-        /// 是否存在该记录
-        /// </summary>
-        public bool ExistsCurve(string ItemName, string RegentBatch)
-        {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("select count(1) from tbMainScalCurve");
-            strSql.Append(" where ItemName=@ItemName and RegentBatch=@RegentBatch");
-            OleDbParameter[] parameters = {
+		/// <summary>
+		/// 是否存在该记录
+		/// </summary>
+		public bool ExistsCurve(string ItemName, string RegentBatch)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("select count(1) from tbMainScalCurve");
+			strSql.Append(" where ItemName=@ItemName and RegentBatch=@RegentBatch");
+			OleDbParameter[] parameters = {
 					new OleDbParameter("@ItemName", OleDbType.VarChar,30),
 					new OleDbParameter("@RegentBatch", OleDbType.VarChar,20)
 			};
-            parameters[0].Value = ItemName;
-            parameters[1].Value = RegentBatch;
+			parameters[0].Value = ItemName;
+			parameters[1].Value = RegentBatch;
 
-            return DbHelperOleDb.Exists(connType, strSql.ToString(), parameters);
-        }
+			return DbHelperOleDb.Exists(connType, strSql.ToString(), parameters);
+		}
 
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-        public bool Add(BioBaseCLIA.Model.tbMainScalCurve model)
+		public bool Add(BioBaseCLIA.Model.tbMainScalCurve model)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("insert into tbMainScalCurve(");
 			strSql.Append("ItemName,RegentBatch,Points,ActiveDate,ValidPeriod)");
 			strSql.Append(" values (");
@@ -96,7 +96,7 @@ namespace BioBaseCLIA.DAL
 			parameters[3].Value = model.ActiveDate;
 			parameters[4].Value = model.ValidPeriod;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -108,11 +108,11 @@ namespace BioBaseCLIA.DAL
 		}
 
 
-        /// <summary>
-        /// 根据批号获得id lyq add 20190815
-        /// </summary>
-        public int SelectIdAsRegentBatch(string RegentBatch)
-        {
+		/// <summary>
+		/// 根据批号获得id lyq add 20190815
+		/// </summary>
+		public int SelectIdAsRegentBatch(string RegentBatch)
+		{
 			string strSql = "select MainCurveID from tbMainScalCurve where RegentBatch = '" + RegentBatch + "'";
 			object temp = DbHelperOleDb.GetSingle(connType, strSql);
 			int rBatch = temp == null ? 0 : (int)temp;
@@ -127,12 +127,12 @@ namespace BioBaseCLIA.DAL
 		}
 
 
-        /// <summary>
-        /// 更新一条数据
-        /// </summary>
-        public bool Update(BioBaseCLIA.Model.tbMainScalCurve model)
+		/// <summary>
+		/// 更新一条数据
+		/// </summary>
+		public bool Update(BioBaseCLIA.Model.tbMainScalCurve model)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("update tbMainScalCurve set ");
 			strSql.Append("ItemName=@ItemName,");
 			strSql.Append("RegentBatch=@RegentBatch,");
@@ -154,7 +154,7 @@ namespace BioBaseCLIA.DAL
 			parameters[4].Value = model.ValidPeriod;
 			parameters[5].Value = model.MainCurveID;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -170,8 +170,8 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public bool Delete(int MainCurveID)
 		{
-			
-			StringBuilder strSql=new StringBuilder();
+
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("delete from tbMainScalCurve ");
 			strSql.Append(" where MainCurveID=@MainCurveID");
 			OleDbParameter[] parameters = {
@@ -179,7 +179,7 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = MainCurveID;
 
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString(),parameters);
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -192,12 +192,12 @@ namespace BioBaseCLIA.DAL
 		/// <summary>
 		/// 批量删除数据
 		/// </summary>
-		public bool DeleteList(string MainCurveIDlist )
+		public bool DeleteList(string MainCurveIDlist)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("delete from tbMainScalCurve ");
-			strSql.Append(" where MainCurveID in ("+MainCurveIDlist + ")  ");
-			int rows=DbHelperOleDb.ExecuteSql(connType, strSql.ToString());
+			strSql.Append(" where MainCurveID in (" + MainCurveIDlist + ")  ");
+			int rows = DbHelperOleDb.ExecuteSql(connType, strSql.ToString());
 			if (rows > 0)
 			{
 				return true;
@@ -212,10 +212,10 @@ namespace BioBaseCLIA.DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-        public BioBaseCLIA.Model.tbMainScalCurve GetModel(int MainCurveID)
+		public BioBaseCLIA.Model.tbMainScalCurve GetModel(int MainCurveID)
 		{
-			
-			StringBuilder strSql=new StringBuilder();
+
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select MainCurveID,ItemName,RegentBatch,Points,ActiveDate,ValidPeriod from tbMainScalCurve ");
 			strSql.Append(" where MainCurveID=@MainCurveID");
 			OleDbParameter[] parameters = {
@@ -223,9 +223,9 @@ namespace BioBaseCLIA.DAL
 			};
 			parameters[0].Value = MainCurveID;
 
-            BioBaseCLIA.Model.tbMainScalCurve model = new BioBaseCLIA.Model.tbMainScalCurve();
-			DataSet ds=DbHelperOleDb.Query(connType, strSql.ToString(),parameters);
-			if(ds.Tables[0].Rows.Count>0)
+			BioBaseCLIA.Model.tbMainScalCurve model = new BioBaseCLIA.Model.tbMainScalCurve();
+			DataSet ds = DbHelperOleDb.Query(connType, strSql.ToString(), parameters);
+			if (ds.Tables[0].Rows.Count > 0)
 			{
 				return DataRowToModel(ds.Tables[0].Rows[0]);
 			}
@@ -239,34 +239,34 @@ namespace BioBaseCLIA.DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-        public BioBaseCLIA.Model.tbMainScalCurve DataRowToModel(DataRow row)
+		public BioBaseCLIA.Model.tbMainScalCurve DataRowToModel(DataRow row)
 		{
-            BioBaseCLIA.Model.tbMainScalCurve model = new BioBaseCLIA.Model.tbMainScalCurve();
+			BioBaseCLIA.Model.tbMainScalCurve model = new BioBaseCLIA.Model.tbMainScalCurve();
 			if (row != null)
 			{
-				if(row["MainCurveID"]!=null && row["MainCurveID"].ToString()!="")
+				if (row["MainCurveID"] != null && row["MainCurveID"].ToString() != "")
 				{
-					model.MainCurveID=int.Parse(row["MainCurveID"].ToString());
+					model.MainCurveID = int.Parse(row["MainCurveID"].ToString());
 				}
-				if(row["ItemName"]!=null)
+				if (row["ItemName"] != null)
 				{
-					model.ItemName=row["ItemName"].ToString();
+					model.ItemName = row["ItemName"].ToString();
 				}
-				if(row["RegentBatch"]!=null)
+				if (row["RegentBatch"] != null)
 				{
-					model.RegentBatch=row["RegentBatch"].ToString();
+					model.RegentBatch = row["RegentBatch"].ToString();
 				}
-				if(row["Points"]!=null)
+				if (row["Points"] != null)
 				{
-					model.Points=row["Points"].ToString();
+					model.Points = row["Points"].ToString();
 				}
-				if(row["ActiveDate"]!=null && row["ActiveDate"].ToString()!="")
+				if (row["ActiveDate"] != null && row["ActiveDate"].ToString() != "")
 				{
-					model.ActiveDate=DateTime.Parse(row["ActiveDate"].ToString());
+					model.ActiveDate = DateTime.Parse(row["ActiveDate"].ToString());
 				}
-				if(row["ValidPeriod"]!=null)
+				if (row["ValidPeriod"] != null)
 				{
-					model.ValidPeriod=DateTime.Parse(row["ValidPeriod"].ToString());
+					model.ValidPeriod = DateTime.Parse(row["ValidPeriod"].ToString());
 				}
 			}
 			return model;
@@ -277,12 +277,12 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public DataSet GetList(string strWhere)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select MainCurveID,ItemName,RegentBatch,Points,ActiveDate,ValidPeriod ");
 			strSql.Append(" FROM tbMainScalCurve ");
-			if(strWhere.Trim()!="")
+			if (strWhere.Trim() != "")
 			{
-				strSql.Append(" where "+strWhere);
+				strSql.Append(" where " + strWhere);
 			}
 			return DbHelperOleDb.Query(connType, strSql.ToString());
 		}
@@ -292,11 +292,11 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public int GetRecordCount(string strWhere)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select count(1) FROM tbMainScalCurve ");
-			if(strWhere.Trim()!="")
+			if (strWhere.Trim() != "")
 			{
-				strSql.Append(" where "+strWhere);
+				strSql.Append(" where " + strWhere);
 			}
 			object obj = DbHelperSQL.GetSingle(connType, strSql.ToString());
 			if (obj == null)
@@ -313,12 +313,12 @@ namespace BioBaseCLIA.DAL
 		/// </summary>
 		public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("SELECT * FROM ( ");
 			strSql.Append(" SELECT ROW_NUMBER() OVER (");
 			if (!string.IsNullOrEmpty(orderby.Trim()))
 			{
-				strSql.Append("order by T." + orderby );
+				strSql.Append("order by T." + orderby);
 			}
 			else
 			{

@@ -14,6 +14,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -26,7 +27,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -53,6 +53,9 @@
   <PropertyGroup>
     <ApplicationIcon>图标I.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>BioBaseCLIA.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bar">
       <HintPath>dlls\Bar.dll</HintPath>
@@ -68,6 +71,10 @@
     </Reference>
     <Reference Include="FastReport.Editor">
       <HintPath>bin\Debug\Report\FastReport.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Model\bin\Debug\Model.dll</HintPath>
     </Reference>
     <Reference Include="NPOI">
       <HintPath>dlls\NPOI.dll</HintPath>
@@ -205,6 +212,7 @@
     <Compile Include="InfoSetting\DelayClass.cs" />
     <Compile Include="InfoSetting\frmInfo.cs">
       <SubType>Form</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="InfoSetting\frmInfo.Designer.cs">
       <DependentUpon>frmInfo.cs</DependentUpon>
@@ -235,6 +243,7 @@
     <Compile Include="InfoSetting\HL7\ServeyReport.cs" />
     <Compile Include="InfoSetting\Inspect.cs" />
     <Compile Include="InfoSetting\LisCommunication.cs" />
+    <Compile Include="LogFileRtest.cs" />
     <Compile Include="NetCom3.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -243,6 +252,11 @@
     </Compile>
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\String\NetCom3.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -268,6 +282,12 @@
     </Compile>
     <Compile Include="Run\frmAddScaling.designer.cs">
       <DependentUpon>frmAddScaling.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Run\frmLoadDiu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Run\frmLoadDiu.Designer.cs">
+      <DependentUpon>frmLoadDiu.cs</DependentUpon>
     </Compile>
     <Compile Include="Run\frmLoadSu.cs">
       <SubType>Form</SubType>
@@ -379,6 +399,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControl\FunctionButton.resx">
       <DependentUpon>FunctionButton.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControl\userNumTextBox.resx">
       <DependentUpon>userNumTextBox.cs</DependentUpon>
@@ -388,15 +409,19 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataQuery\frmHistoryScaling.en-US.resx">
       <DependentUpon>frmHistoryScaling.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="DataQuery\frmHistoryScaling.en.resx">
       <DependentUpon>frmHistoryScaling.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="DataQuery\frmHistoryScaling.resx">
       <DependentUpon>frmHistoryScaling.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="DataQuery\frmLoadSu.en.resx">
       <DependentUpon>frmLoadSu.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="DataQuery\frmLoadSu.resx">
       <DependentUpon>frmLoadSu.cs</DependentUpon>
@@ -434,6 +459,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataQuery\frmResultQuery.resx">
       <DependentUpon>frmResultQuery.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="DataQuery\frmSupplyStatus.en-US.resx">
       <DependentUpon>frmSupplyStatus.cs</DependentUpon>
@@ -452,6 +478,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.en.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.en-US.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
@@ -486,9 +513,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InfoSetting\frmInfo.en.resx">
       <DependentUpon>frmInfo.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoSetting\frmInfo.resx">
       <DependentUpon>frmInfo.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoSetting\frmInstrumentPara.en-US.resx">
       <DependentUpon>frmInstrumentPara.cs</DependentUpon>
@@ -498,7 +527,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InfoSetting\frmInstrumentPara.resx">
       <DependentUpon>frmInstrumentPara.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoSetting\frmNetSet.en.resx">
       <DependentUpon>frmNetSet.cs</DependentUpon>
@@ -517,16 +545,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\String\NetCom3.en.resx" />
     <EmbeddedResource Include="Resources\String\NetCom3.resx">
@@ -553,6 +577,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Run\frmAddScaling.resx">
       <DependentUpon>frmAddScaling.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Run\frmLoadDiu.resx">
+      <DependentUpon>frmLoadDiu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Run\frmLoadSu.resx">
       <DependentUpon>frmLoadSu.cs</DependentUpon>
@@ -645,7 +672,9 @@
     <EmbeddedResource Include="SysMaintenance\frmReconfirm.resx">
       <DependentUpon>frmReconfirm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\DataSources\BioBaseCLIA.Run.LogOfAlarm.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -779,10 +808,6 @@
       <Project>{4AD525D8-9A4B-42C6-BB94-FAFBF0F6530C}</Project>
       <Name>Localization</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{8DDC1C38-9102-4A32-BE1F-346AA0FFD019}</Project>
-      <Name>Model</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\termometer.png" />
@@ -801,8 +826,8 @@
     <None Include="Resources\声音关闭.png" />
     <None Include="Resources\声音启用.png" />
     <None Include="Resources\WasteRack01.png" />
-    <None Include="Resources\WasteRack03.png" />
     <None Include="Resources\WasteRack02.png" />
+    <None Include="Resources\WasteRack03.png" />
     <None Include="Resources\灰显2.png" />
     <None Include="Resources\灰显1.png" />
     <None Include="Resources\logo.png" />
@@ -848,6 +873,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
