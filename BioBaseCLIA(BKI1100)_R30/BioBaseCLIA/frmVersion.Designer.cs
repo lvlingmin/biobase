@@ -47,8 +47,8 @@
             // 
             // btnOK
             // 
-            resources.ApplyResources(this.btnOK, "btnOK");
             this.btnOK.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.btnOK, "btnOK");
             this.btnOK.EnabledSet = true;
             this.btnOK.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnOK.FlatAppearance.BorderSize = 0;
