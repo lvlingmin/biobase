@@ -1248,6 +1248,8 @@ namespace BioBaseCLIA.Run
                 txtRgCode.Enabled = true;
                 txtRgBatch.Enabled = true;
                 dateValidDate.Enabled = true;
+                txtRgAllTest.Enabled = true;
+                txtRgLastTest.Enabled = true;
                 //initContr();
                 //txtRgCode.Focus();
                 //barCodeHook.Stop();
@@ -1258,6 +1260,8 @@ namespace BioBaseCLIA.Run
                 txtRgCode.Enabled = false;
                 txtRgBatch.Enabled = false;
                 dateValidDate.Enabled = false;
+                txtRgAllTest.Enabled = false;
+                txtRgLastTest.Enabled = false;
                 //barCodeHook.Start();
             }
         }
