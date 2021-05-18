@@ -206,6 +206,12 @@ namespace BioBaseCLIA.SysMaintenance
             chart1.ChartAreas[0].AxisY.Maximum = num2;
             saveFileDialog1.InitialDirectory = System.Windows.Forms.Application.StartupPath + @"\daily";//默认路径
             cmbArmRegentPos.SelectedIndex = 0;
+            cmbArmRegentPos.Items.Clear();
+            List<int>list = GetReagentList();
+            foreach (int li in list)
+            {
+                cmbArmRegentPos.Items.Add(li);
+            }
             //zlx add 2018-08-31 zlx add 停止试剂盘旋转
             NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 02 09 01"), 0);
             while (!NetCom3.SpReciveFlag)
@@ -216,6 +222,19 @@ namespace BioBaseCLIA.SysMaintenance
             BQLiquaid = false;
             cmbSendDelay.SelectedIndex = 2;
             cmbConnDelay.SelectedIndex = 1;
+        }
+        /// <summary>
+        /// 试剂位置下拉列表
+        /// </summary>
+        /// <returns></returns>
+        private List<int> GetReagentList()
+        {
+            List<int> list = new List<int>();
+            for (int i = 1; i <= frmParent.RegentNum; i++)
+            {
+                list.Add(i);
+            }
+            return list;
         }
         void Instance_ReceiveHandel(string obj)
         {
@@ -8372,6 +8391,7 @@ namespace BioBaseCLIA.SysMaintenance
                 untxtSampleVol.Enabled = true;
                 untxtSamplePos.Enabled = true;
                 untxtReadNum.Enabled = true;
+                untxtPos2.MaxValue = frmParent.ReactTrayNum;
             }
             else
             {

@@ -139,6 +139,17 @@ namespace BioBaseCLIA.SysMaintenance
             cmbTakeSamPos.SelectedIndex = 0;
             cmbRegentType.SelectedIndex = 0;
             cmbSamCupType.SelectedIndex = 0;
+            cmbReactStartPos.Items.Clear();
+            for (int i = 1; i <= ReactTrayHoleNum; i++)
+            {
+                cmbReactStartPos.Items.Add(i);
+            }
+            cmbReagentPos.Items.Clear();
+            for (int i = 1; i <= frmParent.RegentNum; i++)
+            {
+                cmbReagentPos.Items.Add(i);
+            }
+            cmbReagentPos.SelectedIndex = 0;
             QueryTubePos();
             #endregion
 
