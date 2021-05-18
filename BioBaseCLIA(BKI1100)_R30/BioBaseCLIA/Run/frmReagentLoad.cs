@@ -210,7 +210,28 @@ namespace BioBaseCLIA.Run
         private void btnAddR_Click(object sender, EventArgs e)
         {
             frmMessageShow frmMsgShow = new frmMessageShow();
-
+            if (txtRgCode.Text == "")
+            {
+                frmMsgShow.MessageShow("试剂加载", "试剂条码为空。本次加载操作已取消。");
+                return;
+            }
+            if (txtRgBatch.Text == "")
+            {
+                frmMsgShow.MessageShow("试剂加载", "试剂批号为空。本次加载操作已取消。");
+                return;
+            }
+            if (txtRgAllTest.Text == "")
+            {
+                frmMsgShow.MessageShow("试剂装载", "总测数为空，请重新输入！");
+                txtRgAllTest.Focus();
+                return;
+            }
+            if (txtRgLastTest.Text == "")
+            {
+                frmMsgShow.MessageShow("试剂装载", "剩余测数为空，请重新输入！");
+                txtRgLastTest.Focus();
+                return;
+            }
             txtRgCode.TextChanged -= new EventHandler(txtRgCode_TextChanged);
             txtRgCode.TextChanged -= new EventHandler(txtRgCode_TextChanged);
             for (int i = 1; i <= RegentNum; i++)//查重功能
@@ -1284,11 +1305,18 @@ namespace BioBaseCLIA.Run
         {
             if(txtRgPosition.Text == "")
                 return;
+            string ItemName = OperateIniFile.ReadIniData("ReagentPos" + int.Parse(txtRgPosition.Text).ToString(), "ItemName", "", iniPathReagentTrayInfo);
+            if (ItemName == "")
+            {
+                frmMessageShow frmMessage = new frmMessageShow();
+                frmMessage.MessageShow("添加稀释液", "此试剂位置未装载试剂，不能添加稀释液信息！");
+                return;
+            }
             string DiuFlag = OperateIniFile.ReadIniData("ReagentPos" + int.Parse(txtRgPosition.Text).ToString(), "DiuFlag", "", iniPathReagentTrayInfo);
             if (DiuFlag == "1")
             {
                 frmMessageShow frmMessage = new frmMessageShow();
-                frmMessage.MessageShow("添加稀释液","此试剂位置装载的项目是稀释液！");
+                frmMessage.MessageShow("添加稀释液", "此试剂位置装载的项目是稀释液，不能添加稀释液信息！");
                 return;
             }
             frmLoadDiu frm = new frmLoadDiu();
