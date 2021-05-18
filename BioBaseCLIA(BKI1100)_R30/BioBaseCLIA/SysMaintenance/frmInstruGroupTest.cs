@@ -165,7 +165,17 @@ namespace BioBaseCLIA.SysMaintenance
                 txtWashShowInfo.AppendText(str + Environment.NewLine);
             });
             #region 控件可用状态
-
+            if (LoginUserType == "0")//admin 用户
+            {
+                //fbtnInstruMaintenance.Enabled = false;
+                fbtnInstruDiagnost.Enabled = false;
+                fbtnGroupTest.Enabled = true;
+            }
+            else if (LoginUserType == "2") // normal 用户
+            {
+                fbtnInstruDiagnost.Enabled = false;
+                fbtnGroupTest.Enabled = false;
+            }
             InitControlEnable();
             #endregion
         }
