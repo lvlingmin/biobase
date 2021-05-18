@@ -32,6 +32,7 @@ namespace BioBaseCLIA.Run
         DataTable dtItemInfo = new DataTable();//项目信息列表
         DataTable dtGroupItem = new DataTable();//组合项目信息列表
         DataTable dtSampleInfo = new DataTable();//样本信息列表
+        DataTable dtSampleAllInfo = new DataTable();
         public delegate void DtToDgv();//定义传值委托
         public static event DtToDgv dtodgvEvent;
         DataTable dtrgBatch;//试剂信息列表
@@ -66,6 +67,7 @@ namespace BioBaseCLIA.Run
         {
             InitializeComponent();
             dtSampleInfo = frmParent.dtSpInfo;//将dtSpInfo与dtSampleInfo联系起来
+            dtSampleAllInfo = bllsp.GetList("").Tables[0];
             for (int i = 0; i < 60; i++)
             {
                 ls.Add("");
@@ -734,6 +736,16 @@ namespace BioBaseCLIA.Run
                         modelSp.Source = "内部";
                         modelSp.Department = "";
                         modelSp.SendDateTime = DateTime.Now;
+                        modelSp.InspectionItems = "";//lyq
+                        if (PGNumberList.Count > 0)
+                        {
+                            foreach (Model.tbProjectGroup tpg in PGNumberList)
+                            {
+                                modelSp.InspectionItems += tpg.ProjectGroupNumber + ",";
+                            }
+                            modelSp.InspectionItems = modelSp.InspectionItems.Substring(0, modelSp.InspectionItems.Length - 1);
+                        }
+                        modelSp.AcquisitionTime = DateTime.Now;
                         int PointNum = 1;
                         foreach (CheckBox ch in flpItemName.Controls)
                         {
@@ -1729,6 +1741,7 @@ namespace BioBaseCLIA.Run
                 }
                 #endregion
             }
+            dtSampleAllInfo = bllsp.GetList("").Tables[0];
             PGNumberList.Clear();
             btnDelete.Enabled = true;
             //}
@@ -1947,6 +1960,13 @@ namespace BioBaseCLIA.Run
                 txtSpRepetitions.Text = Convert.ToString(dgvSampleList.SelectedRows[0].Cells["RepeatCount"].Value);
                 cmbSpType.Text = Convert.ToString(dgvSampleList.SelectedRows[0].Cells["SampleType"].Value);
                 cmbPipeType.Text = Convert.ToString(dgvSampleList.SelectedRows[0].Cells["TubeType"].Value);
+                if(btnDelete.Text != "保存" && !chkScanSampleCode.Checked)
+                {
+                    cmbBatch.Items.Clear();
+                    string spBtach = dtSampleAllInfo.Select("SampleNo='" + dgvSampleList.SelectedRows[0].Cells["SampleNo"].Value + "'")[0]["RegentBatch"].ToString();
+                    cmbBatch.Items.Add(spBtach);
+                    cmbBatch.Text = spBtach;
+                }
                 if (Convert.ToString(dgvSampleList.SelectedRows[0].Cells["Emergency"].Value) == "是")//y modify 20180425
                 {
                     chkEmergency.Checked = true;
