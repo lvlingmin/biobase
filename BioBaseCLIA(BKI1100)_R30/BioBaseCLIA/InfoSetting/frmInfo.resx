@@ -4560,4 +4560,7 @@
   <data name="T" xml:space="preserve">
     <value>加底物</value>
   </data>
+  <data name="PrintMode" xml:space="preserve">
+    <value>请选择打印模板</value>
+  </data>
 </root>

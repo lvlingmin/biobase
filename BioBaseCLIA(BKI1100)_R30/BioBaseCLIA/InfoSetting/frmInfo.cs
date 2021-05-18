@@ -1426,6 +1426,8 @@ namespace BioBaseCLIA.InfoSetting
 
             if (cmbPrintMode.SelectedItem == null)//lyq
             {
+                frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("PrintMode"));
+                txtDepName.Focus();
                 return;
             }
             OperateIniFile.WriteIniPara("PrintSet", "PrintMode", cmbPrintMode.Text.Trim());

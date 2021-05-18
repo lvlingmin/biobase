@@ -2588,4 +2588,7 @@
   <data name="W" xml:space="preserve">
     <value>wash</value>
   </data>
+  <data name="PrintMode" xml:space="preserve">
+    <value>Please select print template</value>
+  </data>
 </root>

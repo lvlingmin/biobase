@@ -623,7 +623,7 @@ namespace BioBaseCLIA
             }
             if (btnStopClick != null)
             {
-                DialogResult dr =MessageBox.Show(GetString("NotRun"), GetString("Tips"), MessageBoxButtons.OKCancel,MessageBoxIcon.Warning);
+                DialogResult dr =MessageBox.Show(GetString("Stopexperiment"), GetString("Tips"), MessageBoxButtons.OKCancel,MessageBoxIcon.Warning);
                 if (dr == DialogResult.OK)
                 {
                     IniUpdateAccess();
