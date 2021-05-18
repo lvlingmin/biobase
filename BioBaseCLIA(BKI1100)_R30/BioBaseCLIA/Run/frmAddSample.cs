@@ -1960,7 +1960,7 @@ namespace BioBaseCLIA.Run
                 txtSpRepetitions.Text = Convert.ToString(dgvSampleList.SelectedRows[0].Cells["RepeatCount"].Value);
                 cmbSpType.Text = Convert.ToString(dgvSampleList.SelectedRows[0].Cells["SampleType"].Value);
                 cmbPipeType.Text = Convert.ToString(dgvSampleList.SelectedRows[0].Cells["TubeType"].Value);
-                if(btnDelete.Text != "保存" && !chkScanSampleCode.Checked)
+                if(cmbBatch.Visible && btnDelete.Text != "保存" && chkScanSampleCode.Checked == false && !btnMoreSave.Enabled)
                 {
                     cmbBatch.Items.Clear();
                     string spBtach = dtSampleAllInfo.Select("SampleNo='" + dgvSampleList.SelectedRows[0].Cells["SampleNo"].Value + "'")[0]["RegentBatch"].ToString();
@@ -2431,6 +2431,7 @@ namespace BioBaseCLIA.Run
             SelectInfo(oto - 1);//y add 20180426
             //add y 20180516
             if (AutoUploadAndUnload2.Checked == true) SampleUploadOrUnload(pos, length, true);
+            dtSampleAllInfo = bllsp.GetList("").Tables[0];
             PGNumberList.Clear();
         }
 
@@ -2730,6 +2731,7 @@ namespace BioBaseCLIA.Run
             {//y add 20180425
                 btnAdd.Enabled = btnMoreAdd.Enabled = true;//y add 20180425
             }//y add 20180425
+            dtSampleAllInfo = bllsp.GetList("").Tables[0];
         }
 
         private void btnUnloadSP_Click(object sender, EventArgs e)//this function add 20180516 y
