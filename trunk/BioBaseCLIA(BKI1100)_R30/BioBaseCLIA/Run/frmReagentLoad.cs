@@ -1381,14 +1381,22 @@ namespace BioBaseCLIA.Run
             else//首次装载
             {
                 string[] dealCode = dealBarCode(rgcode).Split('?');
+
+
+                if (dealCode[0] == "")
+                {
+                    frmMessageShow frmMessage = new frmMessageShow();
+                    frmMessage.MessageShow("试剂装载", "未找到此条码对应的项目信息！");
+                    return false ;
+                }
                 string shortName = dealCode[0];//试剂名
                 string batch = dealCode[1];//批号
                 string productDay = batch/* dealCode[2]*/;//生产日期
                 string testNum = dealCode[3];//测试次数
-                if (dealCode[0] == "")
-                {
-                    return false;
-                }
+                //if (dealCode[0] == "")
+                //{
+                //    return false;
+                //}
                 Invoke(new Action(() =>
                 {
                     txtRgCode.Text = rgcode;//条码
