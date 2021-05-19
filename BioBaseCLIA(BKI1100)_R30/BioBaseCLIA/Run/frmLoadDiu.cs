@@ -36,7 +36,7 @@ namespace BioBaseCLIA.Run
         }
         private void btnLoadSubstrate_Click(object sender, EventArgs e)
         {
-            if(cmbDiuPos.SelectedItem!=null || cmbDiuPos.SelectedItem.ToString()!="")
+            if(cmbDiuPos.SelectedItem!=null && cmbDiuPos.SelectedItem.ToString()!="")
             {
                 OperateIniFile.WriteIniData("ReagentPos" + RegentPos, "DiuPos", cmbDiuPos.SelectedItem.ToString(), iniPathReagentTrayInfo);
                 frmMessageShow frmMessage = new frmMessageShow();
