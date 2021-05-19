@@ -40,7 +40,7 @@ namespace BioBaseCLIA.Run
             {
                 OperateIniFile.WriteIniData("ReagentPos" + RegentPos, "DiuPos", cmbDiuPos.SelectedItem.ToString(), iniPathReagentTrayInfo);
                 frmMessageShow frmMessage = new frmMessageShow();
-                frmMessage.MessageShow("添加稀释液","添加稀释液信息成功！");
+                frmMessage.MessageShow("绑定稀释液","绑定稀释液信息成功！");
             }
                 
         }
@@ -49,7 +49,7 @@ namespace BioBaseCLIA.Run
         {
             OperateIniFile.WriteIniData("ReagentPos" + RegentPos, "DiuPos", "", iniPathReagentTrayInfo);
             frmMessageShow frmMessage = new frmMessageShow();
-            frmMessage.MessageShow("卸载稀释液","卸载稀释液信息成功！");
+            frmMessage.MessageShow("解绑稀释液","稀释液信息成功解绑！");
         }
 
        

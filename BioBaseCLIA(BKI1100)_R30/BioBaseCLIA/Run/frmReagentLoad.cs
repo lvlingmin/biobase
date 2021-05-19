@@ -1251,10 +1251,12 @@ namespace BioBaseCLIA.Run
             if (chkManualInput.Checked)
             {
                 txtRgCode.Enabled = true;
-                txtRgBatch.Enabled = true;
-                dateValidDate.Enabled = true;
+                //txtRgBatch.Enabled = true;
+                //dateValidDate.Enabled = true;
                 txtRgAllTest.Enabled = true;
                 txtRgLastTest.Enabled = true;
+                //cmbProType.Enabled = true;
+                //cmbRgName.Enabled = true;
                 //initContr();
                 //txtRgCode.Focus();
                 //barCodeHook.Stop();
@@ -1263,10 +1265,12 @@ namespace BioBaseCLIA.Run
             {
                 //initContr();
                 txtRgCode.Enabled = false;
-                txtRgBatch.Enabled = false;
-                dateValidDate.Enabled = false;
+                //txtRgBatch.Enabled = false;
+                //dateValidDate.Enabled = false;
                 txtRgAllTest.Enabled = false;
                 txtRgLastTest.Enabled = false;
+                //cmbProType.Enabled = false;
+                //cmbRgName.Enabled = false;
                 //barCodeHook.Start();
             }
         }
@@ -1318,20 +1322,20 @@ namespace BioBaseCLIA.Run
             if (ItemName == "")
             {
                 frmMessageShow frmMessage = new frmMessageShow();
-                frmMessage.MessageShow("添加稀释液", "此试剂位置未装载试剂，不能添加稀释液信息！");
+                frmMessage.MessageShow("绑定稀释液", "请选择试剂项目来绑定稀释液！");
                 return;
             }
             if (frmParent.DiuPosList.Count == 0)
             {
                 frmMessageShow frmMessage = new frmMessageShow();
-                frmMessage.MessageShow("添加稀释液", "未找到已装载的稀释液信息，此次操作不成功！");
+                frmMessage.MessageShow("绑定稀释液", "未找到已装载的稀释液信息，此次操作不成功！");
                 return;
             }
             string DiuFlag = OperateIniFile.ReadIniData("ReagentPos" + int.Parse(txtRgPosition.Text).ToString(), "DiuFlag", "", iniPathReagentTrayInfo);
             if (DiuFlag == "1")
             {
                 frmMessageShow frmMessage = new frmMessageShow();
-                frmMessage.MessageShow("添加稀释液", "此试剂位置装载的项目是稀释液，不能添加稀释液信息！");
+                frmMessage.MessageShow("绑定稀释液", "请选择试剂项目来绑定稀释液！");
                 return;
             }
             
@@ -1691,10 +1695,7 @@ namespace BioBaseCLIA.Run
 
             if (!fillRgInfo(txtRgCode.Text.Trim()))
             {
-                Invoke(new Action(() =>
-                {
-                    frmMsgShow.MessageShow("试剂装载", "已装载试剂,请先卸载试剂!");
-                }));
+                return;
             }
         }
         private void txtRgCode_TextChanged(object sender, EventArgs e)
