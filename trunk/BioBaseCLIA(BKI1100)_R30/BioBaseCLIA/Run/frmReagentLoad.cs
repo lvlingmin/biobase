@@ -1321,6 +1321,12 @@ namespace BioBaseCLIA.Run
                 frmMessage.MessageShow("添加稀释液", "此试剂位置未装载试剂，不能添加稀释液信息！");
                 return;
             }
+            if (frmParent.DiuPosList.Count == 0)
+            {
+                frmMessageShow frmMessage = new frmMessageShow();
+                frmMessage.MessageShow("添加稀释液", "未找到已装载的稀释液信息，此次操作不成功！");
+                return;
+            }
             string DiuFlag = OperateIniFile.ReadIniData("ReagentPos" + int.Parse(txtRgPosition.Text).ToString(), "DiuFlag", "", iniPathReagentTrayInfo);
             if (DiuFlag == "1")
             {
@@ -1328,6 +1334,7 @@ namespace BioBaseCLIA.Run
                 frmMessage.MessageShow("添加稀释液", "此试剂位置装载的项目是稀释液，不能添加稀释液信息！");
                 return;
             }
+            
             frmLoadDiu frm = new frmLoadDiu();
             frm.RegentPos = int.Parse(txtRgPosition.Text);
             frm.ShowDialog();
