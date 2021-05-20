@@ -1259,12 +1259,10 @@ namespace BioBaseCLIA.Run
             if (chkManualInput.Checked)
             {
                 txtRgCode.Enabled = true;
-
+                txtRgAllTest.Enabled = true;
+                txtRgLastTest.Enabled = true;
                 //txtRgBatch.Enabled = true;
                 //dateValidDate.Enabled = true;
-                //txtRgAllTest.Enabled = true;
-                //txtRgLastTest.Enabled = true;
-
                 //cmbProType.Enabled = true;
                 //cmbRgName.Enabled = true;
                 //initContr();
@@ -1274,11 +1272,10 @@ namespace BioBaseCLIA.Run
             else
             {
                 txtRgCode.Enabled = false;
+                txtRgAllTest.Enabled = false;
+                txtRgLastTest.Enabled = false;
                 //txtRgBatch.Enabled = false;
                 //dateValidDate.Enabled = false;
-                //txtRgAllTest.Enabled = false;
-                //txtRgLastTest.Enabled = false;
-
                 //initContr();
 
                 //cmbProType.Enabled = false;
