@@ -242,7 +242,7 @@ namespace BioBaseCLIA.Run
             {
                 string BarCode = OperateIniFile.ReadIniData("ReagentPos" + i.ToString(), "BarCode", "", iniPathReagentTrayInfo);
                 string ItemName = OperateIniFile.ReadIniData("ReagentPos" + i.ToString(), "ItemName", "", iniPathReagentTrayInfo);
-                if (txtRgCode.Text.Trim() == BarCode && cmbRgName.Text.Trim() == ItemName)
+                if (txtRgCode.Text.Trim() == BarCode && cmbRgName.Text.Trim() == ItemName && ItemName != "")
                 {
                     frmMsgShow.MessageShow("试剂加载", "试剂条码与现有的重复（" + i + "号位置），请检查输入的试剂条码和试剂名称。本次加载操作已取消。");
                     return;
@@ -1411,8 +1411,12 @@ namespace BioBaseCLIA.Run
                 string[] dealCode = dealBarCode(rgcode).Split('?');
                 if (dealCode[0] == "")
                 {
-                    frmMessageShow frmMessage = new frmMessageShow();
-                    frmMessage.MessageShow("试剂装载", "未找到此条码对应的项目信息！");
+                    new Thread(new ParameterizedThreadStart((obj) =>
+                    {
+                        frmMessageShow frmMessage = new frmMessageShow();
+                        frmMessage.MessageShow("试剂装载", "未找到此条码对应的项目信息！");
+                    }))
+                    { IsBackground = true }.Start();
                     return false ;
                 }
                 string shortName = dealCode[0];//试剂名
@@ -2493,7 +2497,8 @@ namespace BioBaseCLIA.Run
                     RgType = (int)ReagentType.dilute;//lyq
                     if (!dealDiluteOfRFID(order))
                     {
-                        frmMsgShow.MessageShow("射频卡扫描", "稀释液条码处理失败！");
+                        if (txtRgCode.Text.Trim() != "")
+                            frmMsgShow.MessageShow("射频卡扫描", "稀释液条码处理失败！");
                         addRFlag = (int)addRFlagState.fail;
                         NetCom3.Instance.ReceiveHandel -= dealSP;
                         return;
