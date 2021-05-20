@@ -1514,6 +1514,24 @@ namespace BioBaseCLIA.SysMaintenance
         }
         private void functionButton4_Click(object sender, EventArgs e)
         {
+            if (checkBox7.Checked)
+            {
+                if (!string.IsNullOrEmpty(numDwPourin.Value.ToString()))
+                {
+                    if (string.IsNullOrEmpty(OperateIniFile.ReadIniData("Substrate1", "LeftCount", "0", iniPathSubstrateTube)))
+                    {
+                        MessageBox.Show(" 底物测数不足，请装载");
+                        return;
+                    }
+                    int left = int.Parse(OperateIniFile.ReadIniData("Substrate1", "LeftCount", "0", iniPathSubstrateTube));
+                    if (left < int.Parse(numDwPourin.Value.ToString()))
+                    {
+                        MessageBox.Show(" 底物测数不足以完成测试，请装载");
+                        return;
+                    }
+                }
+            }
+
             textBox1.Text = string.Empty;
             //清空，新管，清洗，底物，读数，扔管
             if (isNewWashRun)
@@ -1537,6 +1555,12 @@ namespace BioBaseCLIA.SysMaintenance
             }
             if (checkBox3.Checked)
             {
+                if (string.IsNullOrEmpty(OperateIniFile.ReadIniData("Substrate" + whichPipe + "", "LeftCount", "", iniPathSubstrateTube))) 
+                {
+                    MessageBox.Show("底物不存在请装载");
+                    return;
+                }
+
                 int LeftCount1 = int.Parse(OperateIniFile.ReadIniData("Substrate" + whichPipe + "", "LeftCount", "", iniPathSubstrateTube));
                 int CleanTray = 0;
                 if (cbCleanTray.Checked)
