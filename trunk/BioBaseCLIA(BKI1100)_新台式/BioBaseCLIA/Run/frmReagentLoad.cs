@@ -582,7 +582,7 @@ namespace BioBaseCLIA.Run
                 }
                 if (fg == -1)
                 {
-                    txtRgPosition.Text = (srdReagent.rgSelectedNo + 1).ToString();
+                    txtRgPosition.Text = ((srdReagent.rgSelectedNo == (-1) ? 19 : srdReagent.rgSelectedNo) + 1).ToString();
                     cmbRgName.Text = "";
                     txtRgCode.Text = "";
                     txtRgBatch.Text = "";
