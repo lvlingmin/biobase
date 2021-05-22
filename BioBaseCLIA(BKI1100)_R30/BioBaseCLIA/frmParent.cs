@@ -57,23 +57,23 @@ namespace BioBaseCLIA
         /// <summary>
         /// 系统登录名称
         /// </summary>
-        private static String _logingName;// 2018-11-20 zlx add
+        private static String _logingName;
         /// <summary>
         /// 样本加载位置数
         /// </summary>
-        public const int SampleNum = 60;//2019-02-26  zlx add
+        public const int SampleNum = 60;
         /// <summary>
         /// 试剂加载位置数
         /// </summary>
-        protected const int RegentNum = 30;//2019-02-26  zlx add
+        public const int RegentNum = 30;
         /// <summary>
         /// 温育盘位置数
         /// </summary>
-        protected const int ReactTrayNum = 50;//2019-02-26  zlx add
+        public const int ReactTrayNum = 50;
         /// <summary>
         /// 清洗盘位置数
         /// </summary>
-        protected const int WashTrayNum = 30;//2019-02-26 zlx add
+        public const int WashTrayNum = 30;
         /// <summary>
         /// 实验过程中正在加载试剂标志 2019-03-06 zlx add
         /// </summary>

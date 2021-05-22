@@ -269,7 +269,7 @@ namespace BioBaseCLIA
             string cTempIniPath = @"C:\temp\ReactTrayInfo.ini";//放在C盘temp文件夹的临时温育盘ini文件地址
             if (File.Exists(cTempIniPath))
             {
-                if (OperateIniFile.ReadConfig(cTempIniPath).Rows.Count != 80)
+                if (OperateIniFile.ReadConfig(cTempIniPath).Rows.Count != frmParent.ReactTrayNum)
                 {
                     File.Delete(cTempIniPath);
                     frmMsgShow.MessageShow(GetString("Tips"),GetString("Abnormalexit") );
