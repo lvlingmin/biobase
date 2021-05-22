@@ -9720,7 +9720,7 @@ namespace BioBaseCLIA.Run
                             conc = double.Parse(concs[6]);
                         }
                         dtScalingPMT.Rows.Add(pmt, conc, ItemName, 1, Batch);
-                        concentration = conc.ToString("#0.00");
+                        concentration = conc.ToString("#0.000");
                         result = "";
 
                         //从dtScalingPMT中查询定性的当前项目的定标液信息
@@ -9777,7 +9777,7 @@ namespace BioBaseCLIA.Run
                             conc = double.Parse(concs[1]);//默认为标准品E点浓度
                         }
                         dtScalingPMT.Rows.Add(pmt, conc, ItemName, 1, Batch);
-                        concentration = conc.ToString("#0.00");
+                        concentration = conc.ToString("#0.000");
                         result = "";
                         #endregion
                         //从dtScalingPMT中查询当前项目的校准品信息
@@ -9878,7 +9878,7 @@ namespace BioBaseCLIA.Run
                     //正则表达式 表示汉字范围;
                     Regex cn = new Regex("[\u4e00-\u9fa5]+");
                     //根据线性范围决定显示类型
-                    concentration = CalculationConcentration(ItemName, Batch, pmt).ToString("#0.00");
+                    concentration = CalculationConcentration(ItemName, Batch, pmt).ToString("#0.000");
                     //concentration = GetResultInverse(dbpars, pmt).ToString("#0.000000");//对得出的浓度进行小数点保留 lyn modify 20171118
                     LogFile.Instance.Write(DateTime.Now + "浓度：" + concentration + "");
                     #region 若用户对样本因结果不在线性范围内进行稀释
@@ -9896,7 +9896,7 @@ namespace BioBaseCLIA.Run
                         {
                             double DiuProportion = double.Parse(newDiuTimes) / DiuTimes;
                             LogFile.Instance.Write(DateTime.Now + "不固定稀释倍数：" + DiuProportion + "");
-                            concentration = (double.Parse(concentration) * DiuProportion).ToString("#0.00");
+                            concentration = (double.Parse(concentration) * DiuProportion).ToString("#0.000");
                         }
                     }
                     #endregion
@@ -9908,12 +9908,12 @@ namespace BioBaseCLIA.Run
                     }
                     else if (double.Parse(concentration) < MinValue)
                     {
-                        concentration = "<" + MinValue.ToString("#0.00");
+                        concentration = "<" + MinValue.ToString("#0.000");
                         result = "不在线性范围之内";
                     }
                     else if (double.Parse(concentration) > (MaxValue))
                     {
-                        concentration = ">" + (MaxValue).ToString("#0.00");
+                        concentration = ">" + (MaxValue).ToString("#0.000");
                         result = "不在线性范围之内";
                     }
                     else if (VRangeType != "" && int.Parse(VRangeType) > 0)
@@ -10042,22 +10042,22 @@ namespace BioBaseCLIA.Run
             {
                 if (pmt > scaling[0].DataValue)
                 {
-                    concentration = "<" + scaling[0].Data.ToString("#0.00");
+                    concentration = "<" + scaling[0].Data.ToString("#0.000");
                 }
                 else
                 {
-                    concentration = ">" + scaling[scaling.Count - 1].Data.ToString("#0.00");
+                    concentration = ">" + scaling[scaling.Count - 1].Data.ToString("#0.000");
                 }
             }
             if (calMode == 2)
             {
                 if (pmt < scaling[0].DataValue)
                 {
-                    concentration = "<" + scaling[0].Data.ToString("#0.00");
+                    concentration = "<" + scaling[0].Data.ToString("#0.000");
                 }
                 else
                 {
-                    concentration = ">" + scaling[scaling.Count - 1].Data.ToString("#0.00");
+                    concentration = ">" + scaling[scaling.Count - 1].Data.ToString("#0.000");
                 }
             }
 
