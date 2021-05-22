@@ -222,6 +222,7 @@ namespace BioBaseCLIA.SysMaintenance
             BQLiquaid = false;
             cmbSendDelay.SelectedIndex = 2;
             cmbConnDelay.SelectedIndex = 1;
+            txtMoveInHoleNum.MaxValue = ReactTrayNum;
         }
         /// <summary>
         /// 试剂位置下拉列表
