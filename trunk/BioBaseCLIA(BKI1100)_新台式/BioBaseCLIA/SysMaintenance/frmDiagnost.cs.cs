@@ -879,7 +879,9 @@ namespace BioBaseCLIA.SysMaintenance
                         fbtnWashTubeClear.Enabled = true;
                         return false;
                     }
-                    OperateIniFile.WriteIniData("TubePosition", "No1", "0", iniPathWashTrayInfo);
+                if (LogFileRtest.Instance.Bcount)
+                    LogFileRtest.Instance.Testcount++;
+                OperateIniFile.WriteIniData("TubePosition", "No1", "0", iniPathWashTrayInfo);
                     #endregion
                 }
             return true;
@@ -899,6 +901,8 @@ namespace BioBaseCLIA.SysMaintenance
                     fbtnInTubeClear.Enabled = true;
                     return false;
                 }
+                if (LogFileRtest.Instance.Bcount)
+                    LogFileRtest.Instance.Testcount++;
                 //修改反应盘信息
                 OperateIniFile.WriteIniData("ReactTrayInfo", "no" + int.Parse(dtInTrayIni.Rows[i][0].ToString().Substring(2)).ToString(), "0", iniPathReactTrayInfo);
             }
@@ -6078,6 +6082,9 @@ namespace BioBaseCLIA.SysMaintenance
             fbtnWashAgingStart.Enabled = true;
             fbtnWashAgingStop.Enabled = false;
             showLog = "";
+            LogFileRtest.Instance.Write(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "老化测试指令执行次数为：" + LogFileRtest.Instance.Testcount);
+            LogFileRtest.Instance.Bcount = false;
+            LogFileRtest.Instance.Testcount = 0;
             Invoke(new Action(() =>
             {
                 txtmoveNum.ReadOnly = false;
@@ -6230,6 +6237,8 @@ namespace BioBaseCLIA.SysMaintenance
                 #region 移管手
                 //总测试数
                 int testNum = int.Parse(txtmoveNum.Text);
+                LogFileRtest.Instance.Bcount = true;
+                LogFileRtest.Instance.Testcount = 0;
                 //夹管临时计数
                 int TubetempNum = 1;
                 //总计数
@@ -6248,6 +6257,7 @@ namespace BioBaseCLIA.SysMaintenance
                 if (rdbRackIN.Checked)
                 {
                     #region 管架与温育盘之间
+                    LogFileRtest.Instance.Write(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "移管手老化测试开始，暂存盘与温育盘之间移管测试，测试次数：" + testNum.ToString());
                     if (!reactTrayTubeClear())//2018-09-26
                     {
                         ControlIntit();
@@ -6319,6 +6329,8 @@ namespace BioBaseCLIA.SysMaintenance
                                 return;
                             }
                             //NetCom3.Instance.MoveQuery();
+                            if (LogFileRtest.Instance.Bcount)
+                                LogFileRtest.Instance.Testcount++;
                             #region 取放管成功
                             //移管手要夹的下一个管架位置
                             //CurrentTubePos = CurrentTubePos + 1 == 353 ? 1 : CurrentTubePos + 1;
@@ -6380,6 +6392,8 @@ namespace BioBaseCLIA.SysMaintenance
                             }
                             */
                             #endregion 取放管成功
+                            if (LogFileRtest.Instance.Bcount)
+                                LogFileRtest.Instance.Testcount++;
                             CurrentReactPos++;
                         }
                         //下一次循环次数
@@ -6390,6 +6404,7 @@ namespace BioBaseCLIA.SysMaintenance
                 else if (rdbRackWash.Checked)
                 {
                     #region 管架与清洗盘之间
+                    LogFileRtest.Instance.Write(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "移管手老化测试开始，暂存盘与清洗盘之间移管测试，测试次数：" + testNum.ToString());
                     if (!washTrayTubeClear())//2018-09-26
                     {
                         ControlIntit();
@@ -6459,6 +6474,8 @@ namespace BioBaseCLIA.SysMaintenance
                                 ControlIntit();
                                 return;
                             }
+                            if (LogFileRtest.Instance.Bcount)
+                                LogFileRtest.Instance.Testcount++;
                             //移管手要夹的下一个管架位置
                             //CurrentTubePos = CurrentTubePos + 1 == 353 ? 1 : CurrentTubePos + 1;
                             if (TubetempNum != singleLooPNum)
@@ -6504,6 +6521,8 @@ namespace BioBaseCLIA.SysMaintenance
                                 ControlIntit();
                                 return;
                             }
+                            if (LogFileRtest.Instance.Bcount)
+                                LogFileRtest.Instance.Testcount++;
                             /*
                             int plate = CurrentTubePos % 88 == 0 ? CurrentTubePos / 88 - 1 : CurrentTubePos / 88;//几号板
                             int column = CurrentTubePos % 11 == 0 ? CurrentTubePos / 11 - (plate * 8) : CurrentTubePos / 11 + 1 - (plate * 8);
@@ -6551,6 +6570,7 @@ namespace BioBaseCLIA.SysMaintenance
                     {
                         txtAgingInfoShow.AppendText("-----移管手老化测试开始，管架与废弃处之间移管测试，测试次数：" + testNum.ToString() + "-----" + Environment.NewLine);
                     }));
+                    LogFileRtest.Instance.Write(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "移管手老化测试开始，暂存盘与废弃处之间移管测试，测试次数：" + testNum.ToString());
                     int num = 0;
                     while (testNum > 0)
                     {
@@ -6603,6 +6623,8 @@ namespace BioBaseCLIA.SysMaintenance
                             ControlIntit();
                             return;
                         }
+                        if (LogFileRtest.Instance.Bcount)
+                            LogFileRtest.Instance.Testcount++;
                         #endregion
                         testNum--;
                         BeginInvoke(new Action(() =>
@@ -6621,6 +6643,7 @@ namespace BioBaseCLIA.SysMaintenance
                 {
                     #region 清洗盘与温育盘之间取放管测试
                     //2018-09-26
+                    LogFileRtest.Instance.Write(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "移管手老化测试开始，温育盘与清洗盘之间移管测试，测试次数：" + testNum.ToString());
                     if (!washTrayTubeClear()) { ControlIntit(); return; }
                     if (!reactTrayTubeClear()) { ControlIntit(); return; }
                     BeginInvoke(new Action(() =>
@@ -6692,6 +6715,8 @@ namespace BioBaseCLIA.SysMaintenance
                         }
                         //移管手要夹的下一个管架位置
                         //CurrentTubePos = CurrentTubePos + 1 == 353 ? 1 : CurrentTubePos + 1;
+                        if (LogFileRtest.Instance.Bcount)
+                            LogFileRtest.Instance.Testcount++;
                         if (TubetempNum != singleLooPNum)
                         {
                             //清洗盘逆时针旋转一位
@@ -6739,7 +6764,8 @@ namespace BioBaseCLIA.SysMaintenance
                                 ControlIntit();
                                 return;
                             }
-
+                            if (LogFileRtest.Instance.Bcount)
+                                LogFileRtest.Instance.Testcount++;
                             reactTray[random - 1] = 1; //lyq 191010
 
                             CurrentReactPos = CurrentReactPos + 1 == ReactTrayNum + 1 ? 1 : CurrentReactPos + 1;
@@ -6758,6 +6784,7 @@ namespace BioBaseCLIA.SysMaintenance
                                 }
                             }
                             #endregion
+                           
                             TubetempNum++;
                         }
                         CurrentReactPos = CurrentReactPos - singleLooPNum < 0 ? ReactTrayNum + (CurrentReactPos - singleLooPNum) : CurrentReactPos - singleLooPNum;
@@ -6788,7 +6815,8 @@ namespace BioBaseCLIA.SysMaintenance
                                 ControlIntit();
                                 return;
                             }
-
+                            if (LogFileRtest.Instance.Bcount)
+                                LogFileRtest.Instance.Testcount++;
                             reactTray[random - 1] = 0; //lyq 191010
 
                             CurrentReactPos = CurrentReactPos + 1 == ReactTrayNum + 1 ? 1 : CurrentReactPos + 1;
@@ -10080,7 +10108,49 @@ namespace BioBaseCLIA.SysMaintenance
             NetCom3.Instance.SingleQuery();
             fbtnInitSpReadCard.Enabled = true;
         }
+        /// <summary>
+        /// 磁珠抽液泵执行标志
+        /// </summary>
+        bool bDrainageB = false;
+        private void startDrainageB_Click(object sender, EventArgs e)
+        {
+            int num = int.Parse(numDrainageB.Value.ToString());
 
+            bDrainageB = true;
+            startDrainageB.Enabled = false;
+            endDrainageB.Enabled = true;
+            while (num > 0)
+            {
+                if (bDrainageB)
+                {
+                    NetCom3.Instance.Send(NetCom3.Cover("EB 90 11 0B 00 00"), 5);
+                    if (!NetCom3.Instance.SingleQuery() && NetCom3.Instance.errorFlag != (int)ErrorState.ReadySend)
+                    {
+                        StopDrainageB();
+                        return;
+                    }
+                    num--;
+                    BeginInvoke(new Action(() => { numDrainageB.Value = num; }));
+                }
+                else
+                {
+                    StopDrainageB();
+                    return;
+                }
+            }
+            StopDrainageB();
+        }
+
+        private void endDrainageB_Click(object sender, EventArgs e)
+        {
+            bDrainageB = false;
+        }
+        void StopDrainageB()
+        {
+            bDrainageB = false;
+            startDrainageB.Enabled = true;
+            endDrainageB.Enabled = false;
+        }
         /// <summary>
         /// 试剂盘温度超时默认查询
         /// </summary>

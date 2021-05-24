@@ -476,7 +476,7 @@
     <value>Times New Roman, 9pt</value>
   </data>
   <data name="btnVersion.Text" xml:space="preserve">
-    <value>Minimize</value>
+    <value>About</value>
   </data>
   <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
