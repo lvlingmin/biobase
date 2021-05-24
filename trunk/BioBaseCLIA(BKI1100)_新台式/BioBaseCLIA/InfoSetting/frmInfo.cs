@@ -1551,5 +1551,11 @@ namespace BioBaseCLIA.InfoSetting
                     new ResourceManager("BioBaseCLIA.InfoSetting.frmInfo", typeof(frmInfo).Assembly);
             return resManagerA.GetString(key);
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            frmMessageShow frmMsgShow = new frmMessageShow();
+            frmMsgShow.MessageShow("SVN", "166");
+        }
     }
 }
