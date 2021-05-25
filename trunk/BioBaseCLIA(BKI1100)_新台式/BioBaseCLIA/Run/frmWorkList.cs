@@ -9941,9 +9941,9 @@ namespace BioBaseCLIA.Run
                         //concentration = (MinValue + 0.001).ToString();
                         result = "不在线性范围之内";
                     }
-                    else if (double.Parse(concentration) > MaxValue * 1.2)
+                    else if (double.Parse(concentration) > MaxValue)
                     {
-                        concentration = ">" + (MaxValue * 1.2).ToString("#0.000");
+                        concentration = ">" + (MaxValue ).ToString("#0.000");
                         result = "不在线性范围之内";
                     }
                     else if (VRangeType != "" && int.Parse(VRangeType) > 0)
