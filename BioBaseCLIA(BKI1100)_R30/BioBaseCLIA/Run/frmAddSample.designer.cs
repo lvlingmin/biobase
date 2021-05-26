@@ -73,6 +73,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtSpCode1 = new BioBaseCLIA.CustomControl.userTextBoxBase();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.chbSampleNoScan = new System.Windows.Forms.CheckBox();
             this.txtScanEndNo = new BioBaseCLIA.CustomControl.userNumTextBox();
             this.txtScanStartNo = new BioBaseCLIA.CustomControl.userNumTextBox();
             this.AutoUploadAndUnload1 = new System.Windows.Forms.CheckBox();
@@ -512,6 +513,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.chbSampleNoScan);
             this.groupBox5.Controls.Add(this.txtScanEndNo);
             this.groupBox5.Controls.Add(this.txtScanStartNo);
             this.groupBox5.Controls.Add(this.AutoUploadAndUnload1);
@@ -537,6 +539,15 @@
             resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
+            // 
+            // chbSampleNoScan
+            // 
+            resources.ApplyResources(this.chbSampleNoScan, "chbSampleNoScan");
+            this.chbSampleNoScan.Checked = true;
+            this.chbSampleNoScan.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chbSampleNoScan.Name = "chbSampleNoScan";
+            this.chbSampleNoScan.UseVisualStyleBackColor = true;
+            this.chbSampleNoScan.CheckedChanged += new System.EventHandler(this.chbSampleNoScan_CheckedChanged);
             // 
             // txtScanEndNo
             // 
@@ -1036,7 +1047,6 @@
         private System.Windows.Forms.ComboBox cmbMorePipeType;
         private CustomControl.FunctionButton btnMoreDelete;
         private CustomControl.FunctionButton btnUnloadSP;
-        private System.Windows.Forms.CheckBox chkScanSampleCode;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label lblBatch;
@@ -1079,5 +1089,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn GroupContent;
         private CustomControl.userNumTextBox txtScanEndNo;
         private CustomControl.userNumTextBox txtScanStartNo;
+        private System.Windows.Forms.CheckBox chbSampleNoScan;
+        private System.Windows.Forms.CheckBox chkScanSampleCode;
     }
 }

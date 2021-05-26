@@ -1516,6 +1516,36 @@
   <data name="&gt;&gt;groupBox6.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="chbSampleNoScan.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chbSampleNoScan.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chbSampleNoScan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 16</value>
+  </data>
+  <data name="chbSampleNoScan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 16</value>
+  </data>
+  <data name="chbSampleNoScan.TabIndex" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="chbSampleNoScan.Text" xml:space="preserve">
+    <value>样本编号扫描</value>
+  </data>
+  <data name="&gt;&gt;chbSampleNoScan.Name" xml:space="preserve">
+    <value>chbSampleNoScan</value>
+  </data>
+  <data name="&gt;&gt;chbSampleNoScan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chbSampleNoScan.Parent" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;chbSampleNoScan.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="txtScanEndNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>146, 60</value>
   </data>
@@ -1541,7 +1571,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;txtScanEndNo.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="txtScanStartNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>82, 60</value>
@@ -1568,7 +1598,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;txtScanStartNo.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="AutoUploadAndUnload1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1598,7 +1628,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;AutoUploadAndUnload1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="cmbBatch.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1628,7 +1658,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;cmbBatch.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="lblBatch.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1658,7 +1688,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;lblBatch.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="chkScanSampleCode.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1691,7 +1721,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;chkScanSampleCode.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="label13.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1724,7 +1754,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="label14.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1757,7 +1787,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="txtSpPosition.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1781,7 +1811,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;txtSpPosition.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="chkEmergency.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1814,7 +1844,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;chkEmergency.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1844,7 +1874,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="txtSpBarCode.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1868,7 +1898,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;txtSpBarCode.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="btnDelete.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1965,7 +1995,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1995,7 +2025,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="btnModify.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2092,7 +2122,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;btnModify.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2122,7 +2152,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="btnAdd.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2219,7 +2249,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;btnAdd.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2249,7 +2279,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="cmbPipeType.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2279,7 +2309,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;cmbPipeType.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2309,7 +2339,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="cmbSpType.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2384,7 +2414,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;cmbSpType.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>21</value>
   </data>
   <data name="txtSpRepetitions.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2411,7 +2441,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;txtSpRepetitions.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>22</value>
   </data>
   <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 13</value>
