@@ -527,6 +527,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InfoSetting\frmInstrumentPara.resx">
       <DependentUpon>frmInstrumentPara.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoSetting\frmNetSet.en.resx">
       <DependentUpon>frmNetSet.cs</DependentUpon>
@@ -669,6 +670,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SysMaintenance\frmInstruMaintenance.resx">
       <DependentUpon>frmInstruMaintenance.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SysMaintenance\frmReconfirm.resx">
       <DependentUpon>frmReconfirm.cs</DependentUpon>
