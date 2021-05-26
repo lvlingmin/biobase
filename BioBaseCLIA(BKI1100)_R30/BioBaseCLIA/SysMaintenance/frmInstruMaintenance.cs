@@ -457,7 +457,7 @@ namespace BioBaseCLIA.SysMaintenance
                     currentHoleNum = currentHoleNum - 1;
                     if (currentHoleNum <= 0)
                     {
-                        currentHoleNum = currentHoleNum + 30;
+                        currentHoleNum = currentHoleNum + WashTrayNum;
                     }
                     OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
                     dtWashTrayIni = OperateIniFile.ReadConfig(iniPathWashTrayInfo);
@@ -566,7 +566,7 @@ namespace BioBaseCLIA.SysMaintenance
             
             if (currentHoleNum <= 0)
             {
-                currentHoleNum = 30 + currentHoleNum;
+                currentHoleNum = WashTrayNum + currentHoleNum;
             }
 
             OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
@@ -596,7 +596,7 @@ namespace BioBaseCLIA.SysMaintenance
             currentHoleNum = currentHoleNum - (pos1 - pos2);
             if (currentHoleNum <= 0)
             {
-                currentHoleNum = 30 + currentHoleNum;
+                currentHoleNum = WashTrayNum + currentHoleNum;
             }
             OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());               
             
@@ -626,7 +626,7 @@ namespace BioBaseCLIA.SysMaintenance
             currentHoleNum = currentHoleNum - (pos2 - pos3);
             if (currentHoleNum <= 0)
             {
-                currentHoleNum = 30 + currentHoleNum;
+                currentHoleNum = WashTrayNum + currentHoleNum;
             }
             OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());                      
             NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 06 "), 1);
@@ -653,9 +653,9 @@ namespace BioBaseCLIA.SysMaintenance
                 return;
             }
             currentHoleNum = currentHoleNum - pos3 + 1;
-            if (currentHoleNum > 30)
+            if (currentHoleNum > WashTrayNum)
             {
-                currentHoleNum = currentHoleNum - 30;
+                currentHoleNum = currentHoleNum - WashTrayNum;
             }
             OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
             #endregion
@@ -682,9 +682,9 @@ namespace BioBaseCLIA.SysMaintenance
                 }
 
                 currentHoleNum = currentHoleNum + 1;
-                if (currentHoleNum > 30)
+                if (currentHoleNum > WashTrayNum)
                 {
-                    currentHoleNum = currentHoleNum - 30;
+                    currentHoleNum = currentHoleNum - WashTrayNum;
                 }
                 OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
                 
@@ -711,7 +711,7 @@ namespace BioBaseCLIA.SysMaintenance
                 currentHoleNum = currentHoleNum - 1;
                 if (currentHoleNum <= 0)
                 {
-                    currentHoleNum = currentHoleNum + 30;
+                    currentHoleNum = currentHoleNum + WashTrayNum;
                 }
                 OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
                 #endregion
@@ -728,9 +728,9 @@ namespace BioBaseCLIA.SysMaintenance
                 return;
             }
             currentHoleNum = currentHoleNum + 13;
-            if (currentHoleNum > 30)
+            if (currentHoleNum > WashTrayNum)
             {
-                currentHoleNum = currentHoleNum - 30;
+                currentHoleNum = currentHoleNum - WashTrayNum;
             }
             OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
             NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 04 06"), 1);
@@ -753,9 +753,9 @@ namespace BioBaseCLIA.SysMaintenance
             }
 
             currentHoleNum = currentHoleNum - 4;
-            if (currentHoleNum > 30)
+            if (currentHoleNum > WashTrayNum)
             {
-                currentHoleNum = currentHoleNum - 30;
+                currentHoleNum = currentHoleNum - WashTrayNum;
             }
             OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
             NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 04 06"), 1);
@@ -777,9 +777,9 @@ namespace BioBaseCLIA.SysMaintenance
                 return;
             }
             currentHoleNum = currentHoleNum - 4;
-            if (currentHoleNum > 30)
+            if (currentHoleNum > WashTrayNum)
             {
-                currentHoleNum = currentHoleNum - 30;
+                currentHoleNum = currentHoleNum - WashTrayNum;
             }
             OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
             NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 04 06"), 1);
@@ -828,9 +828,9 @@ namespace BioBaseCLIA.SysMaintenance
                 return;
             }
             currentHoleNum = currentHoleNum + (pos1 - 1);
-            if (currentHoleNum > 30)
+            if (currentHoleNum > WashTrayNum)
             {
-                currentHoleNum = currentHoleNum - 30;
+                currentHoleNum = currentHoleNum - WashTrayNum;
             }
             OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());            
         //夹新管到清洗盘
@@ -858,9 +858,9 @@ namespace BioBaseCLIA.SysMaintenance
 
             currentHoleNum = currentHoleNum - pos1 + 1;
             //若当前管号等于0，说明转过来的孔号为30
-            if (currentHoleNum > 30)
+            if (currentHoleNum > WashTrayNum)
             {
-                currentHoleNum = currentHoleNum - 30;
+                currentHoleNum = currentHoleNum - WashTrayNum;
             }
             OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
             #endregion
@@ -900,9 +900,9 @@ namespace BioBaseCLIA.SysMaintenance
                 }
                 currentHoleNum = currentHoleNum + 2;
                 //若当前管号等于0，说明转过来的孔号为30
-                if (currentHoleNum > 30)
+                if (currentHoleNum > WashTrayNum)
                 {
-                    currentHoleNum = currentHoleNum - 30;
+                    currentHoleNum = currentHoleNum - WashTrayNum;
                 }
                 OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
                 #region 吸液
@@ -928,7 +928,7 @@ namespace BioBaseCLIA.SysMaintenance
                 //若当前管号等于0，说明转过来的孔号为30
                 if (currentHoleNum <= 0)
                 {
-                    currentHoleNum = currentHoleNum + 30;
+                    currentHoleNum = currentHoleNum + WashTrayNum;
                 }
                 OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
                 #endregion
@@ -946,9 +946,9 @@ namespace BioBaseCLIA.SysMaintenance
 
             currentHoleNum = currentHoleNum + 18;
             //若当前管号等于0，说明转过来的孔号为30
-            if (currentHoleNum > 30)
+            if (currentHoleNum > WashTrayNum)
             {
-                currentHoleNum = currentHoleNum - 30;
+                currentHoleNum = currentHoleNum - WashTrayNum;
             }
             OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
             NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 04 06"), 1);
@@ -1029,9 +1029,9 @@ namespace BioBaseCLIA.SysMaintenance
             }
             currentHoleNum = currentHoleNum + (pos1 - 1);
             //若当前管号等于0，说明转过来的孔号为30
-            if (currentHoleNum > 30)
+            if (currentHoleNum > WashTrayNum)
             {
-                currentHoleNum = currentHoleNum - 30;
+                currentHoleNum = currentHoleNum - WashTrayNum;
             }
             OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());           
         //夹新管到清洗盘
@@ -1059,9 +1059,9 @@ namespace BioBaseCLIA.SysMaintenance
 
             currentHoleNum = currentHoleNum - pos1 + 1;
             //若当前管号等于0，说明转过来的孔号为30
-            if (currentHoleNum > 30)
+            if (currentHoleNum > WashTrayNum)
             {
-                currentHoleNum = currentHoleNum - 30;
+                currentHoleNum = currentHoleNum - WashTrayNum;
             }
             OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
             #endregion
@@ -1104,9 +1104,9 @@ namespace BioBaseCLIA.SysMaintenance
             }
             currentHoleNum = currentHoleNum + 6;
             //若当前管号等于0，说明转过来的孔号为30
-            if (currentHoleNum > 30)
+            if (currentHoleNum > WashTrayNum)
             {
-                currentHoleNum = currentHoleNum - 30;
+                currentHoleNum = currentHoleNum - WashTrayNum;
             }
             OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
             //发送单独的读数指令
@@ -1136,9 +1136,9 @@ namespace BioBaseCLIA.SysMaintenance
 
             currentHoleNum = currentHoleNum + 6;
             //若当前管号等于0，说明转过来的孔号为30
-            if (currentHoleNum > 30)
+            if (currentHoleNum > WashTrayNum)
             {
-                currentHoleNum = currentHoleNum - 30;
+                currentHoleNum = currentHoleNum - WashTrayNum;
             }
             OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
             NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 04 06"), 1);
@@ -1357,7 +1357,7 @@ namespace BioBaseCLIA.SysMaintenance
             //BeginInvoke(new Action(() => { textBox1.Text = ""; }));
             #region 清空清洗盘
             TExtAppend(GetString("Clearclean"));
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < WashTrayNum; i++)
             {
                 if (isNewWashEnd()) return;  //lyq add 20190822
                 if (!bLoopRun) return;
@@ -1374,7 +1374,7 @@ namespace BioBaseCLIA.SysMaintenance
                 //逆时针计数。  Jun 2019/1/22
                 if (tubeHoleNum <= 0)
                 {
-                    tubeHoleNum = tubeHoleNum + 30;
+                    tubeHoleNum = tubeHoleNum + WashTrayNum;
                 }
                 tubeHoleNum = tubeHoleNum - 1;
                 if (!NetCom3.Instance.WashQuery())
@@ -1600,7 +1600,7 @@ namespace BioBaseCLIA.SysMaintenance
             {
                 TExtAppend(GetString("Startclean"));
                 tubeHoleNum = starhole;
-                for (int i = 0; i < 30; i++)
+                for (int i = 0; i < WashTrayNum; i++)
                 {
                     if (isNewWashEnd()) return;  //lyq add 20190822
                     NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 04 06"), 1);
@@ -1616,7 +1616,7 @@ namespace BioBaseCLIA.SysMaintenance
                     //逆时针计数。  Jun 2019/1/22
                     if (tubeHoleNum <= 0)
                     {
-                        tubeHoleNum = tubeHoleNum + 30;
+                        tubeHoleNum = tubeHoleNum + WashTrayNum;
                     }
                     tubeHoleNum = tubeHoleNum - 1;
                     if (!NetCom3.Instance.WashQuery())
@@ -1644,7 +1644,7 @@ namespace BioBaseCLIA.SysMaintenance
             int temptubenum = tubeNum;
             int tempread = 1;
             int tubecount = 1;
-            for (int i = 0; i < 30 + tubeNum; i++)
+            for (int i = 0; i < WashTrayNum + tubeNum; i++)
             {
                 if (isNewWashEnd()) return;
                 if (temptubenum > 0)//夹新管
@@ -1769,9 +1769,9 @@ namespace BioBaseCLIA.SysMaintenance
             }
             currentHoleNum = currentHoleNum + (pos1 - 1);
             //若当前管号等于0，说明转过来的孔号为30
-            if (currentHoleNum > 30)
+            if (currentHoleNum > WashTrayNum)
             {
-                currentHoleNum = currentHoleNum - 30;
+                currentHoleNum = currentHoleNum - WashTrayNum;
             }
             OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
             //OperateIniFile.WriteIniData("TubePosition", "No19", "1", iniPathWashTrayInfo);
@@ -1813,9 +1813,9 @@ namespace BioBaseCLIA.SysMaintenance
             }
             currentHoleNum = currentHoleNum - pos1 + 1;
             //若当前管号等于0，说明转过来的孔号为30
-            if (currentHoleNum > 30)
+            if (currentHoleNum > WashTrayNum)
             {
-                currentHoleNum = currentHoleNum - 30;
+                currentHoleNum = currentHoleNum - WashTrayNum;
             }
             OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
             #endregion
@@ -1855,9 +1855,9 @@ namespace BioBaseCLIA.SysMaintenance
                 }
                 currentHoleNum = currentHoleNum + 2;
                 //若当前管号等于0，说明转过来的孔号为30
-                if (currentHoleNum > 30)
+                if (currentHoleNum > WashTrayNum)
                 {
-                    currentHoleNum = currentHoleNum - 30;
+                    currentHoleNum = currentHoleNum - WashTrayNum;
                 }
                 OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
                 #region 吸液
@@ -1880,7 +1880,7 @@ namespace BioBaseCLIA.SysMaintenance
                 //若当前管号等于0，说明转过来的孔号为30
                 if (currentHoleNum <= 0)
                 {
-                    currentHoleNum = currentHoleNum + 30;
+                    currentHoleNum = currentHoleNum + WashTrayNum;
                 }
                 OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
                 #endregion
@@ -1899,9 +1899,9 @@ namespace BioBaseCLIA.SysMaintenance
 
             currentHoleNum = currentHoleNum + 18;
             //若当前管号等于0，说明转过来的孔号为30
-            if (currentHoleNum > 30)
+            if (currentHoleNum > WashTrayNum)
             {
-                currentHoleNum = currentHoleNum - 30;
+                currentHoleNum = currentHoleNum - WashTrayNum;
             }
             OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
             NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 04 06"), 1);
@@ -2032,7 +2032,7 @@ namespace BioBaseCLIA.SysMaintenance
             public CleanTray()
             {
                 pointer = new List<LinkedListNode<int[]>>(11);
-                for (int i = 0; i < 30; i++)
+                for (int i = 0; i < WashTrayNum; i++)
                 {
                     int[] temp = new int[2] { i + 1, 0 };
                     LinkedListNode<int[]> tempnode = new LinkedListNode<int[]>(temp);
@@ -2158,13 +2158,13 @@ namespace BioBaseCLIA.SysMaintenance
             }
             countWashHole(pace);
             currentHoleNum = currentHoleNum - 1;
-            if (currentHoleNum > 30)
+            if (currentHoleNum > WashTrayNum)
             {
-                currentHoleNum = currentHoleNum - 30;
+                currentHoleNum = currentHoleNum - WashTrayNum;
             }
             if (currentHoleNum <= 0)
             {
-                currentHoleNum = currentHoleNum + 30;
+                currentHoleNum = currentHoleNum + WashTrayNum;
             }
             OperateIniFile.WriteIniPara("OtherPara", "washCurrentHoleNum", currentHoleNum.ToString());
             dtWashTrayIni = OperateIniFile.ReadConfig(iniPathWashTrayInfo);
@@ -2545,7 +2545,7 @@ namespace BioBaseCLIA.SysMaintenance
                 SetCultureInfo();
                 string s=GetString("Emptycleaning");
                 TExtAppend(GetString("Emptycleaning"));
-                for (int i = 0; i < 30; i++)
+                for (int i = 0; i < WashTrayNum; i++)
                 {
                     if (isNewWashEnd()) return;  //lyq add 20190822
                     if (!bLoopRun) return;
@@ -2562,7 +2562,7 @@ namespace BioBaseCLIA.SysMaintenance
                     //逆时针计数。  Jun 2019/1/22
                     if (tubeHoleNum <= 0)
                     {
-                        tubeHoleNum = tubeHoleNum + 30;
+                        tubeHoleNum = tubeHoleNum + WashTrayNum;
                     }
                     tubeHoleNum = tubeHoleNum - 1;
                     if (!NetCom3.Instance.WashQuery())

@@ -356,7 +356,7 @@ namespace BioBaseCLIA.Run
                     srdReagent.Enabled = false;
                     #region 旋转到读卡器位置
                     int hole = Convert.ToInt32(addUseHole, 16);
-                    hole = hole - 15 > 0 ? (hole - 15) : (30 + hole - 15);
+                    hole = hole - 15 > 0 ? (hole - 15) : (RegentNum + hole - 15);
                     string HoleNum = hole.ToString("x2");
 
                     RotSendAgain:
@@ -678,10 +678,11 @@ namespace BioBaseCLIA.Run
             if (srdReagent.rgSelectedNo >= -1)
             {
                 if (srdReagent.rgSelectedNo == -1)
-                    RgSelectedNo = 29;
+                    RgSelectedNo = frmParent.RegentNum-1;
                 else
                     RgSelectedNo = srdReagent.rgSelectedNo;
                 string sc = srdReagent.RgColor[GetSelectedNo].Name;
+                btnAddD.Text = "绑定稀释液";
                 if (srdReagent.RgColor[GetSelectedNo].Name == "Yellow")
                 {
                     srdReagent.RgColor[GetSelectedNo] = Color.White;
@@ -714,6 +715,7 @@ namespace BioBaseCLIA.Run
                         {
                             srdReagent.RgColor[RgSelectedNo] = Color.Purple;
                             srdReagent.BdColor[RgSelectedNo] = Color.Purple;
+                            btnAddD.Text = "一键解绑";
                         }
                         else
                         {
@@ -1344,7 +1346,18 @@ namespace BioBaseCLIA.Run
             if (DiuFlag == "1")
             {
                 frmMessageShow frmMessage = new frmMessageShow();
-                frmMessage.MessageShow("绑定稀释液", "请选择试剂项目来绑定稀释液！");
+                DialogResult result = frmMessage.MessageShow("稀释液解绑", "是否确认将稀释液与试剂进行解绑？");
+                if (result == DialogResult.OK)
+                {
+                    foreach (DataRow dr in dtRgInfo.Rows)
+                    {
+                        string DiuPos = OperateIniFile.ReadIniData("ReagentPos" + dr["Postion"].ToString(), "DiuPos", "", iniPathReagentTrayInfo);
+                        if (DiuPos == txtRgPosition.Text)
+                        {
+                            OperateIniFile.WriteIniData("ReagentPos" + dr["Postion"].ToString(), "DiuPos", "", iniPathReagentTrayInfo);
+                        }
+                    }
+                }
                 return;
             }
             
@@ -1803,7 +1816,7 @@ namespace BioBaseCLIA.Run
             batchCA = asciiencoding.GetString(tempByte);
             if (btnLoopAddR.Enabled == true)
             {
-                for (int i = 1; i <= 30; i++)
+                for (int i = 1; i <= RegentNum; i++)
                 {
                     string BarCode = OperateIniFile.ReadIniData("ReagentPos" + i.ToString(), "BarCode", "", iniPathReagentTrayInfo);
                     //string ItemName = OperateIniFile.ReadIniData("ReagentPos" + i.ToString(), "ItemName", "", iniPathReagentTrayInfo);
@@ -2875,7 +2888,7 @@ namespace BioBaseCLIA.Run
                 }));
 
                 int hole = i;
-                hole = hole - 15 > 0 ? (hole - 15) : (30 + hole - 15);
+                hole = hole - 15 > 0 ? (hole - 15) : (RegentNum + hole - 15);
                 string HoleNum = hole.ToString("x2");
 
                 RotSendAgain:
@@ -2917,7 +2930,7 @@ namespace BioBaseCLIA.Run
                     }
                     if (addRFlag == (int)addRFlagState.fail && addREmpty != (int)addRFlagState.empty)
                         goto errorEnd;
-                    if (i == 30)
+                    if (i == RegentNum)
                     {
                         spBreak = "";
                     }
@@ -3407,7 +3420,7 @@ namespace BioBaseCLIA.Run
                 dgvRgInfoList.SelectionChanged += new System.EventHandler(this.dgvRgInfoList_SelectionChanged);
                 loopSpFailResult.Remove(i);
                 loopSpSuccessResult.Add(i);
-                if(i == 30)
+                if(i == RegentNum)
                 {
                     spBreak = "";
                 }
