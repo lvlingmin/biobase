@@ -906,6 +906,12 @@ namespace BioBaseCLIA.Run
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtSpBarCode.Text.Trim()) || !IsNumber(txtSpBarCode.Text.Trim())) 
+            {
+                frmMsg.MessageShow("温馨提示", "请确认样本编号为数字字符!");
+                return;
+            }
+
             btnDelete.Enabled = false;
             DbHelperOleDb db = new DbHelperOleDb(1);
             //还未添加到样本信息显示列表内，可建立一个datatable用于存储。
@@ -1793,6 +1799,16 @@ namespace BioBaseCLIA.Run
             //}
         }
         /// <summary>
+        /// 判断字符串是否是数字
+        /// </summary>
+        public static bool IsNumber(string s)
+        {
+            if (string.IsNullOrWhiteSpace(s)) return false;
+            const string pattern = "^[0-9]*$";
+            Regex rx = new Regex(pattern);
+            return rx.IsMatch(s);
+        }
+        /// <summary>
         /// 底物与管架配置文件地址
         /// </summary>
         string iniPathSubstrateTube = Directory.GetCurrentDirectory() + "\\SubstrateTube.ini";
@@ -1994,7 +2010,6 @@ namespace BioBaseCLIA.Run
             {
                 dtodgvEvent();
             }
-            barCodeHook.BarCodeEvent -= new BarCodeHook.BarCodeDelegate(BarCodeEventHandler);
             barCodeHook.Stop();
         }
 
