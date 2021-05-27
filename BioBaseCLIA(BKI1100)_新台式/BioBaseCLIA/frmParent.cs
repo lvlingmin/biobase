@@ -65,15 +65,15 @@ namespace BioBaseCLIA
         /// <summary>
         /// 试剂加载位置数
         /// </summary>
-        protected const int RegentNum = 20;//2019-02-26  zlx add
+        public const int RegentNum = 20;//2019-02-26  zlx add
         /// <summary>
         /// 温育盘位置数
         /// </summary>
-        protected const int ReactTrayNum = 50;//2019-02-26  zlx add
+        public const int ReactTrayNum = 50;//2019-02-26  zlx add
         /// <summary>
         /// 清洗盘位置数
         /// </summary>
-        protected const int WashTrayNum = 30;//2019-02-26 zlx add
+        public const int WashTrayNum = 30;//2019-02-26 zlx add
         /// <summary>
         /// 实验过程中正在加载试剂标志 2019-03-06 zlx add
         /// </summary>
@@ -173,13 +173,13 @@ namespace BioBaseCLIA
             {
                 washCountNum = washCountNum - pace;
                 if (washCountNum <= 0)
-                    washCountNum = washCountNum + 30;
+                    washCountNum = washCountNum + WashTrayNum;
             }
             else if (pace < 0)
             {
                 washCountNum = washCountNum - pace;
-                if (washCountNum > 30)
-                    washCountNum = washCountNum - 30;
+                if (washCountNum > WashTrayNum)
+                    washCountNum = washCountNum - WashTrayNum;
             }
             LogFile.Instance.Write("==================  当前位置  " + washCountNum);
         }
