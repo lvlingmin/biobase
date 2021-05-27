@@ -1552,10 +1552,11 @@ namespace BioBaseCLIA.InfoSetting
             return resManagerA.GetString(key);
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+
+        private void panel1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             frmMessageShow frmMsgShow = new frmMessageShow();
-            frmMsgShow.MessageShow("SVN", "166");
+            frmMsgShow.MessageShow("SVN", "172");
         }
     }
 }
