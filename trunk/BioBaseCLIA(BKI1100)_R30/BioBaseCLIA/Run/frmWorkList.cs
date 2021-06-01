@@ -11378,7 +11378,7 @@ namespace BioBaseCLIA.Run
                 MessageBox.Show("当前供应品缺乏，请保证供应品充足后在进行实验操作！", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            fbtnAddE.Enabled = false;
+
             //while (AddingSampleFlag)
             //{
             //    NetCom3.Delay(10);//如果正在加样步骤，暂时先不会弹出样本装载界面
@@ -11390,6 +11390,7 @@ namespace BioBaseCLIA.Run
                 return;
             }
             #endregion
+            fbtnAddE.Enabled = false;
             EmergencyFlag = true;//2018-10-15 
             frmSampleLoad.DtItemInfoNoStat = GetNoAddLiquid().Copy();
             if (!CheckFormIsOpen("frmSampleLoad"))
@@ -11425,12 +11426,14 @@ namespace BioBaseCLIA.Run
                 MessageBox.Show("当前供应品缺乏，请保证供应品充足后在进行实验操作！", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            fbtnAddS.Enabled = false;
-            while (AddingSampleFlag)
+            
+            if (AddingSampleFlag)
             {
-                NetCom3.Delay(10);//如果正在加样步骤，暂时先不会弹出样本装载界面
+                MessageBox.Show("正在进行加样操作，请在当前样本加样后进行样本追加！", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             #endregion
+            fbtnAddS.Enabled = false;
             addOrdinaryFlag = true;//2018-10-18 zlx mod
             frmSampleLoad.DtItemInfoNoStat = GetNoAddLiquid().Copy();
             if (!CheckFormIsOpen("frmSampleLoad"))
