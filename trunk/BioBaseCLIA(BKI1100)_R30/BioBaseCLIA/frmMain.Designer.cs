@@ -32,24 +32,26 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.pnlPublic = new System.Windows.Forms.Panel();
             this.pnlSidebar = new System.Windows.Forms.Panel();
+            this.timerStatus = new System.Windows.Forms.Timer(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.pnlbarDown = new System.Windows.Forms.Panel();
+            this.btnVersion = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnHelp = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.pnlbarUP = new System.Windows.Forms.Panel();
+            this.logo = new System.Windows.Forms.PictureBox();
+            this.timeWarnSound = new System.Windows.Forms.Timer(this.components);
+            this.timerConnect = new System.Windows.Forms.Timer(this.components);
             this.fbtnScalQc = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnSet = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnDataQuery = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnMaintenance = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnTest = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.timerStatus = new System.Windows.Forms.Timer(this.components);
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.temperatureButton = new BioBaseCLIA.CustomControl.defineButton(this.components);
-            this.pnlbarDown = new System.Windows.Forms.Panel();
             this.dbtnSound = new BioBaseCLIA.CustomControl.defineButton(this.components);
-            this.btnVersion = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.dbtnConnect = new BioBaseCLIA.CustomControl.defineButton(this.components);
-            this.btnHelp = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.pnlbarUP = new System.Windows.Forms.Panel();
             this.btnWasteRack = new BioBaseCLIA.CustomControl.defineButton(this.components);
-            this.logo = new System.Windows.Forms.PictureBox();
+            this.temperatureButton = new BioBaseCLIA.CustomControl.defineButton(this.components);
             this.defineButton1 = new BioBaseCLIA.CustomControl.defineButton(this.components);
             this.defineButton3 = new BioBaseCLIA.CustomControl.defineButton(this.components);
             this.defineButton2 = new BioBaseCLIA.CustomControl.defineButton(this.components);
@@ -60,8 +62,6 @@
             this.dbtnWaste = new BioBaseCLIA.CustomControl.defineButton(this.components);
             this.dbtnWash = new BioBaseCLIA.CustomControl.defineButton(this.components);
             this.dbtnBuffer = new BioBaseCLIA.CustomControl.defineButton(this.components);
-            this.timeWarnSound = new System.Windows.Forms.Timer(this.components);
-            this.timerConnect = new System.Windows.Forms.Timer(this.components);
             this.pnlPublic.SuspendLayout();
             this.pnlSidebar.SuspendLayout();
             this.pnlbarDown.SuspendLayout();
@@ -85,6 +85,111 @@
             this.pnlSidebar.Controls.Add(this.fbtnTest);
             resources.ApplyResources(this.pnlSidebar, "pnlSidebar");
             this.pnlSidebar.Name = "pnlSidebar";
+            // 
+            // timerStatus
+            // 
+            this.timerStatus.Interval = 20000;
+            this.timerStatus.Tick += new System.EventHandler(this.timerStatus_Tick);
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
+            // 
+            // pnlbarDown
+            // 
+            this.pnlbarDown.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.pnlbarDown, "pnlbarDown");
+            this.pnlbarDown.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlbarDown.Controls.Add(this.dbtnSound);
+            this.pnlbarDown.Controls.Add(this.btnVersion);
+            this.pnlbarDown.Controls.Add(this.label2);
+            this.pnlbarDown.Controls.Add(this.dbtnConnect);
+            this.pnlbarDown.Controls.Add(this.btnHelp);
+            this.pnlbarDown.Controls.Add(this.btnExit);
+            this.pnlbarDown.Name = "pnlbarDown";
+            // 
+            // btnVersion
+            // 
+            this.btnVersion.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.btnVersion, "btnVersion");
+            this.btnVersion.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnVersion.FlatAppearance.BorderSize = 0;
+            this.btnVersion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnVersion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnVersion.Name = "btnVersion";
+            this.btnVersion.UseVisualStyleBackColor = false;
+            this.btnVersion.Click += new System.EventHandler(this.btnVersion_Click);
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.btnHelp, "btnHelp");
+            this.btnHelp.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnHelp.FlatAppearance.BorderSize = 0;
+            this.btnHelp.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnHelp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.UseVisualStyleBackColor = false;
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
+            this.btnHelp.MouseEnter += new System.EventHandler(this.dbtnBuffer_MouseEnter);
+            this.btnHelp.MouseLeave += new System.EventHandler(this.dbtnBuffer_MouseLeave);
+            // 
+            // btnExit
+            // 
+            this.btnExit.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.btnExit, "btnExit");
+            this.btnExit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnExit.Name = "btnExit";
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.button11_Click);
+            this.btnExit.MouseEnter += new System.EventHandler(this.dbtnBuffer_MouseEnter);
+            this.btnExit.MouseLeave += new System.EventHandler(this.dbtnBuffer_MouseLeave);
+            // 
+            // pnlbarUP
+            // 
+            this.pnlbarUP.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.pnlbarUP, "pnlbarUP");
+            this.pnlbarUP.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlbarUP.Controls.Add(this.btnWasteRack);
+            this.pnlbarUP.Controls.Add(this.logo);
+            this.pnlbarUP.Controls.Add(this.temperatureButton);
+            this.pnlbarUP.Controls.Add(this.defineButton1);
+            this.pnlbarUP.Controls.Add(this.defineButton3);
+            this.pnlbarUP.Controls.Add(this.defineButton2);
+            this.pnlbarUP.Controls.Add(this.dbtnLog);
+            this.pnlbarUP.Controls.Add(this.dbtnRack);
+            this.pnlbarUP.Controls.Add(this.dbtnRegent);
+            this.pnlbarUP.Controls.Add(this.dbtnSubstract);
+            this.pnlbarUP.Controls.Add(this.dbtnWaste);
+            this.pnlbarUP.Controls.Add(this.dbtnWash);
+            this.pnlbarUP.Controls.Add(this.dbtnBuffer);
+            this.pnlbarUP.Name = "pnlbarUP";
+            this.pnlbarUP.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlbarUP_Paint);
+            // 
+            // logo
+            // 
+            this.logo.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.logo, "logo");
+            this.logo.Name = "logo";
+            this.logo.TabStop = false;
+            // 
+            // timeWarnSound
+            // 
+            this.timeWarnSound.Interval = 1000;
+            this.timeWarnSound.Tick += new System.EventHandler(this.timeWarnSound_Tick);
+            // 
+            // timerConnect
+            // 
+            this.timerConnect.Interval = 3000;
+            this.timerConnect.Tick += new System.EventHandler(this.timerConnect_Tick);
             // 
             // fbtnScalQc
             // 
@@ -151,48 +256,8 @@
             this.fbtnTest.UseVisualStyleBackColor = false;
             this.fbtnTest.Click += new System.EventHandler(this.fbtnTest_Click);
             // 
-            // timerStatus
-            // 
-            this.timerStatus.Interval = 20000;
-            this.timerStatus.Tick += new System.EventHandler(this.timerStatus_Tick);
-            // 
-            // toolTip1
-            // 
-            this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
-            // 
-            // temperatureButton
-            // 
-            resources.ApplyResources(this.temperatureButton, "temperatureButton");
-            this.temperatureButton.BackColor = System.Drawing.Color.Transparent;
-            this.temperatureButton.BackgroundImage = global::BioBaseCLIA.Properties.Resources.temperature_1;
-            this.temperatureButton.FlatAppearance.BorderSize = 0;
-            this.temperatureButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
-            this.temperatureButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
-            this.temperatureButton.ForeColor = System.Drawing.Color.Transparent;
-            this.temperatureButton.Name = "temperatureButton";
-            this.toolTip1.SetToolTip(this.temperatureButton, resources.GetString("temperatureButton.ToolTip"));
-            this.temperatureButton.UseVisualStyleBackColor = false;
-            this.temperatureButton.Click += new System.EventHandler(this.temperatureButton_Click);
-            this.temperatureButton.MouseEnter += new System.EventHandler(this.dbtnBuffer_MouseEnter);
-            this.temperatureButton.MouseLeave += new System.EventHandler(this.dbtnBuffer_MouseLeave);
-            // 
-            // pnlbarDown
-            // 
-            this.pnlbarDown.BackColor = System.Drawing.Color.Transparent;
-            this.pnlbarDown.BackgroundImage = global::BioBaseCLIA.Properties.Resources.其他界面按钮22;
-            resources.ApplyResources(this.pnlbarDown, "pnlbarDown");
-            this.pnlbarDown.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlbarDown.Controls.Add(this.dbtnSound);
-            this.pnlbarDown.Controls.Add(this.btnVersion);
-            this.pnlbarDown.Controls.Add(this.label2);
-            this.pnlbarDown.Controls.Add(this.dbtnConnect);
-            this.pnlbarDown.Controls.Add(this.btnHelp);
-            this.pnlbarDown.Controls.Add(this.btnExit);
-            this.pnlbarDown.Name = "pnlbarDown";
-            // 
             // dbtnSound
             // 
-            this.dbtnSound.BackgroundImage = global::BioBaseCLIA.Properties.Resources.声音启用;
             resources.ApplyResources(this.dbtnSound, "dbtnSound");
             this.dbtnSound.FlatAppearance.BorderSize = 0;
             this.dbtnSound.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -201,27 +266,8 @@
             this.dbtnSound.UseVisualStyleBackColor = true;
             this.dbtnSound.Click += new System.EventHandler(this.dbtnSound_Click);
             // 
-            // btnVersion
-            // 
-            this.btnVersion.BackColor = System.Drawing.Color.Transparent;
-            this.btnVersion.BackgroundImage = global::BioBaseCLIA.Properties.Resources.主界面按钮;
-            resources.ApplyResources(this.btnVersion, "btnVersion");
-            this.btnVersion.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnVersion.FlatAppearance.BorderSize = 0;
-            this.btnVersion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnVersion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnVersion.Name = "btnVersion";
-            this.btnVersion.UseVisualStyleBackColor = false;
-            this.btnVersion.Click += new System.EventHandler(this.btnVersion_Click);
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            // 
             // dbtnConnect
             // 
-            this.dbtnConnect.BackgroundImage = global::BioBaseCLIA.Properties.Resources.未连接;
             resources.ApplyResources(this.dbtnConnect, "dbtnConnect");
             this.dbtnConnect.FlatAppearance.BorderSize = 0;
             this.dbtnConnect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -233,62 +279,9 @@
             this.dbtnConnect.MouseEnter += new System.EventHandler(this.dbtnConnect_MouseEnter);
             this.dbtnConnect.MouseLeave += new System.EventHandler(this.dbtnConnect_MouseLeave);
             // 
-            // btnHelp
-            // 
-            this.btnHelp.BackColor = System.Drawing.Color.Transparent;
-            this.btnHelp.BackgroundImage = global::BioBaseCLIA.Properties.Resources.主界面按钮;
-            resources.ApplyResources(this.btnHelp, "btnHelp");
-            this.btnHelp.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnHelp.FlatAppearance.BorderSize = 0;
-            this.btnHelp.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnHelp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.UseVisualStyleBackColor = false;
-            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
-            this.btnHelp.MouseEnter += new System.EventHandler(this.dbtnBuffer_MouseEnter);
-            this.btnHelp.MouseLeave += new System.EventHandler(this.dbtnBuffer_MouseLeave);
-            // 
-            // btnExit
-            // 
-            this.btnExit.BackColor = System.Drawing.Color.Transparent;
-            this.btnExit.BackgroundImage = global::BioBaseCLIA.Properties.Resources.主界面按钮;
-            resources.ApplyResources(this.btnExit, "btnExit");
-            this.btnExit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnExit.FlatAppearance.BorderSize = 0;
-            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnExit.Name = "btnExit";
-            this.btnExit.UseVisualStyleBackColor = false;
-            this.btnExit.Click += new System.EventHandler(this.button11_Click);
-            this.btnExit.MouseEnter += new System.EventHandler(this.dbtnBuffer_MouseEnter);
-            this.btnExit.MouseLeave += new System.EventHandler(this.dbtnBuffer_MouseLeave);
-            // 
-            // pnlbarUP
-            // 
-            this.pnlbarUP.BackColor = System.Drawing.Color.Transparent;
-            this.pnlbarUP.BackgroundImage = global::BioBaseCLIA.Properties.Resources.其他界面按钮2;
-            resources.ApplyResources(this.pnlbarUP, "pnlbarUP");
-            this.pnlbarUP.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlbarUP.Controls.Add(this.btnWasteRack);
-            this.pnlbarUP.Controls.Add(this.logo);
-            this.pnlbarUP.Controls.Add(this.temperatureButton);
-            this.pnlbarUP.Controls.Add(this.defineButton1);
-            this.pnlbarUP.Controls.Add(this.defineButton3);
-            this.pnlbarUP.Controls.Add(this.defineButton2);
-            this.pnlbarUP.Controls.Add(this.dbtnLog);
-            this.pnlbarUP.Controls.Add(this.dbtnRack);
-            this.pnlbarUP.Controls.Add(this.dbtnRegent);
-            this.pnlbarUP.Controls.Add(this.dbtnSubstract);
-            this.pnlbarUP.Controls.Add(this.dbtnWaste);
-            this.pnlbarUP.Controls.Add(this.dbtnWash);
-            this.pnlbarUP.Controls.Add(this.dbtnBuffer);
-            this.pnlbarUP.Name = "pnlbarUP";
-            this.pnlbarUP.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlbarUP_Paint);
-            // 
             // btnWasteRack
             // 
             this.btnWasteRack.BackColor = System.Drawing.Color.Transparent;
-            this.btnWasteRack.BackgroundImage = global::BioBaseCLIA.Properties.Resources.WasteRack02;
             resources.ApplyResources(this.btnWasteRack, "btnWasteRack");
             this.btnWasteRack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnWasteRack.FlatAppearance.BorderSize = 0;
@@ -302,18 +295,24 @@
             this.btnWasteRack.MouseEnter += new System.EventHandler(this.dbtnBuffer_MouseEnter);
             this.btnWasteRack.MouseLeave += new System.EventHandler(this.dbtnBuffer_MouseLeave);
             // 
-            // logo
+            // temperatureButton
             // 
-            this.logo.BackColor = System.Drawing.Color.Transparent;
-            this.logo.BackgroundImage = global::BioBaseCLIA.Properties.Resources.logo;
-            resources.ApplyResources(this.logo, "logo");
-            this.logo.Name = "logo";
-            this.logo.TabStop = false;
+            resources.ApplyResources(this.temperatureButton, "temperatureButton");
+            this.temperatureButton.BackColor = System.Drawing.Color.Transparent;
+            this.temperatureButton.FlatAppearance.BorderSize = 0;
+            this.temperatureButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
+            this.temperatureButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
+            this.temperatureButton.ForeColor = System.Drawing.Color.Transparent;
+            this.temperatureButton.Name = "temperatureButton";
+            this.toolTip1.SetToolTip(this.temperatureButton, resources.GetString("temperatureButton.ToolTip"));
+            this.temperatureButton.UseVisualStyleBackColor = false;
+            this.temperatureButton.Click += new System.EventHandler(this.temperatureButton_Click);
+            this.temperatureButton.MouseEnter += new System.EventHandler(this.dbtnBuffer_MouseEnter);
+            this.temperatureButton.MouseLeave += new System.EventHandler(this.dbtnBuffer_MouseLeave);
             // 
             // defineButton1
             // 
             this.defineButton1.BackColor = System.Drawing.Color.Transparent;
-            this.defineButton1.BackgroundImage = global::BioBaseCLIA.Properties.Resources.blue_play_128px_569342_easyicon_net;
             resources.ApplyResources(this.defineButton1, "defineButton1");
             this.defineButton1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.defineButton1.FlatAppearance.BorderSize = 0;
@@ -330,7 +329,6 @@
             // defineButton3
             // 
             this.defineButton3.BackColor = System.Drawing.Color.Transparent;
-            this.defineButton3.BackgroundImage = global::BioBaseCLIA.Properties.Resources.blue_stop_play_back_128px_569353_easyicon_net;
             resources.ApplyResources(this.defineButton3, "defineButton3");
             this.defineButton3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.defineButton3.FlatAppearance.BorderSize = 0;
@@ -347,7 +345,6 @@
             // defineButton2
             // 
             this.defineButton2.BackColor = System.Drawing.Color.Transparent;
-            this.defineButton2.BackgroundImage = global::BioBaseCLIA.Properties.Resources.blue_pause_128px_569341_easyicon_net;
             resources.ApplyResources(this.defineButton2, "defineButton2");
             this.defineButton2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.defineButton2.FlatAppearance.BorderSize = 0;
@@ -364,7 +361,6 @@
             // dbtnLog
             // 
             this.dbtnLog.BackColor = System.Drawing.Color.Transparent;
-            this.dbtnLog.BackgroundImage = global::BioBaseCLIA.Properties.Resources._33感叹号;
             resources.ApplyResources(this.dbtnLog, "dbtnLog");
             this.dbtnLog.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.dbtnLog.FlatAppearance.BorderSize = 0;
@@ -381,7 +377,6 @@
             // dbtnRack
             // 
             this.dbtnRack.BackColor = System.Drawing.Color.Transparent;
-            this.dbtnRack.BackgroundImage = global::BioBaseCLIA.Properties.Resources._14;
             resources.ApplyResources(this.dbtnRack, "dbtnRack");
             this.dbtnRack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.dbtnRack.FlatAppearance.BorderSize = 0;
@@ -398,7 +393,6 @@
             // dbtnRegent
             // 
             this.dbtnRegent.BackColor = System.Drawing.Color.Transparent;
-            this.dbtnRegent.BackgroundImage = global::BioBaseCLIA.Properties.Resources._14__2_;
             resources.ApplyResources(this.dbtnRegent, "dbtnRegent");
             this.dbtnRegent.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.dbtnRegent.FlatAppearance.BorderSize = 0;
@@ -447,7 +441,6 @@
             // dbtnWash
             // 
             this.dbtnWash.BackColor = System.Drawing.Color.Transparent;
-            this.dbtnWash.BackgroundImage = global::BioBaseCLIA.Properties.Resources._8;
             resources.ApplyResources(this.dbtnWash, "dbtnWash");
             this.dbtnWash.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.dbtnWash.FlatAppearance.BorderSize = 0;
@@ -476,16 +469,6 @@
             this.dbtnBuffer.Click += new System.EventHandler(this.dbtnBuffer_Click);
             this.dbtnBuffer.MouseEnter += new System.EventHandler(this.dbtnBuffer_MouseEnter);
             this.dbtnBuffer.MouseLeave += new System.EventHandler(this.dbtnBuffer_MouseLeave);
-            // 
-            // timeWarnSound
-            // 
-            this.timeWarnSound.Interval = 1000;
-            this.timeWarnSound.Tick += new System.EventHandler(this.timeWarnSound_Tick);
-            // 
-            // timerConnect
-            // 
-            this.timerConnect.Interval = 3000;
-            this.timerConnect.Tick += new System.EventHandler(this.timerConnect_Tick);
             // 
             // frmMain
             // 
