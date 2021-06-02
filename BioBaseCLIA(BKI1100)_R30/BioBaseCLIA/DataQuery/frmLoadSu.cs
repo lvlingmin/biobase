@@ -399,7 +399,7 @@ namespace BioBaseCLIA.DataQuery
                     txtSubstrateAllTest.Text = dt.Rows[0]["AllTestNumber"].ToString();
                     txtSubstrateLastTest.Text = dt.Rows[0]["leftoverTest"].ToString();
                     //对比生产日期后一年 和 数据库的有效期
-                    DateTime dt1 = dtime.AddYears(1);
+                    DateTime dt1 = dtime.AddYears(1).AddDays(-1);
                     DateTime dt2 = DateTime.ParseExact(dt.Rows[0]["ValidDate"].ToString().Replace("-", ""), "yyyyMMdd", null, System.Globalization.DateTimeStyles.AllowWhiteSpaces);
                     if (DateTime.Compare(dt1, dt2) <= 0)//使用两个最小的作为有效期
                     {
@@ -420,16 +420,19 @@ namespace BioBaseCLIA.DataQuery
                     txtSubstrateAllTest.Text = testNum;
                     txtSubstrateLastTest.Text = testNum;
                     //对比生产日期后一年 和 今天装载日期后一月
-                    DateTime dt1 = dtime.AddYears(1);
-                    DateTime dt2 = DateTime.Now.AddMonths(1);
-                    if (DateTime.Compare(dt1, dt2) <= 0)//使用两个最小的作为有效期
-                    {
-                        ValidDate.Value = dt1;
-                    }
-                    else
-                    {
-                        ValidDate.Value = dt2;
-                    }
+                    DateTime dt1 = dtime.AddYears(1).AddDays(-1); ;
+                    ValidDate.Value = dt1;
+                    #region 暂使用试剂盒有效期
+                    //DateTime dt2 = DateTime.Now.AddMonths(1);
+                    //if (DateTime.Compare(dt1, dt2) <= 0)//使用两个最小的作为有效期
+                    //{
+                    //    ValidDate.Value = dt1;
+                    //}
+                    //else
+                    //{
+                    //    ValidDate.Value = dt2;
+                    //}
+                    #endregion
                 }));
             }
             fillFlag = true;
