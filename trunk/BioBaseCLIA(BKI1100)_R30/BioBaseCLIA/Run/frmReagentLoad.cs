@@ -41,14 +41,16 @@ namespace BioBaseCLIA.Run
         int addRFlag = 0;
         int RgType = 0;//lyq
         int addREmpty = 0;
+        int spUpdateItemFromXmlFlag = 0;
         List<int> loopSpFailResult = new List<int>();
         public static bool isSp = false;
+        bool noSpAddReagent = true;
+        List<string> spacialProList = new List<string>();//两个试剂盒分装的特殊项目
         /// <summary>
         /// 准备=0，试剂=1，稀释液=2
         /// </summary>
         enum ReagentType { ready = 0, reagent = 1, dilute = 2 };//lyq
         enum addRFlagState { ready = 0, success = 1, fail = 2, empty = 3 };
-        frmMessageShow frmMsgShow = new frmMessageShow();
         /// <summary
         /// 试剂警告最小值 2018-07-27 zlx add
         /// </summary>
@@ -78,6 +80,15 @@ namespace BioBaseCLIA.Run
                 btnLoadSample.Enabled = false;
                 timer1.Start();
             }
+            FileStream fs = new FileStream(Environment.CurrentDirectory + "\\SpacialProjects.txt", FileMode.Open, FileAccess.Read);
+            StreamReader sr = new StreamReader(fs, Encoding.UTF8);
+            string[] tempName = sr.ReadToEnd().Split(new string[] { "\r\n" }, StringSplitOptions.None);
+            foreach (string temp in tempName)
+            {
+                spacialProList.Add(temp);
+            }
+            sr.Close();
+            fs.Close();
             dateValidDate.MinDate = Convert.ToDateTime("2020/01/01");
             dgvRgInfoList.Columns[0].Width = 65;
             dgvRgInfoList.Columns[1].Width = 75;
@@ -242,7 +253,7 @@ namespace BioBaseCLIA.Run
             {
                 string BarCode = OperateIniFile.ReadIniData("ReagentPos" + i.ToString(), "BarCode", "", iniPathReagentTrayInfo);
                 string ItemName = OperateIniFile.ReadIniData("ReagentPos" + i.ToString(), "ItemName", "", iniPathReagentTrayInfo);
-                if (txtRgCode.Text.Trim() == BarCode && cmbRgName.Text.Trim() == ItemName && ItemName != "")
+                if (txtRgCode.Text.Trim() == BarCode && cmbRgName.Text.Trim() == ItemName && ItemName != "" && BarCode != "")
                 {
                     frmMsgShow.MessageShow("试剂加载", "试剂条码与现有的重复（" + i + "号位置），请检查输入的试剂条码和试剂名称。本次加载操作已取消。");
                     return;
@@ -437,6 +448,21 @@ namespace BioBaseCLIA.Run
                     txtRgCode.Focus();
                     return;
                 }
+                if (spacialProList.Find(ty => ty == cmbRgName.Text.Trim()) != null)
+                {
+                    if (txtRgPosition.Text.Trim() == RegentNum.ToString())
+                    {
+                        frmMessageShow msg = new frmMessageShow();
+                        msg.MessageShow("试剂装载", "特殊分装项目不允许放置在最后位置！");
+                        return;
+                    }
+                    if (OperateIniFile.ReadIniData("ReagentPos" + (int.Parse(txtRgPosition.Text.Trim()) + 1), "BarCode", "", iniPathReagentTrayInfo) != "")
+                    {
+                        frmMessageShow msg = new frmMessageShow();
+                        msg.MessageShow("试剂装载", "特殊分装项目，请先卸载掉后一个试剂位的试剂。");
+                        return;
+                    }
+                }
                 #endregion
                 fbtnReturn.Enabled = false;
                 btnAddR.Enabled = false;
@@ -456,6 +482,10 @@ namespace BioBaseCLIA.Run
                         rg[7] = dt2.Rows[0]["leftoverTestR4"].ToString();
                         rg[8] = dt2.Rows[0]["AddDate"].ToString();
                         ModifyRgIni(int.Parse(txtRgPosition.Text.Trim()), rg);
+                        if (spacialProList.Find(ty => ty == rg[1]) != null)
+                        {
+                            ModifyRgIni(int.Parse(txtRgPosition.Text.Trim()) + 1, new string[9] { "", rg[1], "", "", "", "", "", "", "" });
+                        }
                         ShowRgInfo(0);
                         if (NetCom3.isConnect)
                         {
@@ -546,6 +576,10 @@ namespace BioBaseCLIA.Run
                         rg[7] = ModelRg.leftoverTestR4.ToString();
                         rg[8] = ModelRg.AddDate.ToString();
                         ModifyRgIni(int.Parse(ModelRg.Postion.ToString()), rg);
+                        if (spacialProList.Find(ty => ty == rg[1]) != null)
+                        {
+                            ModifyRgIni(int.Parse(txtRgPosition.Text.Trim()) + 1, new string[9] { "", rg[1], "", "", "", "", "", "", "" });
+                        }
                         ShowRgInfo(0);
                         if (NetCom3.isConnect)
                         {
@@ -634,6 +668,12 @@ namespace BioBaseCLIA.Run
                 srdReagent.RgTestNum[int.Parse(dtRgInfo.Rows[i]["Postion"].ToString()) - 1] = dtRgInfo.Rows[i]["leftoverTestR1"].ToString();
                 if (dtRgInfo.Rows[i]["RgName"].ToString().Contains("SD"))
                     DiuPosList.Add(int.Parse(dtRgInfo.Rows[i]["Postion"].ToString()));
+                if (spacialProList.Find(ty => ty == dtRgInfo.Rows[i]["RgName"].ToString()) != null)
+                {
+                    int tempNum = int.Parse(dtRgInfo.Rows[i]["leftoverTestR1"].ToString());
+                    srdReagent.RgTestNum[int.Parse(dtRgInfo.Rows[i]["Postion"].ToString())] = (tempNum - 50 > 0 ? 50 : tempNum).ToString();
+                    srdReagent.RgName[int.Parse(dtRgInfo.Rows[i]["Postion"].ToString())] = dtRgInfo.Rows[i]["RgName"].ToString();
+                }
             }
             int OverDateC = 0;//2018-07-17 zlx add
             foreach (var odr in dr)
@@ -688,7 +728,6 @@ namespace BioBaseCLIA.Run
                     srdReagent.RgColor[GetSelectedNo] = Color.White;
                     srdReagent.BdColor[GetSelectedNo] = Color.White;
                 }
-                string ss = srdReagent.RgName[RgSelectedNo].ToString().Trim();
                 if (srdReagent.RgName[RgSelectedNo].ToString().Trim() == "")
                 {
                     srdReagent.RgColor[RgSelectedNo] = Color.Yellow;
@@ -920,6 +959,13 @@ namespace BioBaseCLIA.Run
                 //    btnDelR.Enabled = false;
                 //}
             }
+            if (spacialProList.Find(ty => ty == ModelRg.ReagentName) != null)//卸载掉特殊分装项目的
+            {
+                srdReagent.RgTestNum[int.Parse(ModelRg.Postion)] = "";
+                srdReagent.RgName[int.Parse(ModelRg.Postion)] = "";
+                ModifyRgIni(int.Parse(ModelRg.Postion) + 1, new string[9] { "", "", "", "", "", "", "", "", "" });
+                ShowRgInfo(0);
+            }
             fbtnReturn.Enabled = true;
             btnAddR.Enabled = true;
             btnDelR.Enabled = true;
@@ -1131,6 +1177,14 @@ namespace BioBaseCLIA.Run
                         srdReagent.BdColor[int.Parse(dtRgInfo.Rows[j]["Postion"].ToString()) - 1] = srdReagent.CBeedsLoaded;
                     }
                 }
+                if (spacialProList.Find(ty => ty == dtRgInfo.Rows[j]["RgName"].ToString()) != null)//特殊分装项目染色
+                {
+                    if (srdReagent.RgName[int.Parse(dtRgInfo.Rows[j]["Postion"].ToString())] == srdReagent.RgName[int.Parse(dtRgInfo.Rows[j]["Postion"].ToString()) - 1])
+                    {
+                        srdReagent.RgColor[int.Parse(dtRgInfo.Rows[j]["Postion"].ToString())] = srdReagent.CRgLoaded;
+                        srdReagent.BdColor[int.Parse(dtRgInfo.Rows[j]["Postion"].ToString())] = srdReagent.CBeedsLoaded;
+                    }
+                }
             }
             #endregion
             #region 样本位号颜色设置
@@ -1235,6 +1289,17 @@ namespace BioBaseCLIA.Run
                     return;
                 }
                 //zlx modify点击10-15报错，及启用卸载按钮
+                if ((RgSelectedNo + 1) != 1)//点击特殊分装项目次瓶
+                {
+                    if (dtRgInfo.Select("Postion='" + (RgSelectedNo) + "'").Length <= 0)
+                        ;
+                    else if (spacialProList.Find(ty => ty == dtRgInfo.Select("Postion='" + (RgSelectedNo) + "'")[0]["RgName"].ToString()) != null)
+                    {
+                        btnAddR.Enabled = false;
+                        barCodeHook.Stop();
+                        goto end;
+                    }
+                }
                 if (dtRgInfo.Select("Postion='" + (RgSelectedNo + 1) + "'").Length > 0)
                 {
                     btnDelR.Enabled = true;
@@ -1251,6 +1316,7 @@ namespace BioBaseCLIA.Run
                         barCodeHook.Start();
                     }
                 }
+                end:
                 RgSelectedNo = -1;
                 bSend = false;
                 srdReagent.Enabled = true;
@@ -1261,8 +1327,8 @@ namespace BioBaseCLIA.Run
             if (chkManualInput.Checked)
             {
                 txtRgCode.Enabled = true;
-                txtRgAllTest.Enabled = true;
-                txtRgLastTest.Enabled = true;
+                //txtRgAllTest.Enabled = true;
+                //txtRgLastTest.Enabled = true;
                 //txtRgBatch.Enabled = true;
                 //dateValidDate.Enabled = true;
                 //cmbProType.Enabled = true;
@@ -1274,8 +1340,8 @@ namespace BioBaseCLIA.Run
             else
             {
                 txtRgCode.Enabled = false;
-                txtRgAllTest.Enabled = false;
-                txtRgLastTest.Enabled = false;
+                //txtRgAllTest.Enabled = false;
+                //txtRgLastTest.Enabled = false;
                 //txtRgBatch.Enabled = false;
                 //dateValidDate.Enabled = false;
                 //initContr();
@@ -1547,6 +1613,10 @@ namespace BioBaseCLIA.Run
             }
             else
             {
+                if (chDay[0] == '.')
+                {
+                    chDay[0] = 'V';
+                }
                 day = ((chDay[0] - 'A') + 10).ToString();
             }
             string checkNum = (int.Parse(year) ^ int.Parse(day)).ToString();
@@ -1708,6 +1778,10 @@ namespace BioBaseCLIA.Run
 
         private string reverseDate(char oriDate)
         {
+            if (oriDate == '.')
+            {
+                oriDate = 'V';
+            }
             string date = "";
             if (oriDate >= '0' && oriDate <= '9')
             {
@@ -1773,9 +1847,7 @@ namespace BioBaseCLIA.Run
                 Invoke(new Action(() =>
                 {
                     initContr();
-                    //frmMsgShow.MessageShow("试剂装载", "未通过条码校验！");
                 }));
-                
                 return;
             }
             if (!fillRgInfo(rgCode))
@@ -1860,6 +1932,110 @@ namespace BioBaseCLIA.Run
             {
                 return false;
             }
+            #region 判断是否是首次装载，首次装载首先更新项目信息       
+            DataTable dt = bllRg.GetList("BarCode='" + batchCA + "'").Tables[0];
+            if (dt.Rows.Count > 0)//已经装载过
+            {
+                ;
+            }
+            else//首次装载
+            {
+                //更新项目信息
+                spUpdateItemFromXmlFlag = (int)addRFlagState.ready;
+                noSpAddReagent = true;
+                NetCom3.Instance.Send(NetCom3.Cover("EB 90 CA 01 06"), 5);
+                if (!spSingleQuery())
+                {
+                    string decryption = StringUtils.instance.ToDecryption(batchCA);
+                    DataTable dtAll = bllP.GetAllList().Tables[0];
+                    if (dtAll.Rows.Count < 1)
+                    {
+                        frmMessageShow msg = new frmMessageShow();
+                        msg.MessageShow("试剂加载", "未检测到对应项目，请导入相关项目信息文件！");
+                        return false;
+                    }
+                    string rgNameCode = decryption.Substring(3, 3);//试剂编号
+                    int length = -1;
+                    try
+                    {
+                        length = dtAll.Select("ProjectNumber ='" + int.Parse(rgNameCode).ToString() + "'").Length;
+                    }
+                    catch (System.Exception ex)
+                    {
+                        frmMessageShow msg = new frmMessageShow();
+                        msg.MessageShow("试剂加载", "未检测到对应项目，请导入相关项目信息文件！");
+                        return false;
+                    }
+                    if (length > 0)//如果有导入相关项目则继续
+                    {
+                        NetCom3.Instance.ReceiveHandel += dealSP;
+                    }
+                    else
+                    {
+                        frmMessageShow msg = new frmMessageShow();
+                        msg.MessageShow("试剂加载", "未检测到对应项目，请导入相关项目信息文件！");
+                        return false;
+                    }
+                }
+                for (int i = 0; i < 4; i++)
+                {
+                    NetCom3.Delay(1000);
+                    string decryption = StringUtils.instance.ToDecryption(batchCA);
+                    string rgNameCode = decryption.Substring(3, 3);//试剂编号
+                    int length = -1;
+                    DataTable dtAll = bllP.GetAllList().Tables[0];
+                    if (dtAll.Rows.Count < 1)
+                    {
+                        if (i == 3)
+                        {
+                            frmMessageShow msg = new frmMessageShow();
+                            msg.MessageShow("试剂加载", "未检测到对应项目，请导入相关项目信息文件！");
+                            return false;
+                        }
+                        else
+                            continue;
+                    }
+                    try
+                    {
+                        length = dtAll.Select("ProjectNumber ='" + int.Parse(rgNameCode).ToString() + "'").Length;
+                    }
+                    catch (System.Exception ex)
+                    {
+                        if (i == 3)
+                        {
+                            frmMessageShow msg = new frmMessageShow();
+                            msg.MessageShow("试剂加载", "未检测到对应项目，请导入相关项目信息文件！");
+                            return false;
+                        }
+
+                        else
+                            continue;
+                    }
+                    if (length > 0)//如果有导入相关项目则继续
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        if (i == 3)
+                        {
+                            frmMessageShow msg = new frmMessageShow();
+                            msg.MessageShow("试剂加载", "未检测到对应项目，请导入相关项目信息文件！");
+                            return false;
+                        }
+                        else
+                            continue;
+                    }
+                }
+                DateTime tempDt = DateTime.Now;
+                while (spUpdateItemFromXmlFlag == (int)addRFlagState.ready && DateTime.Now.Subtract(tempDt).TotalMilliseconds < 20000)
+                {
+                    NetCom3.Delay(100);
+                }
+                if (spUpdateItemFromXmlFlag != (int)addRFlagState.success)
+                    return false;
+            }
+            #endregion
             if (!fillRgInfo(batchCA))
             {
                 return false;
@@ -2130,32 +2306,32 @@ namespace BioBaseCLIA.Run
 
                     //被反映需要可以作为定标曲线使用
                     #region 定标曲线
-                    Model.tbScalingResult modelScalingResult = new Model.tbScalingResult();
-                    modelScalingResult.ItemName = itemName;
-                    modelScalingResult.RegentBatch = itemBatch;
-                    modelScalingResult.ScalingModel = 6;
-                    modelScalingResult.ActiveDate = activeDate;
-                    modelScalingResult.PointCount = 6;
-                    modelScalingResult.Points = pmtValue;
+                    //Model.tbScalingResult modelScalingResult = new Model.tbScalingResult();
+                    //modelScalingResult.ItemName = itemName;
+                    //modelScalingResult.RegentBatch = itemBatch;
+                    //modelScalingResult.ScalingModel = 6;
+                    //modelScalingResult.ActiveDate = activeDate;
+                    //modelScalingResult.PointCount = 6;
+                    //modelScalingResult.Points = pmtValue;
 
-                    //status
-                    int sameScaling = int.Parse(DbHelperOleDb.GetSingle(1, @"select count(*) from tbScalingResult where ItemName = '"
-                                                                  + itemName + "' AND RegentBatch='" + itemBatch + "'").ToString());
-                    //将已有定标的状态设为非正在使用的状态
-                    if (sameScaling > 0)
-                    {
-                        DbHelperOleDb.ExecuteSql(1, @"update tbScalingResult set Status=0 where ItemName = '"
-                                                               + itemName + "' AND RegentBatch='" + itemBatch + "'").ToString();
-                    }
-                    modelScalingResult.Status = 1;
+                    ////status
+                    //int sameScaling = int.Parse(DbHelperOleDb.GetSingle(1, @"select count(*) from tbScalingResult where ItemName = '"
+                    //                                              + itemName + "' AND RegentBatch='" + itemBatch + "'").ToString());
+                    ////将已有定标的状态设为非正在使用的状态
+                    //if (sameScaling > 0)
+                    //{
+                    //    DbHelperOleDb.ExecuteSql(1, @"update tbScalingResult set Status=0 where ItemName = '"
+                    //                                           + itemName + "' AND RegentBatch='" + itemBatch + "'").ToString();
+                    //}
+                    //modelScalingResult.Status = 1;
 
-                    modelScalingResult.Source = 2;
-                    BLL.tbScalingResult bllScalingResult = new BLL.tbScalingResult();
-                    if (!bllScalingResult.Add(modelScalingResult))
-                    {
-                        MessageBox.Show("添加定标曲线失败，请重新装载!");
-                        return false;
-                    }
+                    //modelScalingResult.Source = 2;
+                    //BLL.tbScalingResult bllScalingResult = new BLL.tbScalingResult();
+                    //if (!bllScalingResult.Add(modelScalingResult))
+                    //{
+                    //    MessageBox.Show("添加定标曲线失败，请重新装载!");
+                    //    return false;
+                    //}
                     #endregion
                 }
             }
@@ -2219,32 +2395,32 @@ namespace BioBaseCLIA.Run
 
                 //被反映需要可以作为定标曲线使用
                 #region 定标曲线
-                Model.tbScalingResult modelScalingResult = new Model.tbScalingResult();
-                modelScalingResult.ItemName = itemName;
-                modelScalingResult.RegentBatch = itemBatch;
-                modelScalingResult.ScalingModel = 6;
-                modelScalingResult.ActiveDate = activeDate;
-                modelScalingResult.PointCount = 6;
-                modelScalingResult.Points = pmtValue;
+                //Model.tbScalingResult modelScalingResult = new Model.tbScalingResult();
+                //modelScalingResult.ItemName = itemName;
+                //modelScalingResult.RegentBatch = itemBatch;
+                //modelScalingResult.ScalingModel = 6;
+                //modelScalingResult.ActiveDate = activeDate;
+                //modelScalingResult.PointCount = 6;
+                //modelScalingResult.Points = pmtValue;
 
-                //status
-                int sameScaling = int.Parse(DbHelperOleDb.GetSingle(1, @"select count(*) from tbScalingResult where ItemName = '"
-                                                              + itemName + "' AND RegentBatch='" + itemBatch + "'").ToString());
-                //将已有定标的状态设为非正在使用的状态
-                if (sameScaling > 0)
-                {
-                    DbHelperOleDb.ExecuteSql(1, @"update tbScalingResult set Status=0 where ItemName = '"
-                                                           + itemName + "' AND RegentBatch='" + itemBatch + "'").ToString();
-                }
-                modelScalingResult.Status = 1;
+                ////status
+                //int sameScaling = int.Parse(DbHelperOleDb.GetSingle(1, @"select count(*) from tbScalingResult where ItemName = '"
+                //                                              + itemName + "' AND RegentBatch='" + itemBatch + "'").ToString());
+                ////将已有定标的状态设为非正在使用的状态
+                //if (sameScaling > 0)
+                //{
+                //    DbHelperOleDb.ExecuteSql(1, @"update tbScalingResult set Status=0 where ItemName = '"
+                //                                           + itemName + "' AND RegentBatch='" + itemBatch + "'").ToString();
+                //}
+                //modelScalingResult.Status = 1;
 
-                modelScalingResult.Source = 2;
-                BLL.tbScalingResult bllScalingResult = new BLL.tbScalingResult();
-                if (!bllScalingResult.Add(modelScalingResult))
-                {
-                    MessageBox.Show("添加定标曲线失败，请重新装载!");
-                    return false;
-                }
+                //modelScalingResult.Source = 2;
+                //BLL.tbScalingResult bllScalingResult = new BLL.tbScalingResult();
+                //if (!bllScalingResult.Add(modelScalingResult))
+                //{
+                //    MessageBox.Show("添加定标曲线失败，请重新装载!");
+                //    return false;
+                //}
                 #endregion
             }
             return true;
@@ -2308,11 +2484,19 @@ namespace BioBaseCLIA.Run
             }
             //质控靶值
             string tempX = decryption.Substring(7, 5);
-            tempX = Convert.ToInt32(tempX.Substring(0, 3), 16).ToString() + "." + Convert.ToInt32(tempX.Substring(3, 2), 16).ToString();
-            double qcX = double.Parse(tempX);
-            //质控标准差
             string tempSD = decryption.Substring(12, 5);
-            string temp = Convert.ToInt32(tempSD.Substring(2, 3), 16).ToString();
+
+            string temp = Convert.ToInt32(tempX.Substring(3, 2), 16).ToString();
+            while (temp.Length < 2)
+            {
+                temp = "0" + temp;
+            }
+            //倒转
+            temp = temp.Substring(1, 1) + temp.Substring(0, 1);
+            tempX = Convert.ToInt32(tempX.Substring(0, 3), 16).ToString() + "." + temp;
+
+            double qcX = double.Parse(tempX);
+            temp = Convert.ToInt32(tempSD.Substring(2, 3), 16).ToString();
             while (temp.Length < 3)
             {
                 temp = "0" + temp;
@@ -2356,9 +2540,7 @@ namespace BioBaseCLIA.Run
                     rule += i.ToString();
                 }
             }
-
-
-
+            string validTime = year + "/" + month + "/" + day;
             //录入者
             mQC.Batch = qcBatch;
             mQC.QCNumber = "No Use";//无用
@@ -2369,7 +2551,7 @@ namespace BioBaseCLIA.Run
             mQC.ProjectName = itemName;
             mQC.OperatorName = LoginUserName;
             mQC.AddDate = DateTime.Now.ToLongDateString().Trim();
-            mQC.ValidDate = DateTime.Now.AddDays(28).ToLongDateString().Trim();
+            mQC.ValidDate = Convert.ToDateTime(validTime).AddYears(1).AddDays(-1).ToLongDateString().Trim();//DateTime.Now.AddDays(28).ToLongDateString().Trim();
             mQC.QCRules = rule;
             #endregion
             #region QC-DB                
@@ -2383,7 +2565,8 @@ namespace BioBaseCLIA.Run
             }
             else
             {
-                frmMsgShow.MessageShow("射频卡扫描", "数据获取失败！");
+                frmMessageShow frmMsgShow = new frmMessageShow();
+                frmMsgShow.MessageShow("射频卡扫描", "未检测到试剂盒！");
                 return false;
             }
             #endregion
@@ -2442,6 +2625,105 @@ namespace BioBaseCLIA.Run
             #endregion
             return true;
         }
+        private bool dealItemXmlOfRFID(string order)
+        {
+            #region 处理指令获得条码
+            string rgcode = "";//加密后条码
+            int len = 0;//条码长度
+            order = order.Replace(" ", "").Trim();
+            len = Convert.ToInt32(order.Substring(order.IndexOf("EB90CAA1"), 12).Substring(8, 4), 16);
+            order = order.Substring(order.IndexOf("EB90CAA1"), 12 + len * 2);
+            string tempStr = order.Substring(12, len * 2);
+            byte[] tempByte = new byte[len];
+            for (int i = 0; i < len; i++)
+            {
+                tempByte[i] = Convert.ToByte(tempStr.Substring(2 * i, 2), 16);
+            }
+            //System.Text.Encoding asciiencoding = new ASCIIEncoding();
+            rgcode = Encoding.Default.GetString(tempByte);     //GetString(tempByte);
+            #endregion
+            #region 处理条码取得数据
+            string decryption = itemXmlToDecryption(rgcode);
+            string[] xmlInfo = decryption.Split(new string[1] { "$$" }, System.StringSplitOptions.None);
+            #region 处理校验
+            string checkNum = xmlInfo[xmlInfo.Length - 1].Trim().Substring(0, 2);
+            double caluCheckNum = 0;
+            caluCheckNum += 'F';
+            int index = decryption.LastIndexOf(checkNum);
+            for (int i = 1; i < index; i++)
+            {
+                caluCheckNum += decryption[i];
+            }
+            caluCheckNum %= 97;
+            if (Convert.ToInt16(checkNum, 16) != caluCheckNum)
+            {
+                spUpdateItemFromXmlFlag = (int)addRFlagState.fail;
+                return false;
+            }
+            #endregion
+            #region 获取参数
+            Model.tbProject model = new Model.tbProject();
+            model.ProjectNumber = xmlInfo[0].Substring(1);
+            model.ShortName = xmlInfo[1];
+            model.FullName = xmlInfo[2];
+            model.ProjectType = xmlInfo[3];
+            model.DiluteCount = int.Parse(xmlInfo[4]);
+            model.VRangeType = xmlInfo[5];
+            model.RangeType = xmlInfo[6];
+            model.ValueRange1 = xmlInfo[7];
+            model.ValueRange2 = xmlInfo[8];
+            model.ValueUnit = xmlInfo[9];
+            model.MinValue = double.Parse(xmlInfo[10]);
+            model.MaxValue = double.Parse(xmlInfo[11]);
+            model.CalPointNumber = int.Parse(xmlInfo[12]);
+            model.CalPointConc = xmlInfo[13];
+            model.QCPointNumber = int.Parse(xmlInfo[14]);
+            model.QCPoints = xmlInfo[15];
+            model.ProjectProcedure = xmlInfo[16];
+            model.CalMode = int.Parse(xmlInfo[17]);
+            model.CalMethod = int.Parse(xmlInfo[18]);
+            model.CalculateMethod = xmlInfo[19];
+            model.LoadType = int.Parse(xmlInfo[20]);
+            model.ActiveStatus = int.Parse(xmlInfo[21]);
+            model.DiluteName = xmlInfo[22];
+            model.ExpiryDate = int.Parse(xmlInfo[23]);
+            model.NoUsePro = xmlInfo[24];
+            #endregion
+            #region 删除原有项目
+            if (bllP.Exists_(model.ShortName))
+            {
+                frmMessageShow frmMsg = new frmMessageShow();
+                if (!bllP.Delete_(model.ShortName))
+                {
+                    frmMsg.MessageShow("试剂装载", "项目更新失败");
+                    spUpdateItemFromXmlFlag = (int)addRFlagState.fail;
+                    return false;
+                }
+            }
+            #endregion
+            #region 添加项目
+            if (bllP.Add(model))
+            {
+                ;
+            }
+            else
+            {
+                frmMessageShow frmMsg = new frmMessageShow();
+                frmMsg.MessageShow("试剂装载", "项目更新失败");
+                spUpdateItemFromXmlFlag = (int)addRFlagState.fail;
+                return false;
+            }
+            #endregion
+            #endregion
+            Invoke(new Action(() =>
+            {
+                cmbProType.SelectedIndex = 0;
+                cmbRgName.DataSource = GetItemShortName();
+                cmbRgName.DisplayMember = "ItemShortName";//设置显示列
+            }));
+            spUpdateItemFromXmlFlag = (int)addRFlagState.success;
+            return true;
+        }
         #endregion
 
         private void dealSP(string order)
@@ -2450,9 +2732,16 @@ namespace BioBaseCLIA.Run
             {
                 if (order.Contains("EB 90 CA A1 00 00 00 00 00"))
                 {
+                    if (noSpAddReagent == true)
+                    {
+                        addRFlag = (int)addRFlagState.success;
+                        spUpdateItemFromXmlFlag = (int)addRFlagState.success;
+                        return;
+                    }
                     if (!isSp)//单次装载执行
                     {
-                        frmMsgShow.MessageShow("射频卡扫描", "数据获取失败！");
+                        frmMessageShow frmMsgShow = new frmMessageShow();
+                        frmMsgShow.MessageShow("射频卡扫描", "未检测到试剂盒！");
                     }
                     addRFlag = (int)addRFlagState.fail;
                     addREmpty= (int)addRFlagState.empty;
@@ -2462,6 +2751,10 @@ namespace BioBaseCLIA.Run
                     return;
                 }
                 string signChar = order.Split(' ')[5];
+                if (order.Length > 300)
+                {
+                    signChar = order.Split(' ')[6];
+                }
                 byte byteSign = Convert.ToByte(signChar, 16);
                 System.Text.ASCIIEncoding asciiencoding = new System.Text.ASCIIEncoding();
                 signChar = asciiencoding.GetString(new byte[] { byteSign });
@@ -2472,8 +2765,8 @@ namespace BioBaseCLIA.Run
                     RgType = (int)ReagentType.reagent;//lyq
                     if (!dealBatchOfRFID(order))
                     {
-                        if (txtRgCode.Text.Trim() != "")
-                            frmMsgShow.MessageShow("射频卡扫描", "试剂条码处理失败！");
+                        //if (txtRgCode.Text.Trim() != "")
+                        //    frmMsgShow.MessageShow("射频卡扫描", "试剂条码处理失败！");
                         addRFlag = (int)addRFlagState.fail;
                         NetCom3.Instance.ReceiveHandel -= dealSP;
                         return;
@@ -2484,6 +2777,7 @@ namespace BioBaseCLIA.Run
                     //dealPro func
                     if (!dealProOfRFID(order))
                     {
+                        frmMessageShow frmMsgShow = new frmMessageShow();
                         frmMsgShow.MessageShow("射频卡扫描", "项目流程处理失败！");
                         addRFlag = (int)addRFlagState.fail;
                         NetCom3.Instance.ReceiveHandel -= dealSP;
@@ -2495,6 +2789,7 @@ namespace BioBaseCLIA.Run
                     //dealConc func
                     if (!dealConcOfRFID(order))
                     {
+                        frmMessageShow frmMsgShow = new frmMessageShow();
                         frmMsgShow.MessageShow("射频卡扫描", "项目定标浓度处理失败！");
                         addRFlag = (int)addRFlagState.fail;
                         NetCom3.Instance.ReceiveHandel -= dealSP;
@@ -2506,6 +2801,7 @@ namespace BioBaseCLIA.Run
                     //dealValue func
                     if (!dealValueOfRFID(order))
                     {
+                        frmMessageShow frmMsgShow = new frmMessageShow();
                         frmMsgShow.MessageShow("射频卡扫描", "项目定标曲线处理失败！");
                         addRFlag = (int)addRFlagState.fail;
                         NetCom3.Instance.ReceiveHandel -= dealSP;
@@ -2517,6 +2813,7 @@ namespace BioBaseCLIA.Run
                     //dealQC func
                     if (!dealQcOfRFID(order))
                     {
+                        frmMessageShow frmMsgShow = new frmMessageShow();
                         frmMsgShow.MessageShow("射频卡扫描", "项目质控信息处理失败！");
                         addRFlag = (int)addRFlagState.fail;
                         NetCom3.Instance.ReceiveHandel -= dealSP;
@@ -2529,17 +2826,33 @@ namespace BioBaseCLIA.Run
                     if (!dealDiluteOfRFID(order))
                     {
                         if (txtRgCode.Text.Trim() != "")
+                        {
+                            frmMessageShow frmMsgShow = new frmMessageShow();
                             frmMsgShow.MessageShow("射频卡扫描", "稀释液条码处理失败！");
+                        }
                         addRFlag = (int)addRFlagState.fail;
                         NetCom3.Instance.ReceiveHandel -= dealSP;
                         return;
                     }
                 }
+                else if (signChar == "C")
+                {
+                    if (!dealItemXmlOfRFID(order))
+                    {
+                        frmMessageShow frmMsgShow = new frmMessageShow();
+                        frmMsgShow.MessageShow("射频卡扫描", "项目信息更新失败！");
+                        addRFlag = (int)addRFlagState.fail;
+                        NetCom3.Instance.ReceiveHandel -= dealSP;
+                        return;
+                    }
+                    return;
+                }
                 else
                 {
                     if (!isSp)//单次装载执行
                     {
-                        frmMsgShow.MessageShow("射频卡扫描", "数据获取失败！");
+                        frmMessageShow frmMsgShow = new frmMessageShow();
+                        frmMsgShow.MessageShow("射频卡扫描", "未检测到试剂盒！");
                     }
                     addRFlag = (int)addRFlagState.fail;
                     NetCom3.Instance.ReceiveHandel -= dealSP;
@@ -2551,7 +2864,7 @@ namespace BioBaseCLIA.Run
         public bool spSingleQuery()
         {
             DateTime dti = DateTime.Now;
-            while (!NetCom3.totalOrderFlag && DateTime.Now.Subtract(dti).TotalMilliseconds < 6000)
+            while (!NetCom3.totalOrderFlag && DateTime.Now.Subtract(dti).TotalMilliseconds < 20000)
             {
                 NetCom3.Delay(10);
             }
@@ -2577,6 +2890,12 @@ namespace BioBaseCLIA.Run
         }
         private bool sendSp(string caPara)
         {
+            if (caPara != "01")
+            {
+                noSpAddReagent = true;
+            }
+            else
+                noSpAddReagent = false;
             RgType = (int)ReagentType.ready;//lyq
             addRFlag = (int)addRFlagState.ready;
             addREmpty = (int)addRFlagState.ready;
@@ -2587,7 +2906,8 @@ namespace BioBaseCLIA.Run
                 {
                     BeginInvoke(new Action(()=>
                     {
-                        frmMsgShow.MessageShow("射频卡扫描", "数据获取失败");
+                        frmMessageShow frmMsgShow = new frmMessageShow();
+                        frmMsgShow.MessageShow("射频卡扫描", "未检测到试剂盒");
                         //MessageBox.Show("数据获取失败！", "射频卡扫描");
                     }));
                 }
@@ -2605,10 +2925,23 @@ namespace BioBaseCLIA.Run
             spDelay();
             return true;
         }
+        private string itemXmlToDecryption(string code)
+        {
+            int key = 1;
+            char[] chs = code.ToCharArray();
+            for (int i = 0; i < chs.Length; i++)
+            {
+                if (chs[i] > 31)
+                {
+                    chs[i] = (char)(chs[i] - key);
+                }
+            }
+            return new string(chs);
+        }
         private bool addRegent()
         {
             //string loadItem = frmSpLoadItem.chkResult;
-            string loadItem = "101";//更新项目信息+添加质控记录
+            string loadItem = "111";//更新项目信息+添加质控记录
             //lyq 射频卡 20200107
             NetCom3.Instance.ReceiveHandel += dealSP;
 
@@ -2627,17 +2960,17 @@ namespace BioBaseCLIA.Run
             }
             if (RgType == (int)ReagentType.ready)
                 return false;
-            //pro
-            //if (loadItem.Substring(0, 1) == "1")
-            //{
-            //    if (!sendSp("02"))
-            //    {
-            //        return false;
-            //    }
-            //}
-
-            if (loadItem.Substring(1, 1) == "1")
+            DataTable dtable = bllRg.GetList("BarCode='" + txtRgBatch.Text + "'").Tables[0];
+            if (loadItem.Substring(1, 1) == "1" && dtable.Rows.Count <= 0 && RgType == (int)ReagentType.reagent)//首次装载
             {
+                //pro
+                if (loadItem.Substring(0, 1) == "1")
+                {
+                    if (!sendSp("02"))
+                    {
+                        return false;
+                    }
+                }
                 //conc
                 if (!sendSp("03 01"))
                 {
@@ -2669,10 +3002,6 @@ namespace BioBaseCLIA.Run
                         return false;
                     }
                 }
-            }
-
-            if (loadItem.Substring(2, 1) == "1" && RgType == (int)ReagentType.reagent)
-            {
                 if (!sendSp("05 01"))
                 {
                     return false;
@@ -2873,10 +3202,15 @@ namespace BioBaseCLIA.Run
                                 srdReagent.RgColor[RgSelectedNo] = Color.Orange;
                                 srdReagent.BdColor[RgSelectedNo] = Color.Orange;
                             }
-                            else
+                            else if (!srdReagent.RgName[RgSelectedNo].ToString().Trim().Contains("SD"))
                             {
                                 srdReagent.RgColor[RgSelectedNo] = srdReagent.CRgLoaded;
                                 srdReagent.BdColor[RgSelectedNo] = srdReagent.CBeedsLoaded;
+                            }
+                            else
+                            {
+                                srdReagent.RgColor[RgSelectedNo] = Color.Purple;
+                                srdReagent.BdColor[RgSelectedNo] = Color.Purple;
                             }
                             GetSelectedNo = RgSelectedNo;
                         }
@@ -2932,6 +3266,12 @@ namespace BioBaseCLIA.Run
                     //如果当前位置已装载试剂，则卸载
                     if (bllRg.GetList("Postion='" + i + "'").Tables[0].Rows.Count > 0)//如果当前位置已装载试剂，扫描失败就卸载
                     {
+                        if (spacialProList.Find(ty => ty == dtRgInfo.Select("Postion='" + i + "'")[0]["RgName"].ToString()) != null)
+                        {
+                            ModifyRgIni(i + 1, new string[9] { "", "", "", "", "", "", "", "", "" });
+                            srdReagent.RgTestNum[i] = "";
+                            srdReagent.RgName[i] = "";
+                        }
                         if (DbHelperOleDb.ExecuteSql(3, @"update tbReagent set Postion='' where Postion = '" + i + "'") > 0)//更改db
                         {
                             //更改ini
@@ -2963,8 +3303,87 @@ namespace BioBaseCLIA.Run
                 }
                 string spRgcode = txtRgCode.Text.ToString();
                 string rgpostion = txtRgPosition.Text.ToString();
+                if (spacialProList.Find(ty => ty == cmbRgName.Text) != null)
+                {
+                    if (rgpostion == RegentNum.ToString())
+                    {
+                        frmMessageShow msg = new frmMessageShow();
+                        msg.MessageShow("一键装载", "特殊分装项目不允许放置在最后位置！");
+                        goto errorEnd;
+                    }
+                    //if (OperateIniFile.ReadIniData("ReagentPos" + int.Parse(rgpostion) + 1, "BarCode", "", iniPathReagentTrayInfo) != "")
+                    //{
+                    //    goto errorEnd;
+                    //}
+                }
+                if (dateValidDate.Value.Date <= DateTime.Today.Date)
+                {
+                    frmMessageShow msg = new frmMessageShow();
+                    msg.MessageShow("试剂装载", "试剂(稀释液)已过期！");
+                    goto errorEnd;
+                }
+                if (rgpostion != "1" && spacialProList.Find(ty =>
+                ty == OperateIniFile.ReadIniData("ReagentPos" + (int.Parse(rgpostion) - 1), "ItemName", "", iniPathReagentTrayInfo)) != null
+                && OperateIniFile.ReadIniData("ReagentPos" + (int.Parse(rgpostion) - 1), "BarCode", "", iniPathReagentTrayInfo) != "")//如果上一个项目是特殊项目,特殊项目第一盒才有射频卡
+                {
+                    frmMessageShow msg = new frmMessageShow();
+                    msg.MessageShow("一键装载", "特殊分装项目,请规范放置在试剂盘！");
+                    goto errorEnd;
+                }
                 //根据条码判断已装载、已卸载、首次装载
                 var spdr = dtAllRS.Select("BarCode ='" + spRgcode + "'");
+                NetCom3.Instance.ReceiveHandel += dealSP;
+                if (RgType == (int)ReagentType.reagent)
+                {
+                    if (spdr.Length <= 0)
+                    {
+                        //pro
+                        if (!sendSp("02"))
+                        {
+                            goto errorEnd;
+                        }
+                        //conc
+                        if (!sendSp("03 01"))
+                        {
+                            goto errorEnd;
+                        }
+                        if (!sendSp("03 02"))
+                        {
+                            goto errorEnd;
+                        }
+
+                        //pmtValue
+                        int calNum = conc.Split(',').Length;
+                        if (!sendSp("04 01"))
+                        {
+                            goto errorEnd;
+                        }
+                        if (!sendSp("04 02"))
+                        {
+                            goto errorEnd;
+                        }
+                        if (!sendSp("04 03"))
+                        {
+                            goto errorEnd;
+                        }
+                        if (calNum == 7)
+                        {
+                            if (!sendSp("04 04"))
+                            {
+                                goto errorEnd;
+                            }
+                        }
+                    }
+                    if (!sendSp("05 01"))
+                    {
+                        goto errorEnd;
+                    }
+                    if (!sendSp("05 02"))
+                    {
+                        goto errorEnd;
+                    }
+                }
+                NetCom3.Instance.ReceiveHandel -= dealSP;
                 if (spdr.Length > 0)//非首次装载
                 {
                     if (spdr[0]["Postion"].ToString() == "")//已卸载
@@ -2977,6 +3396,12 @@ namespace BioBaseCLIA.Run
                                 ModifyRgIni(int.Parse(rgpostion), new string[10] { "", "", "", "", "", "", "", "", "" ,""});
                                 //OperateIniFile.WriteIniData("ReagentPos" + rgpostion,
                                 //    "leftDiuVol", "0", iniPathReagentTrayInfo);
+                                if (spacialProList.Find(ty => ty == dtRgInfo.Select("Postion='" + rgpostion + "'")[0]["RgName"].ToString()) != null)
+                                {
+                                    ModifyRgIni(int.Parse(rgpostion) + 1, new string[9] { "", "", "", "", "", "", "", "", "" });
+                                    srdReagent.RgTestNum[int.Parse(rgpostion)] = "";
+                                    srdReagent.RgName[int.Parse(rgpostion)] = "";
+                                }
                             }
                             else
                                 goto errorEnd;
@@ -2999,7 +3424,6 @@ namespace BioBaseCLIA.Run
                         }
                         else//装载失败
                         {
-                            //frmMsgShow.MessageShow("一键装载", "装载失败，请重新装载");
                             goto errorEnd;
                         }
                     }
@@ -3009,6 +3433,8 @@ namespace BioBaseCLIA.Run
                         //判断装载位置是否是此位置
                         if (spRgPostion == rgpostion)
                         {
+                            loopSpFailResult.Remove(i);
+                            loopSpSuccessResult.Add(i);
                             continue;
                         }
                         else
@@ -3026,6 +3452,18 @@ namespace BioBaseCLIA.Run
                                     //ini
                                     ModifyRgIni(int.Parse(rgpostion), new string[9] { "", "", "", "", "", "", "", "", "" });
                                     ModifyRgIni(int.Parse(spRgPostion), new string[9] { "", "", "", "", "", "", "", "", "" });
+                                    if (spacialProList.Find(ty => ty == dtRgInfo.Select("Postion='" + spRgPostion + "'")[0]["RgName"].ToString()) != null)//卸载掉特殊分装项目的
+                                    {
+                                        srdReagent.RgTestNum[int.Parse(spRgPostion)] = "";
+                                        srdReagent.RgName[int.Parse(spRgPostion)] = "";
+                                        ModifyRgIni(int.Parse(spRgPostion) + 1, new string[9] { "", "", "", "", "", "", "", "", "" });
+                                    }
+                                    if (spacialProList.Find(ty => ty == dtRgInfo.Select("Postion='" + rgpostion + "'")[0]["RgName"].ToString()) != null)
+                                    {
+                                        srdReagent.RgTestNum[int.Parse(rgpostion)] = "";
+                                        srdReagent.RgName[int.Parse(rgpostion)] = "";
+                                        ModifyRgIni(int.Parse(rgpostion) + 1, new string[9] { "", "", "", "", "", "", "", "", "" });
+                                    }
                                     srdReagent.RgName[int.Parse(spRgPostion) - 1] = "";
                                     srdReagent.RgTestNum[int.Parse(spRgPostion) - 1] = "";
                                     srdReagent.RgName[int.Parse(rgpostion) - 1] = "";
@@ -3340,6 +3778,12 @@ namespace BioBaseCLIA.Run
                                 if (DbHelperOleDb.ExecuteSql(3, @"update tbReagent set Postion='' where BarCode = '" + spRgcode + "'") > 0)
                                 {
                                     ModifyRgIni(int.Parse(spRgPostion), new string[9] { "", "", "", "", "", "", "", "", "" });
+                                    if (spacialProList.Find(ty => ty == dtRgInfo.Select("Postion='" + spRgPostion + "'")[0]["RgName"].ToString()) != null)//卸载掉特殊分装项目的
+                                    {
+                                        srdReagent.RgTestNum[int.Parse(spRgPostion)] = "";
+                                        srdReagent.RgName[int.Parse(spRgPostion)] = "";
+                                        ModifyRgIni(int.Parse(spRgPostion) + 1, new string[9] { "", "", "", "", "", "", "", "", "" });
+                                    }
                                     //OperateIniFile.WriteIniData("ReagentPos" + spRgPostion, "leftDiuVol", "0", iniPathReagentTrayInfo);
                                     srdReagent.RgName[int.Parse(spRgPostion) - 1] = "";
                                     srdReagent.RgTestNum[int.Parse(spRgPostion) - 1] = "";
@@ -3380,6 +3824,12 @@ namespace BioBaseCLIA.Run
                         if (DbHelperOleDb.ExecuteSql(3, @"update tbReagent set Postion='' where Postion = '" + rgpostion + "'") > 0)
                         {
                             ModifyRgIni(int.Parse(rgpostion), new string[9] { "", "", "", "", "", "", "", "", "" });
+                            if (spacialProList.Find(ty => ty == dtRgInfo.Select("Postion='" + rgpostion + "'")[0]["RgName"].ToString()) != null)
+                            {
+                                srdReagent.RgTestNum[int.Parse(rgpostion)] = "";
+                                srdReagent.RgName[int.Parse(rgpostion)] = "";
+                                ModifyRgIni(int.Parse(rgpostion) + 1, new string[9] { "", "", "", "", "", "", "", "", "" });
+                            }
                             srdReagent.RgName[int.Parse(rgpostion) - 1] = "";
                             srdReagent.RgTestNum[int.Parse(rgpostion) - 1] = "";
                         }
@@ -3420,19 +3870,25 @@ namespace BioBaseCLIA.Run
                     }
                     #endregion
                 }
-                NetCom3.Instance.ReceiveHandel += dealSP;
-                if (RgType == (int)ReagentType.reagent)
+                if (spacialProList.Find(ty => ty == cmbRgName.Text) != null)
                 {
-                    if (!sendSp("05 01"))
-                    {
-                        goto errorEnd;
-                    }
-                    if (!sendSp("05 02"))
-                    {
-                        goto errorEnd;
-                    }
+                    ModifyRgIni(int.Parse(rgpostion) + 1, new string[9] { "", cmbRgName.Text, "", "", "", "", "", "", "" });
                 }
-                NetCom3.Instance.ReceiveHandel -= dealSP;
+                #region
+                //NetCom3.Instance.ReceiveHandel += dealSP;
+                //if (RgType == (int)ReagentType.reagent)
+                //{
+                //    if (!sendSp("05 01"))
+                //    {
+                //        goto errorEnd;
+                //    }
+                //    if (!sendSp("05 02"))
+                //    {
+                //        goto errorEnd;
+                //    }
+                //}
+                //NetCom3.Instance.ReceiveHandel -= dealSP;
+                #endregion
                 dgvRgInfoList.SelectionChanged -= new System.EventHandler(this.dgvRgInfoList_SelectionChanged);
                 ShowRgInfo(0);
                 dgvRgInfoList.SelectionChanged += new System.EventHandler(this.dgvRgInfoList_SelectionChanged);
@@ -3444,6 +3900,7 @@ namespace BioBaseCLIA.Run
                 }
             }
             errorEnd:
+            NetCom3.Instance.ReceiveHandel -= dealSP;
             dgvRgInfoList.Enabled = true;
             srdReagent.Enabled = true;
             string failTip = "",succTip = "";
@@ -3477,6 +3934,8 @@ namespace BioBaseCLIA.Run
             btnAddR.Enabled = true;
             btnLoopAddR.Enabled = true;
             btnDelR.Enabled = true;
+            if (spBreak + succTip + failTip == "")
+                succTip = "装载完成0项,未检测到试剂盒！";
             BeginInvoke(new Action(()=>
             {
                 frmMsgShow.MessageShow("试剂装载", spBreak + succTip + failTip);
