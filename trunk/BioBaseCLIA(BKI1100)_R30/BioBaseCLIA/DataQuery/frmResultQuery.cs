@@ -443,23 +443,24 @@ namespace BioBaseCLIA.DataQuery
                 dtTestResult.DefaultView.Sort = "printIndex asc";
                 dtTestResult = dtTestResult.DefaultView.ToTable();
                 dtTestResult.TableName = "Records";
+                count = dtTestResult.Rows.Count;
                 if (printModel.Contains("模版一"))
                 {
-                    if (count <= 24)
+                    if (count <= 10)
                         ;
-                    else if (count <= 48)
+                    else if (count <= 20)
                     {
                         //移动到右列
-                        for (int i = 24; i < count; i++)
+                        for (int i = 10; i < count; i++)
                         {
-                            dtTestResult.Rows[i - 24]["ShortName-2"] = dtTestResult.Rows[i]["ShortName"];  //dtPro.Select("ShortName = '" + dgvSampleData.Rows[i + 24].Cells["ItemName"].Value.ToString() + "'")[0]["FullName"];//lyq
-                            dtTestResult.Rows[i - 24]["Concentration-2"] = dtTestResult.Rows[i]["Concentration"]; //dgvSampleData.Rows[i + 24].Cells["Concentration"].Value.ToString();
-                            dtTestResult.Rows[i - 24]["Result-2"] = dtTestResult.Rows[i]["Result"]; //dgvSampleData.Rows[i + 24].Cells["Result"].Value.ToString();
-                            dtTestResult.Rows[i - 24]["Range1-2"] = dtTestResult.Rows[i]["Range1"]; // dgvSampleData.Rows[i + 24].Cells["Range"].Value.ToString();
-                            dtTestResult.Rows[i - 24]["Range2-2"] = dtTestResult.Rows[i]["Range2"]; // dgvSampleData.Rows[i + 24].Cells["Unit"].Value.ToString();
+                            dtTestResult.Rows[i - 10]["ShortName-2"] = dtTestResult.Rows[i]["ShortName"];  //dtPro.Select("ShortName = '" + dgvSampleData.Rows[i + 24].Cells["ItemName"].Value.ToString() + "'")[0]["FullName"];//lyq
+                            dtTestResult.Rows[i - 10]["Concentration-2"] = dtTestResult.Rows[i]["Concentration"]; //dgvSampleData.Rows[i + 24].Cells["Concentration"].Value.ToString();
+                            dtTestResult.Rows[i - 10]["Result-2"] = dtTestResult.Rows[i]["Result"]; //dgvSampleData.Rows[i + 24].Cells["Result"].Value.ToString();
+                            dtTestResult.Rows[i - 10]["Range1-2"] = dtTestResult.Rows[i]["Range1"]; // dgvSampleData.Rows[i + 24].Cells["Range"].Value.ToString();
+                            dtTestResult.Rows[i - 10]["Range2-2"] = dtTestResult.Rows[i]["Range2"]; // dgvSampleData.Rows[i + 24].Cells["Unit"].Value.ToString();
                         }
                         //移除多余列
-                        for (int i = count; i > 24; i--)
+                        for (int i = count; i > 10; i--)
                         {
                             dtTestResult.Rows.RemoveAt(i - 1);
                         }
@@ -572,7 +573,6 @@ namespace BioBaseCLIA.DataQuery
                 report.SetParameterValue("title", OperateIniFile.ReadInIPara("PrintSet", "HospitalName"));
                 report.RegisterData(dsReport);
                 #endregion
-
                 //是否直接打印
                 report.PrintSettings.ShowDialog = !bool.Parse(OperateIniFile.ReadInIPara("PrintSet", "AutoPrint"));//2018-11-02 zlx mod
                 ReportPage rp = report.Pages[0] as ReportPage;
