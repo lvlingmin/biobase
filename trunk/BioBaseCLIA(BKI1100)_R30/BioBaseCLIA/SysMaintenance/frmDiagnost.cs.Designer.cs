@@ -195,7 +195,6 @@
             this.label54 = new System.Windows.Forms.Label();
             this.groupBox23 = new System.Windows.Forms.GroupBox();
             this.cmbPeristalticPVol = new System.Windows.Forms.ComboBox();
-            this.fbtnPeristalticPSave = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnPeristalticPEx = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.label53 = new System.Windows.Forms.Label();
             this.groupBox19 = new System.Windows.Forms.GroupBox();
@@ -2887,7 +2886,6 @@
             // groupBox23
             // 
             this.groupBox23.Controls.Add(this.cmbPeristalticPVol);
-            this.groupBox23.Controls.Add(this.fbtnPeristalticPSave);
             this.groupBox23.Controls.Add(this.fbtnPeristalticPEx);
             this.groupBox23.Controls.Add(this.label53);
             this.groupBox23.Location = new System.Drawing.Point(7, 289);
@@ -2908,26 +2906,6 @@
             this.cmbPeristalticPVol.Name = "cmbPeristalticPVol";
             this.cmbPeristalticPVol.Size = new System.Drawing.Size(121, 22);
             this.cmbPeristalticPVol.TabIndex = 16;
-            // 
-            // fbtnPeristalticPSave
-            // 
-            this.fbtnPeristalticPSave.BackColor = System.Drawing.Color.Transparent;
-            this.fbtnPeristalticPSave.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("fbtnPeristalticPSave.BackgroundImage")));
-            this.fbtnPeristalticPSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.fbtnPeristalticPSave.EnabledSet = true;
-            this.fbtnPeristalticPSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.fbtnPeristalticPSave.FlatAppearance.BorderSize = 0;
-            this.fbtnPeristalticPSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.fbtnPeristalticPSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.fbtnPeristalticPSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.fbtnPeristalticPSave.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.fbtnPeristalticPSave.Location = new System.Drawing.Point(319, 23);
-            this.fbtnPeristalticPSave.Name = "fbtnPeristalticPSave";
-            this.fbtnPeristalticPSave.Size = new System.Drawing.Size(65, 24);
-            this.fbtnPeristalticPSave.TabIndex = 15;
-            this.fbtnPeristalticPSave.Text = "保存";
-            this.fbtnPeristalticPSave.UseVisualStyleBackColor = false;
-            this.fbtnPeristalticPSave.Click += new System.EventHandler(this.fbtnPeristalticPSave_Click);
             // 
             // fbtnPeristalticPEx
             // 
@@ -6937,7 +6915,6 @@
         private System.Windows.Forms.Label label58;
         private CustomControl.FunctionButton btnZx;
         private System.Windows.Forms.ComboBox cmbPeristalticPVol;
-        private CustomControl.FunctionButton fbtnPeristalticPSave;
         private System.Windows.Forms.GroupBox groupBox39;
         private CustomControl.FunctionButton btnWashMix;
         private System.Windows.Forms.ComboBox cmbWashMix;

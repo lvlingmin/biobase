@@ -6056,29 +6056,6 @@ namespace BioBaseCLIA.SysMaintenance
             fbtnHoleTarget.Enabled = true;
         }
 
-        private void fbtnPeristalticPSave_Click(object sender, EventArgs e)
-        {
-            if (!NetCom3.totalOrderFlag)
-            {
-                frmMsgShow.MessageShow("仪器调试", "仪器正在运动，请稍等！");
-                return;
-            }
-            //20180524 zlx mod
-            NetCom3.Instance.Send(NetCom3.Cover("EB 90 03 03 00"), 5);
-            NetCom3.Instance.SingleQuery();
-            //if (txtPeristalticPVol.Text.Trim() == "")
-            //{
-            //    frmMsgShow.MessageShow("仪器调试", "请输入注液泵注液量！");
-            //    txtPeristalticPVol.Focus();
-            //    return;
-            //}
-            //fbtnPeristalticPSave.Enabled = false;
-            //string pumpVol = int.Parse(txtPeristalticPVol.Text.Trim()).ToString("x8");
-            //NetCom3.Instance.Send(NetCom3.Cover("EB 90 03 07 13 " + pumpVol.Substring(0, 2) + " " + pumpVol.Substring(2, 2) + " "
-            //        + pumpVol.Substring(4, 2) + " " + pumpVol.Substring(6, 2)), 5);
-            //NetCom3.Instance.SingleQuery();
-            fbtnPeristalticPSave.Enabled = true;
-        }
 
         private void fbtnWashZEx_Click(object sender, EventArgs e)
         {

@@ -2369,7 +2369,10 @@ namespace BioBaseCLIA.SysMaintenance
                 TExtAppend("开始清空温育盘。。。\n");
                 if (!reactTrayTubeClear())
                 {
-                    NewWashEnd();
+                    if (!isNewWashEnd())
+                    {
+                        NewWashEnd();
+                    }
                     return;
                 }
                 TExtAppend("清空温育盘结束。。。\n");
@@ -2381,7 +2384,7 @@ namespace BioBaseCLIA.SysMaintenance
             //}
             if (flow[0])//清空
             {
-                TExtAppend("开始清空");
+                TExtAppend("开始清空清洗盘");
                 tubeHoleNum = starhole;
                 for (int i = 0; i < WashTrayNum; i++)
                 {
@@ -2409,7 +2412,7 @@ namespace BioBaseCLIA.SysMaintenance
                     }
                     if (isNewWashEnd()) return;  //lyq add 20190822
                 }
-                TExtAppend("清空完成");
+                TExtAppend("清空清洗盘完成");
             }
             if (checkBox7.Checked)
             {
@@ -2717,7 +2720,7 @@ namespace BioBaseCLIA.SysMaintenance
         {
             if (CancellationToken)
             {
-                NewWashEnd();
+                //NewWashEnd();
                 return true;
             }
             else return false;
