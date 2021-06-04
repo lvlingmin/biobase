@@ -170,3 +170,10 @@ E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI110
 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\obj\Debug\DBUtility.dll
 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\obj\Debug\DBUtility.pdb
 E:\博科软件\化学发光项目开发-云端\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\obj\Debug\DBUtility.csprojAssemblyReference.cache
+E:\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\bin\Debug\DBUtility.dll
+E:\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\bin\Debug\DBUtility.pdb
+E:\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\bin\Debug\System.Data.SQLite.DLL
+E:\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\obj\Debug\DBUtility.csproj.CoreCompileInputs.cache
+E:\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\obj\Debug\DBUtility.csproj.CopyComplete
+E:\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\obj\Debug\DBUtility.dll
+E:\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\obj\Debug\DBUtility.pdb
