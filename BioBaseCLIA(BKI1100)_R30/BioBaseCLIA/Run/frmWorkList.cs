@@ -4506,14 +4506,14 @@ namespace BioBaseCLIA.Run
                                 {
                                     //setmainformbutten();
                                     //LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手在温育盘扔废管时取管撞管！");
-                                    NetCom3.Instance.stopsendFlag = true;
+                                    //NetCom3.Instance.stopsendFlag = true;
                                     ShowWarnInfo("移管手在温育盘扔废管时取管撞管", "移管", 1);
                                     return false;
                                 }
                             }
                             else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.OverTime)
                             {
-                                NetCom3.Instance.stopsendFlag = true;
+                                //NetCom3.Instance.stopsendFlag = true;
                                 ShowWarnInfo("移管手在温育盘扔废管时接收数据超时", "移管", 1);
                                 //AllStop();
                                 //setmainformbutten();
@@ -4553,7 +4553,7 @@ namespace BioBaseCLIA.Run
                                 }
                                 else
                                 {
-                                    NetCom3.Instance.stopsendFlag = true;
+                                    //NetCom3.Instance.stopsendFlag = true;
                                     ShowWarnInfo("移管手在温育盘扔废管时取管撞管", "移管", 1);
                                     //setmainformbutten();
                                     //LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手在温育盘扔废管时取管撞管！");
@@ -4562,7 +4562,7 @@ namespace BioBaseCLIA.Run
                             }
                             else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.OverTime)
                             {
-                                NetCom3.Instance.stopsendFlag = true;
+                                //NetCom3.Instance.stopsendFlag = true;
                                 ShowWarnInfo("移管手在温育盘扔废管时接收数据超时", "移管", 1);
                                 AllStop();
                                 //setmainformbutten();
