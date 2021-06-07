@@ -33,11 +33,11 @@ namespace BioBaseCLIA.InfoSetting
             #endregion
             tabControlMy1.TabPages.Clear();
             tabControlMy1.TabPages.Add(tabNetSet);
-            if (IsLisConnect && CommunicationType != "")
+            if (IsLisConnect && !CommunicationType.IsNullOrEmpty())
             {
-                if (CommunicationType == "NetConn")
+                if (CommunicationType.Contains("NetConn") || CommunicationType.Contains("网口通讯"))
                     tabControlMy1.TabPages.Add(tabLisSet);
-                else if ((CommunicationType == "SerialConn"))
+                else if ((CommunicationType.Contains("SerialConn"))|| CommunicationType.Contains("串口通讯"))
                     tabControlMy1.TabPages.Add(tabLisSetCK);
             }
             #region 获取可用端口 2018-5-14 zlxadd
@@ -51,7 +51,7 @@ namespace BioBaseCLIA.InfoSetting
             #endregion 
             lisParaShow();
             cmbLisType.SelectedItem =Getstring(CommunicationType);
-            if (CommunicationType == "NetConn")
+            if (CommunicationType.Contains("NetConn") || CommunicationType.Contains("网口通讯"))
             {
                 if (LisCommunication.Instance.IsConnect())
                 {
@@ -66,7 +66,7 @@ namespace BioBaseCLIA.InfoSetting
                     fbtnLISClose.Enabled = false;
                 }
             }
-            else if ((CommunicationType == "SerialConn"))
+            else if (( CommunicationType.Contains("SerialConn") || CommunicationType.Contains("串口通讯")))
             {
                 if (LisConnection.Instance.IsOpen())
                 {
@@ -216,7 +216,6 @@ namespace BioBaseCLIA.InfoSetting
         #region LIS设置
         void lisParaShow()
         {
-
             CommunicationType =OperateIniFile.ReadInIPara("LisSet", "CommunicationType");
             string IPAddress = OperateIniFile.ReadInIPara("LisSet", "IPAddress");
             string Port = OperateIniFile.ReadInIPara("LisSet", "Port");
@@ -224,7 +223,7 @@ namespace BioBaseCLIA.InfoSetting
             string LisCodeType = OperateIniFile.ReadInIPara("LisSet", "LisCodeType");
             bool IsTrueTimeTran = bool.Parse(OperateIniFile.ReadInIPara("LisSet", "IsTrueTimeTran"));
             string transinfo = OperateIniFile.ReadInIPara("LisSet", "TransInfo");
-            if (CommunicationType == "NetConn")
+            if (CommunicationType.Contains("NetConn") || CommunicationType.Contains("网口通讯"))
             {
                 txtLISIPAddress.Text = IPAddress;
                 txtLISPort.Text = Port;
@@ -244,7 +243,7 @@ namespace BioBaseCLIA.InfoSetting
                 }
                 tabControlMy1.TabPages.Remove(tabLisSetCK);
             }
-            else if (CommunicationType == "SerialConn")
+            else if (CommunicationType.Contains("SerialConn") || CommunicationType.Contains("串口通讯"))
             {
                 cmbCom.SelectedItem = IPAddress;
                 cmbBaud.SelectedItem = Port;
@@ -331,7 +330,8 @@ namespace BioBaseCLIA.InfoSetting
             LisCommunication.Instance.comWait = wait;
 
             delayer.sign = wait;
-            LisCommunication.Instance.ReceiveHandel += new Action<string>(InstanceLIS_ReceiveHandel);
+            LisCommunication.Instance.ReceiveHandel -= InstanceLIS_ReceiveHandel;
+            LisCommunication.Instance.ReceiveHandel += InstanceLIS_ReceiveHandel;
             if (!LisCommunication.Instance.IsConnect())
             {
                 string ip = txtLISIPAddress.Text.ToString().Trim();
@@ -344,9 +344,9 @@ namespace BioBaseCLIA.InfoSetting
                 LisCommunication.Instance.EncodeType = cmbLisCodeType.Text.ToString();
             if (LisCommunication.Instance.IsConnect())
             {
-                if (CommunicationType.Contains("NetConn") || CommunicationType.Contains("网口通讯"))
+                if(CommunicationType.Contains("NetConn") || CommunicationType.Contains("网口通讯"))
                     OperateIniFile.WriteIniPara("LisSet", "CommunicationType", Getstring("NetConn"));//2018-5-14 zlx add
-                else if (CommunicationType.Contains("SerialConn") || CommunicationType.Contains("串口通讯"))
+                else if(CommunicationType.Contains("SerialConn") || CommunicationType.Contains("串口通讯"))
                     OperateIniFile.WriteIniPara("LisSet", "CommunicationType", Getstring("SerialConn"));//2018-5-14 zlx add
                 OperateIniFile.WriteIniPara("LisSet", "IPAddress", txtLISIPAddress.Text.Trim());
                 OperateIniFile.WriteIniPara("LisSet", "Port", txtLISPort.Text.Trim());
@@ -411,7 +411,7 @@ namespace BioBaseCLIA.InfoSetting
             if (LisCommunication.Instance.IsConnect())
             {
                 LisCommunication.Instance.disconnection();
-                LisCommunication.Instance.ReceiveHandel -= new Action<string>(InstanceLIS_ReceiveHandel);
+                LisCommunication.Instance.ReceiveHandel -= InstanceLIS_ReceiveHandel;
             }
             if (!LisCommunication.Instance.IsConnect())
             {
@@ -590,7 +590,9 @@ namespace BioBaseCLIA.InfoSetting
         {
             if (cmbLisType.SelectedItem == null)
                 return;
-            if (cmbLisType.SelectedItem.ToString() == Getstring("NetConn"))
+            if (cmbLisType.SelectedItem.ToString() == Getstring("NetConn")
+                || cmbLisType.SelectedItem.ToString().Contains("NetConn")
+                || cmbLisType.SelectedItem.ToString().Contains("网口通讯"))
                 CommunicationType = "NetConn";
             else
                 CommunicationType = "SerialConn";
@@ -604,7 +606,7 @@ namespace BioBaseCLIA.InfoSetting
             Control _control=null;
             if (IsLisConnect)
             {
-                if(CommunicationType == "NetConn")
+                if(CommunicationType.Contains("NetConn") || CommunicationType.Contains("网口通讯"))
                     _control = tabLisSet;
                 else 
                     _control = tabLisSetCK;
