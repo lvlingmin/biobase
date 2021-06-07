@@ -11,6 +11,7 @@ using Common;
 using DBUtility;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Resources;
 
 namespace BioBaseCLIA.DataQuery
 {
@@ -122,12 +123,12 @@ namespace BioBaseCLIA.DataQuery
             #region 扫码-卸载 //lyq mod 20201012
             if (dtSb.Rows.Count <= 0)
             {
-                frmMsgShow.MessageShow("底物装载", "没有检测到已装载底物，请装载底物");
+                frmMsgShow.MessageShow(Getstring("MessageCaption"), Getstring("NoSubstrate"));
                 return;
             }
             if (txtSubstrateCode.Text == "")
             {
-                frmMsgShow.MessageShow("底物装载", "底物条码为空，请重新打开本界面");
+                frmMsgShow.MessageShow(Getstring("MessageCaption"), Getstring("SubstrateBarcodeEmpty"));
                 return;
             }
             btnDelSubstrate.Enabled = false;
@@ -135,7 +136,7 @@ namespace BioBaseCLIA.DataQuery
             DbHelperOleDb.ExecuteSql(3, @"update tbSubstrate set Status='卸载' where Status ='正常' and BarCode = '" + dtSb.Rows[0]["BarCode"].ToString() + "'");
             //清除ini配置文件
             deleteSuIni();
-            frmMsgShow.MessageShow("底物装载", "卸载成功！");
+            frmMsgShow.MessageShow(Getstring("MessageCaption"), Getstring("UnloadSubstrateSuccess"));
             btnDelSubstrate.Enabled = true;
             if (suTestRatio != null)
             {
@@ -149,7 +150,7 @@ namespace BioBaseCLIA.DataQuery
         {
             if (int.Parse(txtSubstrateLastTest.Text) > int.Parse(txtSubstrateAllTest.Text))
             {
-                frmMsgShow.MessageShow("底物装载", "剩余测数不应该大于总测数！");
+                frmMsgShow.MessageShow(Getstring("MessageCaption"), Getstring("LeftTestLessAllTest") );
                 txtSubstrateLastTest.Focus();
                 frmLoadSu_Load(null, null);
                 return;
@@ -157,24 +158,24 @@ namespace BioBaseCLIA.DataQuery
             if (txtSubstrateCode.Text.Trim() == "")
             {
                 txtSubstrateCode.Focus();
-                frmMsgShow.MessageShow("底物装载", "请输入底物条码！");
+                frmMsgShow.MessageShow(Getstring("MessageCaption"), Getstring("InputBarcode") );
                 return;
             }
             if (!judgeSubBarCode(txtSubstrateCode.Text.Trim()))
             {
                 initContr();
-                frmMsgShow.MessageShow("底物装载", "条码校验未通过！请重新输入");
+                frmMsgShow.MessageShow(Getstring("MessageCaption"), Getstring("CheckBarcode") );
                 return;
             }
             if (bllsb.GetList("Status='正常'").Tables[0].Rows.Count > 0)
             {
-                frmMsgShow.MessageShow("底物装载", "已装载底物,请先卸载底物！");
+                frmMsgShow.MessageShow(Getstring("MessageCaption"), Getstring("AlreadySubstate") );
                 return;
             }
             if (!fillFlag)
             {
                 txtSubstrateCode.Focus();
-                frmMsgShow.MessageShow("底物装载", "手动输入条码后，请按回车键解析条码信息！");
+                frmMsgShow.MessageShow(Getstring("MessageCaption"), Getstring("InputBarcodeEnter") );
                 return;
             }
             Model.tbSubstrate modelSb = new Model.tbSubstrate();
@@ -191,7 +192,7 @@ namespace BioBaseCLIA.DataQuery
                 //SuInfo[3] = modelSb.AddDate;
                 SuInfo[3] = dt.Rows[0]["ValidDate"].ToString();
                 ModifySuIni(SuInfo, dt.Rows[0]["AddDate"].ToString().Replace(@"/", "-"));
-                frmMsgShow.MessageShow("供应品状态", "底物装载成功！");
+                frmMsgShow.MessageShow(Getstring("MessageCaption"), Getstring("SubstrateLoadSuccess"));
                 if (suTestRatio != null)
                 {
                     suTestRatio(int.Parse(SuInfo[2]), int.Parse(SuInfo[1]));
@@ -235,14 +236,14 @@ namespace BioBaseCLIA.DataQuery
                 {
                     this.BeginInvoke(new Action(() => { btnBtnColor(3, 0, 3); }));
                 }
-                frmMsgShow.MessageShow("供应品状态", "底物装载成功！");
+                frmMsgShow.MessageShow(Getstring("MessageCaption"), Getstring("SubstrateLoadSuccess") );
                 this.Close();
             }
             #endregion
             txtSubstrateAllTest.Enabled = txtSubstrateCode.Enabled = txtSubstrateLastTest.Enabled = false;
             btnLoadSubstrate.Enabled = false;
             btnDelSubstrate.Enabled = true;
-            btnDelSubstrate.Text = "装载底物";
+            btnDelSubstrate.Text = Getstring("LoadSubstrate");
         }
         void ModifySuIni(string[] suInfo, string loadData = "")
         {
@@ -292,12 +293,12 @@ namespace BioBaseCLIA.DataQuery
         {
             if (e.KeyCode != Keys.Enter)
                 return;
-            if (txtSubstrateCode.Text.Length != 12 || !judgeSubBarCode(txtSubstrateCode.Text.Trim()))
+            if ((txtSubstrateCode.Text.Length != 12 && txtSubstrateCode.Text.Length != 15) || !judgeSubBarCode(txtSubstrateCode.Text.Trim()))
             {
                 new Thread(new ParameterizedThreadStart((obj) =>
                 {
                     frmMessageShow fr = new frmMessageShow();
-                    fr.MessageShow("底物装载", "条码校验未通过！请重新输入！");
+                    fr.MessageShow(Getstring("MessageCaption"), Getstring("CheckBarcode"));
                 }))
                 { IsBackground = true }.Start();
                 Invoke(new Action(() =>
@@ -313,7 +314,7 @@ namespace BioBaseCLIA.DataQuery
                 new Thread(new ParameterizedThreadStart((obj) =>
                 {
                     frmMessageShow fr = new frmMessageShow();
-                    fr.MessageShow("底物装载", "已装载底物,请先卸载底物！");
+                    fr.MessageShow(Getstring("MessageCaption"), Getstring("AlreadySubstate"));
                 }))
                 { IsBackground = true }.Start();
                 Invoke(new Action(() =>
@@ -332,53 +333,121 @@ namespace BioBaseCLIA.DataQuery
             {
                 return false;
             }
-
-            string date = decryption.Substring(1, 3);//生产日期
-            int testN = Convert.ToInt32(decryption.Substring(4, 3), 16);//测试次数
-            int serialNum = Convert.ToInt32(decryption.Substring(7, 4), 16);//流水号
-
-            string year = "", month = "", day = "";
-            try
+            if (subCode.Length == 15)
             {
-                year = StringUtils.instance.reverseDate(date.Substring(0, 1).ToCharArray()[0]);
-                month = StringUtils.instance.reverseDate(date.Substring(1, 1).ToCharArray()[0]);
-                day = StringUtils.instance.reverseDate(date.Substring(2, 1).ToCharArray()[0]);
+                string batchDate = decryption.Substring(1, 3);//批号日期
+                string productDate = decryption.Substring(4, 3);//生产日期
+                int testN = Convert.ToInt32(decryption.Substring(7, 3), 16);//测试次数
+                int serialNum = Convert.ToInt32(decryption.Substring(10, 4), 16);//流水号
+                string year = "", month = "", day = "";
+                string year2 = "", month2 = "", day2 = "";
+                try
+                {
+                    year = StringUtils.instance.reverseDate(batchDate.Substring(0, 1).ToCharArray()[0]);
+                    month = StringUtils.instance.reverseDate(batchDate.Substring(1, 1).ToCharArray()[0]);
+                    day = StringUtils.instance.reverseDate(batchDate.Substring(2, 1).ToCharArray()[0]);
+
+                    year2 = StringUtils.instance.reverseDate(productDate.Substring(0, 1).ToCharArray()[0]);
+                    month2 = StringUtils.instance.reverseDate(productDate.Substring(1, 1).ToCharArray()[0]);
+                    day2 = StringUtils.instance.reverseDate(productDate.Substring(2, 1).ToCharArray()[0]);
+                }
+                catch
+                {
+                    return false;
+                }
+                while (year.Length < 4)
+                {
+                    year = year.Insert(0, "20");
+                }
+                while (month.Length < 2)
+                {
+                    month = month.Insert(0, "0");
+                }
+                while (day.Length < 2)
+                {
+                    day = day.Insert(0, "0");
+                }
+                while (year2.Length < 4)
+                {
+                    year2 = year2.Insert(0, "20");
+                }
+                while (month2.Length < 2)
+                {
+                    month2 = month2.Insert(0, "0");
+                }
+                while (day2.Length < 2)
+                {
+                    day2 = day2.Insert(0, "0");
+                }
+
+                int batchTime = int.Parse(year + month + day);
+                int productTime = int.Parse(year2 + month2 + day2);
+                int check = (10 + batchTime + productTime + testN + serialNum) % 7;
+                if (decryption.Substring(14, 1) != check.ToString())
+                {
+                    return false;
+                }
+
+                testNum = testN.ToString();
+                try
+                {
+                    dtime = DateTime.ParseExact(productTime.ToString(), "yyyyMMdd", null, System.Globalization.DateTimeStyles.AllowWhiteSpaces);
+                }
+                catch
+                {
+                    return false;
+                }
             }
-            catch
+            else if (subCode.Length == 12)
             {
+                string batchDate = decryption.Substring(1, 3);//批号日期
+                int testN = Convert.ToInt32(decryption.Substring(4, 3), 16);//测试次数
+                int serialNum = Convert.ToInt32(decryption.Substring(7, 4), 16);//流水号
+                string year = "", month = "", day = "";
+                try
+                {
+                    year = StringUtils.instance.reverseDate(batchDate.Substring(0, 1).ToCharArray()[0]);
+                    month = StringUtils.instance.reverseDate(batchDate.Substring(1, 1).ToCharArray()[0]);
+                    day = StringUtils.instance.reverseDate(batchDate.Substring(2, 1).ToCharArray()[0]);
+                }
+                catch
+                {
+                    return false;
+                }
+
+                while (year.Length < 4)
+                {
+                    year = year.Insert(0, "20");
+                }
+                while (month.Length < 2)
+                {
+                    month = month.Insert(0, "0");
+                }
+                while (day.Length < 2)
+                {
+                    day = day.Insert(0, "0");
+                }
+
+                int batchTime = int.Parse(year + month + day);
+                int check = (10 + batchTime + testN + serialNum) % 7;
+                if (decryption.Substring(11, 1) != check.ToString())
+                {
+                    return false;
+                }
+
+                testNum = testN.ToString();
+                try
+                {
+                    dtime = DateTime.ParseExact(batchTime.ToString(), "yyyyMMdd", null, System.Globalization.DateTimeStyles.AllowWhiteSpaces);
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            else
                 return false;
-            }
-
-            while (year.Length < 4)
-            {
-                year = year.Insert(0, "20");
-            }
-            while (month.Length < 2)
-            {
-                month = month.Insert(0, "0");
-            }
-            while (day.Length < 2)
-            {
-                day = day.Insert(0, "0");
-            }
-
-            int time = int.Parse(year + month + day);
-            int check = (10 + time + testN + serialNum) % 7;
-
-            if (decryption.Substring(11, 1) != check.ToString())
-            {
-                return false;
-            }
-
-            testNum = testN.ToString();
-            try
-            {
-                dtime = DateTime.ParseExact(time.ToString(), "yyyyMMdd", null, System.Globalization.DateTimeStyles.AllowWhiteSpaces);
-            }
-            catch
-            {
-                return false;
-            }
+            
             return true;
         }
         private bool fillSubInfo(string subCode)
@@ -420,7 +489,7 @@ namespace BioBaseCLIA.DataQuery
                     txtSubstrateAllTest.Text = testNum;
                     txtSubstrateLastTest.Text = testNum;
                     //对比生产日期后一年 和 今天装载日期后一月
-                    DateTime dt1 = dtime.AddYears(1).AddDays(-1); ;
+                    DateTime dt1 = dtime.AddYears(1).AddDays(-1);
                     ValidDate.Value = dt1;
                     #region 暂使用试剂盒有效期
                     //DateTime dt2 = DateTime.Now.AddMonths(1);
@@ -452,7 +521,7 @@ namespace BioBaseCLIA.DataQuery
                 new Thread(new ParameterizedThreadStart((obj) =>
                 {
                     frmMessageShow fr = new frmMessageShow();
-                    fr.MessageShow("底物装载", "未通过条码校验！");
+                    fr.MessageShow(Getstring("MessageCaption"), Getstring("CheckBarcodeFail"));
                 }))
                 { IsBackground = true }.Start();
                 BeginInvoke(new Action(() =>
@@ -467,7 +536,7 @@ namespace BioBaseCLIA.DataQuery
                 new Thread(new ParameterizedThreadStart((obj) =>
                 {
                     frmMessageShow fr = new frmMessageShow();
-                    fr.MessageShow("底物装载", "已装载底物,请先卸载底物！");
+                    fr.MessageShow(Getstring("MessageCaption"), Getstring("AlreadySubstate") );
                 }))
                 { IsBackground = true }.Start();
                 BeginInvoke(new Action(() =>
@@ -506,6 +575,13 @@ namespace BioBaseCLIA.DataQuery
                 }));
             }
             changeFlag = true;
+        }
+
+        private string Getstring(string key)
+        {
+            ResourceManager resManagerA =
+                    new ResourceManager("BioBaseCLIA.DataQuery.frmLoadSu", typeof(frmLoadSu).Assembly);
+            return resManagerA.GetString(key);
         }
 
     }
