@@ -2569,4 +2569,7 @@
   <data name="Wastenormal" xml:space="preserve">
     <value>Waste liquid bucket is normal</value>
   </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
+  </data>
 </root>
