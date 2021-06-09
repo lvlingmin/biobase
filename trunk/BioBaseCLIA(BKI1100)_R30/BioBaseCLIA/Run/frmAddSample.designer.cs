@@ -745,11 +745,7 @@
             resources.GetString("cmbSpType.Items3"),
             resources.GetString("cmbSpType.Items4"),
             resources.GetString("cmbSpType.Items5"),
-            resources.GetString("cmbSpType.Items6"),
-            resources.GetString("cmbSpType.Items7"),
-            resources.GetString("cmbSpType.Items8"),
-            resources.GetString("cmbSpType.Items9"),
-            resources.GetString("cmbSpType.Items10")});
+            resources.GetString("cmbSpType.Items6")});
             this.cmbSpType.Name = "cmbSpType";
             this.cmbSpType.SelectedIndexChanged += new System.EventHandler(this.cmbSpType_SelectedIndexChanged);
             // 
