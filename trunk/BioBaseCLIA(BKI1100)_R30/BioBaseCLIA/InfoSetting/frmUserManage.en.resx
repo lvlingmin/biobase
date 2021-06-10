@@ -872,7 +872,7 @@
     <value>Personal</value>
   </data>
   <data name="SameUser" xml:space="preserve">
-    <value>The password of the account with the same name will be updated automatically.</value>
+    <value>The account already exists, please re-enter the user name!</value>
   </data>
   <data name="UserInfoSet" xml:space="preserve">
     <value>User Information Settings</value>

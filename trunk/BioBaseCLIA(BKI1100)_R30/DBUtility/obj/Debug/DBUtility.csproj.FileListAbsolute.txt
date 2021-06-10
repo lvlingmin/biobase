@@ -177,3 +177,11 @@ E:\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\obj\Debug\DBUtil
 E:\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\obj\Debug\DBUtility.csproj.CopyComplete
 E:\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\obj\Debug\DBUtility.dll
 E:\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\obj\Debug\DBUtility.pdb
+D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\bin\Debug\DBUtility.dll
+D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\bin\Debug\DBUtility.pdb
+D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\bin\Debug\System.Data.SQLite.DLL
+D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\obj\Debug\DBUtility.csprojAssemblyReference.cache
+D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\obj\Debug\DBUtility.csproj.CoreCompileInputs.cache
+D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\obj\Debug\DBUtility.csproj.CopyComplete
+D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\obj\Debug\DBUtility.dll
+D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\DBUtility\obj\Debug\DBUtility.pdb

@@ -108,3 +108,4 @@ D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_新台式\DBUtility\obj\D
 D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_新台式\DBUtility\obj\Debug\DBUtility.csproj.CopyComplete
 D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_新台式\DBUtility\obj\Debug\DBUtility.dll
 D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_新台式\DBUtility\obj\Debug\DBUtility.pdb
+D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_新台式\DBUtility\obj\Debug\DBUtility.csprojAssemblyReference.cache

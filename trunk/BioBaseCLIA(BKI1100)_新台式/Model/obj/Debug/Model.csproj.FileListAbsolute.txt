@@ -59,3 +59,4 @@ D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_新台式\Model\bin\Debug
 D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_新台式\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
 D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_新台式\Model\obj\Debug\Model.dll
 D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_新台式\Model\obj\Debug\Model.pdb
+D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_新台式\Model\obj\Debug\Model.csprojAssemblyReference.cache

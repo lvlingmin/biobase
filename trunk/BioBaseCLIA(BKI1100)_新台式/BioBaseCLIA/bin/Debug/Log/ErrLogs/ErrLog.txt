@@ -1,0 +1,20 @@
+
+************************************************************************
+出现应用程序未处理的异常：：2021/6/10 15:07:30
+类型：FormatException
+消息：输入字符串的格式不正确。
+信息：   在 System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   在 System.Double.Parse(String s)
+   在 BioBaseCLIA.ScalingQC.frmQC.fbtnPrint_MouseDown(Object sender, MouseEventArgs e) 位置 D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_新台式\BioBaseCLIA\ScalingQC\frmQC.cs:行号 791
+   在 System.Windows.Forms.Control.OnMouseDown(MouseEventArgs e)
+   在 System.Windows.Forms.ButtonBase.OnMouseDown(MouseEventArgs mevent)
+   在 System.Windows.Forms.Control.WmMouseDown(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.ButtonBase.WndProc(Message& m)
+   在 System.Windows.Forms.Button.WndProc(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+************************************************************************
+
