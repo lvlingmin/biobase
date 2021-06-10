@@ -97,3 +97,9 @@ E:\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\Model\bin\Debug\Model.pdb
 E:\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
 E:\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\Model\obj\Debug\Model.dll
 E:\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\Model\obj\Debug\Model.pdb
+D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\Model\bin\Debug\Model.dll
+D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\Model\bin\Debug\Model.pdb
+D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\Model\obj\Debug\Model.csprojAssemblyReference.cache
+D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\Model\obj\Debug\Model.dll
+D:\Code\BioBaseCLIA\BKI1100\trunk\BioBaseCLIA(BKI1100)_R30\Model\obj\Debug\Model.pdb

@@ -1459,18 +1459,18 @@
     <value>用户密码不能为空</value>
   </data>
   <data name="PassWordSet" xml:space="preserve">
-    <value>密码不能存在汉字、字母、星号、数字、\".\"、下划线以外的符号。</value>
+    <value>密码不能存在汉字、字母、星号、数字、.、下划线以外的符号。</value>
   </data>
   <data name="Personal" xml:space="preserve">
     <value>普通用户</value>
   </data>
   <data name="SameUser" xml:space="preserve">
-    <value>已有同名帐号，自动更新其密码。</value>
+    <value>该账号已存在，请重新输入用户名！</value>
   </data>
   <data name="UserInfoSet" xml:space="preserve">
     <value>用户信息设置</value>
   </data>
   <data name="UserNameSet" xml:space="preserve">
-    <value>用户名至少由一位汉字、字母、星号、数字、\".\"、下划线组成。</value>
+    <value>用户名至少由一位汉字、字母、星号、数字、.、下划线组成。</value>
   </data>
 </root>
