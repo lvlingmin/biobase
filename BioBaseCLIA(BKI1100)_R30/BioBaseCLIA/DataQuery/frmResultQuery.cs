@@ -43,6 +43,7 @@ namespace BioBaseCLIA.DataQuery
         }
         private void frmResultQuery_Load(object sender, EventArgs e)
         {
+            dgvPatientInfo.MultiSelect = false;
             //2018-5-14 zlx add
             bool IsLisConnect = bool.Parse(OperateIniFile.ReadInIPara("LisSet", "IsLisConnect"));
             if (!IsLisConnect)
