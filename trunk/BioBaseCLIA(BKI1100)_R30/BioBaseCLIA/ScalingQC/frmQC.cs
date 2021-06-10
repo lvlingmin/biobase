@@ -57,7 +57,7 @@ namespace BioBaseCLIA.ScalingQC
         /// <summary>
         /// 信息提示类变量
         /// </summary>
-        messageDialog msd = new messageDialog();        
+        messageDialog msd = new messageDialog();
         bool frmFlag = false;
         #endregion
         public frmQC()
@@ -93,7 +93,7 @@ namespace BioBaseCLIA.ScalingQC
             #endregion
             #region 查询并显示所有的项目名称
             db = new DbHelperOleDb(0);
-            DataTable dtItemName = DbHelperOleDb.Query(0,@"select * from tbProject").Tables[0];
+            DataTable dtItemName = DbHelperOleDb.Query(0, @"select * from tbProject").Tables[0];
             if (dtItemName.Rows.Count == 0)
             {
                 return;
@@ -105,6 +105,7 @@ namespace BioBaseCLIA.ScalingQC
             }
             #endregion            
             #endregion
+            cmbBype.DataSource = new string[3] { getString("keywordText.High"), getString("keywordText.Middle"), getString("keywordText.Low") };
         }
         #region 质控管理
         /// <summary>
@@ -220,6 +221,10 @@ namespace BioBaseCLIA.ScalingQC
                 if (chk10x.Checked)
                 {
                     rl += ",5";
+                }
+                if (rl.Substring(0, 1) == ",")
+                {
+                    rl = rl.Substring(1, rl.Length - 1);
                 }
                 mQC.QCRules = rl;
                 if (bllQC.Add(mQC))
@@ -423,7 +428,7 @@ namespace BioBaseCLIA.ScalingQC
             StringBuilder sbQCLevel = new StringBuilder("select QCLevel from tbQC where Batch ='"
                 + cmbQCBatch.SelectedItem + "' and ProjectName ='" + cmbItem.SelectedItem + "'");
             string queryStr = "QCLevel";
-            DataTable dtQClevel = DbHelperOleDb.Query(3,sbQCLevel.ToString()).Tables[0];
+            DataTable dtQClevel = DbHelperOleDb.Query(3, sbQCLevel.ToString()).Tables[0];
             if (dtQClevel.Rows.Count == 0)
             {
                 return;
@@ -468,7 +473,7 @@ namespace BioBaseCLIA.ScalingQC
         void bindCmbValue(string SQL, ComboBox control, string queryStr)
         {
             DbHelperOleDb db = new DbHelperOleDb(3);
-            DataTable dt = DbHelperOleDb.Query(3,SQL).Tables[0];
+            DataTable dt = DbHelperOleDb.Query(3, SQL).Tables[0];
             if (dt.Rows.Count == 0)
             {
                 return;
@@ -540,8 +545,8 @@ namespace BioBaseCLIA.ScalingQC
                 sbSQLSD.Append("and QCLevel='" + QCLevel1(cmbQClevel.SelectedItem.ToString()) + "'");
             }
             DbHelperOleDb db = new DbHelperOleDb(3);
-            QCMean = DbHelperOleDb.GetSingle(3,sbSQLMean.ToString()).ToString();
-            QCSD = DbHelperOleDb.GetSingle(3,sbSQLSD.ToString()).ToString();
+            QCMean = DbHelperOleDb.GetSingle(3, sbSQLMean.ToString()).ToString();
+            QCSD = DbHelperOleDb.GetSingle(3, sbSQLSD.ToString()).ToString();
             if (QCMean == null)
             {
                 QCMean = 0;
@@ -562,7 +567,7 @@ namespace BioBaseCLIA.ScalingQC
 
         }
 
-        int currenttime;        
+        int currenttime;
         /// <summary>画质控线
         /// 
         /// </summary>
@@ -591,8 +596,8 @@ namespace BioBaseCLIA.ScalingQC
             sbQCValueShow.Append(" and TestDate>=#" + dtpStart.Value.Date.ToString("yyyy-MM-dd")
                     + "# and TestDate<#" + dtpEnd.Value.Date.AddDays(1).ToString("yyyy-MM-dd") + "# ORDER BY TestDate");
             DbHelperOleDb db = new DbHelperOleDb(1);
-            dtQCValueShow = DbHelperOleDb.Query(1,sbQCValueShow.ToString()).Tables[0];  //lyq mod 20190828 
-            
+            dtQCValueShow = DbHelperOleDb.Query(1, sbQCValueShow.ToString()).Tables[0];  //lyq mod 20190828 
+
             //DataTable dtQCValueShow = DbHelperOleDb.Query(sbQCValueShow.ToString()).Tables[0]; 
             //dgvQCValue.DataSource = dtQCValueShow;  //lyq 注释20190902
             #endregion
@@ -620,10 +625,10 @@ namespace BioBaseCLIA.ScalingQC
 
             sbQCValue.Append(" and TestDate>=#" + dtpStart.Value.Date.ToString("yyyy-MM-dd")
                     + "# and TestDate<#" + dtpEnd.Value.AddDays(1).ToString("yyyy-MM-dd") + "#  ORDER BY TestDate");
-            db = new DbHelperOleDb(1); 
-            dtQCValueDay = DbHelperOleDb.Query(1,sbQCValueDay.ToString()).Tables[0];
-            dtQCValue = DbHelperOleDb.Query(1,sbQCValue.ToString()).Tables[0];
-         
+            db = new DbHelperOleDb(1);
+            dtQCValueDay = DbHelperOleDb.Query(1, sbQCValueDay.ToString()).Tables[0];
+            dtQCValue = DbHelperOleDb.Query(1, sbQCValue.ToString()).Tables[0];
+
             for (int i = dtQCValue.Rows.Count - 1; i >= 0; i--)
             {
                 if (string.IsNullOrEmpty(dtQCValue.Rows[i]["Concentration"].ToString()))
@@ -644,7 +649,7 @@ namespace BioBaseCLIA.ScalingQC
                                + "# and TestDate<#" + dtpEnd.Value.AddDays(1).ToString("yyyy-MM-dd") +
                                "# GROUP BY FORMAT(TestDate,'yyyy-mm-dd') ORDER BY FORMAT(TestDate,'yyyy-mm-dd')";
 
-            dtQCAvgDay = DbHelperOleDb.Query(1,strAvgSql.ToString()).Tables[0];
+            dtQCAvgDay = DbHelperOleDb.Query(1, strAvgSql.ToString()).Tables[0];
 
 
             #region 失控提示显示和点颜色变化
@@ -737,7 +742,7 @@ namespace BioBaseCLIA.ScalingQC
             int currenttime4 = int.Parse(DateTime.Now.Second.ToString()) - currenttime;
             currenttime = int.Parse(DateTime.Now.Second.ToString());
             #endregion
-            
+
         }
 
         /// <summary>
@@ -767,15 +772,15 @@ namespace BioBaseCLIA.ScalingQC
         private void chbVis_CheckedChanged(object sender, EventArgs e)
         {
             //lyq add 20190902  两个radioButton 各自change一次，所以执行两次的问题。 改为只执行第二次 
-            if (rbdDtime != null )
+            if (rbdDtime != null)
             {
-                if (DateTime.Now.Subtract(rbdDtime).TotalMilliseconds < 200  )
+                if (DateTime.Now.Subtract(rbdDtime).TotalMilliseconds < 200)
                 {
                     if (frmFlag)
                         DrawQcline();
-                }                    
-            }                
-            rbdDtime = DateTime.Now;  
+                }
+            }
+            rbdDtime = DateTime.Now;
         }
         private void frmQC_SizeChanged(object sender, EventArgs e)
         {
@@ -784,6 +789,10 @@ namespace BioBaseCLIA.ScalingQC
 
         private void fbtnPrint_MouseDown(object sender, MouseEventArgs e)
         {
+            if (dgvQCValue.Rows.Count < 1)
+            {
+                return;
+            }
             DataTable dtPrint;
             if (tabControl1.SelectedIndex == 0)
                 dtPrint = dtQCValue;
@@ -853,9 +862,13 @@ namespace BioBaseCLIA.ScalingQC
 
         private void fbtnDelete_Click(object sender, EventArgs e)
         {
+            if (dgvQCValue.Rows.Count < 1)
+            {
+                return;
+            }
             int index = dgvQCValue.CurrentRow.Index; //lyq 20190911
             bool updFlag = false; //lyq 190911
-            
+
             DbHelperOleDb db = new DbHelperOleDb(1);
             BLL.tbQCResult bllqcresult = new BLL.tbQCResult();
             Model.tbQCResult mdqcresult = new Model.tbQCResult();
@@ -866,7 +879,7 @@ namespace BioBaseCLIA.ScalingQC
                 bllqcresult.Delete(int.Parse(dgvQCValue.CurrentRow.Cells["QCResultID"].Value.ToString()));
             }
             else
-            {               
+            {
                 if (string.IsNullOrEmpty(txtQCNewValue.Text.Trim())) return;
                 if (cmbQCBatch.SelectedItem == null) return;
                 int qcID;
@@ -874,7 +887,7 @@ namespace BioBaseCLIA.ScalingQC
                 if (cmbQClevel.SelectedItem == null)
                 {
                     db = new DbHelperOleDb(3);
-                    qcID = int.Parse(DbHelperOleDb.GetSingle(3,"select QCID from tbQC where Batch = '" + cmbQCBatch.SelectedItem +
+                    qcID = int.Parse(DbHelperOleDb.GetSingle(3, "select QCID from tbQC where Batch = '" + cmbQCBatch.SelectedItem +
                                            "' and ProjectName = '" + cmbItem.SelectedItem + "'").ToString());
                     mdqcresult.ConcLevel = 3;
                 }
@@ -886,7 +899,7 @@ namespace BioBaseCLIA.ScalingQC
                     int concLevel = QCLevel1(cmbQClevel.SelectedItem.ToString());
                     string itemName = cmbItem.SelectedItem.ToString();
                     db = new DbHelperOleDb(3);
-                    qcID = int.Parse(DbHelperOleDb.GetSingle(3,"select QCID from tbQC where QCLevel = '" + QCLevel1(cmbQClevel.SelectedItem.ToString())
+                    qcID = int.Parse(DbHelperOleDb.GetSingle(3, "select QCID from tbQC where QCLevel = '" + QCLevel1(cmbQClevel.SelectedItem.ToString())
                                                + "' and Batch = '" + cmbQCBatch.SelectedItem +
                                                "' and ProjectName = '" + cmbItem.SelectedItem + "'").ToString());
                     mdqcresult.ConcLevel = concLevel;
@@ -922,7 +935,7 @@ namespace BioBaseCLIA.ScalingQC
             if (index >= 0 && index < dgvQCValue.Rows.Count && updFlag) //修改后光标在当前行
             { //lyq add 20190911
                 dgvQCValue.Rows[index].Selected = true;
-                dgvQCValue.CurrentCell = dgvQCValue.Rows[index].Cells[1]; 
+                dgvQCValue.CurrentCell = dgvQCValue.Rows[index].Cells[1];
                 updFlag = false;
 
                 dtpQCTime.Value = DateTime.Parse(dgvQCValue.CurrentRow.Cells["TestDate"].Value.ToString());
@@ -962,7 +975,7 @@ namespace BioBaseCLIA.ScalingQC
                     if (dtQCValueShow.Rows.Count > 0)
                     {
                         dgvQCValue.DataSource = dtQCValueShow;
-                        
+
                         //lyq add 20190827
                         fbtnModify.Enabled = true;
                         fbtnDelete.Enabled = true;
@@ -973,15 +986,15 @@ namespace BioBaseCLIA.ScalingQC
                 {
                     if (dtQCAvgDay.Rows.Count > 0)
                     {
-                        dgvQCValue.DataSource = dtQCAvgDay;                       
+                        dgvQCValue.DataSource = dtQCAvgDay;
 
                         //lyq add 20190831
                         fbtnModify.Enabled = false;
                         fbtnDelete.Enabled = false;
-                        
-                    }     
+
+                    }
                 }
-            }            
+            }
         }
         private void DgvQCValue_DataSourceChanged(object sender, EventArgs e)
         {
@@ -1003,7 +1016,7 @@ namespace BioBaseCLIA.ScalingQC
                 {
                     if (DateTime.Now.Subtract(remindDTime).TotalMilliseconds < 1000)
                         return;
-                        remindDTime = DateTime.Now;
+                    remindDTime = DateTime.Now;
                     BeginInvoke(new Action(() =>
                     {
                         MessageBox.Show(getString("keywordText.ExceedRemind") + dgvQCValue.Rows.Count);
