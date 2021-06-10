@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSampleLoad));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.fbtnTestResult = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
@@ -45,14 +45,6 @@
             this.btnLoadSp = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvSpInfoList = new System.Windows.Forms.DataGridView();
-            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SampleNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RepeatCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SampleType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TubeType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label17 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
@@ -72,6 +64,14 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.srdReagent = new Disk.SampleReagentDisk();
+            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SampleNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RepeatCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SampleType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TubeType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -232,13 +232,14 @@
             // 
             this.dgvSpInfoList.AllowUserToAddRows = false;
             this.dgvSpInfoList.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvSpInfoList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvSpInfoList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSpInfoList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvSpInfoList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvSpInfoList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Position,
@@ -255,62 +256,6 @@
             this.dgvSpInfoList.RowHeadersVisible = false;
             this.dgvSpInfoList.RowTemplate.Height = 23;
             this.dgvSpInfoList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            // 
-            // Position
-            // 
-            this.Position.DataPropertyName = "Position";
-            resources.ApplyResources(this.Position, "Position");
-            this.Position.Name = "Position";
-            this.Position.ReadOnly = true;
-            // 
-            // SampleNo
-            // 
-            this.SampleNo.DataPropertyName = "SampleNo";
-            resources.ApplyResources(this.SampleNo, "SampleNo");
-            this.SampleNo.Name = "SampleNo";
-            this.SampleNo.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "ItemName";
-            resources.ApplyResources(this.dataGridViewTextBoxColumn1, "dataGridViewTextBoxColumn1");
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // RepeatCount
-            // 
-            this.RepeatCount.DataPropertyName = "RepeatCount";
-            resources.ApplyResources(this.RepeatCount, "RepeatCount");
-            this.RepeatCount.Name = "RepeatCount";
-            this.RepeatCount.ReadOnly = true;
-            // 
-            // SampleType
-            // 
-            this.SampleType.DataPropertyName = "SampleType";
-            resources.ApplyResources(this.SampleType, "SampleType");
-            this.SampleType.Name = "SampleType";
-            this.SampleType.ReadOnly = true;
-            // 
-            // TubeType
-            // 
-            this.TubeType.DataPropertyName = "TubeType";
-            resources.ApplyResources(this.TubeType, "TubeType");
-            this.TubeType.Name = "TubeType";
-            this.TubeType.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Emergency";
-            resources.ApplyResources(this.dataGridViewTextBoxColumn2, "dataGridViewTextBoxColumn2");
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // Status
-            // 
-            this.Status.DataPropertyName = "Status";
-            resources.ApplyResources(this.Status, "Status");
-            this.Status.Name = "Status";
-            this.Status.ReadOnly = true;
             // 
             // groupBox3
             // 
@@ -978,6 +923,69 @@
             this.srdReagent.MouseDown += new System.Windows.Forms.MouseEventHandler(this.srdReagent_MouseDown);
             this.srdReagent.MouseUp += new System.Windows.Forms.MouseEventHandler(this.srdReagent_MouseUp);
             // 
+            // Position
+            // 
+            this.Position.DataPropertyName = "Position";
+            this.Position.FillWeight = 60F;
+            resources.ApplyResources(this.Position, "Position");
+            this.Position.Name = "Position";
+            this.Position.ReadOnly = true;
+            // 
+            // SampleNo
+            // 
+            this.SampleNo.DataPropertyName = "SampleNo";
+            this.SampleNo.FillWeight = 150F;
+            resources.ApplyResources(this.SampleNo, "SampleNo");
+            this.SampleNo.Name = "SampleNo";
+            this.SampleNo.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "ItemName";
+            this.dataGridViewTextBoxColumn1.FillWeight = 150F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn1, "dataGridViewTextBoxColumn1");
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // RepeatCount
+            // 
+            this.RepeatCount.DataPropertyName = "RepeatCount";
+            this.RepeatCount.FillWeight = 80F;
+            resources.ApplyResources(this.RepeatCount, "RepeatCount");
+            this.RepeatCount.Name = "RepeatCount";
+            this.RepeatCount.ReadOnly = true;
+            // 
+            // SampleType
+            // 
+            this.SampleType.DataPropertyName = "SampleType";
+            resources.ApplyResources(this.SampleType, "SampleType");
+            this.SampleType.Name = "SampleType";
+            this.SampleType.ReadOnly = true;
+            // 
+            // TubeType
+            // 
+            this.TubeType.DataPropertyName = "TubeType";
+            this.TubeType.FillWeight = 80F;
+            resources.ApplyResources(this.TubeType, "TubeType");
+            this.TubeType.Name = "TubeType";
+            this.TubeType.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Emergency";
+            this.dataGridViewTextBoxColumn2.FillWeight = 60F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn2, "dataGridViewTextBoxColumn2");
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // Status
+            // 
+            this.Status.DataPropertyName = "Status";
+            this.Status.FillWeight = 70F;
+            resources.ApplyResources(this.Status, "Status");
+            this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
+            // 
             // frmSampleLoad
             // 
             resources.ApplyResources(this, "$this");
@@ -1022,14 +1030,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvSpInfoList;
         private CustomControl.FunctionButton btnCreatWorkList;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Position;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SampleNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RepeatCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SampleType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TubeType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -1050,5 +1050,13 @@
         private CustomControl.FunctionButton fbtnRunInfoMody;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Position;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SampleNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RepeatCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SampleType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TubeType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
     }
 }
