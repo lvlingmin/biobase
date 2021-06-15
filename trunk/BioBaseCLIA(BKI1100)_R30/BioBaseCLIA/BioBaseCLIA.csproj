@@ -592,6 +592,9 @@
     <EmbeddedResource Include="Run\frmLogShow.en-US.resx">
       <DependentUpon>frmLogShow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Run\frmLogShow.en.resx">
+      <DependentUpon>frmLogShow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Run\frmLogShow.resx">
       <DependentUpon>frmLogShow.cs</DependentUpon>
       <SubType>Designer</SubType>
