@@ -47,8 +47,8 @@
             // 
             // btnOK
             // 
-            this.btnOK.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnOK, "btnOK");
+            this.btnOK.BackColor = System.Drawing.Color.Transparent;
             this.btnOK.EnabledSet = true;
             this.btnOK.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnOK.FlatAppearance.BorderSize = 0;
@@ -61,10 +61,11 @@
             // frmVersion
             // 
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnOK);
+            this.MaximizeBox = false;
             this.Name = "frmVersion";
             this.ResumeLayout(false);
             this.PerformLayout();
