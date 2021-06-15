@@ -11255,7 +11255,7 @@ namespace BioBaseCLIA.Run
                 {
                     proBar = lisProBar[i];
                 }
-                catch (ArgumentOutOfRangeException exception) 
+                catch (IndexOutOfRangeException exception) 
                 {
                     LogFile.Instance.Write(DateTime.Now.ToString("mm:ss:ms") + "记录进度条数组越界异常");
                 }
