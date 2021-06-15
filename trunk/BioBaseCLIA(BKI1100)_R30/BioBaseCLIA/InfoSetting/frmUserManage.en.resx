@@ -866,7 +866,7 @@
     <value>The user password cannot be empty</value>
   </data>
   <data name="PassWordSet" xml:space="preserve">
-    <value>The password cannot contain characters, letters, asterisks, numbers, \".\", symbols other than underscores.</value>
+    <value>The password cannot contain characters, letters, asterisks, numbers, ., symbols other than underscores.</value>
   </data>
   <data name="Personal" xml:space="preserve">
     <value>Personal</value>
@@ -878,6 +878,6 @@
     <value>User Information Settings</value>
   </data>
   <data name="UserNameSet" xml:space="preserve">
-    <value>The user name consists of at least one Chinese character, letter, asterisk, number, \".\", and underscore.</value>
+    <value>The user name consists of at least one Chinese character, letter, asterisk, number, ., and underscore.</value>
   </data>
 </root>
