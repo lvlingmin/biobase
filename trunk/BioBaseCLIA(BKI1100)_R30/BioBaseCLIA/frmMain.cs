@@ -1565,24 +1565,31 @@ namespace BioBaseCLIA
         {
             if (NetCom3.isConnect && NetCom3.Instance.isHeartbeatLive) return;
 
-            if (NetCom3.Instance.CheckMyIp_Port_Link())
+            try
             {
-                NetCom3.Instance.close();
-                NetCom3.Instance.ConnectServer();
+                if (NetCom3.Instance.CheckMyIp_Port_Link())
+                {
+                    NetCom3.Instance.close();
+                    NetCom3.Instance.ConnectServer();
 
-                if (!NetCom3.isConnect)
-                {
-                    frmMessageShow frmMS = new frmMessageShow();
-                    frmMS.MessageShow(GetString("Tips"),GetString("Unableconnect"));
-                    frmMS.Dispose();
-                    return;
+                    if (!NetCom3.isConnect)
+                    {
+                        frmMessageShow frmMS = new frmMessageShow();
+                        frmMS.MessageShow(GetString("Tips"), GetString("Unableconnect"));
+                        frmMS.Dispose();
+                        return;
+                    }
+                    else
+                    {
+                        NetCom3.Instance.SendHeartbeat();
+                        fbtnTest.Enabled = true;
+                        fbtnMaintenance.Enabled = true;
+                    }
                 }
-                else
-                {
-                    NetCom3.Instance.SendHeartbeat();
-                    fbtnTest.Enabled = true;
-                    fbtnMaintenance.Enabled = true;
-                }
+            }
+            catch (Exception exception) 
+            {
+                MessageBox.Show(GetString("AccessInterruption"), GetString("Tips"), MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             }
         }
 
