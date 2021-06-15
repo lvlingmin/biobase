@@ -6126,4 +6126,19 @@
   <data name="AccessInterruption" xml:space="preserve">
     <value>通路中断，请重新确认连接并重启仪器与软件</value>
   </data>
+  <data name="Alarmfailed" xml:space="preserve">
+    <value>报警模块握手失败！</value>
+  </data>
+  <data name="Cleanfailed" xml:space="preserve">
+    <value>清洗模块握手失败！</value>
+  </data>
+  <data name="Incubationfailure" xml:space="preserve">
+    <value>温育盘模组握手失败</value>
+  </data>
+  <data name="InitExcetion" xml:space="preserve">
+    <value>上下位机握手失败！</value>
+  </data>
+  <data name="Samplefailed" xml:space="preserve">
+    <value>加样机模组握手失败！</value>
+  </data>
 </root>
