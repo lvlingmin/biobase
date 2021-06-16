@@ -35,10 +35,6 @@ namespace BioBaseCLIA.SysMaintenance
         /// 存储线程，返回按钮结束时使用
         /// </summary>
         List<Thread> threadList = new List<Thread>();
-        /// <summary>
-        /// 液位开始查询标志
-        /// </summary>
-        public static bool BQLiquaid = false;
         #region 基础性能变量
         /// <summary>
         /// 反应盘待使用空白反应管个数
@@ -223,7 +219,7 @@ namespace BioBaseCLIA.SysMaintenance
                 NetCom3.Delay(1);
             }
             bClose = true;
-            BQLiquaid = false;
+            frmMain.BQLiquaid = false;
             cmbSendDelay.SelectedIndex = 2;
             cmbConnDelay.SelectedIndex = 1;
             txtMoveInHoleNum.MaxValue = ReactTrayNum;
@@ -317,6 +313,7 @@ namespace BioBaseCLIA.SysMaintenance
             NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 02 0B B0 00 00"), 0);
             NetCom3.Instance.SPQuery();
             fbtnReturn.Enabled = true;
+            frmMain.BQLiquaid = true;
             this.Close();
         }
         private void frmDiagnost_FormClosed(object sender, FormClosedEventArgs e)
@@ -9911,12 +9908,12 @@ namespace BioBaseCLIA.SysMaintenance
             btnBQLiquaid.Enabled = false;
             if (btnBQLiquaid.Text.Trim() == "打开报警查询")
             {
-                BQLiquaid = true;
+                frmMain.BQLiquaid = true;
                 btnBQLiquaid.Text = "关闭报警查询";
             }
             else
             {
-                BQLiquaid = false;
+                frmMain.BQLiquaid = false;
                 btnBQLiquaid.Text = "打开报警查询";
             }
             btnBQLiquaid.Enabled = true;
