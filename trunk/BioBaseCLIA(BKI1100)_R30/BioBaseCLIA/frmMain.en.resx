@@ -2587,4 +2587,7 @@
   <data name="Samplefailed" xml:space="preserve">
     <value>Add prototype module handshake failed!</value>
   </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>BIOBASE</value>
+  </data>
 </root>
