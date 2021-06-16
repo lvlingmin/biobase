@@ -6096,9 +6096,6 @@
   <data name="Temporarystorageempty" xml:space="preserve">
     <value>暂存盘位置缺管</value>
   </data>
-  <data name="Temporarystorageempty1" xml:space="preserve">
-    <value>暂存盘位置缺管</value>
-  </data>
   <data name="Tips" xml:space="preserve">
     <value>温馨提示</value>
   </data>
@@ -6140,5 +6137,11 @@
   </data>
   <data name="Samplefailed" xml:space="preserve">
     <value>加样机模组握手失败！</value>
+  </data>
+  <data name="Counterfailed" xml:space="preserve">
+    <value>计数器模块握手失败！</value>
+  </data>
+  <data name="Cupmanagementfailed" xml:space="preserve">
+    <value>理杯机模块握手失败！</value>
   </data>
 </root>
