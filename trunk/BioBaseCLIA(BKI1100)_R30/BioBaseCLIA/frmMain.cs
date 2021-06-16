@@ -150,6 +150,10 @@ namespace BioBaseCLIA
         /// </summary>
         int SoundFlag;
         public static int WarnTime = 0;
+        /// <summary>
+        /// 液位温度查询标志
+        /// </summary>
+        public static bool BQLiquaid = true;
         public frmMain()
         {
             InitializeComponent();
@@ -342,38 +346,13 @@ namespace BioBaseCLIA
                             Thread.Sleep(1000);
                         if (NetCom3.isConnect && list[0] != null && NetCom3.isConnect/* && NetCom3.Instance.FReciveCallBack < 3*/)
                         {
-                            if (frmWorkList.RunFlag==(int)RunFlagStart.IsRuning )
+                            if (BQLiquaid)
                             {
-                                if (frmWorkList.BQLiquaid)
-                                {
-                                    while (!NetCom3.totalOrderFlag)
-                                        Thread.Sleep(50);
-                                    NetCom3.Instance.Send(NetCom3.Cover(list[0]),5);
-                                    NetCom3.Instance.SingleQuery();
-                                }
-                            }
-                            else
-                            {
-                                Invoke(new Action(() =>
-                                {
-                                    if (this.ActiveControl != null && this.ActiveControl.Text == "frmDiagnost")//在调试界面返回时立刻执行这句会出现“线程间操作无效”错误
-                                    {
-                                        if (!frmDiagnost.BQLiquaid)
-                                        {
-                                            diagFlag = true;
-                                        }
-                                    }
-                                }));
-                                if (diagFlag)
-                                {
-                                    diagFlag = false;
-                                    continue;
-                                }
                                 while (!NetCom3.totalOrderFlag)
-                                Thread.Sleep(50);
+                                    Thread.Sleep(50);
                                 NetCom3.Instance.Send(NetCom3.Cover(list[0]), 5);
                                 NetCom3.Instance.SingleQuery();
-                            }                              
+                            }
                         }                        
                         list.Remove(list[0]);                        
                     }
@@ -409,7 +388,7 @@ namespace BioBaseCLIA
         {
             List<ReagentIniInfo> lisReagentIniInfo = new List<ReagentIniInfo>();
             ReagentIniInfo reagentIniInfo = new ReagentIniInfo();
-            for (int i = 1; i <= 30; i++)
+            for (int i = 1; i <= frmParent.RegentNum; i++)
             {
                 string ReagentType = OperateIniFile.ReadIniData("ReagentPos" + i.ToString(), "ReagentType", "", iniPathReagentTrayInfo);
                 if (ReagentType == "1") continue;

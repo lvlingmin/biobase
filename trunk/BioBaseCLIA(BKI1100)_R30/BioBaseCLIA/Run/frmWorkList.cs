@@ -423,10 +423,6 @@ namespace BioBaseCLIA.Run
         /// </summary>
         bool RunLightFlag = false;
         /// <summary>
-        /// 液位开始查询标志
-        /// </summary>
-        public static bool BQLiquaid = false;
-        /// <summary>
         /// 缺管标志  
         /// </summary>
         public static bool TubeStop = false;
@@ -2797,8 +2793,8 @@ namespace BioBaseCLIA.Run
             TrayRemoveAllTube = false;//y add 抓空标志位，确定是否触发抓空异常
             isCleanPipeLineNow = false;//add y 20180727 是否在清洗清洗盘管路标志位
             //2018-07-23
-            if (BQLiquaid)
-                BQLiquaid = false;
+            if (frmMain.BQLiquaid)
+                frmMain.BQLiquaid = false;
             //2018-07-18
             #region 缺液提示
             if (frmMain.LackLq[0] > 0 || frmMain.LackLq[1] > 0 || frmMain.LackLq[2] > 0 || frmMain.LackLq[3] > 0)
@@ -2901,7 +2897,7 @@ namespace BioBaseCLIA.Run
             {
                 NetCom3.Delay(10);
             }
-            BQLiquaid = true;//2018-07-21
+            frmMain.BQLiquaid = true;//2018-07-21
 
             #region 清洗盘反应管状态表
             DataTable dtIniWashTray = OperateIniFile.ReadConfig(iniPathWashTrayInfo);
@@ -10943,7 +10939,7 @@ namespace BioBaseCLIA.Run
                 }
                 LogFile.Instance.Write(DateTime.Now + "实验调用了终止实验的程序！");
                 StopStopWatch();//终止倒计时
-                BQLiquaid = false;//2018-09-14
+                frmMain.BQLiquaid = false;//2018-09-14
                 buttonEnableRun(false);
                 frmAddSample.newSample = true;
                 if (btnRunStatus != null)
