@@ -3650,9 +3650,6 @@
   <data name="Stopperfusion1" xml:space="preserve">
     <value>停止灌注</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value />
-  </data>
   <data name="Substrateavailability" xml:space="preserve">
     <value>正在进行底物有效性检测。。。</value>
   </data>
@@ -3703,5 +3700,8 @@
   </data>
   <data name="Tue2substrate" xml:space="preserve">
     <value>管路2无底物，请装载！</value>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>正在运行</value>
   </data>
 </root>

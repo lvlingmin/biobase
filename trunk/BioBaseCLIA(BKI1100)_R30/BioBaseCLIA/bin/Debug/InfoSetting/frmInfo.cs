@@ -1168,7 +1168,7 @@ namespace BioBaseCLIA.InfoSetting
             frmMessageShow frmMsgShow = new frmMessageShow();
             if (lbGroupItem.SelectedItem == null)
             {
-                frmMsgShow.MessageShow(Getstring("BasicSetHead"),Getstring("GroupSDelectInfo"));
+                frmMsgShow.MessageShow(Getstring("BasicSetHead"),Getstring("GroupSelectInfo"));
                 return;
             }
             var dr = dtGroupItem.Select("ProjectGroupNumber='" + lbGroupItem.SelectedItem.ToString() + "'");
