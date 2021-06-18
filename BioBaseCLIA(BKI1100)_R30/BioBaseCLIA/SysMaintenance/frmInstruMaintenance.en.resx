@@ -1819,4 +1819,7 @@
   <data name="txtWashPipeline.Text" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>frmInstruMaintenance</value>
+  </data>
 </root>
