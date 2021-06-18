@@ -151,9 +151,6 @@
   <data name="Result.HeaderText" xml:space="preserve">
     <value>sign</value>
   </data>
-  <data name="ResultDatetime.HeaderText" xml:space="preserve">
-    <value>ResultDatetime</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ResultDatetime.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -366,7 +363,7 @@
     <value>Times New Roman, 14.25pt, style=Bold</value>
   </data>
   <data name="fbtnReturn.Text" xml:space="preserve">
-    <value>Return</value>
+    <value>Back</value>
   </data>
   <data name="btnLoadSample.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
