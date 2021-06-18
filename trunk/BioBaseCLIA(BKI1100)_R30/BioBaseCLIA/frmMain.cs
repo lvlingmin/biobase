@@ -330,7 +330,6 @@ namespace BioBaseCLIA
         {
             bool iswork = false;
             List<string> list;
-            bool diagFlag = false;
             while (true)
             {
                 Thread.Sleep(100);
@@ -1404,7 +1403,7 @@ namespace BioBaseCLIA
                     if (Temp > 55)
                         Temp = 55;
                     st.Append(GetString("Incubationtemperature"));
-                    st2.Append(GetString("Incubation" + Temp.ToString() +GetString("Temperaturesign")));
+                    st2.Append(GetString("Incubation" +":"+ Temp.ToString() +GetString("Temperaturesign")));
                     LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + 
                         " *** " +GetString("Err") + " *** " +GetString("NotRead") + 
                         " *** " + GetString("Incubationtemperature")+ GetString("Notstandardtemperature")+
@@ -1417,13 +1416,13 @@ namespace BioBaseCLIA
                         Temp = 55;
                     if (st.Length > 5)
                     {
-                        st.Append("、"+  GetString("Cleantemperature") );
-                        st2.Append("，" +GetString("Clean") + Temp.ToString() + GetString("Temperaturesign"));
+                        st.Append(","+  GetString("Cleantemperature") );
+                        st2.Append("," +GetString("Clean") + ":" + Temp.ToString() + GetString("Temperaturesign"));
                     }
                     else
                     {
                         st.Append( GetString("Cleantemperature"));
-                        st2.Append(GetString("Clean") + Temp.ToString() + GetString("Temperaturesign"));
+                        st2.Append(GetString("Clean") + ":" + Temp.ToString() + GetString("Temperaturesign"));
                     }
                     LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " +
                         GetString("Err") + " *** " + GetString("NotRead") + " *** " +
@@ -1436,13 +1435,13 @@ namespace BioBaseCLIA
                         Temp = 55;
                     if (st.Length > 5)
                     {
-                        st.Append("、" + GetString("Substratetemperature"));
-                        st2.Append("，"+ GetString("Substrate") + Temp.ToString() + GetString("Temperaturesign"));
+                        st.Append("," + GetString("Substratetemperature"));
+                        st2.Append(","+ GetString("Substrate") + ":" + Temp.ToString() + GetString("Temperaturesign"));
                     }
                     else
                     {
                         st.Append(GetString("Substratetemperature"));
-                        st2.Append(GetString("Substrate") + Temp.ToString() + GetString("Temperaturesign"));
+                        st2.Append(GetString("Substrate") + ":" + Temp.ToString() + GetString("Temperaturesign"));
                     }
                     LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + GetString("Err") +
                         " *** " + GetString("NotRead") + " *** " + GetString("Substrate") + GetString("Notstandardtemperature") +"：" +
@@ -1455,13 +1454,13 @@ namespace BioBaseCLIA
                         Temp = 55;
                     if (st.Length > 5)
                     {
-                        st.Append("、"+ GetString("Pipelinetemperature"));
-                        st2.Append("，"+ GetString("Pipeline") + Temp.ToString() + GetString("Temperaturesign"));
+                        st.Append(","+ GetString("Pipelinetemperature"));
+                        st2.Append(","+ GetString("Pipeline") + ":" + Temp.ToString() + GetString("Temperaturesign"));
                     }
                     else
                     {
                         st.Append(GetString("Pipelinetemperature"));
-                        st2.Append(GetString("Pipeline")+ Temp.ToString() + GetString("Temperaturesign"));
+                        st2.Append(GetString("Pipeline") + ":" + Temp.ToString() + GetString("Temperaturesign"));
                     }
                     LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + GetString("Err") +
                         " *** " + GetString("NotRead") + " *** " + GetString("Pipeline") + GetString("Notstandardtemperature") + "：" +
@@ -1562,6 +1561,18 @@ namespace BioBaseCLIA
                     }
                     else
                     {
+                        #region 判断各个模组是否握手成功
+                        NetCom3.Instance.Send(NetCom3.Cover("EB 90 F1 01"), 5);
+                        if (!NetCom3.Instance.SingleQuery())
+                        {
+                            Invoke(new Action(() =>
+                            {
+                                MessageBox.Show(GetString("InitExcetion"), GetString("MessageboxTitle"),
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }));
+                            return;
+                        }
+                        #endregion
                         NetCom3.Instance.SendHeartbeat();
                         fbtnTest.Enabled = true;
                         fbtnMaintenance.Enabled = true;
