@@ -1029,6 +1029,10 @@ namespace BioBaseCLIA.Run
                 {
                     return;
                 }
+                if (!AllowAddSample(cmbSpType.SelectedItem.ToString()))
+                {
+                    return;
+                }
                 //lyq add 20190828
                 //if (txtSpPosition.Text == "")
                 //{
@@ -1851,6 +1855,36 @@ namespace BioBaseCLIA.Run
             return true;
         }
         /// <summary>
+        /// 是否允许添加样本信息
+        /// </summary>
+        /// <param name="SampleType">样本类型</param>
+        /// <returns></returns>
+        bool AllowAddSample(string SampleType)
+        {
+            if (!SampleType.Contains(getString("keywordText.Standard")) && !SampleType.Contains(getString("keywordText.Calibrator")) && !SampleType.Contains(getString("keywordText.Control")))
+            {
+                DataRow[] dataRow = dtSampleInfo.Select("SampleType like '" + getString("keywordText.Standard") + "%' or SampleType like '" + getString("keywordText.Calibrator") + "%' or SampleType like '" + getString("keywordText.Control") + "%' ");
+                if (dataRow.Length > 0)
+                {
+                    frmMessageShow frmMessageShow = new frmMessageShow();
+                    frmMessageShow.MessageShow(getString("keywordText.SampleLoad"), getString("keywordText.Stopload"));
+                    return false;
+                }
+            }
+            if (SampleType.Contains(getString("keywordText.Standard")) || SampleType.Contains(getString("keywordText.Calibrator")) || SampleType.Contains(getString("keywordText.Control")))
+            {
+                DataRow[] dataRow = dtSampleInfo.Select("SampleType like '" + getString("keywordText.Standard") + "%' or SampleType like '" + getString("keywordText.Calibrator") + "%' or SampleType like '" + getString("keywordText.Control") + "%' ");
+                if (dtSampleInfo.Rows.Count - dataRow.Length > 0)
+                {
+                    frmMessageShow frmMessageShow = new frmMessageShow();
+                    frmMessageShow.MessageShow(getString("keywordText.SampleLoad"), getString("keywordText.StoploadStandard"));
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
         /// 获取病人基本信息
         /// </summary>
         public void AchieveInfo(string sampleno)
@@ -2355,6 +2389,10 @@ namespace BioBaseCLIA.Run
                 else
                     frmMsg.MessageShow(getString("keywordText.SampleLoad"), getString("keywordText.NotAllowBeyond"));
                 txtSpNum.Text = Convert.ToString(frmParent.SampleNum - int.Parse(txtSpStartPos.Text) + 1);
+                return;
+            }
+            if (!AllowAddSample(cmbmSpType.SelectedItem.ToString()))
+            {
                 return;
             }
             /*
