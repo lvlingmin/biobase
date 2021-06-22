@@ -292,6 +292,8 @@ namespace BioBaseCLIA
 
             #region 登录lis逻辑
             Thread loginLis = new Thread(Work);
+            loginLis.CurrentCulture = Language.AppCultureInfo;
+            loginLis.CurrentUICulture = Language.AppCultureInfo;
             loginLis.Start();
             #endregion
         }
