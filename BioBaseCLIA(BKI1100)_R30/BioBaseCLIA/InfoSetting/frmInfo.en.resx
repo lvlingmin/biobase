@@ -2367,7 +2367,7 @@
     <value>Connect</value>
   </data>
   <data name="fbtnReturn.Text" xml:space="preserve">
-    <value>Return</value>
+    <value>Back</value>
   </data>
   <data name="File" xml:space="preserve">
     <value>File</value>
