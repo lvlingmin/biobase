@@ -1556,7 +1556,7 @@ namespace BioBaseCLIA.InfoSetting
         private void panel1_DoubleClick(object sender, EventArgs e)
         {
             frmMessageShow frmMsgShow = new frmMessageShow();
-            frmMsgShow.MessageShow("SVN", "144");
+            frmMsgShow.MessageShow("SVN", "219");
         }
     }
 }
