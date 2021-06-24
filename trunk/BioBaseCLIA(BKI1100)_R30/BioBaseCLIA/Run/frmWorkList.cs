@@ -6172,9 +6172,31 @@ namespace BioBaseCLIA.Run
                                     .ToList()
                                     .Where(item => item.Contains(testTempS.ItemName)).Count() > 0;
                                 int reagentPosition;
-                                int leftReagentTest = int.Parse(OperateIniFile.ReadIniData("ReagentPos" + dgvWorkListData.Rows[testTempS.TestID - 1].Cells["RegentPos"].Value.ToString(), "LeftReagent2", "", iniPathReagentTrayInfo));
+                                int leftReagentTest 
+                                    = int.Parse(OperateIniFile.ReadIniData("ReagentPos" + dgvWorkListData.Rows[testTempS.TestID - 1].Cells["RegentPos"].Value.ToString(), "LeftReagent2", "", iniPathReagentTrayInfo));
+
+                                bool isSinglebottle = false;
+                                if (dgvWorkListData.Rows[testTempS.TestID - 1].Cells["RegentPos"].Value.ToString() == "30")
+                                {
+                                    isSinglebottle = true;
+                                }
+                                else
+                                {
+                                    int position = int.Parse(dgvWorkListData.Rows[testTempS.TestID - 1].Cells["RegentPos"].Value.ToString());
+                                    string name = OperateIniFile.ReadIniData("ReagentPos" + (position + 1), "ItemName", "", iniPathReagentTrayInfo);
+                                    string barCode = OperateIniFile.ReadIniData("ReagentPos" + (position + 1), "BarCode", "", iniPathReagentTrayInfo);
+                                    if (!string.IsNullOrEmpty(name) && string.IsNullOrEmpty(barCode))
+                                    {
+                                        isSinglebottle = false;
+                                    }
+                                    else 
+                                    {
+                                        isSinglebottle = true;
+                                    }
+                                }
+
                                 int leftR2 = 0;
-                                if (isCurrentSpecialProject && leftReagentTest > 50)//tpoab/b2-mg特殊项目
+                                if (isCurrentSpecialProject && leftReagentTest > 50 && !isSinglebottle)//tpoab/b2-mg特殊项目
                                 {
                                     leftR2 = int.Parse(OperateIniFile.ReadIniData("ReagentPos" + rgPos.ToString(), "LeftReagent2", "", iniPathReagentTrayInfo)) - 50;
                                     reagentPosition = rgPos;
@@ -6182,8 +6204,7 @@ namespace BioBaseCLIA.Run
                                 else
                                 {
                                     leftR2 = int.Parse(OperateIniFile.ReadIniData("ReagentPos" + rgPos.ToString(), "LeftReagent2", "", iniPathReagentTrayInfo));
-
-                                    if (isCurrentSpecialProject)
+                                    if (isCurrentSpecialProject && !isSinglebottle)
                                     {
                                         reagentPosition = rgPos + 1;
                                     }
@@ -6634,13 +6655,32 @@ namespace BioBaseCLIA.Run
                     break;
                 case TestSchedule.ExperimentScheduleStep.AddSingleR:
                     #region 特殊项目装在两个试剂瓶,试剂2装载两个试剂船
+                    bool isSinglebottle2 = false;
+                    if (dgvWorkListData.Rows[testTempS.TestID - 1].Cells["RegentPos"].Value.ToString() == "30")
+                    {
+                        isSinglebottle2 = true;
+                    }
+                    else
+                    {
+                        int position = int.Parse(dgvWorkListData.Rows[testTempS.TestID - 1].Cells["RegentPos"].Value.ToString());
+                        string name = OperateIniFile.ReadIniData("ReagentPos" + (position + 1), "ItemName", "", iniPathReagentTrayInfo);
+                        string barCode = OperateIniFile.ReadIniData("ReagentPos" + (position + 1), "BarCode", "", iniPathReagentTrayInfo);
+                        if (!string.IsNullOrEmpty(name) && string.IsNullOrEmpty(barCode))
+                        {
+                            isSinglebottle2 = false;
+                        }
+                        else
+                        {
+                            isSinglebottle2 = true;
+                        }
+                    }
                     var isSpecialProject =
                         File.ReadAllLines(System.Windows.Forms.Application.StartupPath + "//SpacialProjects.txt")
                         .ToList()
                         .Where(item => item.Contains(testTempS.ItemName)).Count() > 0;
                     if (testTempS.singleStep == "R2" && isSpecialProject &&
                         int.Parse(OperateIniFile.ReadIniData("ReagentPos" + dgvWorkListData.Rows[testTempS.TestID - 1].Cells["RegentPos"].Value.ToString(),
-                        "LeftReagent2", "", iniPathReagentTrayInfo)) <= 50)
+                        "LeftReagent2", "", iniPathReagentTrayInfo)) <= 50 && !isSinglebottle2)
                         testTempS.singleStep = "NextLocationR2";
                     #endregion
 
@@ -6833,7 +6873,7 @@ namespace BioBaseCLIA.Run
                             int pos = (testTempS.AddSamplePos) % ReactTrayHoleNum == 0 ? ReactTrayHoleNum : (testTempS.AddSamplePos) % ReactTrayHoleNum;
                             //剩余R2体积
                             int leftR2 = 0;
-                            if (isSpecialProject)//tpoab/b2-mg特殊项目
+                            if (isSpecialProject && !isSinglebottle2)//tpoab/b2-mg特殊项目
                             {
                                 leftR2 = int.Parse(OperateIniFile.ReadIniData("ReagentPos" + rgPos.ToString(), "LeftReagent2", "", iniPathReagentTrayInfo)) - 50;
                             }
