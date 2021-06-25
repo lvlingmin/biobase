@@ -49,6 +49,7 @@ namespace BioBaseCLIA.Run
         public static bool isSp = false;
         bool noSpAddReagent = true;
         List<string> spacialProList = new List<string>();//两个试剂盒分装的特殊项目
+        bool isClick = false;
         /// <summary>
         /// 准备=0，试剂=1，稀释液=2
         /// </summary>
@@ -211,6 +212,11 @@ namespace BioBaseCLIA.Run
 
         private void fbtnReturn_Click(object sender, EventArgs e)
         {
+            if (isClick == true)
+            {
+                return;
+            }
+            isClick = true;
             isSp = false;
             fbtnReturn.Enabled = false;
             btnAddR.Enabled = false;
@@ -222,6 +228,7 @@ namespace BioBaseCLIA.Run
             btnDelR.Enabled = true;
             fbtnReturn.Enabled = true;
             this.Close();
+            isClick = false;
         }
 
         messageDialog msd = new messageDialog();
@@ -1078,6 +1085,11 @@ namespace BioBaseCLIA.Run
 
         private void btnWorkList_Click(object sender, EventArgs e)
         {
+            if (isClick == true)
+            {
+                return;
+            }
+            isClick = true;
             LeavePageSetReagentToMix();
             if (!CheckFormIsOpen("frmWorkList"))
             {
@@ -1092,11 +1104,16 @@ namespace BioBaseCLIA.Run
                 frmWL.Show();
                 frmWL.BringToFront();
             }
-
+            isClick = false;
         }
 
         private void fbtnTestResult_Click(object sender, EventArgs e)
         {
+            if (isClick == true)
+            {
+                return;
+            }
+            isClick = true;
             LeavePageSetReagentToMix();
             if (!CheckFormIsOpen("frmTestResult"))
             {
@@ -1110,6 +1127,7 @@ namespace BioBaseCLIA.Run
                 frmTestResult frmTR = (frmTestResult)Application.OpenForms["frmTestResult"];
                 frmTR.BringToFront(); ;
             }
+            isClick = false;
         }
         private void LeavePageSetReagentToMix()//离开页面时，通知下位机加载完成，同时让装卸栽按钮变灰
         {
@@ -1149,6 +1167,11 @@ namespace BioBaseCLIA.Run
         }
         private void btnLoadSample_Click(object sender, EventArgs e)
         {
+            if (isClick == true)
+            {
+                return;
+            }
+            isClick = true;
             isSp = false;
             //if (CheckOvertimeR()) return;
             LeavePageSetReagentToMix();
@@ -1167,6 +1190,7 @@ namespace BioBaseCLIA.Run
             }
             barCodeHook.Stop();
             this.Close();//2018-11-14 zlx add
+            isClick = false;
         }
         public bool CheckOvertimeR(int logAlarm = 0)
         {
