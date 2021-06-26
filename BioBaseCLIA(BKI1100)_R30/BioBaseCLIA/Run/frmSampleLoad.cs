@@ -332,6 +332,15 @@ namespace BioBaseCLIA.Run
             isClick = true;
             btnWorkList.Enabled = false;
 
+            LogFile.Instance.Write("点击生成工作列表按钮" + DateTime.Now.ToString("mm:ss:ms"));
+
+            if (CheckFormIsOpen("frmWorkList") &&
+               (frmWorkList.RunFlag == (int)RunFlagStart.Stoped || frmWorkList.RunFlag == (int)RunFlagStart.NoStart))
+            {
+                frmWorkList frmWL = (frmWorkList)Application.OpenForms["frmWorkList"];
+                frmWL.Close();
+            }
+
             if (CheckFormIsOpen("frmWorkList") && frmWorkList.RunFlag == (int)RunFlagStart.IsRuning)
             {
                 frmWorkList frmWL = (frmWorkList)Application.OpenForms["frmWorkList"];
