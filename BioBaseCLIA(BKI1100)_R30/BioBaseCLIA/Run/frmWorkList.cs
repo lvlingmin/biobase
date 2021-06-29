@@ -3077,19 +3077,20 @@ namespace BioBaseCLIA.Run
                 for (int i = 0; i < LackTubeNum; i++)
                 {
                     if (TubeStop) return false;
-                    MoveTubeStatus moveTube1 = new MoveTubeStatus();
-                    moveTube1.StepNum = 0;
+                    //MoveTubeStatus moveTube1 = new MoveTubeStatus();
+                    //moveTube1.StepNum = 0;
                     int putPos = int.Parse(TrayPos.Substring(2)) + i + 1;
                     if (putPos > ReactTrayHoleNum)
                         putPos = putPos - ReactTrayHoleNum + 3;
-                    moveTube1.putTubePos = "1-" + putPos.ToString();
-                    moveTube1.TestId = 0;
-                    bool b;
-                    moveTube1.TakeTubePos = "0-" + 1;
-                    lock (locker2)
-                    {
-                        lisMoveTube.Add(moveTube1);
-                    }
+                    rackToReact(putPos);
+                    //moveTube1.putTubePos = "1-" + putPos.ToString();
+                    //moveTube1.TestId = 0;
+                    //bool b;
+                    //moveTube1.TakeTubePos = "0-" + 1;
+                    //lock (locker2)
+                    //{
+                    //    lisMoveTube.Add(moveTube1);
+                    //}
                 }
             }
             #endregion
@@ -4190,21 +4191,18 @@ namespace BioBaseCLIA.Run
                         goto AgainNewMove;
                     else
                     {
-                        //NetCom3.Instance.stopsendFlag = true;
                         ShowWarnInfo(getString("keywordText.MAddNewTWashnull"), getString("keywordText.Move"), 1);
-                        //setmainformbutten();
-                        //LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手在暂存盘向清洗盘抓管时多次抓空!实验停止！");
-                        //DialogResult tempresult = MessageBox.Show("移管手抓新管抓空！实验将停止运行！", "移管手错误！", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                         return false;
                     }
                 }
                 else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.LackTube)
                 {
                     ShowWarnInfo(getString("keywordText.LackTube"), getString("keywordText.Move"), 1);
-                    //AllStop();
-                    //setmainformbutten();
-                    //LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "理杯机缺管，实验停止运行！");
-                    //DialogResult tempresult = MessageBox.Show("理杯机缺管！实验将停止运行！", "移管手错误！", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    return false;
+                }
+                else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.StuckTube)
+                {
+                    ShowWarnInfo(getString("keywordText.TemporaryDiskStuckTube"), getString("keywordText.Move"), 1);
                     return false;
                 }
                 else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.Sendfailure)
@@ -7572,6 +7570,23 @@ namespace BioBaseCLIA.Run
                     LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + getString("keywordText.Warning") + " *** " + getString("keywordText.Notread") + " *** " + getString("keywordText.LackTube") + "!" + getString("keywordText.TestStopedAddS"));
                     TubeProblemFlag = false;//2019-08-24 ZLX add
                 }
+                else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.StuckTube)
+                {
+                    TubeStop = true;
+                    if ((ReactPos != 1 && ReactPos != 2 && ReactPos != 3) && !AddTubeStop.Contains(ReactPos))
+                    {
+                        OperateIniFile.ReadIniData("ReactTrayInfo", "no" + ReactPos, "", iniPathReactTrayInfo);
+                        lock (AddTubeStop)
+                        {
+                            AddTubeStop.Add(ReactPos);
+                        }
+                    }
+                    dbtnRackStatus();
+                    setmainformbutten();
+                    string ss = getString("keywordText.TemporaryDiskStuckTube");
+                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + getString("keywordText.Warning") + " *** " + getString("keywordText.Notread") + " *** " + getString("keywordText.TemporaryDiskStuckTube") + "!" + getString("keywordText.TestStopedAddS"));
+                    TubeProblemFlag = false;//2019-08-24 ZLX add
+                }
                 else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.Sendfailure)
                 {
                     if (NetCom3.Instance.waitAndAgainSend != null && NetCom3.Instance.waitAndAgainSend is Thread)
@@ -7602,7 +7617,7 @@ namespace BioBaseCLIA.Run
                 else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.putKnocked)
                 {
                     IsKnockedCool++;
-                    GAgainNewMove:
+                GAgainNewMove:
                     NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 05 " + ReactPos.ToString("x2")), 1);
                     if (!NetCom3.Instance.MoveQuery())
                     {
@@ -8082,8 +8097,23 @@ namespace BioBaseCLIA.Run
                                     }
                                     dbtnRackStatus();
                                     setmainformbutten();
+                                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + getString("keywordText.Error") + " *** " + getString("keywordText.Notread") + " *** " + getString("keywordText.LackTube")+"!"+getString("keywordText.TestStopedAddS"));
+                                    TubeProblemFlag = false;
+                                }
+                                else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.StuckTube)
+                                {
+                                    TubeStop = true;
+                                    if ((int.Parse(putpos[1]) != 1 || int.Parse(putpos[1]) != 2 || int.Parse(putpos[1]) != 3) && !AddTubeStop.Contains(int.Parse(putpos[1])))
+                                    {
+                                        lock (AddTubeStop)
+                                        {
+                                            AddTubeStop.Add(int.Parse(putpos[1]));
+                                        }
+                                    }
+                                    dbtnRackStatus();
+                                    setmainformbutten();
                                     LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "理杯机缺管!实验暂停加样！");
-                                    TubeProblemFlag = false;//2019-08-24 ZLX add
+                                    TubeProblemFlag = false;
                                 }
                                 else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.Sendfailure)
                                 {

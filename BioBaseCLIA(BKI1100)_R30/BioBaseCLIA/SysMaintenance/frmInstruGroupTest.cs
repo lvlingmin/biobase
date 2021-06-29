@@ -3252,6 +3252,12 @@ namespace BioBaseCLIA.SysMaintenance
                         return false;
                     }
                 }
+                else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.StuckTube)
+                {
+                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "暂存盘卡管！");
+                    DialogResult tempresult = MessageBox.Show("暂存盘卡管", "移管手错误！", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    return false;
+                }
                 else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.Sendfailure)
                 {
                     if (NetCom3.Instance.waitAndAgainSend != null && NetCom3.Instance.waitAndAgainSend is Thread)
@@ -3278,21 +3284,21 @@ namespace BioBaseCLIA.SysMaintenance
                 {
                     IsKnockedCool++;
 
-                //GAgainMove:
-                //    NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 04 01"), 1);
-                //    if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked)
-                //    {
-                //        IsKnockedCool++;
-                //        if (IsKnockedCool < 2)
-                //            goto GAgainMove;
-                //        else
-                //        {
-                //            LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手清洗盘扔管时发生撞管！");
-                //            LogFile.Instance.Write("==============  移管手在管架向清洗盘扔管时发生撞管  " + currentHoleNum);
-                //            DialogResult tempresult = MessageBox.Show("移管手在清洗盘扔管时发生撞管，实验将进行停止！", "移管手错误", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                //            return false;
-                //        }
-                //    }
+                    //GAgainMove:
+                    //    NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 04 01"), 1);
+                    //    if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked)
+                    //    {
+                    //        IsKnockedCool++;
+                    //        if (IsKnockedCool < 2)
+                    //            goto GAgainMove;
+                    //        else
+                    //        {
+                    //            LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手清洗盘扔管时发生撞管！");
+                    //            LogFile.Instance.Write("==============  移管手在管架向清洗盘扔管时发生撞管  " + currentHoleNum);
+                    //            DialogResult tempresult = MessageBox.Show("移管手在清洗盘扔管时发生撞管，实验将进行停止！", "移管手错误", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    //            return false;
+                    //        }
+                    //    }
                     if (IsKnockedCool < 2)
                         goto AgainNewMove;
                     else
