@@ -1822,4 +1822,7 @@
   <data name="$this.Text" xml:space="preserve">
     <value>frmInstruMaintenance</value>
   </data>
+  <data name="keywordText.TemporaryDiskStuckTube" xml:space="preserve">
+    <value>Temporary storage disk card tube</value>
+  </data>
 </root>

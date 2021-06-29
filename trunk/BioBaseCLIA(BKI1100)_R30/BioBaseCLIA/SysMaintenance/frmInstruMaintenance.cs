@@ -655,6 +655,14 @@ namespace BioBaseCLIA.SysMaintenance
                     {
                         goto AgainNewMove;
                     }
+                    else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.StuckTube)
+                    {
+                        frmMessageShow frmMessage = new frmMessageShow();
+                        frmMessage.MessageShow(GetString("label6.Text"),GetString("keywordText.TemporaryDiskStuckTube"));
+                        fbtnStart.Enabled = true;
+                        fbtnStop.Enabled = false;
+                        return;
+                    }
                     else
                     {
                         fbtnStart.Enabled = true;
@@ -712,6 +720,14 @@ namespace BioBaseCLIA.SysMaintenance
                     {
                         goto AgainNewMove2;
                     }
+                    else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.StuckTube)
+                    {
+                        frmMessageShow frmMessage = new frmMessageShow();
+                        frmMessage.MessageShow(GetString("label6.Text"), GetString("keywordText.TemporaryDiskStuckTube"));
+                        fbtnStart.Enabled = true;
+                        fbtnStop.Enabled = false;
+                        return;
+                    }
                     else
                     {
                         fbtnStart.Enabled = true;
@@ -768,6 +784,14 @@ namespace BioBaseCLIA.SysMaintenance
                     else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.putKnocked)
                     {
                         goto AgainNewMove3;
+                    }
+                    else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.StuckTube)
+                    {
+                        frmMessageShow frmMessage = new frmMessageShow();
+                        frmMessage.MessageShow(GetString("label6.Text"), GetString("keywordText.TemporaryDiskStuckTube"));
+                        fbtnStart.Enabled = true;
+                        fbtnStop.Enabled = false;
+                        return;
                     }
                     else
                     {
@@ -1146,6 +1170,14 @@ namespace BioBaseCLIA.SysMaintenance
                     {
                         goto AgainNewMove;
                     }
+                    else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.StuckTube)
+                    {
+                        frmMessageShow frmMessage = new frmMessageShow();
+                        frmMessage.MessageShow(GetString("label6.Text"), GetString("keywordText.TemporaryDiskStuckTube"));
+                        fbtnStart.Enabled = true;
+                        fbtnStop.Enabled = false;
+                        return;
+                    }
                     else
                     {
                         fbtnStart.Enabled = true;
@@ -1423,6 +1455,14 @@ namespace BioBaseCLIA.SysMaintenance
                     else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.putKnocked)
                     {
                         goto AgainNewMove;
+                    }
+                    else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.StuckTube)
+                    {
+                        frmMessageShow frmMessage = new frmMessageShow();
+                        frmMessage.MessageShow(GetString("label6.Text"), GetString("keywordText.TemporaryDiskStuckTube"));
+                        fbtnStart.Enabled = true;
+                        fbtnStop.Enabled = false;
+                        return;
                     }
                     else
                     {
@@ -2028,7 +2068,7 @@ namespace BioBaseCLIA.SysMaintenance
             {
                 if (string.IsNullOrEmpty(OperateIniFile.ReadIniData("Substrate" + whichPipe + "", "LeftCount", "", iniPathSubstrateTube)))
                 {
-                    MessageBox.Show("底物不存在请装载");
+                    MessageBox.Show(GetString("Insufficientsubstrate"));
                     return;
                 }
                 int LeftCount1 = int.Parse(OperateIniFile.ReadIniData("Substrate" + whichPipe + "", "LeftCount", "", iniPathSubstrateTube));
@@ -2175,6 +2215,13 @@ namespace BioBaseCLIA.SysMaintenance
                                 else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.putKnocked)
                                 {
                                     goto AgainNewMove;
+                                }
+                                else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.StuckTube)
+                                {
+                                    frmMessageShow frmMessage = new frmMessageShow();
+                                    frmMessage.MessageShow(GetString("label6.Text"), GetString("keywordText.TemporaryDiskStuckTube"));
+                                    NewWashEnd(1);
+                                    return;
                                 }
                                 else
                                 {
@@ -2371,6 +2418,13 @@ namespace BioBaseCLIA.SysMaintenance
                     else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.putKnocked)
                     {
                         goto AgainNewMove;
+                    }
+                    else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.StuckTube)
+                    {
+                        frmMessageShow frmMessage = new frmMessageShow();
+                        frmMessage.MessageShow(GetString("label6.Text"), GetString("keywordText.TemporaryDiskStuckTube"));
+                        NewWashEnd(1);
+                        return;
                     }
                     else
                     {
@@ -2946,10 +3000,23 @@ namespace BioBaseCLIA.SysMaintenance
                         return false;
                     }
                 }
+                else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.StuckTube)
+                {
+                    frmMessageShow frmMessage = new frmMessageShow();
+                    frmMessage.MessageShow(GetString("label6.Text"), GetString("keywordText.TemporaryDiskStuckTube"));
+                    NewWashEnd(1);
+                    return false;
+                }
                 else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.OverTime)
                 {
-                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手在暂存盘向温育盘抓管时接收数据超时！");
+                   LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手在暂存盘向清洗盘抓管时接收数据超时！");
                     DialogResult tempresult = MessageBox.Show(GetString("Overtimestop"), GetString("Tip"), MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    return false;
+                }
+                else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.StuckTube)
+                {
+                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + GetString("keywordText.TemporaryDiskStuckTube"));
+                    DialogResult tempresult = MessageBox.Show(GetString("keywordText.TemporaryDiskStuckTube"), GetString("Tip"), MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                     return false;
                 }
                 #endregion
