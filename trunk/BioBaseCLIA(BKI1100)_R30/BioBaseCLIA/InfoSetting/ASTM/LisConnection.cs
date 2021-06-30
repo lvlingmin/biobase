@@ -10,6 +10,8 @@ using Localization;
 using Common;
 using System.IO.Ports;
 using Res = BioBaseCLIA.Resources.String.LIS.ASTM.LisConnection;
+using BioBaseCLIA.Run;
+
 namespace BioBaseCLIA.InfoSetting
 {
     /// <summary>
@@ -180,7 +182,10 @@ namespace BioBaseCLIA.InfoSetting
                 {
                     if (msg.Contains("ACK^R01")&&msg.Contains("AA")) 
                     {
-                        MessageBox.Show(Res.Datasentsuccessfully);
+                        if (frmWorkList.RunFlag != (int)RunFlagStart.IsRuning)
+                        {
+                            MessageBox.Show(Res.Datasentsuccessfully);
+                        }
                     }
 
                     if (msg.Contains("QCK^Q02")) 
