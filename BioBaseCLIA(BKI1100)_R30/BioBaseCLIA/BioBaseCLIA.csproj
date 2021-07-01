@@ -140,6 +140,12 @@
     <Compile Include="CustomControl\userTextBoxBase.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DataQuery\frmAddSampleResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataQuery\frmAddSampleResult.Designer.cs">
+      <DependentUpon>frmAddSampleResult.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataQuery\frmHistoryScaling.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -436,6 +442,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControl\userTextBoxBase.resx">
       <DependentUpon>userTextBoxBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataQuery\frmAddSampleResult.en.resx">
+      <DependentUpon>frmAddSampleResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataQuery\frmAddSampleResult.resx">
+      <DependentUpon>frmAddSampleResult.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataQuery\frmHistoryScaling.en-US.resx">
       <DependentUpon>frmHistoryScaling.cs</DependentUpon>
