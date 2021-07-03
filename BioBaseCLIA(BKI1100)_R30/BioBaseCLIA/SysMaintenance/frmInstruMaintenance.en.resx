@@ -1825,4 +1825,40 @@
   <data name="keywordText.TemporaryDiskStuckTube" xml:space="preserve">
     <value>Temporary storage disk card tube</value>
   </data>
+  <data name="keywordText.Err" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="keywordText.MAddNewToWashOvertime" xml:space="preserve">
+    <value>The transferer has timed out receiving data when transferring the temporary storage disk to the cleaning disk!</value>
+  </data>
+  <data name="keywordText.MAddNewTReactIsKnock" xml:space="preserve">
+    <value>The pipe bumping occurred when the pipette hand grabbed the pipe from the temporary storage plate to the incubation plate</value>
+  </data>
+  <data name="keywordText.MAddNewTReactNulls" xml:space="preserve">
+    <value>When the transferer grabs the tube from the temporary storage tray to the incubation tray many times</value>
+  </data>
+  <data name="keywordText.MWashLossIsKnock" xml:space="preserve">
+    <value>Pipe collision occurred when the pipe was moved to the cleaning plate and the waste pipe was thrown away</value>
+  </data>
+  <data name="keywordText.MWashLossNullS" xml:space="preserve">
+    <value>The pipette hand grabs the empty pipe many times when cleaning the tray and throwing out the waste pipe.</value>
+  </data>
+  <data name="keywordText.MWashLossOverTime" xml:space="preserve">
+    <value>The transferer has timed out receiving data when cleaning the disk and discarding the waste tube!</value>
+  </data>
+  <data name="keywordText.NoRead" xml:space="preserve">
+    <value>Unread</value>
+  </data>
+  <data name="keywordText.NoSubstrate" xml:space="preserve">
+    <value>The substrate count is insufficient, please replace the substrate!</value>
+  </data>
+  <data name="keywordText.time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="keywordText.WashErr" xml:space="preserve">
+    <value>Cleaning error</value>
+  </data>
+  <data name="keywordText.WashHole" xml:space="preserve">
+    <value>Position of the cleaning tube:</value>
+  </data>
 </root>

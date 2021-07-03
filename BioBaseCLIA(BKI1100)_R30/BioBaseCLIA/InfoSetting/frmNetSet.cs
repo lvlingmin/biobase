@@ -50,7 +50,7 @@ namespace BioBaseCLIA.InfoSetting
             }
             #endregion 
             lisParaShow();
-            cmbLisType.SelectedItem =Getstring(CommunicationType);
+            cmbLisType.SelectedItem =CommunicationType;
             if (CommunicationType.Contains("NetConn") || CommunicationType.Contains("网口通讯"))
             {
                 if (LisCommunication.Instance.IsConnect())
@@ -590,13 +590,13 @@ namespace BioBaseCLIA.InfoSetting
         {
             if (cmbLisType.SelectedItem == null)
                 return;
-            if (cmbLisType.SelectedItem.ToString() == Getstring("NetConn")
-                || cmbLisType.SelectedItem.ToString().Contains("NetConn")
-                || cmbLisType.SelectedItem.ToString().Contains("网口通讯"))
-                CommunicationType = "NetConn";
-            else
-                CommunicationType = "SerialConn";
-            //CommunicationType = cmbLisType.SelectedItem.ToString();
+            //if (cmbLisType.SelectedItem.ToString() == Getstring("NetConn")
+            //    || cmbLisType.SelectedItem.ToString().Contains("NetConn")
+            //    || cmbLisType.SelectedItem.ToString().Contains("网口通讯"))
+            //    CommunicationType = "NetConn";
+            //else
+            //    CommunicationType = "SerialConn";
+            CommunicationType = cmbLisType.SelectedItem.ToString();
             OperateIniFile.WriteIniPara("LisSet", "CommunicationType", CommunicationType);
             frmNetSet_Load(sender, e);
             //OnLoad(null);

@@ -2032,13 +2032,13 @@ namespace BioBaseCLIA.SysMaintenance
                 {
                     if (string.IsNullOrEmpty(OperateIniFile.ReadIniData("Substrate1", "LeftCount", "0", iniPathSubstrateTube)))
                     {
-                        MessageBox.Show(" 底物测数不足，请装载");
+                        MessageBox.Show(GetString("keywordText.NoSubstrate"));
                         return;
                     }
                     int left = int.Parse(OperateIniFile.ReadIniData("Substrate1", "LeftCount", "0", iniPathSubstrateTube));
                     if (left < int.Parse(numDwPourin.Value.ToString()))
                     {
-                        MessageBox.Show(" 底物测数不足以完成测试，请装载");
+                        MessageBox.Show(GetString("keywordText.NoSubstrate"));
                         return;
                     }
                 }
@@ -2846,8 +2846,8 @@ namespace BioBaseCLIA.SysMaintenance
                 else if (NetCom3.Instance.WasherrorFlag == (int)ErrorState.OverTime)
                 {
                     NetCom3.Instance.stopsendFlag = true;
-                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "清洗指令接收指令超时！");
-                    frmMsgShow.MessageShow("清洗指令错误提示", GetString("Overtimepause"));
+                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + GetString("keywordText.Err") + " *** " + GetString("keywordText.NoRead") + " *** " +GetString("Cleanovertime"));
+                    frmMsgShow.MessageShow(GetString("keywordText.WashErr"), GetString("Overtimepause"));
                 }
                 else
                     return;
@@ -2905,7 +2905,7 @@ namespace BioBaseCLIA.SysMaintenance
                 else if (NetCom3.Instance.WasherrorFlag == (int)ErrorState.OverTime)
                 {
                     NetCom3.Instance.stopsendFlag = true;
-                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "清洗指令接收超时！");
+                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + GetString("keywordText.Err") + " *** " + GetString("keywordText.NoRead") + " *** " + GetString("Cleanovertime"));
                     frmMsgShow.MessageShow(GetString("Tip"), GetString("Overtimepause"));
                 }
                 else
@@ -2947,14 +2947,14 @@ namespace BioBaseCLIA.SysMaintenance
                     }
                     else
                     {
-                        LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手在暂存盘向温育盘抓管时多次抓空!");
+                        LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + GetString("keywordText.Err") + " *** " + GetString("keywordText.NoRead") + " *** " + GetString("keywordText.MAddNewTReactNulls"));
                         DialogResult tempresult = MessageBox.Show(GetString("Handemptystop"), GetString("Tip"), MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                         return false;
                     }
                 }
                 else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.LackTube)
                 {
-                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "理杯机缺管，实验停止运行！");
+                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + GetString("keywordText.Err") + " *** " + GetString("keywordText.NoRead") + " *** " + GetString("EMptytube"));
                     DialogResult tempresult = MessageBox.Show(GetString("Tubeemptystop"), GetString("Tip"), MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                     return false;
                 }
@@ -2980,7 +2980,7 @@ namespace BioBaseCLIA.SysMaintenance
                     }
                     else
                     {
-                        LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手在暂存盘向温育盘抓管时发生撞管！");
+                        LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + GetString("keywordText.Err") + " *** " + GetString("keywordText.NoRead") + " *** " + GetString("keywordText.MAddNewTReactIsKnock"));
                         LogFile.Instance.Write("==============  移管手在暂存盘向清洗盘取放管处抓管发生撞管  " + currentHoleNum);
                         DialogResult tempresult = MessageBox.Show(GetString("Hitstop"), GetString("Tip"), MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                         return false;
@@ -2994,7 +2994,7 @@ namespace BioBaseCLIA.SysMaintenance
                         goto AgainNewMove;
                     else
                     {
-                        LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手清洗盘扔管时发生撞管！");
+                        LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + GetString("keywordText.Err") + " *** " + GetString("keywordText.NoRead") + " *** " + GetString("keywordText.MWashLossIsKnock"));
                         LogFile.Instance.Write("==============  移管手在暂存盘向清洗盘抓管时发生撞管  " + currentHoleNum);
                         DialogResult tempresult = MessageBox.Show(GetString("Emptystop"), GetString("Tip"), MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                         return false;
@@ -3009,13 +3009,13 @@ namespace BioBaseCLIA.SysMaintenance
                 }
                 else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.OverTime)
                 {
-                   LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手在暂存盘向清洗盘抓管时接收数据超时！");
+                   LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + GetString("keywordText.Err") + " *** " + GetString("keywordText.NoRead") + " *** " + GetString("keywordText.MAddNewToWashOvertime"));
                     DialogResult tempresult = MessageBox.Show(GetString("Overtimestop"), GetString("Tip"), MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                     return false;
                 }
                 else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.StuckTube)
                 {
-                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + GetString("keywordText.TemporaryDiskStuckTube"));
+                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + GetString("keywordText.Err") + " *** " + GetString("keywordText.NoRead") + " *** " + GetString("keywordText.TemporaryDiskStuckTube"));
                     DialogResult tempresult = MessageBox.Show(GetString("keywordText.TemporaryDiskStuckTube"), GetString("Tip"), MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                     return false;
                 }
@@ -3042,8 +3042,8 @@ namespace BioBaseCLIA.SysMaintenance
                         NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 08"), 1);
                         if (!NetCom3.Instance.MoveQuery())
                         {
-                            LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手在清洗盘扔废管时多次抓空！");
-                            LogFileAlarm.Instance.Write(" *** " + "时间" + DateTime.Now.ToString("HH-mm-ss") + "请洗盘抓空孔位置" + tubeHoleNum + " *** ");
+                            LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + GetString("keywordText.Err") + " *** " +GetString("keywordText.NoRead") + " *** " + GetString("Throwovertimestop"));
+                            LogFileAlarm.Instance.Write(" *** " + GetString("keywordText.time") + DateTime.Now.ToString("HH-mm-ss") + GetString("keywordText.WashHole") + tubeHoleNum + " *** ");
                             DialogResult tempresult = frmMsgShow.MessageShow(GetString("Tip"), GetString("Emptytimesstop"));
                             return false;
                         }
@@ -3051,8 +3051,8 @@ namespace BioBaseCLIA.SysMaintenance
                     }
                     else
                     {
-                        LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手在清洗盘扔废管时多次抓空！");
-                        LogFileAlarm.Instance.Write(" *** " + "时间" + DateTime.Now.ToString("HH-mm-ss") + "请洗盘抓空孔位置" + tubeHoleNum + " *** ");
+                        LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " +GetString("keywordText.Err") + " *** " + GetString("keywordText.NoRead") + " *** " + GetString("keywordText.MWashLossNullS"));
+                        LogFileAlarm.Instance.Write(" *** " + GetString("keywordText.time") + DateTime.Now.ToString("HH-mm-ss") + GetString("keywordText.WashHole") + tubeHoleNum + " *** ");
                         DialogResult tempresult = frmMsgShow.MessageShow(GetString("Tip"), GetString("Emptytimesstop"));
                         return false;
                     }
@@ -3074,15 +3074,15 @@ namespace BioBaseCLIA.SysMaintenance
                     }
                     else
                     {
-                        LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手在清洗盘扔废管时发生撞管！");
-                        LogFileAlarm.Instance.Write(" *** " + "时间" + DateTime.Now.ToString("HH-mm-ss") + "清洗盘扔废管时发生撞管孔位置" + tubeHoleNum + " *** ");
+                        LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " +GetString("keywordText.Err") + " *** " + GetString("keywordText.NoRead") + " *** " + GetString("keywordText.MWashLossIsKnock"));
+                        LogFileAlarm.Instance.Write(" *** " + GetString("keywordText.time") + DateTime.Now.ToString("HH-mm-ss") + GetString("keywordText.WashHole") + tubeHoleNum + " *** ");
                         DialogResult tempresult = frmMsgShow.MessageShow(GetString("Tip"), GetString("Throwstop"));
                         return false;
                     }
                 }
                 else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.OverTime)
                 {
-                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "错误" + " *** " + "未读" + " *** " + "移管手在清洗盘扔废管时接收数据超时！");
+                    LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + GetString("keywordText.Err") + " *** " + GetString("keywordText.NoRead")  + " *** " + GetString("keywordText.MWashLossOverTime"));
                     DialogResult tempresult = frmMsgShow.MessageShow(GetString("Tip"), GetString("Throwovertimestop"));
                     return false;
                 }
