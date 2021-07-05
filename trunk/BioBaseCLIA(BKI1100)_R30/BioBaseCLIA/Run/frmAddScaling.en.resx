@@ -780,4 +780,7 @@
   <data name="keywordText.ValueNone" xml:space="preserve">
     <value>There is a point with an empty luminous value, please enter it again!</value>
   </data>
+  <data name="projectUpdate" xml:space="preserve">
+    <value>Project update</value>
+  </data>
 </root>

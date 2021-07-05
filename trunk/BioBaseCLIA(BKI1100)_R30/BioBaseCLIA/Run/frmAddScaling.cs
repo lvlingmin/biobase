@@ -404,7 +404,7 @@ namespace BioBaseCLIA.Run
                                 //dtConcValue.Rows[6][2] = double.Parse(sign17);
                                 break;
                             default:
-                                frmMsg.MessageShow("项目更新", getString("keywordText.ScanByStandard"));
+                                frmMsg.MessageShow(getString("projectUpdate"), getString("keywordText.ScanByStandard"));
                                 //Console.WriteLine("请按标准扫描本公司条码");
                                 break;
                         }
