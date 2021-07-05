@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSampleLoad));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.fbtnTestResult = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
@@ -39,6 +39,8 @@
             this.btnLoadSample = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.btnLoadReagent = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cmbDispatchType = new System.Windows.Forms.ComboBox();
             this.fbtnRunInfoMody = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.btnCreatWorkList = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.btnAddPatient = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
@@ -162,12 +164,26 @@
             // groupBox2
             // 
             resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.cmbDispatchType);
             this.groupBox2.Controls.Add(this.fbtnRunInfoMody);
             this.groupBox2.Controls.Add(this.btnCreatWorkList);
             this.groupBox2.Controls.Add(this.btnAddPatient);
             this.groupBox2.Controls.Add(this.btnLoadSp);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // cmbDispatchType
+            // 
+            resources.ApplyResources(this.cmbDispatchType, "cmbDispatchType");
+            this.cmbDispatchType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDispatchType.FormattingEnabled = true;
+            this.cmbDispatchType.Name = "cmbDispatchType";
             // 
             // fbtnRunInfoMody
             // 
@@ -233,13 +249,13 @@
             resources.ApplyResources(this.dgvSpInfoList, "dgvSpInfoList");
             this.dgvSpInfoList.AllowUserToAddRows = false;
             this.dgvSpInfoList.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvSpInfoList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSpInfoList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvSpInfoList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvSpInfoList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Position,
@@ -1050,5 +1066,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TubeType;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cmbDispatchType;
     }
 }

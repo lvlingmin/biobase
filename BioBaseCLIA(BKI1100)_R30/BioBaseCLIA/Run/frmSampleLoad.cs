@@ -249,7 +249,23 @@ namespace BioBaseCLIA.Run
             dtItemInfoNoStat.Columns.Add("RgName", typeof(string));
             dtItemInfoNoStat.Columns.Add("TestRg", typeof(int));
             dtItemInfoNoStat.Columns.Add("TestDiu", typeof(int));
+
+            SetDispatchContent();
+            cmbDispatchType.Visible = false;
+            label7.Visible = false;
         }
+
+        private void SetDispatchContent()
+        {
+            cmbDispatchType.Items.Clear();
+            cmbDispatchType.Items.Add(getString("DispathchTypeAdd"));
+            cmbDispatchType.Items.Add(getString("DispathchTypeSampleProject"));
+            cmbDispatchType.Items.Add(getString("DispathchTypeSpeed"));
+
+            string dispatchType = OperateIniFile.ReadIniData("DispatchType", "DispatchType", "", Application.StartupPath + "//InstrumentPara.ini");
+            cmbDispatchType.SelectedIndex = int.Parse(string.IsNullOrEmpty(dispatchType) ? "0" : dispatchType);
+        }
+
         private void SetDtSampleInfo()
         {
             DataTable dtSI = dtSpInfo.Clone();
@@ -673,6 +689,11 @@ namespace BioBaseCLIA.Run
         {
             ResourceManager resManager = new ResourceManager(typeof(frmSampleLoad));
             return resManager.GetString(key).Replace(@"\n", "\n").Replace(@"\t", "\t");
+        }
+
+        private void cmbDispatchType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
