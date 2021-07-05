@@ -572,4 +572,7 @@
   <data name="cbLanguage.Items1" xml:space="preserve">
     <value>English</value>
   </data>
+  <data name="UserNameIsNull" xml:space="preserve">
+    <value>The username input is empty, please re-enter! </value>
+  </data>
 </root>
