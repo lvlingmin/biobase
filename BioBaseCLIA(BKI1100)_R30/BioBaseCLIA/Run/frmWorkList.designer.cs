@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmWorkList));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.timeReckon = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.TimeLabel3 = new System.Windows.Forms.Label();
@@ -43,13 +43,6 @@
             this.fbtnAddS = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnAddE = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.dgvWorkListData = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.fbtnTestResult = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.btnWorkList = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.fbtnReturn = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.btnLoadSample = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.btnLoadReagent = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.fbtnPatientInfo = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.No = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SampleNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,6 +55,14 @@
             this.RegentBatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SubstratePipe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RegentPos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.fbtnTestResult = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.btnWorkList = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.fbtnReturn = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.btnLoadSample = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.btnLoadReagent = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.fbtnPatientInfo = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.fbtnToEmergency = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvWorkListData)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -148,14 +149,14 @@
             this.dgvWorkListData.AllowUserToResizeRows = false;
             this.dgvWorkListData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvWorkListData.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvWorkListData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvWorkListData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvWorkListData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvWorkListData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.No,
@@ -176,6 +177,97 @@
             this.dgvWorkListData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvWorkListData.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgvWorkListData_Scroll);
             this.dgvWorkListData.SelectionChanged += new System.EventHandler(this.dgvWorkListData_SelectionChanged);
+            // 
+            // No
+            // 
+            this.No.DataPropertyName = "TestID";
+            this.No.FillWeight = 70F;
+            resources.ApplyResources(this.No, "No");
+            this.No.Name = "No";
+            this.No.ReadOnly = true;
+            // 
+            // SampleNo
+            // 
+            this.SampleNo.DataPropertyName = "SampleNo";
+            this.SampleNo.FillWeight = 120F;
+            resources.ApplyResources(this.SampleNo, "SampleNo");
+            this.SampleNo.Name = "SampleNo";
+            this.SampleNo.ReadOnly = true;
+            // 
+            // Position
+            // 
+            this.Position.DataPropertyName = "SamplePos";
+            this.Position.FillWeight = 70F;
+            resources.ApplyResources(this.Position, "Position");
+            this.Position.Name = "Position";
+            this.Position.ReadOnly = true;
+            // 
+            // SampleType
+            // 
+            this.SampleType.DataPropertyName = "SampleType";
+            resources.ApplyResources(this.SampleType, "SampleType");
+            this.SampleType.Name = "SampleType";
+            this.SampleType.ReadOnly = true;
+            // 
+            // ItemName
+            // 
+            this.ItemName.DataPropertyName = "ItemName";
+            resources.ApplyResources(this.ItemName, "ItemName");
+            this.ItemName.Name = "ItemName";
+            this.ItemName.ReadOnly = true;
+            // 
+            // Schedule
+            // 
+            this.Schedule.DataPropertyName = "Schedule";
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            this.Schedule.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Schedule.FillWeight = 300F;
+            resources.ApplyResources(this.Schedule, "Schedule");
+            this.Schedule.Name = "Schedule";
+            this.Schedule.ReadOnly = true;
+            // 
+            // TestStatus
+            // 
+            this.TestStatus.DataPropertyName = "TestStatus";
+            this.TestStatus.FillWeight = 120F;
+            resources.ApplyResources(this.TestStatus, "TestStatus");
+            this.TestStatus.Name = "TestStatus";
+            this.TestStatus.ReadOnly = true;
+            // 
+            // TestTime
+            // 
+            this.TestTime.DataPropertyName = "TestTime";
+            resources.ApplyResources(this.TestTime, "TestTime");
+            this.TestTime.Name = "TestTime";
+            this.TestTime.ReadOnly = true;
+            // 
+            // SampleID
+            // 
+            this.SampleID.DataPropertyName = "SampleID";
+            resources.ApplyResources(this.SampleID, "SampleID");
+            this.SampleID.Name = "SampleID";
+            this.SampleID.ReadOnly = true;
+            // 
+            // RegentBatch
+            // 
+            this.RegentBatch.DataPropertyName = "RegentBatch";
+            resources.ApplyResources(this.RegentBatch, "RegentBatch");
+            this.RegentBatch.Name = "RegentBatch";
+            this.RegentBatch.ReadOnly = true;
+            // 
+            // SubstratePipe
+            // 
+            this.SubstratePipe.DataPropertyName = "SubstratePipe";
+            resources.ApplyResources(this.SubstratePipe, "SubstratePipe");
+            this.SubstratePipe.Name = "SubstratePipe";
+            this.SubstratePipe.ReadOnly = true;
+            // 
+            // RegentPos
+            // 
+            this.RegentPos.DataPropertyName = "RegentPos";
+            resources.ApplyResources(this.RegentPos, "RegentPos");
+            this.RegentPos.Name = "RegentPos";
+            this.RegentPos.ReadOnly = true;
             // 
             // panel1
             // 
@@ -265,101 +357,24 @@
             this.fbtnPatientInfo.UseVisualStyleBackColor = false;
             this.fbtnPatientInfo.Click += new System.EventHandler(this.btnPatientInfo_Click);
             // 
-            // No
+            // fbtnToEmergency
             // 
-            this.No.DataPropertyName = "TestID";
-            this.No.FillWeight = 70F;
-            resources.ApplyResources(this.No, "No");
-            this.No.Name = "No";
-            this.No.ReadOnly = true;
-            // 
-            // SampleNo
-            // 
-            this.SampleNo.DataPropertyName = "SampleNo";
-            this.SampleNo.FillWeight = 120F;
-            resources.ApplyResources(this.SampleNo, "SampleNo");
-            this.SampleNo.Name = "SampleNo";
-            this.SampleNo.ReadOnly = true;
-            // 
-            // Position
-            // 
-            this.Position.DataPropertyName = "SamplePos";
-            this.Position.FillWeight = 70F;
-            resources.ApplyResources(this.Position, "Position");
-            this.Position.Name = "Position";
-            this.Position.ReadOnly = true;
-            // 
-            // SampleType
-            // 
-            this.SampleType.DataPropertyName = "SampleType";
-            resources.ApplyResources(this.SampleType, "SampleType");
-            this.SampleType.Name = "SampleType";
-            this.SampleType.ReadOnly = true;
-            // 
-            // ItemName
-            // 
-            this.ItemName.DataPropertyName = "ItemName";
-            resources.ApplyResources(this.ItemName, "ItemName");
-            this.ItemName.Name = "ItemName";
-            this.ItemName.ReadOnly = true;
-            // 
-            // Schedule
-            // 
-            this.Schedule.DataPropertyName = "Schedule";
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            this.Schedule.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Schedule.FillWeight = 300F;
-            resources.ApplyResources(this.Schedule, "Schedule");
-            this.Schedule.Name = "Schedule";
-            this.Schedule.ReadOnly = true;
-            // 
-            // TestStatus
-            // 
-            this.TestStatus.DataPropertyName = "TestStatus";
-            this.TestStatus.FillWeight = 120F;
-            resources.ApplyResources(this.TestStatus, "TestStatus");
-            this.TestStatus.Name = "TestStatus";
-            this.TestStatus.ReadOnly = true;
-            // 
-            // TestTime
-            // 
-            this.TestTime.DataPropertyName = "TestTime";
-            resources.ApplyResources(this.TestTime, "TestTime");
-            this.TestTime.Name = "TestTime";
-            this.TestTime.ReadOnly = true;
-            // 
-            // SampleID
-            // 
-            this.SampleID.DataPropertyName = "SampleID";
-            resources.ApplyResources(this.SampleID, "SampleID");
-            this.SampleID.Name = "SampleID";
-            this.SampleID.ReadOnly = true;
-            // 
-            // RegentBatch
-            // 
-            this.RegentBatch.DataPropertyName = "RegentBatch";
-            resources.ApplyResources(this.RegentBatch, "RegentBatch");
-            this.RegentBatch.Name = "RegentBatch";
-            this.RegentBatch.ReadOnly = true;
-            // 
-            // SubstratePipe
-            // 
-            this.SubstratePipe.DataPropertyName = "SubstratePipe";
-            resources.ApplyResources(this.SubstratePipe, "SubstratePipe");
-            this.SubstratePipe.Name = "SubstratePipe";
-            this.SubstratePipe.ReadOnly = true;
-            // 
-            // RegentPos
-            // 
-            this.RegentPos.DataPropertyName = "RegentPos";
-            resources.ApplyResources(this.RegentPos, "RegentPos");
-            this.RegentPos.Name = "RegentPos";
-            this.RegentPos.ReadOnly = true;
+            resources.ApplyResources(this.fbtnToEmergency, "fbtnToEmergency");
+            this.fbtnToEmergency.BackColor = System.Drawing.Color.Transparent;
+            this.fbtnToEmergency.EnabledSet = true;
+            this.fbtnToEmergency.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.fbtnToEmergency.FlatAppearance.BorderSize = 0;
+            this.fbtnToEmergency.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.fbtnToEmergency.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.fbtnToEmergency.Name = "fbtnToEmergency";
+            this.fbtnToEmergency.UseVisualStyleBackColor = false;
+            this.fbtnToEmergency.Click += new System.EventHandler(this.fbtnToEmergency_Click);
             // 
             // frmWorkList
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.Controls.Add(this.fbtnToEmergency);
             this.Controls.Add(this.fbtnPatientInfo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TimeLabel3);
@@ -416,5 +431,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn RegentBatch;
         private System.Windows.Forms.DataGridViewTextBoxColumn SubstratePipe;
         private System.Windows.Forms.DataGridViewTextBoxColumn RegentPos;
+        private CustomControl.FunctionButton fbtnToEmergency;
     }
 }
