@@ -1602,7 +1602,7 @@ namespace BioBaseCLIA
                     if (Temp > 55)
                         Temp = 55;
                     st.Append(GetString("Incubationtemperature"));
-                    st2.Append(GetString("Incubation" +":"+ Temp.ToString() +GetString("Temperaturesign")));
+                    st2.Append(GetString("Incubation") +":"+ Temp.ToString() +GetString("Temperaturesign"));
                     LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + 
                         " *** " +GetString("Err") + " *** " +GetString("NotRead") + 
                         " *** " + GetString("Incubationtemperature")+ GetString("Notstandardtemperature")+
@@ -1766,7 +1766,7 @@ namespace BioBaseCLIA
                         {
                             Invoke(new Action(() =>
                             {
-                                MessageBox.Show(GetString("InitExcetion"), GetString("MessageboxTitle"),
+                                MessageBox.Show(GetString("InitExcetion"), GetString("Tips"),
                                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }));
                             return;

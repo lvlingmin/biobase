@@ -146,7 +146,7 @@
     <value>Unloaded</value>
   </data>
   <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 442</value>
+    <value>329, 442</value>
   </data>
   <data name="groupBox4.Text" xml:space="preserve">
     <value>Sample Legend</value>
@@ -209,10 +209,7 @@
     <value>Batch</value>
   </data>
   <data name="dgvRgInfoList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>486, 62</value>
-  </data>
-  <data name="dgvRgInfoList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 249</value>
+    <value>462, 60</value>
   </data>
   <data name="labUnit2.Location" type="System.Drawing.Point, System.Drawing">
     <value>318, 143</value>
@@ -248,7 +245,7 @@
     <value>Reagent</value>
   </data>
   <data name="cmbProType.Items1" xml:space="preserve">
-    <value>Dilute</value>
+    <value>Diluent</value>
   </data>
   <data name="cmbProType.Location" type="System.Drawing.Point, System.Drawing">
     <value>213, 14</value>
@@ -706,19 +703,16 @@
     <value>Load</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>482, 317</value>
+    <value>456, 317</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 229</value>
+    <value>376, 229</value>
   </data>
   <data name="groupBox2.Text" xml:space="preserve">
     <value>Operation</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>482, 44</value>
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 273</value>
+    <value>456, 44</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Reagent Information</value>
@@ -728,6 +722,9 @@
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Reagent Load</value>
+  </data>
+  <data name="srdReagent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-9, 8</value>
   </data>
   <data name="fbtnTestResult.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1076,9 +1073,6 @@
   <data name="keywordText.ConnectionErrorAndRetry" xml:space="preserve">
     <value>Communication is abnormal, please check the connection and restart the instrument system！</value>
   </data>
-  <data name="keywordText.DiluteBarcodeRepeat" xml:space="preserve">
-    <value>The diluent barcode is the same as the existing one ({0} position). Please check the entered diluent barcode. This loading operation has been cancelled</value>
-  </data>
   <data name="keywordText.DiluteBeUsedAndUnloadAbout" xml:space="preserve">
     <value>Diluent information is being used. Please uninstall the relevant reagent first！</value>
   </data>
@@ -1094,23 +1088,11 @@
   <data name="keywordText.FailedOfDilute" xml:space="preserve">
     <value>Dilution bar code processing failed！</value>
   </data>
-  <data name="keywordText.FailedOfItemConc" xml:space="preserve">
-    <value>Failure of project calibration concentration treatment！</value>
-  </data>
   <data name="keywordText.FailedOfItemMaincurve" xml:space="preserve">
     <value>Failure of project calibration curve processing！</value>
   </data>
-  <data name="keywordText.FailedOfItemMainCurveUpdateAndRetry1" xml:space="preserve">
-    <value>Project standard calibration concentration update failed, please reload！</value>
-  </data>
-  <data name="keywordText.FailedOfItemMainCurveUpdateAndRetry2" xml:space="preserve">
-    <value>Failed to add master curve, please reload!</value>
-  </data>
   <data name="keywordText.FailedOfItemProcess" xml:space="preserve">
     <value>Project process failure!</value>
-  </data>
-  <data name="keywordText.FailedOfItemProcessUpdateAndRetry" xml:space="preserve">
-    <value>Project process update failed, please reload！</value>
   </data>
   <data name="keywordText.FailedOfItemQc" xml:space="preserve">
     <value>Failure of project quality control information processing!</value>
@@ -1261,9 +1243,6 @@
   </data>
   <data name="keywordText.TipsAboutReagentLoadSuccess" xml:space="preserve">
     <value>Load completed {0}(reagent position: {1})!</value>
-  </data>
-  <data name="keywordText.Unload" xml:space="preserve">
-    <value>Unload</value>
   </data>
   <data name="keywordText.UnloadSuccess" xml:space="preserve">
     <value>Uninstall successfully！</value>

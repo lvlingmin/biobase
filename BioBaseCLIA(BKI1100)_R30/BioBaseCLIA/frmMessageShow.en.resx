@@ -382,9 +382,9 @@
 </value>
   </data>
   <data name="keywordText.Waring1" xml:space="preserve">
-    <value>警告</value>
+    <value>warning</value>
   </data>
   <data name="keywordText.Waring2" xml:space="preserve">
-    <value>警告</value>
+    <value>warning</value>
   </data>
 </root>
