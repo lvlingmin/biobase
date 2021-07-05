@@ -1310,4 +1310,7 @@
   <data name="keywordText.ValueNone" xml:space="preserve">
     <value>存在发光值为空的点，请重新输入！</value>
   </data>
+  <data name="projectUpdate" xml:space="preserve">
+    <value>项目更新</value>
+  </data>
 </root>
