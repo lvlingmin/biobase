@@ -11467,6 +11467,11 @@ namespace BioBaseCLIA.Run
 
             return isExitStandard;
         }
+
+        private void fbtnToEmergency_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     public class TestResultInfo
     {
