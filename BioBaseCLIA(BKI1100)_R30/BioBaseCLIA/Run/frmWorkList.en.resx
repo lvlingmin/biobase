@@ -914,21 +914,11 @@
         /BszvVKvx5MPAzA7yGZlu5nptv2Pm/MHz+N45ZRT+BMAAAAASUVORK5CYII=
 </value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="fbtnToEmergency.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="fbtnToEmergency.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
   <data name="fbtnToEmergency.Font" type="System.Drawing.Font, System.Drawing">
     <value>宋体, 9pt, style=Bold</value>
   </data>
-  <data name="fbtnToEmergency.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="fbtnToEmergency.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 29</value>
+  <data name="fbtnToEmergency.Location" type="System.Drawing.Point, System.Drawing">
+    <value>401, 53</value>
   </data>
   <data name="fbtnToEmergency.Text" xml:space="preserve">
     <value>To Emergency</value>
