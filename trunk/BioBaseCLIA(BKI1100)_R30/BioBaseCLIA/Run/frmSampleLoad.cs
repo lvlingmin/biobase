@@ -380,6 +380,7 @@ namespace BioBaseCLIA.Run
 
             EmergencySample();
 
+
             btnWorkList.Enabled = true;
             //if (!CheckFormIsOpen("frmWorkList"))
             //{
