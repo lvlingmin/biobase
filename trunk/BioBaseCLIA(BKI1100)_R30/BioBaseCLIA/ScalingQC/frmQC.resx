@@ -3261,4 +3261,7 @@
   <data name="reminder" xml:space="preserve">
     <value>温馨提示</value>
   </data>
+  <data name="keywordText.QCRules" xml:space="preserve">
+    <value>请选择质控规则</value>
+  </data>
 </root>

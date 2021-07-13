@@ -1219,4 +1219,7 @@
   <data name="reminder" xml:space="preserve">
     <value>Tips</value>
   </data>
+  <data name="keywordText.QCRules" xml:space="preserve">
+    <value>Please select quality control rule</value>
+  </data>
 </root>
