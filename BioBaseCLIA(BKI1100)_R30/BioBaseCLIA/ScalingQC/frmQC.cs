@@ -189,6 +189,12 @@ namespace BioBaseCLIA.ScalingQC
                 txtOperator.Focus();
                 return;
             }
+            if (!chk12s.Checked && !chk13s.Checked
+               && !chk22s.Checked && !chk41s.Checked && !chk10x.Checked)
+            {
+                frmMsgShow.MessageShow(getString("keywordText.QcManagement"), getString("keywordText.QCRules"));
+                return;
+            }
 
             if (addOrModify == 1)//添加质控
             {
