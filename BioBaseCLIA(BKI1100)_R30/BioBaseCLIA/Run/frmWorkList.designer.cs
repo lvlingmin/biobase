@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmWorkList));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.timeReckon = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.TimeLabel3 = new System.Windows.Forms.Label();
@@ -63,6 +63,7 @@
             this.btnLoadReagent = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnPatientInfo = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnToEmergency = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
+            this.fbtnfrmResultQuery = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvWorkListData)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -148,14 +149,14 @@
             this.dgvWorkListData.AllowUserToResizeRows = false;
             this.dgvWorkListData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvWorkListData.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvWorkListData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Times New Roman", 9F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvWorkListData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvWorkListData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvWorkListData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.No,
@@ -219,8 +220,8 @@
             // Schedule
             // 
             this.Schedule.DataPropertyName = "Schedule";
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            this.Schedule.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            this.Schedule.DefaultCellStyle = dataGridViewCellStyle6;
             this.Schedule.FillWeight = 300F;
             resources.ApplyResources(this.Schedule, "Schedule");
             this.Schedule.Name = "Schedule";
@@ -271,6 +272,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.fbtnfrmResultQuery);
             this.panel1.Controls.Add(this.fbtnTestResult);
             this.panel1.Controls.Add(this.btnWorkList);
             this.panel1.Controls.Add(this.fbtnReturn);
@@ -369,6 +371,19 @@
             this.fbtnToEmergency.Name = "fbtnToEmergency";
             this.fbtnToEmergency.UseVisualStyleBackColor = false;
             // 
+            // fbtnfrmResultQuery
+            // 
+            this.fbtnfrmResultQuery.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.fbtnfrmResultQuery, "fbtnfrmResultQuery");
+            this.fbtnfrmResultQuery.EnabledSet = true;
+            this.fbtnfrmResultQuery.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.fbtnfrmResultQuery.FlatAppearance.BorderSize = 0;
+            this.fbtnfrmResultQuery.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.fbtnfrmResultQuery.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.fbtnfrmResultQuery.Name = "fbtnfrmResultQuery";
+            this.fbtnfrmResultQuery.UseVisualStyleBackColor = false;
+            this.fbtnfrmResultQuery.Click += new System.EventHandler(this.fbtnfrmResultQuery_Click);
+            // 
             // frmWorkList
             // 
             resources.ApplyResources(this, "$this");
@@ -431,5 +446,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SubstratePipe;
         private System.Windows.Forms.DataGridViewTextBoxColumn RegentPos;
         private CustomControl.FunctionButton fbtnToEmergency;
+        private CustomControl.FunctionButton fbtnfrmResultQuery;
     }
 }

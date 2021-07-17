@@ -986,8 +986,14 @@
   <data name="keywordText.AddSWarn" xml:space="preserve">
     <value>keywordText.AddSWarn</value>
   </data>
+  <data name="keywordText.BodyFluid" xml:space="preserve">
+    <value>Body fluid</value>
+  </data>
   <data name="keywordText.CalculationInfo" xml:space="preserve">
     <value>Function calculation error, maybe the data is not suitable for this regression model</value>
+  </data>
+  <data name="keywordText.CalibrationSolution" xml:space="preserve">
+    <value>Calibration solution</value>
   </data>
   <data name="keywordText.Calibrator" xml:space="preserve">
     <value>Calibrator</value>
@@ -1235,6 +1241,12 @@
   <data name="keywordText.SerialConnection" xml:space="preserve">
     <value>Serial Port Connection</value>
   </data>
+  <data name="keywordText.Serum" xml:space="preserve">
+    <value>Serum</value>
+  </data>
+  <data name="keywordText.SerumSampleCannotTestWithOther" xml:space="preserve">
+    <value>General samples can't be tested at the same time with standard and quality control materials!</value>
+  </data>
   <data name="keywordText.Standard" xml:space="preserve">
     <value>Standard</value>
   </data>
@@ -1301,6 +1313,9 @@
   <data name="keywordText.tubeWaste" xml:space="preserve">
     <value>Waste pipe box full</value>
   </data>
+  <data name="keywordText.Urine" xml:space="preserve">
+    <value>Urine</value>
+  </data>
   <data name="keywordText.Warning" xml:space="preserve">
     <value>Warning</value>
   </data>
@@ -1318,20 +1333,5 @@
   </data>
   <data name="keywordText.WashTurnOver" xml:space="preserve">
     <value>Cleaning disk rotation command receiving timeout</value>
-  </data>
-  <data name="keywordText.BodyFluid" xml:space="preserve">
-    <value>Body fluid</value>
-  </data>
-  <data name="keywordText.CalibrationSolution" xml:space="preserve">
-    <value>Calibration solution</value>
-  </data>
-  <data name="keywordText.Serum" xml:space="preserve">
-    <value>Serum</value>
-  </data>
-  <data name="keywordText.SerumSampleCannotTestWithOther" xml:space="preserve">
-    <value>General samples can't be tested at the same time with standard and quality control materials!</value>
-  </data>
-  <data name="keywordText.Urine" xml:space="preserve">
-    <value>Urine</value>
   </data>
 </root>
