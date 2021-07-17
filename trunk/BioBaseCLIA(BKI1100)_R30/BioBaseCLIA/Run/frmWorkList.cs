@@ -11713,6 +11713,15 @@ namespace BioBaseCLIA.Run
             stopTimer.Start();//倒计时继续
             #endregion
         }
+
+        private void fbtnfrmResultQuery_Click(object sender, EventArgs e)
+        {
+            frmResultQuery frmRQ = new frmResultQuery();
+            frmRQ.TopLevel = false;
+            frmRQ.Parent = this.Parent;
+            frmRQ.Show();
+            frmRQ.BringToFront();
+        }
     }
     public class TestResultInfo
     {
