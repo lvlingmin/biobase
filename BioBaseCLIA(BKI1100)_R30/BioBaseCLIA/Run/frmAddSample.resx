@@ -3615,4 +3615,16 @@
   <data name="keywordText.StoploadStandard" xml:space="preserve">
     <value>已经装载样本存在非标准品或者非质控品样本，此次装载样本失败</value>
   </data>
+  <data name="ExitSample" xml:space="preserve">
+    <value>存在样本</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>位置</value>
+  </data>
+  <data name="Testcomplete" xml:space="preserve">
+    <value>完成</value>
+  </data>
+  <data name="TestStatusAbondoned" xml:space="preserve">
+    <value>废弃</value>
+  </data>
 </root>
