@@ -68,7 +68,7 @@ namespace BioBaseCLIA.Run
         /// <summary>
         /// 绑定类型的列表，便于作为datagridview的数据源时进行增删改查
         /// </summary>
-        static BindingList<TestItem> BTestItem = new BindingList<TestItem>(lisTestItem);
+        public static BindingList<TestItem> BTestItem = new BindingList<TestItem>(lisTestItem);
         /// <summary>
         /// 新建一个所做实验项目的实例
         /// </summary>
@@ -321,6 +321,10 @@ namespace BioBaseCLIA.Run
         /// </summary>
         public static bool addOrdinaryFlag = false;
         /// <summary>
+        /// 添加重测样本
+        /// </summary>
+        public static bool RetestFlag = false;
+        /// <summary>
         /// 实验运行的下一步骤
         /// </summary>
         TestSchedule TestStep;
@@ -544,6 +548,9 @@ namespace BioBaseCLIA.Run
             frmWarn.btnPauseClick += new Action(AllPause);
             frmWarn.btnGoonClick += new Action(Goon);
             NetCom3.Instance.EventStop += new Action(AllStop);
+
+            frmTestResult.RetestSample -= new Action(EmergencySampleSch);
+            frmTestResult.RetestSample += new Action(EmergencySampleSch);
 
             //NetCom3.MoveTubeError += this.DisposeMoveAndAddError;//y add 20180723
             AddResetEvent.Set();//add y 20180727
@@ -829,7 +836,7 @@ namespace BioBaseCLIA.Run
                     lisTestSchedule.Sort(new SortRun());
                     #endregion
                 }
-                else
+                else if (addOrdinaryFlag)
                 {
                     #region 追加普通样本
                     #region 获取样本信息
@@ -872,6 +879,149 @@ namespace BioBaseCLIA.Run
                     {
                         LoadingHelper.CloseForm();
                         addOrdinaryFlag = false;
+                        frmAddSample.newSample = false;
+                        Goon();
+                        return;
+                    }
+                    #region 将dataTable转换为list<TestMethod>类型
+                    Dictionary<string, Type> dEnum = new Dictionary<string, Type>();
+                    dEnum.Add("StepName", typeof(ExperimentStep));
+                    List<TestMethod> templisTestMethod = (List<TestMethod>)ConvertHelper.DataTableConvertToListGenuric<TestMethod>(MethodInit(dtSampleInfo), dEnum);
+                    #endregion
+                    //合并加液步骤，对进度进行赋值
+                    List<TestSchedule> templisTestSchedule = MethodMergeSchedule(templisTestMethod);
+                    //对进度列表进行排序，并按照所排的顺序对TestID按照顺序赋值
+                    templisTestSchedule = orderModifyTestID(templisTestSchedule);
+                    int tempSamNum = templisTestSchedule.FindAll(tx => tx.TestScheduleStep ==
+                        TestSchedule.ExperimentScheduleStep.AddLiquidTube).Count;
+                    int NoStartTestID = dgvWorkListData.Rows.Count + 1;
+                    //被延后的反应管的所在位置
+                    int OldAddSamPos = lisTestSchedule.Find(ty => ty.TestID == NoStartTestID - 1 && ((
+                        ty.TestScheduleStep == TestSchedule.ExperimentScheduleStep.AddLiquidTube) ||
+                        (ty.TestScheduleStep == TestSchedule.ExperimentScheduleStep.DoNotTakeCareThis))).AddSamplePos;
+                    //追加样本testID赋值
+                    for (int j = 0; j < templisTestSchedule.Count; j++)
+                    {
+                        TestSchedule TempTestSchedule = templisTestSchedule[j];
+                        TempTestSchedule.TestID = TempTestSchedule.TestID + NoStartTestID - 1;
+                        if (TempTestSchedule.TestScheduleStep == TestSchedule.ExperimentScheduleStep.AddLiquidTube)
+                        {
+                            //稀释实验赋值
+                            if (int.Parse(TempTestSchedule.dilutionTimes) > 1)
+                            {
+                                string[] diupos = TempTestSchedule.dilutionPos.Split('-');
+                                if (diupos.Length > 1)
+                                {
+                                    string newpos = "";
+                                    for (int i = 0; i < diupos.Length; i++)
+                                    {
+                                        if (newpos == "")
+                                        {
+                                            newpos = "1";
+                                        }
+                                        else
+                                        {
+                                            newpos += "-" + (i + 1).ToString();
+                                        }
+                                    }
+                                    TempTestSchedule.dilutionPos = newpos;
+                                }
+                                else
+                                {
+                                    TempTestSchedule.dilutionPos = "1";
+                                }
+                                string[] temppos = TempTestSchedule.dilutionPos.Split('-');
+                                TempTestSchedule.getSamplePos = "R" + temppos[temppos.Length - 1];
+                                OldAddSamPos = OldAddSamPos + 1;
+                                if (OldAddSamPos > ReactTrayHoleNum)
+                                {
+                                    OldAddSamPos = 4;
+                                }
+                                TempTestSchedule.AddSamplePos = OldAddSamPos;
+                            }
+                            else
+                            {
+                                OldAddSamPos = OldAddSamPos + 1;
+                                if (OldAddSamPos > ReactTrayHoleNum)
+                                {
+                                    OldAddSamPos = 4;
+                                }
+                                TempTestSchedule.AddSamplePos = OldAddSamPos;
+                                TempTestSchedule.getSamplePos = "S" + TempTestSchedule.samplePos;
+                            }
+                        }
+                    }
+                    //追加样本之前还有未运行的样本
+                    NoStartTestID = NoStartTestId;
+                    //获取添加新的普通样本后的当前样本数量
+                    SampleNumCurrent = SampleNumCurrent + tempSamNum;//2018-07-11 lyn mod
+                    //将实验运行时的样本合并到已经生成进度的列表中
+                    lisTestSchedule.AddRange(templisTestSchedule);
+                    //按照testid进行排序
+                    lisTestSchedule.Sort(new SortEmergency());
+                    //进度计算
+                    #region 控件清空还未开始运行的进度条控件
+                    while (dgvWorkListData.Controls.Count > 2)
+                    {
+                        this.dgvWorkListData.Controls.Clear();//清除已有的控件
+                    }
+                    for (int i = BTestItem.Count - 1; i >= NoStartTestID - 1; i--)
+                    {
+                        BTestItem.Remove(BTestItem[i]);
+                    }
+                    //清空之前获取已经开始实验的进度条控件
+                    for (int i = lisProBar.Count - 1; i >= NoStartTestID - 1; i--)
+                    {
+                        lisProBar.Remove(lisProBar[i]);
+                    }
+                    #endregion
+                    //将新添加的急诊进度和未开始运行的样本进度附加到datagridview中
+                    BindData(lisTestSchedule.FindAll(tx => tx.TestID >= NoStartTestID), NoStartTestID);
+                    #region 获取已经开始实验的样本的空闲时间
+                    //获取已经开始运行的样本的进度表
+                    List<TestSchedule> RunSchedule = lisTestSchedule.FindAll(tx => tx.TestID < NoStartTestID);
+                    List<string> runFreeTime = GetFreeTime(RunSchedule);
+                    #endregion
+                    //未运行的样本进度计算
+                    List<TestSchedule> lisTestNoRun = ExperimentalScheduleAlgorithm(lisTestSchedule.FindAll(tx => tx.TestID >= NoStartTestID), runFreeTime);
+                    //清空之前获取已经开始实验的进度条控件
+                    lisTestSchedule = lisTestSchedule.FindAll(tx => tx.TestID < NoStartTestID);
+                    lisTestSchedule.AddRange(lisTestNoRun);
+                    lisTestSchedule.Sort(new SortRun());
+                    #endregion
+                }
+                else
+                {
+                    #region 重检
+                    #region 获取样本信息
+                    //查询添加的急诊样本
+                    DbHelperOleDb db = new DbHelperOleDb(1);
+                    DataTable dtprosample = bllsampleinfo.GetList(" SendDateTime >=#" + DateTime.Now.ToString("yyyy-MM-dd")
+                        + "#and SendDateTime <#" + DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")
+                        + "# and Status = 0  and Emergency = 6 order by SampleNo").Tables[0];
+                    db = new DbHelperOleDb(1);
+                    DbHelperOleDb.ExecuteSql(1, @"update tbSampleInfo set Emergency = 1 where Status = 0 and Emergency = 6 and SendDateTime >=#"
+                        + DateTime.Now.ToString("yyyy-MM-dd") + "#and SendDateTime <#"
+                        + DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + "#");
+                    db = new DbHelperOleDb(0);
+                    DataTable dtproinfo = bllproject.GetList("").Tables[0];
+                    for (int i = 0; i < dtprosample.Rows.Count; i++)
+                    {
+                        string[] projectName = dtprosample.Rows[i]["ProjectName"].ToString().TrimEnd().Split(' ');
+                        for (int j = 0; j < projectName.Length; j++)
+                        {
+                            DataRow[] dr = dtproinfo.Select("ShortName ='" + projectName[j] + "'");
+                            string projectProcedure = (string)dr[0]["ProjectProcedure"];
+                            dtSampleInfo.Rows.Add(dtprosample.Rows[i]["SampleID"], dtprosample.Rows[i]["SampleType"],
+                                dtprosample.Rows[i]["SampleNo"], dtprosample.Rows[i]["RepeatCount"], dtprosample.Rows[i]["Position"],
+                                dtprosample.Rows[i]["SampleContainer"], 4, projectProcedure, projectName[j]);
+                        }
+                    }
+                    #endregion
+                    if (dtSampleInfo.Rows.Count == 0 || dtSampleInfo == null)
+                    {
+                        LoadingHelper.CloseForm();
+                        RetestFlag = false;
                         frmAddSample.newSample = false;
                         Goon();
                         return;
@@ -10860,6 +11010,7 @@ namespace BioBaseCLIA.Run
             frmMain.btnStopClick -= new Action(AllStop);
             NetCom3.Instance.ReceiveHandel -= new Action<string>(Instance_ReceiveHandel);
             NetCom3.Instance.EventStop -= new Action(AllStop);
+            frmTestResult.RetestSample -= new Action(EmergencySampleSch);
             //NetCom3.MoveTubeError -= this.DisposeMoveAndAddError;//add y 20180723
             AddResetEvent.Set();//add y 20180727
             timeReckon.Stop();
