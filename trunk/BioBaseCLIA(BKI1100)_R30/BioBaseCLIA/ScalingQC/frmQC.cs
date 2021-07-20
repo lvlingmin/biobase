@@ -215,19 +215,31 @@ namespace BioBaseCLIA.ScalingQC
                 }
                 if (chk13s.Checked)
                 {
-                    rl += ",2";
+                    if(rl=="")
+                        rl += "2";
+                    else
+                        rl += ",2";
                 }
                 if (chk22s.Checked)
                 {
-                    rl += ",3";
+                    if (rl == "")
+                        rl += "3";
+                    else
+                        rl += ",3";
                 }
                 if (chk41s.Checked)
                 {
-                    rl += ",4";
+                    if (rl == "")
+                        rl += "4";
+                    else
+                        rl += ",4";
                 }
                 if (chk10x.Checked)
                 {
-                    rl += ",5";
+                    if (rl == "")
+                        rl += "5";
+                    else
+                        rl += ",5";
                 }
                 if (rl.Substring(0, 1) == ",")
                 {
@@ -270,19 +282,31 @@ namespace BioBaseCLIA.ScalingQC
                 }
                 if (chk13s.Checked)
                 {
-                    rl += ",2";
+                    if (rl == "")
+                        rl += "2";
+                    else
+                        rl += ",2";
                 }
                 if (chk22s.Checked)
                 {
-                    rl += ",3";
+                    if (rl == "")
+                        rl += "3";
+                    else
+                        rl += ",3";
                 }
                 if (chk41s.Checked)
                 {
-                    rl += ",4";
+                    if (rl == "")
+                        rl += "4";
+                    else
+                        rl += ",4";
                 }
                 if (chk10x.Checked)
                 {
-                    rl += ",5";
+                    if (rl == "")
+                        rl += "5";
+                    else
+                        rl += ",5";
                 }
                 mQC.QCRules = rl;
                 if (bllQC.Update(mQC))

@@ -542,7 +542,38 @@ namespace BioBaseCLIA.Run
                     }
                     else
                     {
-                        modelScalingResult.Status = 0;
+                        string CPoints = DbHelperOleDb.GetSingle(1, @"select Points from tbScalingResult where ItemName = '"
+                                                                   + ilistStandardResult[0].ItemName + "' AND RegentBatch='" + ilistStandardResult[0].ReagentBeach + "' AND Status=1").ToString();
+                        if (CPoints == "")
+                            modelScalingResult.Status = 0;
+                        else
+                        {
+                            string[] SpPoints = CPoints.Split(';');
+                            string[] spointS = points.ToString().Split(';');
+                            for (int i = 0; i < SpPoints.Length; i++)
+                            {
+                                foreach (string temp in spointS)
+                                {
+                                    if (temp != null && temp != " " && temp.Split(',')[0] == SpPoints[i].Split(',')[0])
+                                    {
+                                        SpPoints[i] = temp;
+                                        break;
+                                    }
+                                }
+                            }
+                            points.Clear();
+                            for (int i = 0; i < SpPoints.Length; i++)
+                            {
+                                if (SpPoints[i] != null && SpPoints[i] != "")
+                                {
+                                    points.Append(SpPoints[i] + ";");
+                                }
+                            }
+                            points.Remove(points.Length - 1, 1);
+                            modelScalingResult.Status = 1;
+                            DbHelperOleDb.ExecuteSql(1, @"update tbScalingResult set Status=0 where ItemName = '"
+                                                                  + ilistStandardResult[0].ItemName + "' AND RegentBatch='" + ilistStandardResult[0].ReagentBeach + "'").ToString();
+                        }
                     }
 
                     modelScalingResult.ActiveDate = DateTime.Now;
