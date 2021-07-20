@@ -114,6 +114,10 @@ namespace BioBaseCLIA.Run
         /// </summary>
         int timeInterval = 1000;
         /// <summary>
+        /// 实验剩余时间(以分钟计算)
+        /// </summary>
+        public static int LeftTestTime = 0;
+        /// <summary>
         /// 当前可做样本的数量
         /// </summary>
         int SampleNumCurrent = 0;
@@ -1257,6 +1261,9 @@ namespace BioBaseCLIA.Run
                 TimeLabel3.Text = span.Minutes.ToString("00");
                 TimeLabel2.Visible = TimeLabel1.Visible = TimeLabel3.Visible = label2.Visible = label3.Visible = true;
             }));
+
+            LeftTestTime = Convert.ToInt32(TimeLabel2.Text) * 60 + Convert.ToInt32(TimeLabel3.Text);
+
             stopTimer.Elapsed += StopWatchDecrease;
             stopTimer.Interval = 60000;
             stopTimer.Start();
@@ -1282,6 +1289,8 @@ namespace BioBaseCLIA.Run
                     return;
                 }));
             }
+
+            LeftTestTime = Convert.ToInt32(TimeLabel2.Text) * 60 + Convert.ToInt32(TimeLabel3.Text);
         }
         void StopWatchAddOrSubtractEmergency()//加急诊之后增加倒计时,或者减去试验后减少倒计时
         {
@@ -1335,6 +1344,8 @@ namespace BioBaseCLIA.Run
             {
                 StopStopWatch();
             }
+
+            LeftTestTime = Convert.ToInt32(TimeLabel2.Text) * 60 + Convert.ToInt32(TimeLabel3.Text);
         }
         /// <summary>
         /// 实验步骤初始化
@@ -10873,6 +10884,8 @@ namespace BioBaseCLIA.Run
                 TimeLabel2.Visible = TimeLabel1.Visible = TimeLabel3.Visible = label2.Visible = label3.Visible = true;
             }));
             stopTimer.Start();//倒计时继续
+
+            LeftTestTime = Convert.ToInt32(TimeLabel2.Text) * 60 + Convert.ToInt32(TimeLabel3.Text);
         }
 
         #region 控件窗体
@@ -11565,6 +11578,8 @@ namespace BioBaseCLIA.Run
             stopTimer.Start();//倒计时继续
             #endregion
             //StopWatchAddOrSubtractEmergency();//加急诊之后增加倒计时,或者减去试验后减少倒计时
+
+            LeftTestTime = Convert.ToInt32(TimeLabel2.Text) * 60 + Convert.ToInt32(TimeLabel3.Text);
         }
 
         private void dgvWorkListData_SelectionChanged(object sender, EventArgs e)
