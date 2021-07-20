@@ -303,7 +303,7 @@ namespace BioBaseCLIA.Run
         /// <summary>
         /// 稀释样本后弃体积
         /// </summary>
-        int DiuLeftVol = 40;
+        int DiuLeftVol = 60;
         /// <summary>
         /// 试剂获取不到的体积/ul 2019-04-12 zlx add
         /// </summary>
@@ -2984,7 +2984,7 @@ namespace BioBaseCLIA.Run
                 frmMain.BQLiquaid = false;
             if (dtSpInfo.Select("SampleType='" + getString("keywordText.CalibrationSolution") + "' and Status='0'").Length > 0 ||
                    dtSpInfo.Select("SampleType like '" + getString("keywordText.Calibrator") + "%' and Status='0'").Length > 0 ||
-                   dtSpInfo.Select("SampleType like '" + getString("keywordText.Control") + "%' and Status='0'").Length > 0 ||
+                   //dtSpInfo.Select("SampleType like '" + getString("keywordText.Control") + "%' and Status='0'").Length > 0 ||
                    dtSpInfo.Select("SampleType like '" + getString("keywordText.Standard") + "%' and Status='0'").Length > 0)
             {
                 if (dtSpInfo.Select("SampleType ='" + getString("keywordText.Serum") + "' and Status='0'").Length > 0 ||
@@ -5811,36 +5811,6 @@ namespace BioBaseCLIA.Run
                                             goto outAddLiquidTube;
                                         }
                                         #endregion
-                                        #region 加稀释液
-                                        AddErrorCount = 0;
-                                        AddErrorCount = AddLiquid(rgPos, pos, DiuVol);
-                                        if (NetCom3.Instance.AdderrorFlag == (int)ErrorState.OverTime)
-                                        {
-                                            NetCom3.Instance.stopsendFlag = true;
-                                            ShowWarnInfo(getString("keywordText.AddDiuOver"), getString("keywordText.Samplingneedle"), 1);
-                                            AllStop();
-                                        }
-                                        if (AddErrorCount > 0)
-                                        {
-                                            if (AddErrorCount > 1)
-                                            {
-                                                NetCom3.Instance.stopsendFlag = true;
-                                                ShowWarnInfo(getString("keywordText.AddDiuOverIsKnocked"), getString("keywordText.Samplingneedle"), 1);
-                                                AllStop();
-                                            }
-                                            else
-                                            {
-                                                MoveTubeListAddTubeDispose(pos);
-                                                RemoveTestList(testTempS, getString("keywordText.AddDiuOverIsKnocked"));
-                                            }
-                                            break;
-                                        }
-                                        DataRow[] drDiu = dtRgInfo.Select("Postion='" + rgPos + "'");
-                                        drDiu[0]["leftoverTestR1"] = OperateIniFile.ReadIniData("ReagentPos" + rgPos, "LeftReagent1", "", iniPathReagentTrayInfo);
-                                        string rgBar = OperateIniFile.ReadIniData("ReagentPos" + rgPos.ToString(), "BarCode", "", iniPathReagentTrayInfo);
-                                        DbHelperOleDb.ExecuteSql(3, @"update tbReagent set leftoverTestR1 =" + (drDiu[0]["leftoverTestR1"]).ToString() + " where BarCode = '"
-                                                + rgBar + "' and Postion = '" + rgPos.ToString() + "'");
-                                        #endregion
                                         #region 加需稀释的样本
                                         int samplePos;//获取样本位置。
                                         if (i == 0)
@@ -5909,8 +5879,39 @@ namespace BioBaseCLIA.Run
                                             }
                                             break;
                                         }
-                                        //混匀
-                                        AgainMix:
+                                        #endregion
+                                        #region 加稀释液
+                                        AddErrorCount = 0;
+                                        AddErrorCount = AddLiquid(rgPos, pos, DiuVol);
+                                        if (NetCom3.Instance.AdderrorFlag == (int)ErrorState.OverTime)
+                                        {
+                                            NetCom3.Instance.stopsendFlag = true;
+                                            ShowWarnInfo(getString("keywordText.AddDiuOver"), getString("keywordText.Samplingneedle"), 1);
+                                            AllStop();
+                                        }
+                                        if (AddErrorCount > 0)
+                                        {
+                                            if (AddErrorCount > 1)
+                                            {
+                                                NetCom3.Instance.stopsendFlag = true;
+                                                ShowWarnInfo(getString("keywordText.AddDiuOverIsKnocked"), getString("keywordText.Samplingneedle"), 1);
+                                                AllStop();
+                                            }
+                                            else
+                                            {
+                                                MoveTubeListAddTubeDispose(pos);
+                                                RemoveTestList(testTempS, getString("keywordText.AddDiuOverIsKnocked"));
+                                            }
+                                            break;
+                                        }
+                                        DataRow[] drDiu = dtRgInfo.Select("Postion='" + rgPos + "'");
+                                        drDiu[0]["leftoverTestR1"] = OperateIniFile.ReadIniData("ReagentPos" + rgPos, "LeftReagent1", "", iniPathReagentTrayInfo);
+                                        string rgBar = OperateIniFile.ReadIniData("ReagentPos" + rgPos.ToString(), "BarCode", "", iniPathReagentTrayInfo);
+                                        DbHelperOleDb.ExecuteSql(3, @"update tbReagent set leftoverTestR1 =" + (drDiu[0]["leftoverTestR1"]).ToString() + " where BarCode = '"
+                                                + rgBar + "' and Postion = '" + rgPos.ToString() + "'");
+                                    #endregion
+                                    //混匀
+                                    AgainMix:
                                         NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 04 01 " + pos.ToString("x2")), 0);
                                         if (!NetCom3.Instance.SPQuery())//NetCom3.Instance.MoveQuery()
                                         {
@@ -5929,7 +5930,6 @@ namespace BioBaseCLIA.Run
                                             }
                                             #endregion
                                         }
-                                        #endregion
                                     }
                                     else
                                     {
@@ -9979,13 +9979,13 @@ namespace BioBaseCLIA.Run
             if (testresult.SampleType.Contains(getString("keywordText.Standard")))
             {
                 GC.KeepAlive(testresult);//防止被回收               
-                List<TestItem> BToList = BToListTi.FindAll(tx => (tx.ItemName == testresult.ItemName && tx.SampleType.Contains(getString("keywordText.Standard")) && tx.RegentBatch == dgvWorkListData.Rows[testresult.TestID - 1].Cells["RegentBatch"].Value.ToString()));
-                List<TestItem> ENDList = lisTiEnd.FindAll(tx => (tx.ItemName == testresult.ItemName && tx.SampleType.Contains(getString("keywordText.Standard"))));
+                List<TestItem> BToList = BToListTi.FindAll(tx => (tx.ItemName == testresult.ItemName && tx.SampleType.Contains(getString("keywordText.Standard")) && tx.RegentBatch == testresult.ReagentBeach));
+                List<TestItem> ENDList = lisTiEnd.FindAll(tx => (tx.ItemName == testresult.ItemName && tx.SampleType.Contains(getString("keywordText.Standard")) && tx.RegentBatch == testresult.ReagentBeach));
                 if (BToList.Count == ENDList.Count)
                 {
                     //List<TestResult> ScalingResult = new List<TestResult>(BTestResult).FindAll(tx => (tx.ItemName == testResult.ItemName && testResult.SampleType.Contains(getString("keywordText.Standard"))));
                     //frmTestResult f = new frmTestResult();
-                    List<TestResult> ScalingResult = new List<TestResult>(TemporaryTestResult).FindAll(tx => (tx.ItemName == testresult.ItemName && testresult.SampleType.Contains(getString("keywordText.Standard"))));
+                    List<TestResult> ScalingResult = new List<TestResult>(TemporaryTestResult).FindAll(tx => (tx.ItemName == testresult.ItemName && testresult.SampleType.Contains(getString("keywordText.Standard")) && tx.ReagentBeach == testresult.ReagentBeach));
 
                     Invoke(new Action(() =>
                     {
