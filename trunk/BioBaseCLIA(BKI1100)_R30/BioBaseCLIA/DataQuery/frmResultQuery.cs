@@ -232,7 +232,7 @@ namespace BioBaseCLIA.DataQuery
         {
             string Result = "";
             DbHelperOleDb db = new DbHelperOleDb(1);
-            DataTable tbtbProject = DbHelperOleDb.Query(1, @"select Range from tbAssayResult where AssayResultID = '" + long.Parse(ResultId) + "'").Tables[0];
+            DataTable tbtbProject = DbHelperOleDb.Query(1, @"select Range from tbAssayResult where AssayResultID = " + long.Parse(ResultId) + "").Tables[0];
             if (concentration.Contains("<"))
             {
                 Result = Getstring("NotRangeMessage");
