@@ -146,6 +146,12 @@
     <Compile Include="DataQuery\frmAddSampleResult.Designer.cs">
       <DependentUpon>frmAddSampleResult.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataQuery\frmDataAnalysis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataQuery\frmDataAnalysis.Designer.cs">
+      <DependentUpon>frmDataAnalysis.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataQuery\frmHistoryScaling.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -449,6 +455,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataQuery\frmAddSampleResult.resx">
       <DependentUpon>frmAddSampleResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataQuery\frmDataAnalysis.resx">
+      <DependentUpon>frmDataAnalysis.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataQuery\frmHistoryScaling.en-US.resx">
       <DependentUpon>frmHistoryScaling.cs</DependentUpon>
