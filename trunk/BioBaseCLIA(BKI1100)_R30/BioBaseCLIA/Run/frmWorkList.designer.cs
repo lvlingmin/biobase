@@ -56,6 +56,7 @@
             this.SubstratePipe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RegentPos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.fbtnfrmResultQuery = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnTestResult = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.btnWorkList = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnReturn = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
@@ -63,7 +64,6 @@
             this.btnLoadReagent = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnPatientInfo = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             this.fbtnToEmergency = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
-            this.fbtnfrmResultQuery = new BioBaseCLIA.CustomControl.FunctionButton(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvWorkListData)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -281,6 +281,19 @@
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
+            // fbtnfrmResultQuery
+            // 
+            this.fbtnfrmResultQuery.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.fbtnfrmResultQuery, "fbtnfrmResultQuery");
+            this.fbtnfrmResultQuery.EnabledSet = true;
+            this.fbtnfrmResultQuery.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.fbtnfrmResultQuery.FlatAppearance.BorderSize = 0;
+            this.fbtnfrmResultQuery.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.fbtnfrmResultQuery.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.fbtnfrmResultQuery.Name = "fbtnfrmResultQuery";
+            this.fbtnfrmResultQuery.UseVisualStyleBackColor = false;
+            this.fbtnfrmResultQuery.Click += new System.EventHandler(this.fbtnfrmResultQuery_Click);
+            // 
             // fbtnTestResult
             // 
             this.fbtnTestResult.BackColor = System.Drawing.Color.Transparent;
@@ -370,19 +383,7 @@
             this.fbtnToEmergency.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.fbtnToEmergency.Name = "fbtnToEmergency";
             this.fbtnToEmergency.UseVisualStyleBackColor = false;
-            // 
-            // fbtnfrmResultQuery
-            // 
-            this.fbtnfrmResultQuery.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.fbtnfrmResultQuery, "fbtnfrmResultQuery");
-            this.fbtnfrmResultQuery.EnabledSet = true;
-            this.fbtnfrmResultQuery.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.fbtnfrmResultQuery.FlatAppearance.BorderSize = 0;
-            this.fbtnfrmResultQuery.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.fbtnfrmResultQuery.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.fbtnfrmResultQuery.Name = "fbtnfrmResultQuery";
-            this.fbtnfrmResultQuery.UseVisualStyleBackColor = false;
-            this.fbtnfrmResultQuery.Click += new System.EventHandler(this.fbtnfrmResultQuery_Click);
+            this.fbtnToEmergency.Click += new System.EventHandler(this.fbtnToEmergency_Click);
             // 
             // frmWorkList
             // 
