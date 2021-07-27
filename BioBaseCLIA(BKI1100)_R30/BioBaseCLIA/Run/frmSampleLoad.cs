@@ -697,7 +697,26 @@ namespace BioBaseCLIA.Run
 
         private void cmbDispatchType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (frmWorkList.RunFlag == (int)RunFlagStart.IsRuning)
+            {
+                string dispatchType = OperateIniFile.ReadIniData("DispatchType", "DispatchType", "", Application.StartupPath + "//InstrumentPara.ini");
+                switch (dispatchType)
+                {
+                    case "0":
+                        cmbDispatchType.Text = getString("DispathchTypeAdd");
+                        break;
+                    case "1":
+                        cmbDispatchType.Text = getString("DispathchTypeSampleProject");
+                        break;
+                    case "2":
+                        cmbDispatchType.Text = getString("DispathchTypeSpeed");
+                        break;
+                }
 
+                return;
+            }
+
+            OperateIniFile.WriteIniData("DispatchType", "DispatchType", cmbDispatchType.SelectedIndex.ToString(), Application.StartupPath + "//InstrumentPara.ini");
         }
     }
 }

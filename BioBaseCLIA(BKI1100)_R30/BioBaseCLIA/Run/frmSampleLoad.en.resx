@@ -757,6 +757,12 @@
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>447, 411</value>
   </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>447, 42</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Sample Information</value>
+  </data>
   <data name="Position.HeaderText" xml:space="preserve">
     <value>Position</value>
   </data>
@@ -778,11 +784,14 @@
   <data name="dataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
     <value>Emergency</value>
   </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>447, 42</value>
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 421</value>
   </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Sample Information</value>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 125</value>
+  </data>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>Reagent Legend</value>
   </data>
   <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 12</value>
@@ -814,14 +823,14 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Unloaded</value>
   </data>
-  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 421</value>
+  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>321, 442</value>
   </data>
-  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 125</value>
+  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 104</value>
   </data>
-  <data name="groupBox3.Text" xml:space="preserve">
-    <value>Reagent Legend</value>
+  <data name="groupBox4.Text" xml:space="preserve">
+    <value>Sample Legend</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>29, 75</value>
@@ -849,15 +858,6 @@
   </data>
   <data name="label9.Text" xml:space="preserve">
     <value>Unloaded</value>
-  </data>
-  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>321, 442</value>
-  </data>
-  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 104</value>
-  </data>
-  <data name="groupBox4.Text" xml:space="preserve">
-    <value>Sample Legend</value>
   </data>
   <data name="srdReagent.Location" type="System.Drawing.Point, System.Drawing">
     <value>-8, 13</value>
