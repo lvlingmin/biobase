@@ -47,6 +47,7 @@ namespace BioBaseCLIA.Run
         List<int> loopSpFailResult = new List<int>();
         List<string> loopSpFailReason = new List<string>();
         public static bool isSp = false;
+        bool rgTrayIsLeftClick = false;
         bool noSpAddReagent = true;
         List<string> spacialProList = new List<string>();//两个试剂盒分装的特殊项目
         bool isClick = false;
@@ -768,6 +769,12 @@ namespace BioBaseCLIA.Run
         /// </summary>
         private void srdReagent_MouseDown(object sender, MouseEventArgs e)
         {
+            rgTrayIsLeftClick = true;
+            if (srdReagent.rgSelectedNo < 0)
+            {
+                rgTrayIsLeftClick = false;
+                return;
+            }
             txtRgCode.TextChanged -= new EventHandler(txtRgCode_TextChanged);
             txtRgCode.TextChanged -= new EventHandler(txtRgCode_TextChanged);
             int fg = -1;
@@ -1343,6 +1350,11 @@ namespace BioBaseCLIA.Run
         bool bSend = false;
         private void srdReagent_MouseUp(object sender, MouseEventArgs e)
         {
+            if(!rgTrayIsLeftClick)
+            {
+                return;
+            }
+            rgTrayIsLeftClick = false;
             txtRgCode.TextChanged += new EventHandler(txtRgCode_TextChanged);
 
             frmMessageShow frmMsgShow = new frmMessageShow();
