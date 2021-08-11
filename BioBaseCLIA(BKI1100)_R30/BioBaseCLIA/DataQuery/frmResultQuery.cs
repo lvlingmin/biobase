@@ -1042,7 +1042,11 @@ namespace BioBaseCLIA.DataQuery
         private void btnImPort_Click(object sender, EventArgs e)
         {
             if (dgvPatientInfo.SelectedRows.Count == 0)
+            {
+                frmMessageShow f = new frmMessageShow();
+                f.MessageShow(Getstring("MessageHead"), Getstring("keywordText.SelectSampleMessage"));
                 return;
+            }
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.InitialDirectory = System.Windows.Forms.Application.StartupPath;
             dialog.Filter = "xls" + Getstring("File") + "|*.xls";
@@ -1265,7 +1269,7 @@ namespace BioBaseCLIA.DataQuery
                       + "tbAssayResult.ItemName,tbAssayResult.TestDate,tbAssayResult.PMTCounter,"
                       + "tbAssayResult.Concentration,tbAssayResult.Unit,tbAssayResult.Result,tbAssayResult.Range,tbSampleInfo.SampleType,tbAssayResult.Status,tbAssayResult.Batch from " //2018-08-17  zlx 添加tbAssayResult.Status
                       + "tbAssayResult INNER JOIN tbSampleInfo on tbAssayResult.SampleID = tbSampleInfo.SampleID "
-                      + "where tbAssayResult.SampleID=" + SampleID + " AND  tbAssayResult.TestDate >=#" + dtpStartDate.Value.ToString("yyyy-MM-dd") + "# and tbAssayResult.TestDate < #" + dtpEndDate.Value.AddDays(1).ToString("yyyy-MM-dd") + "# AND tbAssayResult.Status=0";
+                      + "where tbAssayResult.SampleID=" + SampleID + " AND  tbAssayResult.TestDate >=#" + dtpStartDate.Value.ToString("yyyy-MM-dd") + "# and tbAssayResult.TestDate < #" + dtpEndDate.Value.AddDays(1).ToString("yyyy-MM-dd") + "#";// AND tbAssayResult.Status=0
 
             DbHelperOleDb DB = new DbHelperOleDb(1);//2018-5-9 zlx add tbSampleInfo.SampleType
             DataTable dtTestData = DbHelperOleDb.Query(1, @str).Tables[0];
