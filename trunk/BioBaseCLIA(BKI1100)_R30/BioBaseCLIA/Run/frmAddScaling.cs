@@ -404,14 +404,27 @@ namespace BioBaseCLIA.Run
                                 //dtConcValue.Rows[6][2] = double.Parse(sign17);
                                 break;
                             default:
-                                frmMessageShow fmsg = new frmMessageShow();
-                                fmsg.MessageShow(getString("projectUpdate"), getString("keywordText.ScanByStandard"));
+                                //frmMessageShow fmsg = new frmMessageShow();
+                                //fmsg.MessageShow(getString("projectUpdate"), getString("keywordText.ScanByStandard"));
                                 //Console.WriteLine("请按标准扫描本公司条码");
                                 break;
                         }
                     }
                 }
             }
+        }
+        public bool CheckFormIsOpen(string Forms)
+        {
+            bool bResult = false;
+            foreach (Form frm in Application.OpenForms)
+            {
+                if (frm.Name == Forms)
+                {
+                    bResult = true;
+                    break;
+                }
+            }
+            return bResult;
         }
         /// <summary>
         /// 填充流程列表
@@ -1015,8 +1028,11 @@ namespace BioBaseCLIA.Run
                         //dtConcValue.Rows[6][2] = double.Parse(sign17);
                         break;
                     default:
-                        frmMessageShow fmsg = new frmMessageShow();
-                        fmsg.MessageShow(getString("projectUpdate"), getString("keywordText.ScanByStandard"));
+                        if (!CheckFormIsOpen("frmMessageShow"))
+                        {
+                            frmMessageShow fmsg = new frmMessageShow();
+                            fmsg.MessageShow(getString("projectUpdate"), getString("keywordText.ScanByStandard"));
+                        }
                         //Console.WriteLine("请按标准扫描本公司条码");
                         break;
                 }
