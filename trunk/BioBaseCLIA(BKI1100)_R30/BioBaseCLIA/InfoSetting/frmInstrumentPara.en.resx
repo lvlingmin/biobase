@@ -188,6 +188,45 @@
   <data name="fbtnCancle.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="txtTDarkMax.Location" type="System.Drawing.Point, System.Drawing">
+    <value>575, 206</value>
+  </data>
+  <data name="txtTDarkMax.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 30</value>
+  </data>
+  <data name="label59.Location" type="System.Drawing.Point, System.Drawing">
+    <value>558, 210</value>
+  </data>
+  <data name="label59.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 22</value>
+  </data>
+  <data name="txtTDarkMin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>521, 206</value>
+  </data>
+  <data name="txtTDarkMin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 30</value>
+  </data>
+  <data name="label56.Location" type="System.Drawing.Point, System.Drawing">
+    <value>370, 210</value>
+  </data>
+  <data name="label56.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 22</value>
+  </data>
+  <data name="label56.Text" xml:space="preserve">
+    <value>Dark room alarm:</value>
+  </data>
+  <data name="txtDiuNum.Location" type="System.Drawing.Point, System.Drawing">
+    <value>230, 245</value>
+  </data>
+  <data name="txtDiuNum.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 30</value>
+  </data>
+  <data name="label57.Size" type="System.Drawing.Size, System.Drawing">
+    <value>206, 22</value>
+  </data>
+  <data name="label57.Text" xml:space="preserve">
+    <value>Number of diluent items:</value>
+  </data>
   <data name="label54.Location" type="System.Drawing.Point, System.Drawing">
     <value>615, 162</value>
   </data>
@@ -330,10 +369,6 @@
   <data name="label43.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 22</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label43.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="label42.Location" type="System.Drawing.Point, System.Drawing">
     <value>594, 283</value>
   </data>
@@ -343,15 +378,13 @@
   <data name="label42.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 22</value>
   </data>
-  <data name="label42.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="label41.Location" type="System.Drawing.Point, System.Drawing">
     <value>304, 162</value>
   </data>
   <data name="label41.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 22</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label41.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -412,9 +445,6 @@
   <data name="txtErrorTube.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 30</value>
   </data>
-  <data name="txtErrorTube.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
     <value>337, 328</value>
   </data>
@@ -423,9 +453,6 @@
   </data>
   <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>170, 22</value>
-  </data>
-  <data name="label19.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="txtWarnTube.Location" type="System.Drawing.Point, System.Drawing">
     <value>518, 279</value>
@@ -436,9 +463,6 @@
   <data name="txtWarnTube.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 30</value>
   </data>
-  <data name="txtWarnTube.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
     <value>337, 283</value>
   </data>
@@ -447,9 +471,6 @@
   </data>
   <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
     <value>170, 22</value>
-  </data>
-  <data name="label20.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="txtErrorReagent.Location" type="System.Drawing.Point, System.Drawing">
     <value>230, 158</value>
@@ -1229,12 +1250,12 @@
 </value>
   </data>
   <data name="InstrumentParaHead" xml:space="preserve">
-    <value>Setting of the instrument's data</value>
+    <value>Instrument parameter setting</value>
   </data>
   <data name="ParaIsNull" xml:space="preserve">
-    <value>The information cannot be empty</value>
+    <value>Parameter information cannot be empty</value>
   </data>
   <data name="ParaSaveSucess" xml:space="preserve">
-    <value>The data was saved successfully and came into effect after the instrument was restarted</value>
+    <value>The parameter information is saved successfully and takes effect after the instrument is restarted</value>
   </data>
 </root>
