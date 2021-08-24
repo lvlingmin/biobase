@@ -1379,7 +1379,7 @@ namespace BioBaseCLIA
                                         }
                                         else
                                         {
-                                            tempInt = tempResponse.IndexOf("EB 90 F1 02 00 ");
+                                            tempInt = tempResponse.IndexOf("EB 90 F1 02 ");
                                         }
                                         //int tempInt = tempResponse.IndexOf("EB 90 F1 02 00 ");
                                         //初始化检测II：加样模块光电信号
