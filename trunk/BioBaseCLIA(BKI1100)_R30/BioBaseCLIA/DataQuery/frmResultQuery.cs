@@ -51,7 +51,7 @@ namespace BioBaseCLIA.DataQuery
             }
             cmbSelect.SelectedIndex = 0;//2018-11-20 zlx add
             fbtnQuery_Click(sender, e);
-
+            fbtnAddSampleResult.Visible = false;
         }
         private void frmResultQuery_SizeChanged(object sender, EventArgs e)
         {
@@ -242,14 +242,23 @@ namespace BioBaseCLIA.DataQuery
             else
             {
                 string Range = tbtbProject.Rows[0]["Range"].ToString();
-                string[] SpRange = Range.Split(' ');
-                if (SpRange.Length == 1)
+                Regex cn = new Regex("[\u4e00-\u9fa5]+");
+                //string[] SpRange = Range.Split(' ');
+
+                if (cn.IsMatch(Range))//range1字符串中有中文
                 {
-                    string Range1 = SpRange[0];
+                    Result = "";
+                }
+                else if (Regex.Matches(Range, "[a-zA-Z]").Count > 0)//range1字符串中有英文
+                {
+                    Result = "";
+                }
+                else
+                {
                     double dconcentration = double.Parse(concentration);
-                    if (Range1.Contains("-"))
+                    if (Range.Contains("-"))
                     {
-                        string[] ranges = Range1.Split('-');
+                        string[] ranges = Range.Split('-');
                         if (dconcentration < double.Parse(ranges[0]))
                         {
                             Result = "↓";
@@ -261,9 +270,9 @@ namespace BioBaseCLIA.DataQuery
                         else
                             Result = Getstring("Normal");
                     }
-                    else if (Range1.Contains("<"))
+                    else if (Range.Contains("<"))
                     {
-                        if (dconcentration >= double.Parse(Range1.Substring(1)))
+                        if (dconcentration >= double.Parse(Range.Substring(1)))
                         {
                             Result = "↑";
                         }
@@ -272,9 +281,9 @@ namespace BioBaseCLIA.DataQuery
                             Result = Getstring("Normal");
                         }
                     }
-                    else if (Range1.Contains("<="))
+                    else if (Range.Contains("<="))
                     {
-                        if (dconcentration > double.Parse(Range1.Substring(2)))
+                        if (dconcentration > double.Parse(Range.Substring(2)))
                         {
                             Result = "↑";
                         }
@@ -283,9 +292,9 @@ namespace BioBaseCLIA.DataQuery
                             Result = Getstring("Normal");
                         }
                     }
-                    else if (Range1.Contains(">"))
+                    else if (Range.Contains(">"))
                     {
-                        if (dconcentration <= double.Parse(Range1.Substring(1)))
+                        if (dconcentration <= double.Parse(Range.Substring(1)))
                         {
                             Result = "↓";
                         }
@@ -294,9 +303,9 @@ namespace BioBaseCLIA.DataQuery
                             Result = Getstring("Normal");
                         }
                     }
-                    else if (Range1.Contains(">="))
+                    else if (Range.Contains(">="))
                     {
-                        if (dconcentration < double.Parse(Range1.Substring(2)))
+                        if (dconcentration < double.Parse(Range.Substring(2)))
                         {
                             Result = "↓";
                         }
@@ -455,7 +464,12 @@ namespace BioBaseCLIA.DataQuery
                     {
                         dgvSampleData.Rows[i].Selected = true;
                         dr = dtTestResult.NewRow();
-                        dr["ShortName"] = dtPro.Select("ShortName = '" + dgvSampleData.Rows[i].Cells["ItemName"].Value.ToString() + "'")[0]["FullName"].ToString();//lyq/*dgvSampleData.Rows[i].Cells["ItemName"].Value.ToString();*/
+                        DataRow[] drPro = dtPro.Select("ShortName = '" + dgvSampleData.Rows[i].Cells["ItemName"].Value.ToString() + "'");
+                        if (drPro.Length > 0)
+                            dr["ShortName"] = drPro[0]["FullName"].ToString();
+                        else
+                            dr["ShortName"] = dgvSampleData.Rows[i].Cells["ItemName"].Value.ToString();//lyq/*dgvSampleData.Rows[i].Cells["ItemName"].Value.ToString();*/
+                        //dr["ShortName"] = dtPro.Select("ShortName = '" + dgvSampleData.Rows[i].Cells["ItemName"].Value.ToString() + "'")[0]["FullName"].ToString();//lyq/*dgvSampleData.Rows[i].Cells["ItemName"].Value.ToString();*/
                         dr["Concentration"] = dgvSampleData.Rows[i].Cells["Concentration"].Value.ToString();
                         dr["Result"] = dgvSampleData.Rows[i].Cells["Result"].Value.ToString();
                         dr["Range1"] = dgvSampleData.Rows[i].Cells["Range"].Value.ToString();
@@ -465,6 +479,8 @@ namespace BioBaseCLIA.DataQuery
 
                         string printIndex = OperateIniFile.ReadIniData("RpSort", dgvSampleData.Rows[i].Cells["ItemName"].Value.ToString(), "",
                              Application.StartupPath + "//ReportSort.ini");
+                        if (printIndex == "")
+                            printIndex = "999";
                         dr["printIndex"] = printIndex;
                         dtTestResult.Rows.Add(dr);
                     }
@@ -1329,7 +1345,7 @@ namespace BioBaseCLIA.DataQuery
         {
             try
             {
-                if (dgvSampleData.CurrentRow == null || Convert.ToInt32(dgvSampleData.CurrentRow.Cells["Status"].Value) == 9)
+                if (dgvSampleData.CurrentRow == null || dgvSampleData.CurrentRow.Cells["Status"].Value.ToString() == "" || Convert.ToInt32(dgvSampleData.CurrentRow.Cells["Status"].Value) == 9)
                     return;//Result
             }
             catch (Exception ex) { return; }

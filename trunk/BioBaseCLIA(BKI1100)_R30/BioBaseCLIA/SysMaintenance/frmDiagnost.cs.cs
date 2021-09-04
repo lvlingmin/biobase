@@ -6477,6 +6477,7 @@ namespace BioBaseCLIA.SysMaintenance
                             {
                                 textSurplusNum.Text = surplusNum.ToString();
                             }));
+                            Thread.Sleep(5000);
                         }
                         TubetempNum = 1;
                         //CurrentTubePos = CurrentTubePos - singleLooPNum < 0 ? CurrentTubePos - singleLooPNum + 352 : CurrentTubePos - singleLooPNum;
@@ -6633,6 +6634,7 @@ namespace BioBaseCLIA.SysMaintenance
                             {
                                 textSurplusNum.Text = surplusNum.ToString();
                             }));
+                            Thread.Sleep(5000);
                         }
                         TubetempNum = 1;
                         //CurrentTubePos = CurrentTubePos - singleLooPNum < 0 ? CurrentTubePos - singleLooPNum + 352 : CurrentTubePos - singleLooPNum;
@@ -6768,6 +6770,7 @@ namespace BioBaseCLIA.SysMaintenance
                         {
                             textSurplusNum.Text = surplusNum.ToString();
                         }));
+                        Thread.Sleep(5000);
                     }
                     #endregion
                 }
@@ -6855,6 +6858,7 @@ namespace BioBaseCLIA.SysMaintenance
                         }
                         if (LogFileRtest.Instance.Bcount)
                             LogFileRtest.Instance.Testcount++;
+                        Thread.Sleep(5000);
                         //移管手要夹的下一个管架位置
                         //CurrentTubePos = CurrentTubePos + 1 == 353 ? 1 : CurrentTubePos + 1;
                         if (TubetempNum != singleLooPNum)
