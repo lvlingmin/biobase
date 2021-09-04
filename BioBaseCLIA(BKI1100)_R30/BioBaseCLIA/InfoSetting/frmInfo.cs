@@ -1373,10 +1373,20 @@ namespace BioBaseCLIA.InfoSetting
         /// </summary>
         private void ShowReportSet()
         {
+            string HospitalName = OperateIniFile.ReadInIPara("PrintSet", "HospitalName");
+            if (HospitalName != "")
+                txtHospitalName.Text = HospitalName;
+            else
+                txtHospitalName.Text = Getstring("HospitalName");
             txtHospitalName.Text =Getstring("HospitalName");
             InitprinterComboBox();
             cmbPrinter.SelectedItem = OperateIniFile.ReadInIPara("PrintSet", "defaultPrinter");
             cmbFormat.SelectedItem = OperateIniFile.ReadInIPara("PrintSet", "PageSize");
+            string PrintMode = OperateIniFile.ReadInIPara("PrintSet", "PrintMode");
+            if (PrintMode == "")
+                cmbPrintMode.SelectedIndex = 0;
+            else
+                cmbPrintMode.SelectedItem = PrintMode;
             string Margin = OperateIniFile.ReadInIPara("PrintSet", "Margin");
             string[] udlr = Margin.Split('|');
             nudUP.Value = decimal.Parse(udlr[0]);
