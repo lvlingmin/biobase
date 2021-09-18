@@ -27,7 +27,7 @@ namespace BioBaseCLIA.Run
         /// <summary>
         /// 稀释液获取不到的体积/ul 2019-04-12 zlx add
         /// </summary>
-        int DiuNoUsePro = 2000;
+        int DiuNoUsePro = 0;
         /// <summary>
         /// 稀释液后弃体积
         /// </summary>
@@ -35,7 +35,7 @@ namespace BioBaseCLIA.Run
         /// <summary>
         /// 稀释液最小加液体积
         /// </summary>
-        const int addDiuVol = 5;
+        const int addDiuVol =7;
         /// <summary>
         /// 试剂盘配置文件地址
         /// </summary>

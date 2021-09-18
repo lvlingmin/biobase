@@ -51,7 +51,7 @@ namespace BioBaseCLIA.Run
         /// <summary>
         /// 稀释液获取不到的体积/ul
         /// </summary>
-        int DiuNoUsePro = 2000;
+        int DiuNoUsePro = 0;
         /// <summary>
         /// 稀释过程获取不到的稀释液体积
         /// </summary>
@@ -63,7 +63,7 @@ namespace BioBaseCLIA.Run
         /// <summary>
         /// 稀释液最小加液体积
         /// </summary>
-        const int addDiuVol = 5;
+        const int addDiuVol = 7;
         /// <summary>
         /// 查询底物剩余数量事件
         /// </summary>
@@ -628,7 +628,8 @@ namespace BioBaseCLIA.Run
                     //读取条码  
                     NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 02 0a " + (i + 6).ToString("x2")), 0);
                     SendAgain:
-                    if (!NetCom3.Instance.SPQuery() && NetCom3.Instance.AdderrorFlag != (int)ErrorState.ReadySend)
+                    if (!NetCom3.Instance.SPQuery()) 
+                        //&& NetCom3.Instance.AdderrorFlag != (int)ErrorState.ReadySend)
                     {
                         if (NetCom3.Instance.AdderrorFlag == (int)ErrorState.Sendfailure)
                             goto SendAgain;
@@ -2203,14 +2204,16 @@ namespace BioBaseCLIA.Run
                     {
                         string tesst = dgvSampleList.SelectedRows[i].Cells["SampleNo"].Value.ToString();
                         db = new DbHelperOleDb(1);
-                        string emergency;
+                        string emergency = "";
                         try
                         {
-                            emergency = DbHelperOleDb.GetSingle(1, "select Emergency from tbSampleInfo where SampleNo = '"
-                            + dgvSampleList.SelectedRows[i].Cells["SampleNo"].Value.ToString() + "' and SendDateTime >=#"
-                            + DateTime.Now.ToString("yyyy-MM-dd")
-                            + "# and SendDateTime <#" + DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")
-                            + "#").ToString();
+                            object emergency1 = DbHelperOleDb.GetSingle(1, "select Emergency from tbSampleInfo where SampleNo = '"
+                          + dgvSampleList.SelectedRows[i].Cells["SampleNo"].Value.ToString() + "' and SendDateTime >=#"
+                          + frmParent.StartRuntime.ToString("yyyy-MM-dd")
+                          + "# and SendDateTime <#" + DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")
+                          + "#");
+                            if (emergency1 != null)
+                                emergency = emergency1.ToString();
                         }
                         catch (Exception ex)
                         {
