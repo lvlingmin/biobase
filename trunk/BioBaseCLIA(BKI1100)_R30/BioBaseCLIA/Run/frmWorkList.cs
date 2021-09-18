@@ -285,21 +285,13 @@ namespace BioBaseCLIA.Run
         /// </summary>
         int ReactTrayHoleNum = int.Parse(OperateIniFile.ReadInIPara("OtherPara", "ReactTrayHoleNum"));
         /// <summary>
-        /// 最大稀释倍数（针最小吸液量为5，反应管最大体积为600）
-        /// </summary>
-        int DiuMaxTimes = 10; //2018 zlx add
-        /// <summary>
         /// 最小吸液量
         /// </summary>
-        int ImbibitionMin = 5;
-        /// <summary>
-        /// 稀释总体积 2018-06-01 zlx add
-        /// </summary>
-        int _diuSumVol = 100;
+        int ImbibitionMin = 7;
         /// <summary>
         /// 稀释液获取不到的体积/ul 2019-04-12 zlx add
         /// </summary>
-        int DiuNoUsePro = 2000;
+        int DiuNoUsePro = 0;
         /// <summary>
         /// 稀释样本后弃体积
         /// </summary>
@@ -2154,30 +2146,6 @@ namespace BioBaseCLIA.Run
                             Ts.dilutionPos += "-" + ((i + 1) % 4 != 0 ? (i + 1) % 4 : 1).ToString();
                         }
                     }
-                    #region
-                    /*
-                    if (int.Parse(Ts.dilutionTimes.Trim()) > DiuMaxTimes)
-                    {
-                        string[] spos = Ts.dilutionPos.Split('-');
-                        Ts.dilutionPos = "";
-                        for (int i = 0; i < spos.Length; i++)
-                        {
-                            if (Ts.dilutionPos == "")
-                            {
-                                Ts.dilutionPos = "1";
-                            }
-                            else
-                            {
-                                Ts.dilutionPos += "-" + (i + 1).ToString();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Ts.dilutionPos = "1";
-                    }
-                    */
-                    #endregion
                     string[] diupos = Ts.dilutionPos.Split('-');
                     Ts.getSamplePos = "R" + diupos[diupos.Length - 1];
                     ReactStartPos = ReactStartPos + 1;
@@ -2802,7 +2770,7 @@ namespace BioBaseCLIA.Run
             DbHelperOleDb db = new DbHelperOleDb(1);
             BLL.tbSampleInfo bllsp = new BLL.tbSampleInfo();
             DataTable dtSample = bllsp.GetList(" SendDateTime  >=#"
-                + DateTime.Now.ToString("yyyy-MM-dd") + "#and SendDateTime <#"
+                + frmParent.StartRuntime.ToString("yyyy-MM-dd") + "#and SendDateTime <#"
                 + DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + "# and Status = 0 order by SampleNo").Tables[0];
             for (int i = nostartid; i <= lisTS[lisTS.Count - 1].TestID; i++)
             {
@@ -3127,6 +3095,7 @@ namespace BioBaseCLIA.Run
             lisSavedId = new List<int>();//2018-08-21 zlx add
             buttonEnableRun(true);//2018-11-29 zlx mod
             EntertRun = true;
+            frmParent.StartRuntime = DateTime.Now;
             RunThread = new Thread(new ParameterizedThreadStart(GaTestRun));// GaTestRun  TestRun
             RunThread.CurrentCulture = Language.AppCultureInfo;
             RunThread.CurrentUICulture = Language.AppCultureInfo;
@@ -3377,10 +3346,18 @@ namespace BioBaseCLIA.Run
                         {
                             int diuTimes = int.Parse(diutest.dilutionTimes);
                             int GetSampleV = int.Parse(diutest.AddLiqud.Split('-')[0]);
-                            DbHelperOleDb db = new DbHelperOleDb(0);
-                            string DiluteName = DbHelperOleDb.GetSingle(0, @"select DiluteName from tbProject where ShortName ='" + item.Key + "'").ToString();
-                            db = new DbHelperOleDb(0);
-                            int DiluteCount = int.Parse(DbHelperOleDb.GetSingle(0, @"select DiluteCount from tbProject where ShortName ='" + item.Key + "'").ToString());
+                            DataTable DiluteInfo = DbHelperOleDb.Query(0, @"select DiluteName , DiluteCount from tbProject where ShortName ='" + item.Key + "'").Tables[0];
+                            string DiluteName = "1";
+                            int DiluteCount = 1;
+                            foreach (DataRow drDiu in DiluteInfo.Rows)
+                            {
+                                DiluteName = drDiu["DiluteName"].ToString();
+                                DiluteCount = int.Parse(drDiu["DiluteCount"].ToString());
+                            }
+                            //DbHelperOleDb db = new DbHelperOleDb(0);
+                            //string DiluteName = DbHelperOleDb.GetSingle(0, @"select DiluteName from tbProject where ShortName ='" + item.Key + "'").ToString();
+                            //db = new DbHelperOleDb(0);
+                            //int DiluteCount = int.Parse(DbHelperOleDb.GetSingle(0, @"select DiluteCount from tbProject where ShortName ='" + item.Key + "'").ToString());
                             if (DiluteCount > 1)
                             {
                                 List<string> diuList = GetDiuVol(GetSampleV, DiluteName);
@@ -3484,36 +3461,37 @@ namespace BioBaseCLIA.Run
                         if (int.Parse(dtItemInfo.Rows[0][0].ToString()) == 1)
                         {
                             #region 定量实验
+                            List<TestItem> listSccal = lisSameItem.FindAll(ty => ty.SampleType.Contains(getString("keywordText.Standard")) && ty.RegentBatch == reBNum.Key);
                             for (int i = 0; i < int.Parse(dtItemInfo.Rows[0][2].ToString()); i++)
                             {
                                 switch (i)
                                 {
                                     case 0:
-                                        dtScal.Rows.Add(getString("keywordText.StandardA"), lisItem.FindAll(ty => ty.SampleType == getString("keywordText.StandardA")
+                                        dtScal.Rows.Add(getString("keywordText.StandardA"), listSccal.FindAll(ty => ty.SampleType == getString("keywordText.StandardA")
                                             && ty.RegentBatch == reBNum.Key).Count);
                                         break;
                                     case 1:
-                                        dtScal.Rows.Add(getString("keywordText.StandardB"), lisItem.FindAll(ty => ty.SampleType == getString("keywordText.StandardB")
+                                        dtScal.Rows.Add(getString("keywordText.StandardB"), listSccal.FindAll(ty => ty.SampleType == getString("keywordText.StandardB")
                                             && ty.RegentBatch == reBNum.Key).Count);
                                         break;
                                     case 2:
-                                        dtScal.Rows.Add(getString("keywordText.StandardC"), lisItem.FindAll(ty => ty.SampleType == getString("keywordText.StandardC")
+                                        dtScal.Rows.Add(getString("keywordText.StandardC"), listSccal.FindAll(ty => ty.SampleType == getString("keywordText.StandardC")
                                         && ty.RegentBatch == reBNum.Key).Count);
                                         break;
                                     case 3:
-                                        dtScal.Rows.Add(getString("keywordText.StandardD"), lisItem.FindAll(ty => ty.SampleType == getString("keywordText.StandardD")
+                                        dtScal.Rows.Add(getString("keywordText.StandardD"), listSccal.FindAll(ty => ty.SampleType == getString("keywordText.StandardD")
                                         && ty.RegentBatch == reBNum.Key).Count);
                                         break;
                                     case 4:
-                                        dtScal.Rows.Add(getString("keywordText.StandardE"), lisItem.FindAll(ty => ty.SampleType == getString("keywordText.StandardE")
+                                        dtScal.Rows.Add(getString("keywordText.StandardE"), listSccal.FindAll(ty => ty.SampleType == getString("keywordText.StandardE")
                                         && ty.RegentBatch == reBNum.Key).Count);
                                         break;
                                     case 5:
-                                        dtScal.Rows.Add(getString("keywordText.StandardF"), lisItem.FindAll(ty => ty.SampleType == getString("keywordText.StandardF")
+                                        dtScal.Rows.Add(getString("keywordText.StandardF"), listSccal.FindAll(ty => ty.SampleType == getString("keywordText.StandardF")
                                         && ty.RegentBatch == reBNum.Key).Count);
                                         break;
                                     case 6:
-                                        dtScal.Rows.Add(getString("keywordText.StandardG"), lisItem.FindAll(ty => ty.SampleType == getString("keywordText.StandardG")
+                                        dtScal.Rows.Add(getString("keywordText.StandardG"), listSccal.FindAll(ty => ty.SampleType == getString("keywordText.StandardG")
                                         && ty.RegentBatch == reBNum.Key).Count);
                                         break;
                                 }
@@ -3539,7 +3517,8 @@ namespace BioBaseCLIA.Run
                                     if (ExitsMainCurve) //有主曲线
                                     {
 
-                                        if (lisSameItem.FindAll(ty => (ty.SampleType.Contains(getString("keywordText.Standard")))).Count == 0)
+                                        //if (lisSameItem.FindAll(ty => (ty.SampleType.Contains(getString("keywordText.Standard")))).Count == 0)
+                                        if (listSccal.Count == 0)
                                         {
                                             #region 判断定标曲线是否可以使用
                                             string[] scpoint = points.Split(';');
@@ -3616,7 +3595,8 @@ namespace BioBaseCLIA.Run
                                         }
                                         else
                                         {
-                                            if (lisSameItem.FindAll(ty => (ty.SampleType.Contains(getString("keywordText.Standard")))).Count == 0)
+                                            //if (lisSameItem.FindAll(ty => (ty.SampleType.Contains(getString("keywordText.Standard")))).Count == 0)
+                                            if (listSccal.Count == 0)
                                             {
                                                 #region 判断定标曲线是否可以使用
                                                 string[] scpoint = points.Split(';');
@@ -3672,7 +3652,7 @@ namespace BioBaseCLIA.Run
                                     //判断是否有历史定标
                                     if (points == null || points == "")
                                     {
-                                        int count = lisItem.FindAll(ty => (ty.RegentBatch == reBNum.Key || ty.RegentBatch == "")).Count;
+                                        int count = lisSameItem.FindAll(ty => (ty.RegentBatch == reBNum.Key || ty.RegentBatch == "")).Count;
                                         if (count > 0)
                                         {
                                             frmMsgShow.MessageShow(getString("btnWorkList.Text"), getString("keywordText.Reagentbatch") + reBNum.Key + getString("keywordText.ProjectName") + item.Key + getString("keywordText.NoScling"));
@@ -3875,7 +3855,7 @@ namespace BioBaseCLIA.Run
                 if (Convert.ToDateTime(ValidDate1) < DateTime.Now.Date)
                     OverInfo = getString("keywordText.substrate");
                 LogFileAlarm.Instance.Write(DateTime.Now.ToString("HH-mm-ss") + " *** " + "警告" + " *** " + "未读" + " *** " + "底物1已经过期");
-                DialogResult r = MessageBox.Show("" + OverInfo + getString("keywordText.OvertimeInfo"), getString("tip"), MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                DialogResult r = MessageBox.Show("" + OverInfo + getString("keywordText.OvertimeInfo"), getString("keywordText.tip"), MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 if (DialogResult.OK != r)
                     return false;
             }
@@ -5676,8 +5656,8 @@ namespace BioBaseCLIA.Run
                     float AddSample = float.Parse(MinSunDiuV.ToString()) / float.Parse(Diutimes[i - 1]);
                     int AddSampleV = 0;
                     int AddDiuV = 0;
-                    if (AddSample < 5)
-                        AddSampleV = 5;
+                    if (AddSample < ImbibitionMin)
+                        AddSampleV = ImbibitionMin;
                     else
                     {
                         if ((AddSample - (int)AddSample) != 0)
@@ -6367,17 +6347,22 @@ namespace BioBaseCLIA.Run
                                     .ToList()
                                     .Where(item => item==testTempS.ItemName).Count() > 0;
                                 int reagentPosition;
-                                int leftReagentTest
-                                     = int.Parse(OperateIniFile.ReadIniData("ReagentPos" + dgvWorkListData.Rows[testTempS.TestID - 1].Cells["RegentPos"].Value.ToString(), "LeftReagent2", "", iniPathReagentTrayInfo));
+                                //string SleftReagentTest = OperateIniFile.ReadIniData("ReagentPos" + dgvWorkListData.Rows[testTempS.TestID - 1].Cells["RegentPos"].Value.ToString(), "LeftReagent2", "", iniPathReagentTrayInfo);
+                                string SleftReagentTest = OperateIniFile.ReadIniData("ReagentPos" + rgPos, "LeftReagent2", "", iniPathReagentTrayInfo);
+                                LogFile.Instance.Write("加R2的位置："+ rgPos + ";试剂剩余量为："+ SleftReagentTest);
+                                int leftReagentTest = 0;
+                                if (SleftReagentTest != "")
+                                    leftReagentTest = int.Parse(SleftReagentTest);
+                                //int leftReagentTest = int.Parse(OperateIniFile.ReadIniData("ReagentPos" + dgvWorkListData.Rows[testTempS.TestID - 1].Cells["RegentPos"].Value.ToString(), "LeftReagent2", "", iniPathReagentTrayInfo));
 
                                 bool isSinglebottle = false;
-                                if (dgvWorkListData.Rows[testTempS.TestID - 1].Cells["RegentPos"].Value.ToString() == "30")
+                                if (rgPos.ToString() == "30")
                                 {
                                     isSinglebottle = true;
                                 }
                                 else
                                 {
-                                    int position = int.Parse(dgvWorkListData.Rows[testTempS.TestID - 1].Cells["RegentPos"].Value.ToString());
+                                    int position = int.Parse(rgPos.ToString());
                                     string name = OperateIniFile.ReadIniData("ReagentPos" + (position + 1), "ItemName", "", iniPathReagentTrayInfo);
                                     string barCode = OperateIniFile.ReadIniData("ReagentPos" + (position + 1), "BarCode", "", iniPathReagentTrayInfo);
                                     if (!string.IsNullOrEmpty(name) && string.IsNullOrEmpty(barCode))

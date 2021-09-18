@@ -226,8 +226,16 @@ namespace BioBaseCLIA.DataQuery
                 double max = 0;
                 for (int i = 0; i < dtDgv1.Rows.Count; i++)
                 {
-                    if (max < double.Parse(dtDgv1.Rows[i][1].ToString()))
-                        max = double.Parse(dtDgv1.Rows[i][1].ToString());
+                    try
+                    {
+                        if (max < double.Parse(dtDgv1.Rows[i][1].ToString()))
+                            max = double.Parse(dtDgv1.Rows[i][1].ToString());
+                    }
+                    catch (Exception ee)
+                    {
+                        return;
+                    }
+                    
                 }
                 paintReleaseCurve(img1, dtDgv1, dtDgv1.Rows.Count, max, 0, true, false);
                 Bitmap bmp = new Bitmap(img1.Width, img1.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
@@ -439,10 +447,17 @@ namespace BioBaseCLIA.DataQuery
             //pgii
             dr1 = dt2.Select("ItemName='PGII'").LastOrDefault();
             string pgiiValue = dr1 == null ? "?" : dr1["Concentration"].ToString();
-
             if (fpsaValue != "?" && tpsaValue != "?")
             {
-                ratio1.Text = (double.Parse(fpsaValue) / double.Parse(tpsaValue)).ToString("F3");
+                try
+                {
+                    ratio1.Text = (double.Parse(fpsaValue) / double.Parse(tpsaValue)).ToString("F3");
+                }
+                catch (Exception e)
+                {
+                    ratio1.Text = "?/?" ;
+                }
+               
             }
             else
             {
@@ -450,7 +465,14 @@ namespace BioBaseCLIA.DataQuery
             }
             if (fshValue != "?" && lhValue != "?")
             {
-                ratio2.Text = (double.Parse(fshValue) / double.Parse(lhValue)).ToString("F3");
+                try
+                {
+                    ratio2.Text = (double.Parse(fshValue) / double.Parse(lhValue)).ToString("F3");
+                }
+                catch (Exception e)
+                {
+                    ratio1.Text = "?/?";
+                }
             }
             else
             {
@@ -458,7 +480,15 @@ namespace BioBaseCLIA.DataQuery
             }
             if (pgiValue != "?" && pgiiValue != "?")
             {
-                ratio3.Text = (double.Parse(pgiValue) / double.Parse(pgiiValue)).ToString("F3");
+               
+                try
+                {
+                    ratio3.Text = (double.Parse(pgiValue) / double.Parse(pgiiValue)).ToString("F3");
+                }
+                catch (Exception e)
+                {
+                    ratio1.Text = "?/?";
+                }
             }
             else
             {
@@ -471,11 +501,18 @@ namespace BioBaseCLIA.DataQuery
             foreach (DataRow dr in dt2.Select("ItemName='C-P'"))
             {
                 dtDgv1.Rows.Add((no++).ToString(), dr["Concentration"].ToString(), dr["TestDate"].ToString());
-
-                if(max < double.Parse(dr["Concentration"].ToString()))
+                try
                 {
-                    max = double.Parse(dr["Concentration"].ToString());
+                    if (max < double.Parse(dr["Concentration"].ToString()))
+                    {
+                        max = double.Parse(dr["Concentration"].ToString());
+                    }
                 }
+                catch (Exception e)
+                {
+                    continue;
+                }
+                
             }
             dgvReleaseInfo1.DataSource = dtDgv1.Clone();
             dgvReleaseInfo1.DataSource = dtDgv1;
@@ -486,19 +523,27 @@ namespace BioBaseCLIA.DataQuery
             foreach (DataRow dr in dt2.Select("ItemName='INS'"))
             {
                 dtDgv2.Rows.Add((no++).ToString(), dr["Concentration"].ToString(), dr["TestDate"].ToString());//Convert.ToDateTime(dr["TestDate"].ToString()).ToShortDateString()
-                if (max2 < double.Parse(dr["Concentration"].ToString()))
+                try
                 {
-                    max2 = double.Parse(dr["Concentration"].ToString());
+                    if (max2 < double.Parse(dr["Concentration"].ToString()))
+                    {
+                        max2 = double.Parse(dr["Concentration"].ToString());
+                    }
                 }
+                catch (Exception e)
+                {
+                    continue;
+                }
+               
             }
             dgvReleaseInfo2.DataSource = dtDgv2.Clone();
             dgvReleaseInfo2.DataSource = dtDgv2;
             //3chart
-            if(dtDgv1.Rows.Count > 0)
+            if(dtDgv1.Rows.Count > 0 && max > 0)
             {
                 paintReleaseCurve(dPanal1, dtDgv1, dtDgv1.Rows.Count, max, 0, true, false);
             }
-            if (dtDgv2.Rows.Count > 0)
+            if (dtDgv2.Rows.Count > 0 && max > 0)
             {
                 paintReleaseCurve(dPanal2, dtDgv2, dtDgv2.Rows.Count, max2, 0, true, false);
             }
@@ -544,7 +589,8 @@ namespace BioBaseCLIA.DataQuery
                 }
                 DataRow dr = dt.NewRow();
                 dr[0] = tempNum;
-                dr[1] = datacopy.Rows[i][1].ToString();
+                string result = datacopy.Rows[i][1].ToString().Replace('<', ' ').Replace('>', ' ').Trim();
+                dr[1] = result;
                 dr[2] = "5";//"0"、"1"、"2"
                 dt.Rows.Add(dr);
 
@@ -602,7 +648,14 @@ namespace BioBaseCLIA.DataQuery
         double AVGVALUE = 0, DifferenceValue = 0;
         Point zzOptical(double dx, int bx, double dy, int by)//根据数值画线
         {
-            return new Point(Convert.ToInt32(35 + x * dx) + bx, Convert.ToInt32(cc.Height - (14 + y * dy + by)));
+            try
+            {
+                return new Point(Convert.ToInt32(35 + x * dx) + bx, Convert.ToInt32(cc.Height - (14 + y * dy + by)));
+            }
+            catch (Exception e)
+            {
+                return new Point();
+            }
         }
         void drawCircleScaling(Graphics g, Point pt, int r, double dataValue, int color)
         {
@@ -615,7 +668,15 @@ namespace BioBaseCLIA.DataQuery
         }
         Point zzQC(double dx, double dy)
         {
-            return new Point(Convert.ToInt32(35 + x * dx), Convert.ToInt32(yy + (AVGVALUE - dy) * 1000 * y));
+            try
+            {
+                return new Point(Convert.ToInt32(35 + x * dx), Convert.ToInt32(yy + (AVGVALUE - dy) * 1000 * y));
+            }
+            catch (Exception e)
+            {
+                return new Point();
+            }
+            
         }
         Point zzQC(double dx, int bx, double dy, int by)//根据数值画线
         {
@@ -626,7 +687,15 @@ namespace BioBaseCLIA.DataQuery
             d2 = yy + (AVGVALUE - dy) * 1000 * y - by;
             if (d2 > int.MaxValue || d2 < int.MinValue)
                 d2 = int.MaxValue;
-            return new Point(Convert.ToInt32(d1), Convert.ToInt32(d2));
+            try
+            {
+                return new Point(Convert.ToInt32(d1), Convert.ToInt32(d2));
+            }
+            catch (Exception e)
+            {
+                return new Point();
+            }
+
         }
         Color getColor(double dataValue, int color)
         {

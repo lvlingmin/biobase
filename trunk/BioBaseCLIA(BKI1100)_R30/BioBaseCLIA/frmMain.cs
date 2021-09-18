@@ -1106,7 +1106,10 @@ namespace BioBaseCLIA
                     #endregion
                     break;
                 case "08":
-                    DealRefrigeration(dataRecive);
+                    if (dataRecive[5] == "08")
+                    {
+                        DealRefrigeration(dataRecive);
+                    }
                     break;
                 default:
                     break;
@@ -1814,14 +1817,14 @@ namespace BioBaseCLIA
             if (LackTube[0] == 0 || LackTube[1] == 0)
             {
                 string Err = "";
-                if (LackTube[0] == 0)
+                //if (LackTube[0] == 0)
                     Err = GetString("Temporarystorageempty");
-                if (LackTube[1] == 0)
-                {
-                    if (Err != "")
-                        Err = Err + ",";
-                    Err = Err + GetString("keywordText.TemporaryDiskStuckTube");
-                }
+                //if (LackTube[1] == 0)
+                //{
+                //    if (Err != "")
+                //        Err = Err + ",";
+                //    Err = Err + GetString("keywordText.TemporaryDiskStuckTube");
+                //}
                 new Thread(new ParameterizedThreadStart((obj) =>
                 {
                     SetCultureInfo();
