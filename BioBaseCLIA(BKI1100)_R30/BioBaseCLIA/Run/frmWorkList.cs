@@ -6649,7 +6649,7 @@ namespace BioBaseCLIA.Run
                         pos1 = pos1 - ReactTrayHoleNum + 3;
                     }
                     string ss = OperateIniFile.ReadIniData("ReactTrayInfo", "no" + pos1, "", iniPathReactTrayInfo);
-                    if (ss == "2" && !AddTubeStop.Contains(pos1))
+                    if ((ss == "2" || ss == "9") && !AddTubeStop.Contains(pos1))
                         AddTubeStop.Add(pos1);
                     else
                     {
