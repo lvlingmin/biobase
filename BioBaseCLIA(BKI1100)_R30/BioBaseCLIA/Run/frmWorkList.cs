@@ -9561,6 +9561,7 @@ namespace BioBaseCLIA.Run
             double MinValue = 0;
             int ExpiryDate = 0;
             string VRangeType = "";
+            string newDiuTimes = "1"; //实验结果中的稀释倍数
             foreach (DataRow dr in tbtbProject.Rows)
             {
                 if (dr != null)
@@ -9932,7 +9933,7 @@ namespace BioBaseCLIA.Run
                         string SampleNo = dgvWorkListData.Rows[testid - 1].Cells["SampleNo"].Value.ToString();
                         DataRow[] rows = dtSampleRunInfo.Select("ItemName='" + ItemName + "' and SampleNo='"
                         + SampleNo + "'");
-                        string newDiuTimes = rows[0]["DilutionTimes"].ToString();
+                        newDiuTimes = rows[0]["DilutionTimes"].ToString();
                         if (DiuTimes < int.Parse(newDiuTimes))
                         {
                             double DiuProportion = double.Parse(newDiuTimes) / DiuTimes;
@@ -10048,6 +10049,7 @@ namespace BioBaseCLIA.Run
                 #endregion
             }
             #endregion
+            testResult.DiluteCount = int.Parse(newDiuTimes);
             testResult.SampleID = int.Parse
                 (dgvWorkListData.Rows[testid - 1].Cells["SampleID"].Value.ToString());
             testResult.TestID = testid;
@@ -10123,6 +10125,7 @@ namespace BioBaseCLIA.Run
         void SaveTestResultData(List<TestItem> BToListTi, List<TestItem> lis1, List<TestItem> lis2)
         {
             var testresult = new TestResult();
+            testresult.DiluteCount = testResult.DiluteCount;
             testresult.PMT = testResult.PMT;
             testresult.SampleID = testResult.SampleID;
             testresult.TestID = testResult.TestID;
@@ -10343,7 +10346,7 @@ namespace BioBaseCLIA.Run
                 //    modelAssayResult.Concentration = double.Parse(result.concentration);
                 //}
                 modelAssayResult.ConcSpec = "";
-                modelAssayResult.DiluteCount = 0;
+                modelAssayResult.DiluteCount = result.DiluteCount;
                 modelAssayResult.ItemName = result.ItemName;
                 modelAssayResult.PMTCounter = result.PMT;
                 modelAssayResult.PMTCounter = (int)((double)result.PMT * double.Parse(Coefficient));
