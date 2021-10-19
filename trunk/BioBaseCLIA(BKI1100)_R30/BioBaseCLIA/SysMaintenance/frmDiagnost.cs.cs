@@ -10549,6 +10549,7 @@ namespace BioBaseCLIA.SysMaintenance
             NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 02 0B B0 00 00"), 0);
             NetCom3.Instance.SPQuery();
             fbtnReturn.Enabled = true;
+            frmMain.BQLiquaid = true;
             Invoke(new Action(() =>
             {
                 this.Close();

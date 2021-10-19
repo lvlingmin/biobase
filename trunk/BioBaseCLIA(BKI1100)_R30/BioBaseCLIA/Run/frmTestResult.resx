@@ -2091,4 +2091,7 @@
   <data name="TestStatusAbondoned" xml:space="preserve">
     <value>实验废弃</value>
   </data>
+  <data name="keywordText.WarningOprate" xml:space="preserve">
+    <value>禁止对非血清样本执行此操作</value>
+  </data>
 </root>

@@ -2135,4 +2135,7 @@
   <data name="keywordText.WashTurnOver" xml:space="preserve">
     <value>清洗盘旋转指令接收超时</value>
   </data>
+  <data name="keywordText.AddSPlugneedle" xml:space="preserve">
+    <value>加样针加样本时发生堵针</value>
+  </data>
 </root>

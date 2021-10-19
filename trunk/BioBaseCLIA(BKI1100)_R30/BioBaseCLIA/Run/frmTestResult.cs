@@ -108,9 +108,9 @@ namespace BioBaseCLIA.Run
             //dgvResultData.Rows.Add(1, "TestID", "SampleNo", "1", "1", "ItemName", 4470, 1.5, "Result", "0-1000", "0-10","","","","","ul");
             dgvResultData.DataSource = frmWorkList.BTestResult;
             GetDataGridColor(); //2018-08-18 zlx add
-            string s1 = "(0,100);(5,500);(11,1100);(20,2000);(45,4500);(100,10000);";
-            string S2 = "(11,1100);(45,4500);";
-            GetNewPoint(s1, S2, 6);
+            //string s1 = "(0,100);(5,500);(11,1100);(20,2000);(45,4500);(100,10000);";
+            //string S2 = "(11,1100);(45,4500);";
+            //GetNewPoint(s1, S2, 6);
         }
         public void GetDataGridColor()
         {
@@ -881,7 +881,7 @@ namespace BioBaseCLIA.Run
                 string type = dgvResultData.SelectedRows[i].Cells["SampleType"].Value.ToString();
                 if (type.Contains("定标") || type.Contains("Standard"))
                 {
-                    MessageBox.Show(getString("WarningOprate"));
+                    MessageBox.Show(getString("keywordText.WarningOprate"));
                     return;
                 }
             }
