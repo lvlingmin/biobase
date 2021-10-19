@@ -820,7 +820,7 @@ namespace BioBaseCLIA.ScalingQC
                 }
                 catch (Exception exeception)
                 {
-                    MessageBox.Show(getString("RecordWrongData"));
+                    MessageBox.Show(getString("keywordText.RecordWrongData"));
                     return;
                 }
 

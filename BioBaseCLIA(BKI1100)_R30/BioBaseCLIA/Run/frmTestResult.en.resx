@@ -1363,7 +1363,7 @@
   <data name="TestStatusAbondoned" xml:space="preserve">
     <value>abandonment</value>
   </data>
-  <data name="WarningOprate" xml:space="preserve">
+  <data name="keywordText.WarningOprate" xml:space="preserve">
     <value>Do not do this for non serum samples</value>
   </data>
 </root>

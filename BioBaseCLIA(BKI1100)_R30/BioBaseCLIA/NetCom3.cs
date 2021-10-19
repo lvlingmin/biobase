@@ -978,9 +978,9 @@ namespace BioBaseCLIA
                         LogFile.Instance.Write(DateTime.Now.ToString("hh:mm:ss:fff") + "DiagnostSendCallback调试指令接收出现异常！");
                         errorFlag = (int)ErrorState.OverTime;
                         totalOrderFlag = true;
-                        frmMessageShow frmMS = new frmMessageShow();
-                        frmMS.MessageShow("",Res.communicationfail);
-                        frmMS.Dispose();
+                        //frmMessageShow frmMS = new frmMessageShow();
+                        //frmMS.MessageShow("",Res.communicationfail);
+                        //frmMS.Dispose();
 						//if(EventStop!=null)
       //                      EventStop.Invoke();
                     }
@@ -1601,9 +1601,22 @@ namespace BioBaseCLIA
                                     {
                                         int tempInt = tempResponse.IndexOf("EB 90 31 A2 ");
                                         string temp = tempResponse.Substring(tempInt + 12, 2);
-                                        if (temp == "7F")//加液针撞针
+                                        Byte bit = Convert.ToByte(temp, 16);
+                                        if (bit != Byte.MaxValue)
                                         {
-                                            AdderrorFlag = (int)ErrorState.IsKnocked;
+                                            temp = Convert.ToString(bit, 2);
+                                            while (temp.Length < 8)
+                                            {
+                                                temp = "0" + temp;
+                                            }
+                                            if (temp.Substring(0, 1) == "0")//撞针
+                                            {
+                                                AdderrorFlag = (int)ErrorState.IsKnocked;
+                                            }
+                                            if (temp.Substring(1, 1) == "0")//堵针
+                                            {
+                                                AdderrorFlag = (int)ErrorState.putKnocked;
+                                            }
                                         }
                                         else
                                         {
@@ -1862,7 +1875,7 @@ namespace BioBaseCLIA
     // State object for receiving data from remote device. 
     /// <summary>
     /// 信息传输错误状态
-    /// 0-准备发送,1-成功 2-发送失败 3-接收失败 4-抓管撞管（撞针） 5-抓空 6-混匀异常 7-放管撞管 8-理杯机缺管 9-发送超时 10-暂存盘卡管
+    /// 0-准备发送,1-成功 2-发送失败 3-接收失败 4-抓管撞管（撞针） 5-抓空 6-混匀异常 7-放管撞管(堵针) 8-理杯机缺管 9-发送超时 10-暂存盘卡管
     /// </summary>
     public enum ErrorState { ReadySend = 0, Success = 1, Sendfailure = 2, Recivefailure = 3, IsKnocked = 4, IsNull = 5, BlendUnusua = 6, putKnocked=7,LackTube=8,OverTime = 9,StuckTube=10 }
     /// <summary>
@@ -1948,7 +1961,7 @@ namespace BioBaseCLIA
         {
             if (File.Exists(Application.StartupPath + @"\Log\AlarmLog\I" + DateTime.Now.ToString("yyyyMMdd") + ".txt"))
             {
-                Fs = new FileStream(Application.StartupPath + @"\Log\AlarmLog\I" + DateTime.Now.ToString("yyyyMMdd") + ".txt", FileMode.Open, FileAccess.ReadWrite, FileShare.Read ,100, FileOptions.Asynchronous);
+                Fs = new FileStream(Application.StartupPath + @"\Log\AlarmLog\I" + DateTime.Now.ToString("yyyyMMdd") + ".txt", FileMode.Append, FileAccess.Write, FileShare.None,100, FileOptions.Asynchronous);
                 //Fs = new FileStream(Application.StartupPath + @"\Log\AlarmLog\I" + DateTime.Now.ToString("yyyyMMdd") + ".txt", FileMode.Open,FileAccess.ReadWrite,FileShare.Read );
             }
             else

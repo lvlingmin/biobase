@@ -188,6 +188,9 @@
         /BszvVKvx5MPAzA7yGZlu5nptv2Pm/MHz+N45ZRT+BMAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="fbtnTestResult.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 315</value>
+  </data>
   <data name="fbtnTestResult.Text" xml:space="preserve">
     <value>Result</value>
   </data>
@@ -254,6 +257,9 @@
         vNjc7RVu0Y6LLmsngNlKNixblk3LtsOtJ017IPzlIu/X/G0RtzA/4hYXnAMwS8hmZbuyYdlyuo0npX0o
         /BszvVKvx5MPAzA7yGZlu5nptv2Pm/MHz+N45ZRT+BMAAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="btnWorkList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 222</value>
   </data>
   <data name="btnWorkList.Text" xml:space="preserve">
     <value>Work List</value>
@@ -322,6 +328,9 @@
         /BszvVKvx5MPAzA7yGZlu5nptv2Pm/MHz+N45ZRT+BMAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="fbtnReturn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 425</value>
+  </data>
   <data name="fbtnReturn.Text" xml:space="preserve">
     <value>Back</value>
   </data>
@@ -388,6 +397,9 @@
         vNjc7RVu0Y6LLmsngNlKNixblk3LtsOtJ017IPzlIu/X/G0RtzA/4hYXnAMwS8hmZbuyYdlyuo0npX0o
         /BszvVKvx5MPAzA7yGZlu5nptv2Pm/MHz+N45ZRT+BMAAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="btnLoadSample.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 124</value>
   </data>
   <data name="btnLoadSample.Text" xml:space="preserve">
     <value>Sample Load</value>
@@ -456,11 +468,26 @@
         /BszvVKvx5MPAzA7yGZlu5nptv2Pm/MHz+N45ZRT+BMAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="btnLoadReagent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 29</value>
+  </data>
   <data name="btnLoadReagent.Text" xml:space="preserve">
     <value>Reagent Load</value>
   </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>865, 12</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 505</value>
+  </data>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>207, 37</value>
+  </data>
   <data name="label7.Text" xml:space="preserve">
     <value>Dispatch：</value>
+  </data>
+  <data name="cmbDispatchType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>298, 34</value>
   </data>
   <data name="fbtnRunInfoMody.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -527,7 +554,7 @@
 </value>
   </data>
   <data name="fbtnRunInfoMody.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 73</value>
+    <value>276, 73</value>
   </data>
   <data name="fbtnRunInfoMody.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 40</value>
@@ -600,7 +627,7 @@
 </value>
   </data>
   <data name="btnCreatWorkList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 24</value>
+    <value>276, 24</value>
   </data>
   <data name="btnCreatWorkList.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 40</value>
@@ -673,7 +700,7 @@
 </value>
   </data>
   <data name="btnAddPatient.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 74</value>
+    <value>45, 74</value>
   </data>
   <data name="btnAddPatient.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 40</value>
@@ -746,7 +773,7 @@
 </value>
   </data>
   <data name="btnLoadSp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 26</value>
+    <value>45, 26</value>
   </data>
   <data name="btnLoadSp.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 40</value>
@@ -755,13 +782,10 @@
     <value>Loading Sample</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>447, 411</value>
+    <value>410, 411</value>
   </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>447, 42</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Sample Information</value>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>449, 120</value>
   </data>
   <data name="Position.HeaderText" xml:space="preserve">
     <value>Position</value>
@@ -781,17 +805,24 @@
   <data name="TubeType.HeaderText" xml:space="preserve">
     <value>Cup Type</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TubeType.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="dataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
     <value>Emergency</value>
   </data>
-  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 421</value>
+  <data name="dgvSpInfoList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>436, 350</value>
   </data>
-  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 125</value>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>411, 42</value>
   </data>
-  <data name="groupBox3.Text" xml:space="preserve">
-    <value>Reagent Legend</value>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>448, 363</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Sample Information</value>
   </data>
   <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 12</value>
@@ -823,14 +854,14 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Unloaded</value>
   </data>
-  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>321, 442</value>
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 421</value>
   </data>
-  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 104</value>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 125</value>
   </data>
-  <data name="groupBox4.Text" xml:space="preserve">
-    <value>Sample Legend</value>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>Reagent Legend</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>29, 75</value>
@@ -859,17 +890,20 @@
   <data name="label9.Text" xml:space="preserve">
     <value>Unloaded</value>
   </data>
+  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>294, 442</value>
+  </data>
+  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 104</value>
+  </data>
+  <data name="groupBox4.Text" xml:space="preserve">
+    <value>Sample Legend</value>
+  </data>
   <data name="srdReagent.Location" type="System.Drawing.Point, System.Drawing">
     <value>-8, 13</value>
   </data>
-  <data name="DispathchTypeAdd" xml:space="preserve">
-    <value>Sample addition</value>
-  </data>
-  <data name="DispathchTypeSampleProject" xml:space="preserve">
-    <value>Same project</value>
-  </data>
-  <data name="DispathchTypeSpeed" xml:space="preserve">
-    <value>Speed first</value>
+  <data name="srdReagent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>450, 450</value>
   </data>
   <data name="keywordText.CalibrationSolution" xml:space="preserve">
     <value>Calibration Solution</value>
@@ -885,6 +919,15 @@
   </data>
   <data name="keywordText.Control" xml:space="preserve">
     <value>Control</value>
+  </data>
+  <data name="keywordText.DispathchTypeAdd" xml:space="preserve">
+    <value>Sample addition</value>
+  </data>
+  <data name="keywordText.DispathchTypeSampleProject" xml:space="preserve">
+    <value>Same project</value>
+  </data>
+  <data name="keywordText.DispathchTypeSpeed" xml:space="preserve">
+    <value>Speed first</value>
   </data>
   <data name="keywordText.DontAddReagentWithWorking" xml:space="preserve">
     <value>In the experiment, do not add reagent!</value>
