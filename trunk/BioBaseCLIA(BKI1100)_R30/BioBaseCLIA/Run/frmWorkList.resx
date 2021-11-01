@@ -2138,4 +2138,7 @@
   <data name="keywordText.AddSPlugneedle" xml:space="preserve">
     <value>加样针加样本时发生堵针</value>
   </data>
+  <data name="keywordText.MAddNewTWashIsKnocked" xml:space="preserve">
+    <value>移管手从暂存盘向清洗盘移管时在取管位置发生撞管</value>
+  </data>
 </root>

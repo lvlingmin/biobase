@@ -200,7 +200,7 @@ namespace BioBaseCLIA.InfoSetting
             {
                 OperateIniFile.WriteIniPara("NetSet", "IPAdress", txtNetIPAdress.Text.Trim());
                 OperateIniFile.WriteIniPara("NetSet", "Port", txtNetPort.Text.Trim());
-                OperateIniFile.WriteIniPara("LisSet", "CommunicationType", cmbLisConType.Text );
+                OperateIniFile.WriteIniPara("LisSet", "CommunicationType", cmbLisType.SelectedItem.ToString() );
                 OperateIniFile.WriteIniPara("LisSet", "IsLisConnect", chkIsLisConn.Checked.ToString());
                 frmMsgShow.MessageShow(Getstring("ConnectSet"),Getstring("NetSaveSucess"));
             }
