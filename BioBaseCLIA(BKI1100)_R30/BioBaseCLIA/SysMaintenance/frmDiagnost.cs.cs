@@ -14,6 +14,7 @@ using BioBaseCLIA.Run;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 using Maticsoft.DBUtility;
+using Localization;
 
 namespace BioBaseCLIA.SysMaintenance
 {
@@ -174,7 +175,10 @@ namespace BioBaseCLIA.SysMaintenance
                     }
                 }
             }))
-            { IsBackground = true }.Start();
+            { IsBackground = true,
+                CurrentCulture = Language.AppCultureInfo,
+                CurrentUICulture = Language.AppCultureInfo
+            }.Start();
             //this block add y 20180816
             new Thread(new ParameterizedThreadStart((obj) =>
             {
@@ -191,7 +195,10 @@ namespace BioBaseCLIA.SysMaintenance
                     }
                 }
             }))
-            { IsBackground = true }.Start();
+            { IsBackground = true,
+                CurrentCulture = Language.AppCultureInfo,
+                CurrentUICulture = Language.AppCultureInfo
+            }.Start();
             //block end
             //查询清洗盘管信息
             dtWashTrayInfo = OperateIniFile.ReadConfig(iniPathWashTrayInfo);
@@ -2306,6 +2313,8 @@ namespace BioBaseCLIA.SysMaintenance
             runFlag = true;
             //启动移管线程
             MoveTubeThread = new Thread(new ParameterizedThreadStart(MoveTube));
+            MoveTubeThread.CurrentCulture = Language.AppCultureInfo;
+            MoveTubeThread.CurrentUICulture = Language.AppCultureInfo;
             MoveTubeThread.IsBackground = true;
             MoveTubeThread.Start();
             #region 变量初始化
@@ -3292,6 +3301,8 @@ namespace BioBaseCLIA.SysMaintenance
             //启动移管线程
             MoveTubeThread = new Thread(new ParameterizedThreadStart(MoveTube));
             MoveTubeThread.IsBackground = true;
+            MoveTubeThread.CurrentCulture = Language.AppCultureInfo;
+            MoveTubeThread.CurrentUICulture = Language.AppCultureInfo;
             MoveTubeThread.Start();
             washTrayTubeClear();
             #region 检测反应盘空白反应管个数，不足十个补齐。
@@ -3921,6 +3932,8 @@ namespace BioBaseCLIA.SysMaintenance
             frmMain.LiquidQueryFlag = false;
             cmbZhenID.Enabled = txtFilePath.Enabled = btnSelectBin.Enabled = btnLoadProgram.Enabled = false;
             thFire = new Thread(new ThreadStart(LoadPro));
+            thFire.CurrentCulture = Language.AppCultureInfo;
+            thFire.CurrentUICulture = Language.AppCultureInfo;
             thFire.Start();
         }
         private void LoadPro() //IAP
@@ -6215,6 +6228,8 @@ namespace BioBaseCLIA.SysMaintenance
             //reactTrayTubeClear();
             //CurrentTubePos = Convert.ToInt32(cmbRackPos.Text);//2018-08-26 zlx mod
             AgingTestRun = new Thread(new ThreadStart(TestRun));
+            AgingTestRun.CurrentCulture = Language.AppCultureInfo;
+            AgingTestRun.CurrentUICulture = Language.AppCultureInfo;
             AgingTestRun.IsBackground = true;
             AgingTestRun.Start();
         }
@@ -6279,6 +6294,8 @@ namespace BioBaseCLIA.SysMaintenance
             reactTrayTubeClear();
             AgingTestRun = new Thread(new ThreadStart(TestRun));
             AgingTestRun.IsBackground = true;
+            AgingTestRun.CurrentCulture = Language.AppCultureInfo;
+            AgingTestRun.CurrentUICulture = Language.AppCultureInfo;
             AgingTestRun.Start();
 
         }
@@ -6326,6 +6343,8 @@ namespace BioBaseCLIA.SysMaintenance
             washTrayTubeClear();
             AgingTestRun = new Thread(new ThreadStart(TestRun));
             AgingTestRun.IsBackground = true;
+            AgingTestRun.CurrentCulture = Language.AppCultureInfo;
+            AgingTestRun.CurrentUICulture = Language.AppCultureInfo;
             AgingTestRun.Start();
         }
         bool WashAgingCondition()
@@ -8512,6 +8531,8 @@ namespace BioBaseCLIA.SysMaintenance
             Thread run = new Thread(specificationTestRun);
             run.Name = "specificationTest";
             run.IsBackground = true;
+            run.CurrentCulture = Language.AppCultureInfo;
+            run.CurrentUICulture = Language.AppCultureInfo;
             run.Start();
             threadList.Add(run);
         }
@@ -10049,6 +10070,8 @@ namespace BioBaseCLIA.SysMaintenance
                     bLoopRun = true;
                     Loopthread = new Thread(new ThreadStart(TestLoopRun));
                     Loopthread.IsBackground = true;
+                    Loopthread.CurrentCulture = Language.AppCultureInfo;
+                    Loopthread.CurrentUICulture = Language.AppCultureInfo;
                     Loopthread.Start();
                     btnLoopTurn.Enabled = true;
                     btnLoopTurn.Text = "停止循环";

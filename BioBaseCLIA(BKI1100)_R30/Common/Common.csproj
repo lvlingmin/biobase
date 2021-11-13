@@ -87,6 +87,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QCRules.cs" />
     <Compile Include="ReadTxtWarn.cs" />
+    <Compile Include="Resources\reportCurve.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>reportCurve.resx</DependentUpon>
+    </Compile>
     <Compile Include="SerializerHelper.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +99,18 @@
       <Project>{76173D02-5984-42B8-9D44-B0CDA5A6E049}</Project>
       <Name>DBUtility</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Localization\Localization.csproj">
+      <Project>{4ad525d8-9a4b-42c6-bb94-fafbf0f6530c}</Project>
+      <Name>Localization</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\reportCurve.en.resx" />
+    <EmbeddedResource Include="Resources\reportCurve.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>reportCurve.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

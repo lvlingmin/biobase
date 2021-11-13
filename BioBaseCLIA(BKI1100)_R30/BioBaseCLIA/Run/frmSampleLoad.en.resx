@@ -118,8 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 21.75pt, style=Bold</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>425, 4</value>
+  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 29</value>
+    <value>176, 32</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Sample Load</value>
@@ -187,6 +193,9 @@
         vNjc7RVu0Y6LLmsngNlKNixblk3LtsOtJ017IPzlIu/X/G0RtzA/4hYXnAMwS8hmZbuyYdlyuo0npX0o
         /BszvVKvx5MPAzA7yGZlu5nptv2Pm/MHz+N45ZRT+BMAAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="fbtnTestResult.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 14.25pt, style=Bold</value>
   </data>
   <data name="fbtnTestResult.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 315</value>
@@ -258,6 +267,9 @@
         /BszvVKvx5MPAzA7yGZlu5nptv2Pm/MHz+N45ZRT+BMAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="btnWorkList.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 14.25pt, style=Bold</value>
+  </data>
   <data name="btnWorkList.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 222</value>
   </data>
@@ -327,6 +339,9 @@
         vNjc7RVu0Y6LLmsngNlKNixblk3LtsOtJ017IPzlIu/X/G0RtzA/4hYXnAMwS8hmZbuyYdlyuo0npX0o
         /BszvVKvx5MPAzA7yGZlu5nptv2Pm/MHz+N45ZRT+BMAAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="fbtnReturn.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 14.25pt, style=Bold</value>
   </data>
   <data name="fbtnReturn.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 425</value>
@@ -398,6 +413,9 @@
         /BszvVKvx5MPAzA7yGZlu5nptv2Pm/MHz+N45ZRT+BMAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="btnLoadSample.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 14.25pt, style=Bold</value>
+  </data>
   <data name="btnLoadSample.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 124</value>
   </data>
@@ -468,6 +486,9 @@
         /BszvVKvx5MPAzA7yGZlu5nptv2Pm/MHz+N45ZRT+BMAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="btnLoadReagent.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 14.25pt, style=Bold</value>
+  </data>
   <data name="btnLoadReagent.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 29</value>
   </data>
@@ -488,6 +509,9 @@
   </data>
   <data name="cmbDispatchType.Location" type="System.Drawing.Point, System.Drawing">
     <value>298, 34</value>
+  </data>
+  <data name="cmbDispatchType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 23</value>
   </data>
   <data name="fbtnRunInfoMody.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -787,6 +811,9 @@
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>449, 120</value>
   </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Operate</value>
+  </data>
   <data name="Position.HeaderText" xml:space="preserve">
     <value>Position</value>
   </data>
@@ -805,10 +832,6 @@
   <data name="TubeType.HeaderText" xml:space="preserve">
     <value>Cup Type</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="TubeType.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="dataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
     <value>Emergency</value>
   </data>
@@ -825,31 +848,31 @@
     <value>Sample Information</value>
   </data>
   <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 12</value>
+    <value>43, 15</value>
   </data>
   <data name="label17.Text" xml:space="preserve">
     <value>Diluent</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 12</value>
+    <value>53, 15</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>Sufficient</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 12</value>
+    <value>55, 15</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Depletion</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 12</value>
+    <value>46, 15</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Warning</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 12</value>
+    <value>53, 15</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Unloaded</value>
@@ -867,7 +890,7 @@
     <value>29, 75</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 12</value>
+    <value>71, 15</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>To Be Tested</value>
@@ -876,7 +899,7 @@
     <value>29, 47</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 12</value>
+    <value>77, 15</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
     <value>Tested Sample</value>
@@ -885,7 +908,7 @@
     <value>29, 19</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 12</value>
+    <value>53, 15</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
     <value>Unloaded</value>
@@ -902,8 +925,8 @@
   <data name="srdReagent.Location" type="System.Drawing.Point, System.Drawing">
     <value>-8, 13</value>
   </data>
-  <data name="srdReagent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 450</value>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 9pt</value>
   </data>
   <data name="keywordText.CalibrationSolution" xml:space="preserve">
     <value>Calibration Solution</value>
@@ -938,6 +961,9 @@
   <data name="keywordText.NetErrorAndRetry" xml:space="preserve">
     <value>Network not connected, please connect first!</value>
   </data>
+  <data name="keywordText.No" xml:space="preserve">
+    <value>No</value>
+  </data>
   <data name="keywordText.PleaseChoose" xml:space="preserve">
     <value>Please select the sample information to be modified！</value>
   </data>
@@ -958,5 +984,8 @@
   </data>
   <data name="keywordText.UpdateRunningInfomation" xml:space="preserve">
     <value>Run Information Modify</value>
+  </data>
+  <data name="keywordText.Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>

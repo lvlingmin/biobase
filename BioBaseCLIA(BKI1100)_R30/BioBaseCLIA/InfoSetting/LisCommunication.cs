@@ -45,6 +45,8 @@ namespace BioBaseCLIA.InfoSetting
                 client = new TcpClient(IP, port);
                 stream = client.GetStream();
                 thReceive = new System.Threading.Thread(new System.Threading.ThreadStart(Run));
+                thReceive.CurrentCulture = Language.AppCultureInfo;
+                thReceive.CurrentUICulture = Language.AppCultureInfo;
                 thReceive.IsBackground = true;
                 thReceive.Start();
             }

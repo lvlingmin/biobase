@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmWorkList));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.timeReckon = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.TimeLabel3 = new System.Windows.Forms.Label();
@@ -105,8 +105,8 @@
             // 
             // fbtnDelTest
             // 
-            this.fbtnDelTest.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.fbtnDelTest, "fbtnDelTest");
+            this.fbtnDelTest.BackColor = System.Drawing.Color.Transparent;
             this.fbtnDelTest.EnabledSet = true;
             this.fbtnDelTest.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.fbtnDelTest.FlatAppearance.BorderSize = 0;
@@ -118,8 +118,8 @@
             // 
             // fbtnAddS
             // 
-            this.fbtnAddS.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.fbtnAddS, "fbtnAddS");
+            this.fbtnAddS.BackColor = System.Drawing.Color.Transparent;
             this.fbtnAddS.EnabledSet = true;
             this.fbtnAddS.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.fbtnAddS.FlatAppearance.BorderSize = 0;
@@ -131,8 +131,8 @@
             // 
             // fbtnAddE
             // 
-            this.fbtnAddE.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.fbtnAddE, "fbtnAddE");
+            this.fbtnAddE.BackColor = System.Drawing.Color.Transparent;
             this.fbtnAddE.EnabledSet = true;
             this.fbtnAddE.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.fbtnAddE.FlatAppearance.BorderSize = 0;
@@ -144,19 +144,20 @@
             // 
             // dgvWorkListData
             // 
+            resources.ApplyResources(this.dgvWorkListData, "dgvWorkListData");
             this.dgvWorkListData.AllowUserToAddRows = false;
             this.dgvWorkListData.AllowUserToResizeColumns = false;
             this.dgvWorkListData.AllowUserToResizeRows = false;
             this.dgvWorkListData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvWorkListData.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Times New Roman", 9F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvWorkListData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvWorkListData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvWorkListData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvWorkListData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.No,
@@ -171,7 +172,6 @@
             this.RegentBatch,
             this.SubstratePipe,
             this.RegentPos});
-            resources.ApplyResources(this.dgvWorkListData, "dgvWorkListData");
             this.dgvWorkListData.Name = "dgvWorkListData";
             this.dgvWorkListData.ReadOnly = true;
             this.dgvWorkListData.RowHeadersVisible = false;
@@ -220,8 +220,8 @@
             // Schedule
             // 
             this.Schedule.DataPropertyName = "Schedule";
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            this.Schedule.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            this.Schedule.DefaultCellStyle = dataGridViewCellStyle2;
             this.Schedule.FillWeight = 300F;
             resources.ApplyResources(this.Schedule, "Schedule");
             this.Schedule.Name = "Schedule";
@@ -272,19 +272,19 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.fbtnfrmResultQuery);
             this.panel1.Controls.Add(this.fbtnTestResult);
             this.panel1.Controls.Add(this.btnWorkList);
             this.panel1.Controls.Add(this.fbtnReturn);
             this.panel1.Controls.Add(this.btnLoadSample);
             this.panel1.Controls.Add(this.btnLoadReagent);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // fbtnfrmResultQuery
             // 
-            this.fbtnfrmResultQuery.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.fbtnfrmResultQuery, "fbtnfrmResultQuery");
+            this.fbtnfrmResultQuery.BackColor = System.Drawing.Color.Transparent;
             this.fbtnfrmResultQuery.EnabledSet = true;
             this.fbtnfrmResultQuery.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.fbtnfrmResultQuery.FlatAppearance.BorderSize = 0;
@@ -296,8 +296,8 @@
             // 
             // fbtnTestResult
             // 
-            this.fbtnTestResult.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.fbtnTestResult, "fbtnTestResult");
+            this.fbtnTestResult.BackColor = System.Drawing.Color.Transparent;
             this.fbtnTestResult.EnabledSet = true;
             this.fbtnTestResult.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.fbtnTestResult.FlatAppearance.BorderSize = 0;
@@ -309,8 +309,8 @@
             // 
             // btnWorkList
             // 
-            this.btnWorkList.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnWorkList, "btnWorkList");
+            this.btnWorkList.BackColor = System.Drawing.Color.Transparent;
             this.btnWorkList.EnabledSet = true;
             this.btnWorkList.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnWorkList.FlatAppearance.BorderSize = 0;
@@ -322,8 +322,8 @@
             // 
             // fbtnReturn
             // 
-            this.fbtnReturn.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.fbtnReturn, "fbtnReturn");
+            this.fbtnReturn.BackColor = System.Drawing.Color.Transparent;
             this.fbtnReturn.EnabledSet = true;
             this.fbtnReturn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.fbtnReturn.FlatAppearance.BorderSize = 0;
@@ -335,8 +335,8 @@
             // 
             // btnLoadSample
             // 
-            this.btnLoadSample.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnLoadSample, "btnLoadSample");
+            this.btnLoadSample.BackColor = System.Drawing.Color.Transparent;
             this.btnLoadSample.EnabledSet = true;
             this.btnLoadSample.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnLoadSample.FlatAppearance.BorderSize = 0;
@@ -348,8 +348,8 @@
             // 
             // btnLoadReagent
             // 
-            this.btnLoadReagent.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnLoadReagent, "btnLoadReagent");
+            this.btnLoadReagent.BackColor = System.Drawing.Color.Transparent;
             this.btnLoadReagent.EnabledSet = true;
             this.btnLoadReagent.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnLoadReagent.FlatAppearance.BorderSize = 0;
@@ -361,8 +361,8 @@
             // 
             // fbtnPatientInfo
             // 
-            this.fbtnPatientInfo.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.fbtnPatientInfo, "fbtnPatientInfo");
+            this.fbtnPatientInfo.BackColor = System.Drawing.Color.Transparent;
             this.fbtnPatientInfo.EnabledSet = true;
             this.fbtnPatientInfo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.fbtnPatientInfo.FlatAppearance.BorderSize = 0;
@@ -374,8 +374,8 @@
             // 
             // fbtnToEmergency
             // 
-            this.fbtnToEmergency.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.fbtnToEmergency, "fbtnToEmergency");
+            this.fbtnToEmergency.BackColor = System.Drawing.Color.Transparent;
             this.fbtnToEmergency.EnabledSet = true;
             this.fbtnToEmergency.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.fbtnToEmergency.FlatAppearance.BorderSize = 0;

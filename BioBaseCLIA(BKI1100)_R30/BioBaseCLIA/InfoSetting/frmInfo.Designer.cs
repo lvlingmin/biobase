@@ -180,15 +180,16 @@
             // 
             // tabInfo
             // 
+            resources.ApplyResources(this.tabInfo, "tabInfo");
             this.tabInfo.Controls.Add(this.tabPPro);
             this.tabInfo.Controls.Add(this.tabPBaseInfo);
             this.tabInfo.Controls.Add(this.tabPint);
-            resources.ApplyResources(this.tabInfo, "tabInfo");
             this.tabInfo.Name = "tabInfo";
             this.tabInfo.SelectedIndex = 0;
             // 
             // tabPPro
             // 
+            resources.ApplyResources(this.tabPPro, "tabPPro");
             this.tabPPro.BackColor = System.Drawing.Color.LightBlue;
             this.tabPPro.Controls.Add(this.btnLoadItem);
             this.tabPPro.Controls.Add(this.btnUnLoadItem);
@@ -196,13 +197,12 @@
             this.tabPPro.Controls.Add(this.groupBox2);
             this.tabPPro.Controls.Add(this.groupBox1);
             this.tabPPro.Controls.Add(this.dgvItemList);
-            resources.ApplyResources(this.tabPPro, "tabPPro");
             this.tabPPro.Name = "tabPPro";
             // 
             // btnLoadItem
             // 
-            this.btnLoadItem.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnLoadItem, "btnLoadItem");
+            this.btnLoadItem.BackColor = System.Drawing.Color.Transparent;
             this.btnLoadItem.EnabledSet = true;
             this.btnLoadItem.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnLoadItem.FlatAppearance.BorderSize = 0;
@@ -214,8 +214,8 @@
             // 
             // btnUnLoadItem
             // 
-            this.btnUnLoadItem.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnUnLoadItem, "btnUnLoadItem");
+            this.btnUnLoadItem.BackColor = System.Drawing.Color.Transparent;
             this.btnUnLoadItem.EnabledSet = true;
             this.btnUnLoadItem.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnUnLoadItem.FlatAppearance.BorderSize = 0;
@@ -227,16 +227,16 @@
             // 
             // groupBox3
             // 
+            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Controls.Add(this.btnSaveItem);
             this.groupBox3.Controls.Add(this.dgvItemStd);
-            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
             // btnSaveItem
             // 
-            this.btnSaveItem.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnSaveItem, "btnSaveItem");
+            this.btnSaveItem.BackColor = System.Drawing.Color.Transparent;
             this.btnSaveItem.EnabledSet = true;
             this.btnSaveItem.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnSaveItem.FlatAppearance.BorderSize = 0;
@@ -248,6 +248,7 @@
             // 
             // dgvItemStd
             // 
+            resources.ApplyResources(this.dgvItemStd, "dgvItemStd");
             this.dgvItemStd.AllowUserToAddRows = false;
             this.dgvItemStd.AllowUserToDeleteRows = false;
             this.dgvItemStd.AllowUserToResizeRows = false;
@@ -272,7 +273,6 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvItemStd.DefaultCellStyle = dataGridViewCellStyle5;
-            resources.ApplyResources(this.dgvItemStd, "dgvItemStd");
             this.dgvItemStd.MultiSelect = false;
             this.dgvItemStd.Name = "dgvItemStd";
             this.dgvItemStd.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -315,16 +315,16 @@
             // 
             // groupBox2
             // 
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.btnModifyStep);
             this.groupBox2.Controls.Add(this.dgvItemStep);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
             // btnModifyStep
             // 
-            this.btnModifyStep.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnModifyStep, "btnModifyStep");
+            this.btnModifyStep.BackColor = System.Drawing.Color.Transparent;
             this.btnModifyStep.EnabledSet = true;
             this.btnModifyStep.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnModifyStep.FlatAppearance.BorderSize = 0;
@@ -336,6 +336,7 @@
             // 
             // dgvItemStep
             // 
+            resources.ApplyResources(this.dgvItemStep, "dgvItemStep");
             this.dgvItemStep.AllowUserToAddRows = false;
             this.dgvItemStep.AllowUserToDeleteRows = false;
             this.dgvItemStep.AllowUserToResizeRows = false;
@@ -345,7 +346,6 @@
             this.StepName,
             this.StepPara,
             this.ParaUnit});
-            resources.ApplyResources(this.dgvItemStep, "dgvItemStep");
             this.dgvItemStep.MultiSelect = false;
             this.dgvItemStep.Name = "dgvItemStep";
             this.dgvItemStep.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -395,6 +395,7 @@
             // 
             // groupBox1
             // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.NumResult);
             this.groupBox1.Controls.Add(this.label20);
             this.groupBox1.Controls.Add(this.numExpiryDate);
@@ -415,7 +416,6 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
@@ -462,9 +462,9 @@
             // 
             // cmbItemType
             // 
+            resources.ApplyResources(this.cmbItemType, "cmbItemType");
             this.cmbItemType.BackColor = System.Drawing.Color.White;
             this.cmbItemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.cmbItemType, "cmbItemType");
             this.cmbItemType.FormattingEnabled = true;
             this.cmbItemType.Items.AddRange(new object[] {
             resources.GetString("cmbItemType.Items"),
@@ -473,15 +473,15 @@
             // 
             // txtItemFullName
             // 
-            this.txtItemFullName.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this.txtItemFullName, "txtItemFullName");
+            this.txtItemFullName.BackColor = System.Drawing.Color.White;
             this.txtItemFullName.Name = "txtItemFullName";
             this.txtItemFullName.ReadOnly = true;
             // 
             // txtDilutionFactor
             // 
-            this.txtDilutionFactor.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this.txtDilutionFactor, "txtDilutionFactor");
+            this.txtDilutionFactor.BackColor = System.Drawing.Color.White;
             this.txtDilutionFactor.IsNull = false;
             this.txtDilutionFactor.MaxValue = new decimal(new int[] {
             10000,
@@ -497,26 +497,26 @@
             // 
             // txtValueRange2
             // 
-            this.txtValueRange2.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this.txtValueRange2, "txtValueRange2");
+            this.txtValueRange2.BackColor = System.Drawing.Color.White;
             this.txtValueRange2.Name = "txtValueRange2";
             // 
             // txtValueUnit
             // 
-            this.txtValueUnit.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this.txtValueUnit, "txtValueUnit");
+            this.txtValueUnit.BackColor = System.Drawing.Color.White;
             this.txtValueUnit.Name = "txtValueUnit";
             // 
             // txtValueRange1
             // 
-            this.txtValueRange1.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this.txtValueRange1, "txtValueRange1");
+            this.txtValueRange1.BackColor = System.Drawing.Color.White;
             this.txtValueRange1.Name = "txtValueRange1";
             // 
             // txtItemShortName
             // 
-            this.txtItemShortName.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this.txtItemShortName, "txtItemShortName");
+            this.txtItemShortName.BackColor = System.Drawing.Color.White;
             this.txtItemShortName.Name = "txtItemShortName";
             // 
             // label9
@@ -556,6 +556,7 @@
             // 
             // dgvItemList
             // 
+            resources.ApplyResources(this.dgvItemList, "dgvItemList");
             this.dgvItemList.AllowUserToAddRows = false;
             this.dgvItemList.AllowUserToDeleteRows = false;
             this.dgvItemList.AllowUserToResizeRows = false;
@@ -579,7 +580,6 @@
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvItemList.DefaultCellStyle = dataGridViewCellStyle9;
-            resources.ApplyResources(this.dgvItemList, "dgvItemList");
             this.dgvItemList.MultiSelect = false;
             this.dgvItemList.Name = "dgvItemList";
             this.dgvItemList.ReadOnly = true;
@@ -623,15 +623,16 @@
             // 
             // tabPBaseInfo
             // 
+            resources.ApplyResources(this.tabPBaseInfo, "tabPBaseInfo");
             this.tabPBaseInfo.BackColor = System.Drawing.Color.LightBlue;
             this.tabPBaseInfo.Controls.Add(this.groupBox5);
             this.tabPBaseInfo.Controls.Add(this.groupBox4);
             this.tabPBaseInfo.Controls.Add(this.groupBox8);
-            resources.ApplyResources(this.tabPBaseInfo, "tabPBaseInfo");
             this.tabPBaseInfo.Name = "tabPBaseInfo";
             // 
             // groupBox5
             // 
+            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Controls.Add(this.btnSaveDoc);
             this.groupBox5.Controls.Add(this.btnDelDoc);
             this.groupBox5.Controls.Add(this.btnModifyDoc);
@@ -641,14 +642,13 @@
             this.groupBox5.Controls.Add(this.txtDocName);
             this.groupBox5.Controls.Add(this.label10);
             this.groupBox5.Controls.Add(this.dgvDoctor);
-            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
             // 
             // btnSaveDoc
             // 
-            this.btnSaveDoc.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnSaveDoc, "btnSaveDoc");
+            this.btnSaveDoc.BackColor = System.Drawing.Color.Transparent;
             this.btnSaveDoc.EnabledSet = true;
             this.btnSaveDoc.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnSaveDoc.FlatAppearance.BorderSize = 0;
@@ -660,8 +660,8 @@
             // 
             // btnDelDoc
             // 
-            this.btnDelDoc.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnDelDoc, "btnDelDoc");
+            this.btnDelDoc.BackColor = System.Drawing.Color.Transparent;
             this.btnDelDoc.EnabledSet = true;
             this.btnDelDoc.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnDelDoc.FlatAppearance.BorderSize = 0;
@@ -673,8 +673,8 @@
             // 
             // btnModifyDoc
             // 
-            this.btnModifyDoc.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnModifyDoc, "btnModifyDoc");
+            this.btnModifyDoc.BackColor = System.Drawing.Color.Transparent;
             this.btnModifyDoc.EnabledSet = true;
             this.btnModifyDoc.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnModifyDoc.FlatAppearance.BorderSize = 0;
@@ -686,8 +686,8 @@
             // 
             // btnAddDoc
             // 
-            this.btnAddDoc.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnAddDoc, "btnAddDoc");
+            this.btnAddDoc.BackColor = System.Drawing.Color.Transparent;
             this.btnAddDoc.EnabledSet = true;
             this.btnAddDoc.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnAddDoc.FlatAppearance.BorderSize = 0;
@@ -699,8 +699,8 @@
             // 
             // cmbDep
             // 
-            this.cmbDep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmbDep, "cmbDep");
+            this.cmbDep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDep.FormattingEnabled = true;
             this.cmbDep.Name = "cmbDep";
             // 
@@ -721,6 +721,7 @@
             // 
             // dgvDoctor
             // 
+            resources.ApplyResources(this.dgvDoctor, "dgvDoctor");
             this.dgvDoctor.AllowUserToAddRows = false;
             this.dgvDoctor.AllowUserToDeleteRows = false;
             this.dgvDoctor.AllowUserToResizeColumns = false;
@@ -731,7 +732,6 @@
             this.Doctor,
             this.Department,
             this.DocID});
-            resources.ApplyResources(this.dgvDoctor, "dgvDoctor");
             this.dgvDoctor.MultiSelect = false;
             this.dgvDoctor.Name = "dgvDoctor";
             this.dgvDoctor.ReadOnly = true;
@@ -769,6 +769,7 @@
             // 
             // groupBox4
             // 
+            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Controls.Add(this.btnSave);
             this.groupBox4.Controls.Add(this.btnDelete);
             this.groupBox4.Controls.Add(this.btnModify);
@@ -778,14 +779,13 @@
             this.groupBox4.Controls.Add(this.label12);
             this.groupBox4.Controls.Add(this.lbGroupItem);
             this.groupBox4.Controls.Add(this.flpItemName);
-            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
             // 
             // btnSave
             // 
-            this.btnSave.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnSave, "btnSave");
+            this.btnSave.BackColor = System.Drawing.Color.Transparent;
             this.btnSave.EnabledSet = true;
             this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnSave.FlatAppearance.BorderSize = 0;
@@ -797,8 +797,8 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnDelete, "btnDelete");
+            this.btnDelete.BackColor = System.Drawing.Color.Transparent;
             this.btnDelete.EnabledSet = true;
             this.btnDelete.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnDelete.FlatAppearance.BorderSize = 0;
@@ -810,8 +810,8 @@
             // 
             // btnModify
             // 
-            this.btnModify.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnModify, "btnModify");
+            this.btnModify.BackColor = System.Drawing.Color.Transparent;
             this.btnModify.EnabledSet = true;
             this.btnModify.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnModify.FlatAppearance.BorderSize = 0;
@@ -823,8 +823,8 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnAdd, "btnAdd");
+            this.btnAdd.BackColor = System.Drawing.Color.Transparent;
             this.btnAdd.EnabledSet = true;
             this.btnAdd.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnAdd.FlatAppearance.BorderSize = 0;
@@ -851,20 +851,21 @@
             // 
             // lbGroupItem
             // 
-            this.lbGroupItem.FormattingEnabled = true;
             resources.ApplyResources(this.lbGroupItem, "lbGroupItem");
+            this.lbGroupItem.FormattingEnabled = true;
             this.lbGroupItem.Name = "lbGroupItem";
             this.lbGroupItem.SelectedIndexChanged += new System.EventHandler(this.lbGroupItem_SelectedIndexChanged);
             // 
             // flpItemName
             // 
+            resources.ApplyResources(this.flpItemName, "flpItemName");
             this.flpItemName.BackColor = System.Drawing.Color.White;
             this.flpItemName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.flpItemName, "flpItemName");
             this.flpItemName.Name = "flpItemName";
             // 
             // groupBox8
             // 
+            resources.ApplyResources(this.groupBox8, "groupBox8");
             this.groupBox8.Controls.Add(this.btnSaveDep);
             this.groupBox8.Controls.Add(this.btnDelDep);
             this.groupBox8.Controls.Add(this.btnModifyDep);
@@ -872,14 +873,13 @@
             this.groupBox8.Controls.Add(this.txtDepName);
             this.groupBox8.Controls.Add(this.label14);
             this.groupBox8.Controls.Add(this.lbDep);
-            resources.ApplyResources(this.groupBox8, "groupBox8");
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.TabStop = false;
             // 
             // btnSaveDep
             // 
-            this.btnSaveDep.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnSaveDep, "btnSaveDep");
+            this.btnSaveDep.BackColor = System.Drawing.Color.Transparent;
             this.btnSaveDep.EnabledSet = true;
             this.btnSaveDep.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnSaveDep.FlatAppearance.BorderSize = 0;
@@ -891,8 +891,8 @@
             // 
             // btnDelDep
             // 
-            this.btnDelDep.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnDelDep, "btnDelDep");
+            this.btnDelDep.BackColor = System.Drawing.Color.Transparent;
             this.btnDelDep.EnabledSet = true;
             this.btnDelDep.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnDelDep.FlatAppearance.BorderSize = 0;
@@ -904,8 +904,8 @@
             // 
             // btnModifyDep
             // 
-            this.btnModifyDep.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnModifyDep, "btnModifyDep");
+            this.btnModifyDep.BackColor = System.Drawing.Color.Transparent;
             this.btnModifyDep.EnabledSet = true;
             this.btnModifyDep.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnModifyDep.FlatAppearance.BorderSize = 0;
@@ -917,8 +917,8 @@
             // 
             // btnAddDep
             // 
-            this.btnAddDep.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnAddDep, "btnAddDep");
+            this.btnAddDep.BackColor = System.Drawing.Color.Transparent;
             this.btnAddDep.EnabledSet = true;
             this.btnAddDep.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnAddDep.FlatAppearance.BorderSize = 0;
@@ -940,32 +940,32 @@
             // 
             // lbDep
             // 
-            this.lbDep.FormattingEnabled = true;
             resources.ApplyResources(this.lbDep, "lbDep");
+            this.lbDep.FormattingEnabled = true;
             this.lbDep.Name = "lbDep";
             this.lbDep.SelectedIndexChanged += new System.EventHandler(this.lbDep_SelectedIndexChanged);
             // 
             // tabPint
             // 
+            resources.ApplyResources(this.tabPint, "tabPint");
             this.tabPint.BackColor = System.Drawing.Color.LightBlue;
             this.tabPint.Controls.Add(this.groupBox7);
             this.tabPint.Controls.Add(this.groupBox6);
-            resources.ApplyResources(this.tabPint, "tabPint");
             this.tabPint.Name = "tabPint";
             // 
             // groupBox7
             // 
+            resources.ApplyResources(this.groupBox7, "groupBox7");
             this.groupBox7.Controls.Add(this.btnMoveDown);
             this.groupBox7.Controls.Add(this.btnMoveUP);
             this.groupBox7.Controls.Add(this.dgvPrint);
-            resources.ApplyResources(this.groupBox7, "groupBox7");
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.TabStop = false;
             // 
             // btnMoveDown
             // 
-            this.btnMoveDown.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnMoveDown, "btnMoveDown");
+            this.btnMoveDown.BackColor = System.Drawing.Color.Transparent;
             this.btnMoveDown.EnabledSet = true;
             this.btnMoveDown.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnMoveDown.FlatAppearance.BorderSize = 0;
@@ -977,8 +977,8 @@
             // 
             // btnMoveUP
             // 
-            this.btnMoveUP.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnMoveUP, "btnMoveUP");
+            this.btnMoveUP.BackColor = System.Drawing.Color.Transparent;
             this.btnMoveUP.EnabledSet = true;
             this.btnMoveUP.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnMoveUP.FlatAppearance.BorderSize = 0;
@@ -990,6 +990,7 @@
             // 
             // dgvPrint
             // 
+            resources.ApplyResources(this.dgvPrint, "dgvPrint");
             this.dgvPrint.AllowUserToAddRows = false;
             this.dgvPrint.AllowUserToDeleteRows = false;
             this.dgvPrint.AllowUserToResizeColumns = false;
@@ -999,7 +1000,6 @@
             this.dgvPrint.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.PrintNo,
             this.ItemName});
-            resources.ApplyResources(this.dgvPrint, "dgvPrint");
             this.dgvPrint.Name = "dgvPrint";
             this.dgvPrint.RowHeadersVisible = false;
             this.dgvPrint.RowTemplate.Height = 23;
@@ -1024,6 +1024,7 @@
             // 
             // groupBox6
             // 
+            resources.ApplyResources(this.groupBox6, "groupBox6");
             this.groupBox6.Controls.Add(this.cmbPrintMode);
             this.groupBox6.Controls.Add(this.label21);
             this.groupBox6.Controls.Add(this.groupBox9);
@@ -1037,18 +1038,17 @@
             this.groupBox6.Controls.Add(this.label16);
             this.groupBox6.Controls.Add(this.label13);
             this.groupBox6.Controls.Add(this.txtHospitalName);
-            resources.ApplyResources(this.groupBox6, "groupBox6");
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.TabStop = false;
             // 
             // cmbPrintMode
             // 
+            resources.ApplyResources(this.cmbPrintMode, "cmbPrintMode");
             this.cmbPrintMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPrintMode.FormattingEnabled = true;
             this.cmbPrintMode.Items.AddRange(new object[] {
             resources.GetString("cmbPrintMode.Items"),
             resources.GetString("cmbPrintMode.Items1")});
-            resources.ApplyResources(this.cmbPrintMode, "cmbPrintMode");
             this.cmbPrintMode.Name = "cmbPrintMode";
             // 
             // label21
@@ -1058,23 +1058,23 @@
             // 
             // groupBox9
             // 
+            resources.ApplyResources(this.groupBox9, "groupBox9");
             this.groupBox9.Controls.Add(this.nudRight);
             this.groupBox9.Controls.Add(this.nudDown);
             this.groupBox9.Controls.Add(this.nudLeft);
             this.groupBox9.Controls.Add(this.nudUP);
-            resources.ApplyResources(this.groupBox9, "groupBox9");
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.TabStop = false;
             // 
             // nudRight
             // 
+            resources.ApplyResources(this.nudRight, "nudRight");
             this.nudRight.DecimalPlaces = 2;
             this.nudRight.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            resources.ApplyResources(this.nudRight, "nudRight");
             this.nudRight.Maximum = new decimal(new int[] {
             10,
             0,
@@ -1089,13 +1089,13 @@
             // 
             // nudDown
             // 
+            resources.ApplyResources(this.nudDown, "nudDown");
             this.nudDown.DecimalPlaces = 2;
             this.nudDown.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            resources.ApplyResources(this.nudDown, "nudDown");
             this.nudDown.Maximum = new decimal(new int[] {
             10,
             0,
@@ -1110,13 +1110,13 @@
             // 
             // nudLeft
             // 
+            resources.ApplyResources(this.nudLeft, "nudLeft");
             this.nudLeft.DecimalPlaces = 2;
             this.nudLeft.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            resources.ApplyResources(this.nudLeft, "nudLeft");
             this.nudLeft.Maximum = new decimal(new int[] {
             10,
             0,
@@ -1131,13 +1131,13 @@
             // 
             // nudUP
             // 
+            resources.ApplyResources(this.nudUP, "nudUP");
             this.nudUP.DecimalPlaces = 2;
             this.nudUP.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            resources.ApplyResources(this.nudUP, "nudUP");
             this.nudUP.Maximum = new decimal(new int[] {
             10,
             0,
@@ -1171,18 +1171,18 @@
             // 
             // cmbFormat
             // 
+            resources.ApplyResources(this.cmbFormat, "cmbFormat");
             this.cmbFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFormat.FormattingEnabled = true;
             this.cmbFormat.Items.AddRange(new object[] {
             resources.GetString("cmbFormat.Items"),
             resources.GetString("cmbFormat.Items1")});
-            resources.ApplyResources(this.cmbFormat, "cmbFormat");
             this.cmbFormat.Name = "cmbFormat";
             // 
             // btnSetHospitalName
             // 
-            this.btnSetHospitalName.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnSetHospitalName, "btnSetHospitalName");
+            this.btnSetHospitalName.BackColor = System.Drawing.Color.Transparent;
             this.btnSetHospitalName.EnabledSet = true;
             this.btnSetHospitalName.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnSetHospitalName.FlatAppearance.BorderSize = 0;
@@ -1199,9 +1199,9 @@
             // 
             // cmbPrinter
             // 
+            resources.ApplyResources(this.cmbPrinter, "cmbPrinter");
             this.cmbPrinter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPrinter.FormattingEnabled = true;
-            resources.ApplyResources(this.cmbPrinter, "cmbPrinter");
             this.cmbPrinter.Name = "cmbPrinter";
             // 
             // label16
@@ -1221,19 +1221,19 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.btnUserInfo);
             this.panel1.Controls.Add(this.fbtnConnetSet);
             this.panel1.Controls.Add(this.btnInstrumentPara);
             this.panel1.Controls.Add(this.fbtnReturn);
             this.panel1.Controls.Add(this.btnProInfo);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             this.panel1.DoubleClick += new System.EventHandler(this.panel1_DoubleClick);
             // 
             // btnUserInfo
             // 
-            this.btnUserInfo.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnUserInfo, "btnUserInfo");
+            this.btnUserInfo.BackColor = System.Drawing.Color.Transparent;
             this.btnUserInfo.EnabledSet = true;
             this.btnUserInfo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnUserInfo.FlatAppearance.BorderSize = 0;
@@ -1245,8 +1245,8 @@
             // 
             // fbtnConnetSet
             // 
-            this.fbtnConnetSet.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.fbtnConnetSet, "fbtnConnetSet");
+            this.fbtnConnetSet.BackColor = System.Drawing.Color.Transparent;
             this.fbtnConnetSet.EnabledSet = true;
             this.fbtnConnetSet.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.fbtnConnetSet.FlatAppearance.BorderSize = 0;
@@ -1258,8 +1258,8 @@
             // 
             // btnInstrumentPara
             // 
-            this.btnInstrumentPara.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnInstrumentPara, "btnInstrumentPara");
+            this.btnInstrumentPara.BackColor = System.Drawing.Color.Transparent;
             this.btnInstrumentPara.EnabledSet = true;
             this.btnInstrumentPara.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnInstrumentPara.FlatAppearance.BorderSize = 0;
@@ -1271,8 +1271,8 @@
             // 
             // fbtnReturn
             // 
-            this.fbtnReturn.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.fbtnReturn, "fbtnReturn");
+            this.fbtnReturn.BackColor = System.Drawing.Color.Transparent;
             this.fbtnReturn.EnabledSet = true;
             this.fbtnReturn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.fbtnReturn.FlatAppearance.BorderSize = 0;
@@ -1284,8 +1284,8 @@
             // 
             // btnProInfo
             // 
-            this.btnProInfo.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnProInfo, "btnProInfo");
+            this.btnProInfo.BackColor = System.Drawing.Color.Transparent;
             this.btnProInfo.EnabledSet = true;
             this.btnProInfo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnProInfo.FlatAppearance.BorderSize = 0;

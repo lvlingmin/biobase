@@ -188,6 +188,8 @@ namespace BioBaseCLIA
             client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             KeepAliveThread = new Thread(new ParameterizedThreadStart(KeepAlive));
             KeepAliveThread.IsBackground = true;
+            KeepAliveThread. CurrentCulture = Language.AppCultureInfo;
+            KeepAliveThread. CurrentUICulture = Language.AppCultureInfo;
             KeepAliveThread.Start();
             //frmMS = new frmMessageShow();
         }
@@ -855,6 +857,8 @@ namespace BioBaseCLIA
                 SpSendFlag = true;
                 SPReciveThread = new Thread(new ParameterizedThreadStart(SPReciveMessage));
                 SPReciveThread.IsBackground = true;
+                SPReciveThread.CurrentCulture = Language.AppCultureInfo;
+                SPReciveThread.CurrentUICulture = Language.AppCultureInfo;
                 SPReciveThread.Start();
             }
             catch (Exception e)
@@ -890,6 +894,8 @@ namespace BioBaseCLIA
                 //WashOrderNum = 1;
                 WashSendFlag = true;
                 WASHReciveThread = new Thread(new ParameterizedThreadStart(WASHReciveMessage));
+                WASHReciveThread.CurrentCulture = Language.AppCultureInfo;
+                WASHReciveThread.CurrentUICulture = Language.AppCultureInfo;
                 WASHReciveThread.IsBackground = true;
                 WASHReciveThread.Start();
             }
@@ -925,6 +931,8 @@ namespace BioBaseCLIA
                 MoveSendFlag = true;
                 MOVEReciveThread = new Thread(new ParameterizedThreadStart(MOVEReciveMessage));
                 MOVEReciveThread.IsBackground = true;
+                MOVEReciveThread.CurrentCulture = Language.AppCultureInfo;
+                MOVEReciveThread.CurrentUICulture = Language.AppCultureInfo;
                 MOVEReciveThread.Start();
             }
             catch (Exception e)
