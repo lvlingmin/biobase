@@ -1877,10 +1877,10 @@ namespace BioBaseCLIA.Run
             {
                 int exitNumber = frmWorkList.BTestItem
                     .Where(item => item.SamplePos == position
-                    && ((!item.TestStatus.Contains(getString("Testcomplete"))) && (!item.TestStatus.Contains(getString("TestStatusAbondoned")))) && !item.TestStatus.Contains("")).Count();
+                    && ((!item.TestStatus.Contains(getString("keywordText.Testcomplete"))) && (!item.TestStatus.Contains(getString("keywordText.TestStatusAbondoned")))) && !item.TestStatus.Contains("")).Count();
                 if (exitNumber > 0)
                 {
-                    MessageBox.Show(getString("Location") + position + getString("ExitSample"));
+                    MessageBox.Show(getString("keywordText.Location") + position + getString("keywordText.ExitSample"));
                     return true;
                 }
             }
@@ -3160,9 +3160,9 @@ namespace BioBaseCLIA.Run
             string isup = isUpload ? getString("keywordText.Load") : getString("keywordText.Unload");
             string temp = "";
             if (length == 1) temp = "" + star + getString("keywordText.No.Space");
-            else if (length == 2) temp = " " + star + getString("keywordText.No.Sign") + (star + 1) + getString("keywordText.No.Space");
-            else if (length > 2 && length <= 15) temp = " " + star + getString("keywordText.No.To") + (star + length - 1) + getString("keywordText.No.Space");
-            else if (length > 2 && length > 15) temp = " " + star + getString("keywordText.No.To") + (star + 14) + getString("keywordText.No.Space");
+            else if (length == 2) temp = " " + star + getString("keywordText.No.Sign") + " " + (star + 1) + " " + getString("keywordText.No.Space");
+            else if (length > 2 && length <= 15) temp = " " + star + " "+ getString("keywordText.No.To") + " " + (star + length - 1) + " " + getString("keywordText.No.Space");
+            else if (length > 2 && length > 15) temp = " " + star + " " + getString("keywordText.No.To") + " " + (star + 14) + " " + getString("keywordText.No.Space");
             frmMsg.MessageShow(getString("keywordText.SampleLoad"), string.Format(getString("keywordText.LoadSampleInTray"), temp, isup));//2018-11-15 zlx mod
             if (!isUpload)
             {

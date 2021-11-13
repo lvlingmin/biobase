@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Localization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,6 +34,8 @@ namespace BioBaseCLIA.Run
                 return;
             Thread thread = new Thread(new ThreadStart(LoadingHelper.ShowForm));
             thread.IsBackground = true;
+            thread.CurrentCulture = Language.AppCultureInfo;
+            thread.CurrentUICulture = Language.AppCultureInfo;
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
 

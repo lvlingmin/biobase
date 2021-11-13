@@ -13,6 +13,7 @@ using BioBaseCLIA.CalculateCurve;
 using BioBaseCLIA.DataQuery;
 using System.Timers; //lyq add 20190828
 using System.Resources;
+using Localization;
 
 namespace BioBaseCLIA.ScalingQC
 {
@@ -90,6 +91,8 @@ namespace BioBaseCLIA.ScalingQC
             {
                 RefreshUI();
             }));
+            th.CurrentCulture = Language.AppCultureInfo;
+            th.CurrentUICulture = Language.AppCultureInfo;
             th.IsBackground = true;
             th.Start();
             //new Thread(new ParameterizedThreadStart((obj) =>
@@ -145,7 +148,7 @@ namespace BioBaseCLIA.ScalingQC
                         dr["Points"] = drScal["Points"];
                         dr["MainCurve"] = ExitsMainCurve ? "Y" : "N";
                         dr["Scaling"] = "Y";
-                        dr["CalType"] = drScal["ScalingModel"].ToString() == "6" ? "六点定标" : "两点校准";
+                        dr["CalType"] = drScal["ScalingModel"].ToString() == "6" ? getString("keywordText.SixPoint") : getString("keywordText.TwoPoint");
                         dr["ActiveDate"] = Convert.ToDateTime(drScal["ActiveDate"]).ToString("yyyy-MM-dd");
                         dr["OriginActiveDate"] = drScal["ActiveDate"];
                         dr["ValidDate"] = (Convert.ToDateTime(drScal["ActiveDate"]).AddDays(expiryDate)).ToString();
@@ -777,6 +780,8 @@ namespace BioBaseCLIA.ScalingQC
                     RefreshUI();
                 }));
                 th.IsBackground = true;
+                th.CurrentCulture = Language.AppCultureInfo;
+                th.CurrentUICulture = Language.AppCultureInfo;
                 th.Start();
                 resetIsReady(sender, e);
             }

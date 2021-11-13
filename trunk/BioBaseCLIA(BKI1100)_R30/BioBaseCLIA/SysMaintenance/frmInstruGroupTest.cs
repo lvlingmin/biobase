@@ -12,6 +12,7 @@ using Common;
 using System.IO;
 using BioBaseCLIA.Run;
 using Maticsoft.DBUtility;
+using Localization;
 
 namespace BioBaseCLIA.SysMaintenance
 {
@@ -1679,6 +1680,8 @@ namespace BioBaseCLIA.SysMaintenance
             MoveTubeReset();
             GroupTestRun = new Thread(new ThreadStart(TestRun));
             GroupTestRun.IsBackground = true;
+            GroupTestRun.CurrentCulture = Language.AppCultureInfo;
+            GroupTestRun.CurrentUICulture = Language.AppCultureInfo;
             GroupTestRun.Start();
         }
         /// <summary>
@@ -1885,6 +1888,8 @@ namespace BioBaseCLIA.SysMaintenance
             WashTrayFlag = false;
             AddSampleArmReset();
             GroupTestRun = new Thread(new ThreadStart(TestRun));
+            GroupTestRun.CurrentCulture = Language.AppCultureInfo;
+            GroupTestRun.CurrentUICulture = Language.AppCultureInfo;
             GroupTestRun.IsBackground = true;
             GroupTestRun.Start();
 
@@ -2029,6 +2034,8 @@ namespace BioBaseCLIA.SysMaintenance
             }
             GroupTestRun = new Thread(new ThreadStart(TestRun));
             GroupTestRun.IsBackground = true;
+            GroupTestRun.CurrentCulture = Language.AppCultureInfo;
+            GroupTestRun. CurrentUICulture = Language.AppCultureInfo;
             GroupTestRun.Start();
 
 
@@ -3010,6 +3017,8 @@ namespace BioBaseCLIA.SysMaintenance
                     TExtAppend("循环灌注开始。。。\n");
                     Loopthread = new Thread(new ThreadStart(TestLoopRun));
                     Loopthread.IsBackground = true;
+                    Loopthread.CurrentCulture = Language.AppCultureInfo;
+                    Loopthread.CurrentUICulture = Language.AppCultureInfo;
                     Loopthread.Start();
                 }
             }

@@ -187,7 +187,7 @@ namespace BioBaseCLIA.InfoSetting
                 dgvItemList.Rows[selectId].Selected = true;
                 dgvItemList.SelectionChanged += dgvItemList_SelectionChanged;
                 frmMessageShow frmMsgShow = new frmMessageShow();
-                frmMsgShow.MessageShow(Getstring("ProjectHead"), Getstring("ProjectSaveSucess"));
+                frmMsgShow.MessageShow(Getstring("keywordText.ProjectHead"), Getstring("keywordText.ProjectSaveSucess"));
             }
         }
 
@@ -199,7 +199,7 @@ namespace BioBaseCLIA.InfoSetting
             {
                 frmMessageShow frmMsgShow = new frmMessageShow();
                 dialog.InitialDirectory = System.Windows.Forms.Application.StartupPath;
-                dialog.Filter = "xml"+Getstring("File") +"|*.xml";
+                dialog.Filter = "xml"+Getstring("keywordText.File") +"|*.xml";
                 dialog.Multiselect = true;//等于true表示可以选择多个文件
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
@@ -212,19 +212,23 @@ namespace BioBaseCLIA.InfoSetting
                         //string shortName = proInfoXml.ShortName;
                         try
                         {
-                            document = XmlRemoveSpaces(document); //lyq add 20191029
+                            if (OperateIniFile.ReadInIPara("CultureInfo", "Culture") == "zh-CN")
+                            {
+                                document = XmlRemoveSpaces(document);
+                            }
+                             //lyq add 20191029
                             mProject = XmlToModelNew(document);
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(Getstring("ProjectSaveError"));
+                            MessageBox.Show(Getstring("keywordText.ProjectSaveError"));
                             return;
                         }
                         string shortName = mProject.ShortName;
                         if (bllProject.Exists_(shortName))
                         {
                             frmMessageShow frmMsg = new frmMessageShow();
-                            DialogResult dr = frmMsg.MessageShow(Getstring("ProjectHead"), Getstring("ProjectReAdd"));
+                            DialogResult dr = frmMsg.MessageShow(Getstring("keywordText.ProjectHead"), Getstring("keywordText.ProjectReAdd"));
                             if (dr != DialogResult.OK)
                             {
                                 return;
@@ -244,12 +248,12 @@ namespace BioBaseCLIA.InfoSetting
                             dgvItemList.DataSource = dtGetShortName;
                             dgvItemList.Columns[0].Width = 40;
                             //dgvItemList.SelectionChanged += dgvItemList_SelectionChanged;
-                            frmMsgShow.MessageShow(Getstring("ProjectHead"),Getstring("ProjectImportSucess"));
+                            frmMsgShow.MessageShow(Getstring("keywordText.ProjectHead"),Getstring("keywordText.ProjectImportSucess"));
                             ShowReportSort();
                         }
                         else
                         {
-                            frmMsgShow.MessageShow(Getstring("ProjectHead"), Getstring("ProjectIPFormat"));
+                            frmMsgShow.MessageShow(Getstring("keywordText.ProjectHead"), Getstring("keywordText.ProjectIPFormat"));
                         }
                     }
                     //        if (bllProject.Add(mProject))
@@ -493,45 +497,45 @@ namespace BioBaseCLIA.InfoSetting
             //S-30-ml;R1-30-ml;R2-30-ml;H-15-min;B-30-ml;H-5-min;W-300-ml;T-20-ml;D-10-s
             if (flagName == "S")
             {
-                return Getstring("S");
+                return Getstring("keywordText.S");
             }
             if (flagName == "R1")
             {
-                return Getstring("R1");
+                return Getstring("keywordText.R1");
             }
             if (flagName == "R2")
             {
-                return Getstring("R2");
+                return Getstring("keywordText.R2");
             }
             if (flagName == "R3")
             {
-                return Getstring("R3");
+                return Getstring("keywordText.R3");
             }
             if (flagName == "RD")
             {
-                return Getstring("RD");
+                return Getstring("keywordText.RD");
             }
             if (flagName == "H")
             {
-                return Getstring("H");
+                return Getstring("keywordText.H");
             }
             if (flagName == "B")
             {
-                return Getstring("B");
+                return Getstring("keywordText.B");
             }
             if (flagName.Contains("W"))
             {
-                return Getstring("W");
+                return Getstring("keywordText.W");
             }
             if (flagName == "T")
             {
-                return Getstring("T");
+                return Getstring("keywordText.T");
             }
             if (flagName == "D")
             {
-                return Getstring("D");
+                return Getstring("keywordText.D");
             }
-            return Getstring("Custom");
+            return Getstring("keywordText.Custom");
 
         }
         /// <summary>
@@ -627,35 +631,35 @@ namespace BioBaseCLIA.InfoSetting
         /// <returns></returns>
         private string SetStepName(string SName)
         {
-            if (SName == Getstring("S"))
+            if (SName == Getstring("keywordText.S"))
             {
                 return "S";
             }
-            if (SName == Getstring("R1"))
+            if (SName == Getstring("keywordText.R1"))
             {
                 return "R1";
             }
-            if (SName == Getstring("R2"))
+            if (SName == Getstring("keywordText.R2"))
             {
                 return "R2";
             }
-            if (SName == Getstring("H"))
+            if (SName == Getstring("keywordText.H"))
             {
                 return "H";
             }
-            if (SName == Getstring("B"))
+            if (SName == Getstring("keywordText.B"))
             {
                 return "B";
             }
-            if (SName == Getstring("W"))
+            if (SName == Getstring("keywordText.W"))
             {
                 return "W";
             }
-            if (SName == Getstring("T"))
+            if (SName == Getstring("keywordText.T"))
             {
                 return "T";
             }
-            if (SName == Getstring("D"))
+            if (SName == Getstring("keywordText.D"))
             {
                 return "D";
             }
@@ -697,7 +701,7 @@ namespace BioBaseCLIA.InfoSetting
             DbHelperOleDb db = new DbHelperOleDb(0);
             DataTable dtProject = bllPj.GetList("ActiveStatus=1").Tables[0];
             db = new DbHelperOleDb(3);
-            DataTable dtRgItem = bllRg.GetList("Status='正常'").Tables[0];//DataTable dtRgItem = bllRg.GetList("Status='"+Getstring("Normal") +"'").Tables[0];
+            DataTable dtRgItem = bllRg.GetList("Status='正常'").Tables[0];//DataTable dtRgItem = bllRg.GetList("Status='"+Getstring("keywordText.Normal") +"'").Tables[0];
             dtRgItem = Distinct(dtRgItem, "ReagentName");
             dtItemInfo1 = dtProject.Clone();
             for (int i = 0; i < dtRgItem.Rows.Count; i++)
@@ -760,16 +764,16 @@ namespace BioBaseCLIA.InfoSetting
         }
         private void btnAddDep_Click(object sender, EventArgs e)
         {
-            if (btnAddDep.Text == Getstring("Add"))
+            if (btnAddDep.Text == Getstring("keywordText.Add"))
             {
-                btnAddDep.Text = Getstring("Cancel");
+                btnAddDep.Text = Getstring("keywordText.Cancel");
                 txtDepName.Text = "";
                 btnModifyDep.Enabled = btnDelDep.Enabled = false;
                 txtDepName.Enabled = btnSaveDep.Enabled = true;
             }
             else
             {
-                btnAddDep.Text = Getstring("Add");
+                btnAddDep.Text = Getstring("keywordText.Add");
                 if (lbDep.Items.Count != 0)//y add 20180510
                     btnModifyDep.Enabled = btnDelDep.Enabled = true;
                 txtDepName.Enabled = btnSaveDep.Enabled = false;
@@ -780,15 +784,15 @@ namespace BioBaseCLIA.InfoSetting
         private void btnModifyDep_Click(object sender, EventArgs e)
         {
             if (lbDep.SelectedItem == null) txtDepName.Text = "";
-            if (btnModifyDep.Text == Getstring("Modify"))
+            if (btnModifyDep.Text == Getstring("keywordText.Modify"))
             {
-                btnModifyDep.Text = Getstring("Cancel");
+                btnModifyDep.Text = Getstring("keywordText.Cancel");
                 btnAddDep.Enabled = btnDelDep.Enabled = false;
                 txtDepName.Enabled = btnSaveDep.Enabled = true;
             }
             else
             {
-                btnModifyDep.Text = Getstring("Modify");
+                btnModifyDep.Text = Getstring("keywordText.Modify");
                 btnAddDep.Enabled = btnDelDep.Enabled = true;
                 txtDepName.Enabled = btnSaveDep.Enabled = false;
                 if (lbDep.SelectedItems.Count > 0)//y add 20180510
@@ -803,19 +807,19 @@ namespace BioBaseCLIA.InfoSetting
             frmMessageShow frmMsgShow = new frmMessageShow();
             if (!Inspect.NameOnlycharacter2(txtDepName.Text.Trim()))//y modify 20180419
             {
-                frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("DepartNameSet"));
+                frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.DepartNameSet"));
                 txtDepName.Focus();
                 return;
             }
 
             DbHelperOleDb db = new DbHelperOleDb(2);
-            if (btnAddDep.Text == Getstring("Cancel"))
+            if (btnAddDep.Text == Getstring("keywordText.Cancel"))
             {
                 foreach (var a in lbDep.Items)//查重
                 {
                     if (a.ToString() == txtDepName.Text)
                     {
-                        frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("DepartReName"));
+                        frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.DepartReName"));
                         return;
                     }
                 }
@@ -825,10 +829,10 @@ namespace BioBaseCLIA.InfoSetting
                 {
                     SetDepInfo();
                     txtDepName.Text = "";
-                    btnAddDep.Text = Getstring("Add");
+                    btnAddDep.Text = Getstring("keywordText.Add");
                     btnAddDep.Enabled = btnModifyDep.Enabled = btnDelDep.Enabled = true;
                     txtDepName.Enabled = btnSaveDep.Enabled = false;
-                    frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("DepartAddSucess"));
+                    frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.DepartAddSucess"));
                 }
                 if (lbDep.Items.Count != 0)//y add 20180420
                 {
@@ -840,7 +844,7 @@ namespace BioBaseCLIA.InfoSetting
             {
                 if (lbDep.SelectedItem == null)
                 {
-                    frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("DepartSelectInfo"));
+                    frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.DepartSelectInfo"));
                     return;
                 }
                 for (int i = 0; i < lbDep.Items.Count;i++ )//y ths.block add 20180420
@@ -848,7 +852,7 @@ namespace BioBaseCLIA.InfoSetting
                     if (lbDep.Items.IndexOf(lbDep.SelectedItem) == i) continue;
                     if (lbDep.Items[i].ToString() == txtDepName.Text)
                     {
-                        frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("DepartReName"));
+                        frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.DepartReName"));
                         return;
                     }
                 }
@@ -858,10 +862,10 @@ namespace BioBaseCLIA.InfoSetting
                 if (bllDep.Update(modelDep))
                 {
                     SetDepInfo();
-                    btnModifyDep.Text = Getstring("Modify");
+                    btnModifyDep.Text = Getstring("keywordText.Modify");
                     btnAddDep.Enabled = btnModifyDep.Enabled = btnDelDep.Enabled = true;
                     txtDepName.Enabled = btnSaveDep.Enabled = false;
-                    frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("DepartAlterSucess"));
+                    frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.DepartAlterSucess"));
                 }
             }
         }
@@ -871,20 +875,20 @@ namespace BioBaseCLIA.InfoSetting
             frmMessageShow frmMsgShow = new frmMessageShow();
             if (lbDep.SelectedItem == null)
             {
-                frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("DepartSDeleteInfo"));
+                frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.DepartSDeleteInfo"));
                 return;
             }
             var dr = dtDoctorInfo.Select("DepartmentName='" + dtDepInfo.Rows[lbDep.SelectedIndex]["DepartmentName"].ToString() + "'");
             if (dr.Length > 0)
             {
-                frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("DepartDeleteInfo"));
+                frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.DepartDeleteInfo"));
                 return;
             }
             DbHelperOleDb db = new DbHelperOleDb(2);
             if (bllDep.Delete(int.Parse(dtDepInfo.Rows[lbDep.SelectedIndex]["DepartmentID"].ToString())))
             {
                 SetDepInfo();
-                frmMsgShow.MessageShow(Getstring("BasicSetHead"),Getstring("DepartDeleteSucess"));
+                frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"),Getstring("keywordText.DepartDeleteSucess"));
             }
             txtDepName.Text = "";
             if (lbDep.Items.Count == 0)//y add 20180420
@@ -896,16 +900,16 @@ namespace BioBaseCLIA.InfoSetting
 
         private void btnAddDoc_Click(object sender, EventArgs e)
         {
-            if (btnAddDoc.Text == Getstring("Add"))
+            if (btnAddDoc.Text == Getstring("keywordText.Add"))
             {
-                btnAddDoc.Text = Getstring("Cancel");
+                btnAddDoc.Text = Getstring("keywordText.Cancel");
                 btnModifyDoc.Enabled = btnDelDoc.Enabled = false;
                 txtDocName.Enabled = cmbDep.Enabled = btnSaveDoc.Enabled = true;
                 txtDocName.Text = "";
             }
             else
             {
-                btnAddDoc.Text = Getstring("Add");
+                btnAddDoc.Text = Getstring("keywordText.Add");
                 if (dgvDoctor.Rows.Count != 0)//y add 20180510
                     btnModifyDoc.Enabled = btnDelDoc.Enabled = true;
                 txtDocName.Enabled = cmbDep.Enabled = btnSaveDoc.Enabled = false;
@@ -925,9 +929,9 @@ namespace BioBaseCLIA.InfoSetting
 
         private void btnModifyDoc_Click(object sender, EventArgs e)
         {
-            if (btnModifyDoc.Text ==Getstring("Modify"))
+            if (btnModifyDoc.Text ==Getstring("keywordText.Modify"))
             {
-                btnModifyDoc.Text = Getstring("Cancel");
+                btnModifyDoc.Text = Getstring("keywordText.Cancel");
                 btnAddDoc.Enabled = btnDelDoc.Enabled = false;
                 txtDocName.Enabled = cmbDep.Enabled = btnSaveDoc.Enabled = true;
                 if (dgvDoctor.SelectedRows.Count != 0)//add y 20180511
@@ -940,7 +944,7 @@ namespace BioBaseCLIA.InfoSetting
             }
             else
             {
-                btnModifyDoc.Text = Getstring("Modify");
+                btnModifyDoc.Text = Getstring("keywordText.Modify");
                 btnAddDoc.Enabled = btnDelDoc.Enabled = true;
                 txtDocName.Enabled = cmbDep.Enabled = btnSaveDoc.Enabled = false;
                 if (dgvDoctor.SelectedRows.Count == 0)
@@ -960,28 +964,28 @@ namespace BioBaseCLIA.InfoSetting
             frmMessageShow frmMsgShow = new frmMessageShow();
             if (!Inspect.NameOnlycharacter2(txtDocName.Text.Trim()))
             {
-                frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("DoctorNameSet"));
+                frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.DoctorNameSet"));
                 txtDepName.Focus();
                 return;
             }
             if (dtDepInfo.Rows.Count == 0)//this move y 20180511
             {
-                frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("DepartAddInfo"));
+                frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.DepartAddInfo"));
                 return;
             }
             if (cmbDep.SelectedItem == null)
             {
-                frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("DepartAddInfo"));
+                frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.DepartAddInfo"));
                 return;
             }//this end
             DbHelperOleDb db = new DbHelperOleDb(2);
-            if (btnAddDoc.Text == Getstring("Cancel"))
+            if (btnAddDoc.Text == Getstring("keywordText.Cancel"))
             {
                 foreach (DataGridViewRow a in dgvDoctor.Rows)//重名判断。y add 20180419
                 {
                     if (txtDocName.Text.Trim() == a.Cells["Doctor"].Value.ToString() && cmbDep.Text.Trim() == a.Cells["Department"].Value.ToString())
                     {
-                        frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("DoctorReName"));
+                        frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.DoctorReName"));
                         return;
                     }
                 }
@@ -992,7 +996,7 @@ namespace BioBaseCLIA.InfoSetting
                 if (bllDoctor.Add(modelDoc))
                 {
                     SetDoctorInfo();
-                    btnAddDoc.Text = Getstring("Add");
+                    btnAddDoc.Text = Getstring("keywordText.Add");
                     btnModifyDoc.Enabled = btnDelDoc.Enabled = true;
                     txtDocName.Enabled = cmbDep.Enabled = btnSaveDoc.Enabled = false;
                     if (dgvDoctor.Rows.Count != 0)
@@ -1000,14 +1004,14 @@ namespace BioBaseCLIA.InfoSetting
                         btnModifyDoc.Enabled = true;
                         btnDelDoc.Enabled = true;
                     }
-                    frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("DoctorAddSucess"));
+                    frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.DoctorAddSucess"));
                 }
             }
-            else if (btnModifyDoc.Text == Getstring("Cancel"))
+            else if (btnModifyDoc.Text == Getstring("keywordText.Cancel"))
             {
                 if (dgvDoctor.SelectedRows.Count == 0)
                 {
-                    frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("DoctorSelectInfo"));
+                    frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.DoctorSelectInfo"));
                     return;
                 }
                 for (int i = 0; i < dgvDoctor.Rows.Count; i++)//重名判断。y add 20180419
@@ -1018,7 +1022,7 @@ namespace BioBaseCLIA.InfoSetting
                     }
                     if (txtDocName.Text.Trim() == dgvDoctor.Rows[i].Cells["Doctor"].Value.ToString() && cmbDep.Text.Trim() == dgvDoctor.Rows[i].Cells["Department"].Value.ToString())
                     {
-                        frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("DoctorReName"));
+                        frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.DoctorReName"));
                         return;
                     }
                 }
@@ -1030,10 +1034,10 @@ namespace BioBaseCLIA.InfoSetting
                 if (bllDoctor.Update(modelDoc))
                 {
                     SetDoctorInfo();
-                    btnModifyDoc.Text = Getstring("Modify");
+                    btnModifyDoc.Text = Getstring("keywordText.Modify");
                     btnAddDoc.Enabled = btnDelDoc.Enabled = true;
                     txtDocName.Enabled = cmbDep.Enabled = btnSaveDoc.Enabled = false;
-                    frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("DoctorModifySucess"));
+                    frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.DoctorModifySucess"));
                 }
             }
         }
@@ -1043,7 +1047,7 @@ namespace BioBaseCLIA.InfoSetting
             frmMessageShow frmMsgShow = new frmMessageShow();
             if (dgvDoctor.SelectedRows.Count == 0)
             {
-                frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("DepartSDeleteInfo"));
+                frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.DepartSDeleteInfo"));
                 return;
             }
             if (dgvDoctor.SelectedRows == null) return;
@@ -1067,7 +1071,7 @@ namespace BioBaseCLIA.InfoSetting
                     dgvDoctor.Rows[temp].Selected = true;//add y 20180511
                     //txtDocName.Text = dgvDoctor.SelectedRows[0].Cells["Doctor"].Value.ToString();
                 }
-                frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("DoctorDeleteSucess"));
+                frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.DoctorDeleteSucess"));
             }
         }
         private void lbDep_SelectedIndexChanged(object sender, EventArgs e)
@@ -1087,19 +1091,19 @@ namespace BioBaseCLIA.InfoSetting
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (btnAdd.Text ==Getstring("Add"))
+            if (btnAdd.Text ==Getstring("keywordText.Add"))
             {
                 txtGroupItemName.Enabled = flpItemName.Enabled = btnSave.Enabled = true;
                 btnModify.Enabled = btnDelete.Enabled = false;
                 txtGroupItemName.Text = "";
-                btnAdd.Text = Getstring("Cancel");
+                btnAdd.Text = Getstring("keywordText.Cancel");
             }
             else
             {
                 txtGroupItemName.Enabled = flpItemName.Enabled = btnSave.Enabled = false;
                 if (lbGroupItem.Items.Count != 0)//y add 20180510
                     btnModify.Enabled = btnDelete.Enabled = true;
-                btnAdd.Text = Getstring("Add");
+                btnAdd.Text = Getstring("keywordText.Add");
                 try   //y this block add 20180420
                 {
                     if (lbGroupItem.Items.Count == 0)
@@ -1127,17 +1131,17 @@ namespace BioBaseCLIA.InfoSetting
 
         private void btnModify_Click(object sender, EventArgs e)
         {
-            if (btnModify.Text ==Getstring("Modify"))
+            if (btnModify.Text ==Getstring("keywordText.Modify"))
             {
                 txtGroupItemName.Enabled = flpItemName.Enabled = btnSave.Enabled = true;
                 btnAdd.Enabled = btnDelete.Enabled = false;
-                btnModify.Text = Getstring("Cancel");
+                btnModify.Text = Getstring("keywordText.Cancel");
             }
             else
             {
                 txtGroupItemName.Enabled = flpItemName.Enabled = btnSave.Enabled = false;
                 btnAdd.Enabled = btnDelete.Enabled = true;
-                btnModify.Text = Getstring("Modify");
+                btnModify.Text = Getstring("keywordText.Modify");
                 try   //y this block add 20180420
                 {
                     if (lbGroupItem.Items.Count == 0)
@@ -1168,7 +1172,7 @@ namespace BioBaseCLIA.InfoSetting
             frmMessageShow frmMsgShow = new frmMessageShow();
             if (lbGroupItem.SelectedItem == null)
             {
-                frmMsgShow.MessageShow(Getstring("BasicSetHead"),Getstring("GroupSDelectInfo"));
+                frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"),Getstring("keywordText.GroupSDelectInfo"));
                 return;
             }
             var dr = dtGroupItem.Select("ProjectGroupNumber='" + lbGroupItem.SelectedItem.ToString() + "'");
@@ -1177,7 +1181,7 @@ namespace BioBaseCLIA.InfoSetting
                 DbHelperOleDb db = new DbHelperOleDb(0);
                 if (bllPG.Delete(int.Parse(dr[0]["ProjectGroupID"].ToString())))
                 {
-                    frmMsgShow.MessageShow(Getstring("BasicSetHead"),Getstring("GroupDeleteSucess"));
+                    frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"),Getstring("keywordText.GroupDeleteSucess"));
                     SetGroupItem();
                     if (lbGroupItem.Items.Count == 0)   //y this block add 20180420
                     {
@@ -1205,7 +1209,7 @@ namespace BioBaseCLIA.InfoSetting
             string gpItem = "";
             if (!Inspect.NameOnlycharacter2(txtGroupItemName.Text.Trim()))
             {
-                frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("GroupNameInfo"));
+                frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.GroupNameInfo"));
                 txtGroupItemName.Focus();
                 return;
             }
@@ -1223,10 +1227,10 @@ namespace BioBaseCLIA.InfoSetting
             }
             if (num == 0)
             {
-                frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("GroupSItemInfo"));
+                frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.GroupSItemInfo"));
                 return;
             }
-            if (btnAdd.Text == Getstring("Cancel"))
+            if (btnAdd.Text == Getstring("keywordText.Cancel"))
             {
                 DbHelperOleDb db = new DbHelperOleDb(0);
                 modelPG.ProjectGroupNumber = txtGroupItemName.Text.Trim();
@@ -1236,17 +1240,17 @@ namespace BioBaseCLIA.InfoSetting
                 {
                     if (modelPG.ProjectGroupNumber == a.ToString())
                     {
-                        frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("GroupReName"));
+                        frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.GroupReName"));
                         return;
                     }
                 }
                 if (bllPG.Add(modelPG))
                 {
                     SetGroupItem();
-                    btnAdd.Text = Getstring("Add");
+                    btnAdd.Text = Getstring("keywordText.Add");
                     txtGroupItemName.Enabled = flpItemName.Enabled = btnSave.Enabled = false;
                     btnAdd.Enabled = btnModify.Enabled = btnDelete.Enabled = true;
-                    frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("GroupAddSucess"));
+                    frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.GroupAddSucess"));
                 }
                 if (lbGroupItem.Items.Count != 0)//y add 20180420
                 {
@@ -1254,13 +1258,13 @@ namespace BioBaseCLIA.InfoSetting
                     btnDelete.Enabled = true;
                 }
             }
-            else if (btnModify.Text == Getstring("Cancel"))
+            else if (btnModify.Text == Getstring("keywordText.Cancel"))
             {
                 DbHelperOleDb db = new DbHelperOleDb(0);
                 int gpNo = lbGroupItem.SelectedIndex;
                 if (gpNo == -1)// add y 20180510
                 {
-                    frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("GroupSModify"));// add y 20180510
+                    frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.GroupSModify"));// add y 20180510
                     return;// add y 20180510
                 }
                 modelPG.ProjectGroupID = int.Parse(dtGroupItem.Rows[gpNo]["ProjectGroupID"].ToString());
@@ -1273,17 +1277,17 @@ namespace BioBaseCLIA.InfoSetting
                     if (lbGroupItem.Items.IndexOf(lbGroupItem.SelectedItem) == i) continue;
                     if (modelPG.ProjectGroupNumber.ToString() == lbGroupItem.Items[i].ToString())
                     {
-                        frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("GroupReName"));
+                        frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.GroupReName"));
                         return;
                     }
                 }
                 if (bllPG.Update(modelPG))
                 {
                     SetGroupItem();
-                    btnModify.Text = Getstring("Modify");
+                    btnModify.Text = Getstring("keywordText.Modify");
                     txtGroupItemName.Enabled = flpItemName.Enabled = btnSave.Enabled = false;
                     btnAdd.Enabled = btnModify.Enabled = btnDelete.Enabled = true;
-                    frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("GroupModifySucess"));
+                    frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.GroupModifySucess"));
                 }
             }
         }
@@ -1377,8 +1381,8 @@ namespace BioBaseCLIA.InfoSetting
             if (HospitalName != "")
                 txtHospitalName.Text = HospitalName;
             else
-                txtHospitalName.Text = Getstring("HospitalName");
-            txtHospitalName.Text =Getstring("HospitalName");
+                txtHospitalName.Text = Getstring("keywordText.HospitalName");
+            txtHospitalName.Text =Getstring("keywordText.HospitalName");
             InitprinterComboBox();
             cmbPrinter.SelectedItem = OperateIniFile.ReadInIPara("PrintSet", "defaultPrinter");
             cmbFormat.SelectedItem = OperateIniFile.ReadInIPara("PrintSet", "PageSize");
@@ -1422,21 +1426,21 @@ namespace BioBaseCLIA.InfoSetting
             //2018-11-02 zlx add
             if (cmbPrinter.SelectedItem == null)
             {
-                frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("PrinterSelect"));
+                frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.PrinterSelect"));
                 txtDepName.Focus();
                 return;
             }
 
             if (!Inspect.NameOnlycharacter3(txtHospitalName.Text.Trim()))
             {
-                frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("ReportNameSet"));
+                frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.ReportNameSet"));
                 txtDepName.Focus();
                 return;
             }
 
             if (cmbPrintMode.SelectedItem == null)//lyq
             {
-                frmMsgShow.MessageShow(Getstring("BasicSetHead"), Getstring("PrintMode"));
+                frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), Getstring("keywordText.PrintMode"));
                 txtDepName.Focus();
                 return;
             }
@@ -1449,7 +1453,7 @@ namespace BioBaseCLIA.InfoSetting
             {
                 if (!Externs.SetDefaultPrinter(cmbPrinter.SelectedItem.ToString())) //设置默认打印机
                 {
-                    frmMsgShow.MessageShow(Getstring("BasicSetHead"), cmbPrinter.SelectedItem.ToString() + Getstring("PrinterSetFail"));
+                    frmMsgShow.MessageShow(Getstring("keywordText.BasicSetHead"), cmbPrinter.SelectedItem.ToString() + Getstring("keywordText.PrinterSetFail"));
                 }
             }
             if (cmbFormat.SelectedItem != null)
@@ -1459,7 +1463,7 @@ namespace BioBaseCLIA.InfoSetting
             OperateIniFile.WriteIniPara("PrintSet", "AutoPrint", rdbOpen.Checked.ToString());
             OperateIniFile.WriteIniPara("PrintSet", "Margin", nudUP.Value.ToString() + "|" + nudDown.Value.ToString() + "|"
                 + nudLeft.Value.ToString() + "|" + nudRight.Value.ToString());
-            frmMsgShow.MessageShow(Getstring("PrintHead"), Getstring("PrintParaSetSucess"));
+            frmMsgShow.MessageShow(Getstring("keywordText.PrintHead"), Getstring("keywordText.PrintParaSetSucess"));
         }
 
 
@@ -1542,7 +1546,7 @@ namespace BioBaseCLIA.InfoSetting
             if (dgvItemList.SelectedRows.Count == 0) 
             {
                 frmMessageShow frmMsgShow = new frmMessageShow();
-                frmMsgShow.MessageShow(Getstring("ProjectHead"), Getstring("DepartSDeleteInfo"));
+                frmMsgShow.MessageShow(Getstring("keywordText.ProjectHead"), Getstring("keywordText.DepartSDeleteInfo"));
                 //MessageBox.Show(Getstring("DepartSDeleteInfo"));
                 return;
             }
@@ -1550,9 +1554,9 @@ namespace BioBaseCLIA.InfoSetting
             if (bllProject.Delete_(dgvItemList.SelectedRows[0].Cells[1].Value.ToString()))
             {
                 frmMessageShow frmMsgShow = new frmMessageShow();
-                frmMsgShow.MessageShow(Getstring("ProjectHead"), Getstring("ProjectDeleteSucess"));
-            } 
-            //MessageBox.Show(Getstring("ProjectDeleteSucess"));
+                frmMsgShow.MessageShow(Getstring("keywordText.ProjectHead"), Getstring("keywordText.ProjectDeleteSucess"));
+            }
+            //MessageBox.Show(Getstring("keywordText.ProjectDeleteSucess"));
             dgvItemList.DataSource = GetItemShortName(bllProject.GetAllList().Tables[0]);
             dgvItemList.Columns[0].Width = 40;
         }

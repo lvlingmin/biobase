@@ -825,7 +825,7 @@ namespace BioBaseCLIA.ScalingQC
         {
             if (txtMean.Text == "" || textSDc.Text == "" || cmbItem.SelectedItem.ToString() == "" || cmbQCBatch.SelectedItem.ToString() == "" || cmbQClevel.SelectedItem.ToString() == "")
             {
-                frmMsgShow.MessageShow(getString("reminder"), getString("PrintError"));
+                frmMsgShow.MessageShow(getString("keywordText.reminder"), getString("keywordText.PrintError"));
                 return;
             }
             if (dgvQCValue.Rows.Count < 1)
@@ -903,14 +903,14 @@ namespace BioBaseCLIA.ScalingQC
         {
             if (dgvQCValue.Rows.Count < 1 && fbtnDelete.Text == getString("keywordText.Delete"))
             {
-                frmMsgShow.MessageShow(getString("reminder"), getString("DeleteError"));
+                frmMsgShow.MessageShow(getString("keywordText.reminder"), getString("keywordText.DeleteError"));
                 return;
             }
             else
             {
                 if (txtQCNewValue.Text == "")
                 {
-                    frmMsgShow.MessageShow(getString("reminder"), getString("lbQCValueNew") + getString("keywordText.null"));
+                    frmMsgShow.MessageShow(getString("keywordText.reminder"), getString("keywordText.lbQCValueNew") + getString("keywordText.null"));
                     return;
                 }
             }

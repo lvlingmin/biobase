@@ -1031,7 +1031,7 @@ namespace BioBaseCLIA.Run
                         if (!CheckFormIsOpen("frmMessageShow"))
                         {
                             frmMessageShow fmsg = new frmMessageShow();
-                            fmsg.MessageShow(getString("projectUpdate"), getString("keywordText.ScanByStandard"));
+                            fmsg.MessageShow(getString("keywordText.projectUpdate"), getString("keywordText.ScanByStandard"));
                         }
                         //Console.WriteLine("请按标准扫描本公司条码");
                         break;

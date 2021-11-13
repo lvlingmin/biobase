@@ -494,7 +494,7 @@ namespace BioBaseCLIA.DataQuery
             modelSb.Status = "卸载"/*Getstring("uninstall")*/;
             if (bllsb.Update(modelSb))
             {
-                frmMsgShow.MessageShow(Getstring("MessageHead1"), Getstring("UnstallSubSucess"));
+                frmMsgShow.MessageShow(Getstring("keywordText.MessageHead"), Getstring("keywordText.UnstallSubSucess"));
                 OperateIniFile.WriteIniData("Substrate" + CurBottle.ToString(), "BarCode", "", Application.StartupPath + "//SubstrateTube.ini");
                 OperateIniFile.WriteIniData("Substrate" + CurBottle.ToString(), "TestCount", "", Application.StartupPath + "//SubstrateTube.ini");
                 OperateIniFile.WriteIniData("Substrate" + CurBottle.ToString(), "LeftCount", "", Application.StartupPath + "//SubstrateTube.ini");
