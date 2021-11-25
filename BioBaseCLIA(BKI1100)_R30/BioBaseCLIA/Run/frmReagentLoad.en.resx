@@ -1176,7 +1176,7 @@
     <value>No kit was detected！</value>
   </data>
   <data name="keywordText.OneKeyUnbundling" xml:space="preserve">
-    <value>One Key Solution</value>
+    <value>One-click Unbinding </value>
   </data>
   <data name="keywordText.PealseFirstUnloadSampleAbout" xml:space="preserve">
     <value>This project needs to be tested. Please uninstall the relevant sample information first！</value>
