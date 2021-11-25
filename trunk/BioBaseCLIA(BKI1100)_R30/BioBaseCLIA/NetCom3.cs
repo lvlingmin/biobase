@@ -301,7 +301,7 @@ namespace BioBaseCLIA
                 frmMS.Dispose();
                 return false;
             }
-            if (!CheckPort(myip, "5000"))
+            if (!CheckPort(myip, port.ToString()))
             {
                 tryNum++;
                 if (tryNum < 3)
