@@ -139,7 +139,8 @@ namespace BioBaseCLIA.User
                 KeepPwd = "0";
             OperateIniFile.WriteIniPara("UsedName", "KeepPwd", KeepPwd);
             paProcess.Visible = true;
-            new Thread(new ThreadStart(LoadProgram)).Start();
+            new Thread(new ThreadStart(LoadProgram)) 
+            { CurrentCulture = Language.AppCultureInfo, CurrentUICulture = Language.AppCultureInfo }.Start();
             NetCom3.Instance.ReceiveHandel += new Action<string>(Darkroom);    //暗室自检
             btnLogin.Enabled = false;
             btnCancel.Enabled = false;
