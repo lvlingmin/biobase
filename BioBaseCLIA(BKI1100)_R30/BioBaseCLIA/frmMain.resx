@@ -6261,7 +6261,7 @@
   <data name="keywordText.Wastetubefull" xml:space="preserve">
     <value>废管盒已满</value>
   </data>
-  <data name="Wastepipenormal" xml:space="preserve">
+  <data name="keywordText.Wastepipenormal" xml:space="preserve">
     <value>废管盒正常</value>
   </data>
 </root>
