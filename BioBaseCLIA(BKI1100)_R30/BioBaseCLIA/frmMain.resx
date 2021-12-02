@@ -6216,7 +6216,7 @@
   <data name="keywordText.Substratetemperature" xml:space="preserve">
     <value>底物环境温度</value>
   </data>
-  <data name="keywordText.tandardtemperature" xml:space="preserve">
+  <data name="keywordText.Standardtemperature" xml:space="preserve">
     <value>温度已达到运行标准</value>
   </data>
   <data name="keywordText.temperatureButton.ToolTip" xml:space="preserve">
