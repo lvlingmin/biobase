@@ -1519,4 +1519,10 @@
   <data name="keywordText.UnstallSubSucess" xml:space="preserve">
     <value>底物卸载成功</value>
   </data>
+  <data name="keywordText.IsRunTest" xml:space="preserve">
+    <value>正在检测实验,禁止更换底物</value>
+  </data>
+  <data name="keywordText.SubChangeWarn" xml:space="preserve">
+    <value>底物更换警告</value>
+  </data>
 </root>

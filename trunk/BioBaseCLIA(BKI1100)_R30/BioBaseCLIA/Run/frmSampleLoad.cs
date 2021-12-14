@@ -42,6 +42,10 @@ namespace BioBaseCLIA.Run
         List<string> spacialProList = new List<string>();//两个试剂盒分装的特殊项目
         List<string> TwoReagentProList = new List<string>();//三个或者四个试剂项目
         bool isClick = false;
+        /// <summary>
+        /// 可装载样本底物限制数量
+        /// </summary>
+        public static int SubstrateLeft = 0;
         public static DataTable DtItemInfoNoStat
         {
             get { return dtItemInfoNoStat; }
@@ -444,6 +448,12 @@ namespace BioBaseCLIA.Run
         {
             if (isClick == true)
             {
+                return;
+            }
+            if (frmWorkList.RunFlag == (int)RunFlagStart.IsRuning)
+            {
+                frmMessageShow frmMessage = new frmMessageShow();
+                frmMessage.MessageShow(getString("keywordText.SampleLoad"), getString("keywordText.AppentSample"));
                 return;
             }
             isClick = true;

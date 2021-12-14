@@ -2220,4 +2220,13 @@
   <data name="keywordText.WarningOprate1" xml:space="preserve">
     <value>禁止对非血清样本执行此操作</value>
   </data>
+  <data name="keywordText.bReagentDiuLess" xml:space="preserve">
+    <value>供应品不足，本次操作无效！</value>
+  </data>
+  <data name="keywordText.Reading" xml:space="preserve">
+    <value>正在读数</value>
+  </data>
+  <data name="keywordText.SubLess" xml:space="preserve">
+    <value>底物不足，本次操作失败</value>
+  </data>
 </root>
