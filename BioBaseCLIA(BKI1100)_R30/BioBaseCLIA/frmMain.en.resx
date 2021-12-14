@@ -5270,7 +5270,7 @@
     <value>Are you sure to shut down the running system!</value>
   </data>
   <data name="keywordText.FastSpeeds" xml:space="preserve">
-    <value>The speed of refrigeration pump is too fast (lack of liquid)!</value>
+    <value>Insufficient refrigerant, please add!</value>
   </data>
   <data name="keywordText.HighCoolPlate1" xml:space="preserve">
     <value>The current of cooling plate I is too high!</value>
