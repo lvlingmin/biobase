@@ -888,7 +888,7 @@
     <value>时间</value>
   </data>
   <data name="keywordText.Throwthe" xml:space="preserve">
-    <value>正在从清洗盘扔第</value>
+    <value>正在从清洗盘扔第{0}个反应管</value>
   </data>
   <data name="cmbSelectAct.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 23</value>
@@ -3740,10 +3740,10 @@
   <data name="keywordText.TemporaryDiskStuckTube" xml:space="preserve">
     <value>暂存盘卡管</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.Language" type="System.Globalization.CultureInfo, mscorlib">
     <value>en</value>
-  </metadata>
+  </data>
 </root>

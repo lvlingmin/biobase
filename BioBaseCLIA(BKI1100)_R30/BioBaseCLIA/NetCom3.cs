@@ -347,6 +347,7 @@ namespace BioBaseCLIA
             {
                 writeLog(e);
                 isConnect = false;
+                client.Dispose();
                 return;
             }
         }
@@ -1866,6 +1867,7 @@ namespace BioBaseCLIA
                 LogFile.Instance.Write(DateTime.Now + "connectCatchENd");
                 writeLog(e);
                 isConnect = false;
+                client.Dispose();
                 return;
             }
         }

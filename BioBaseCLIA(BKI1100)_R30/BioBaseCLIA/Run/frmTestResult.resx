@@ -2229,4 +2229,7 @@
   <data name="keywordText.SubLess" xml:space="preserve">
     <value>底物不足，本次操作失败</value>
   </data>
+  <data name="keywordText.NoAddSample" xml:space="preserve">
+    <value>实验未开始加样本，此次操作无效！</value>
+  </data>
 </root>

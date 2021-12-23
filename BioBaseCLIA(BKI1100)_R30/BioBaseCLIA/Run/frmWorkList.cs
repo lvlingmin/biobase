@@ -1201,7 +1201,7 @@ namespace BioBaseCLIA.Run
                 lisTestSchedule.Sort(new SortRun());
             }
             #endregion
-            if (EmergencyFlag || addOrdinaryFlag || RetestFlag)
+            if ((EmergencyFlag || addOrdinaryFlag || RetestFlag) && (RunFlag == (int)RunFlagStart.IsRuning))
             {
                 List<TestSchedule> tss = lisTestSchedule.FindAll(tx => tx.StartTime <= sumTime);
                 _GaDoingOne = tss[tss.Count - 1];
@@ -4273,7 +4273,7 @@ namespace BioBaseCLIA.Run
                 for (int i = 0; i < WashTrayCleanTimes; i++)
                 {
                     if (RunFlag != (int)RunFlagStart.IsRuning &&
-                        RunFlag != (int)RunFlagStart.IsStoping || NetCom3.Instance.stopsendFlag) break;
+                        RunFlag != (int)RunFlagStart.IsStoping || NetCom3.Instance.stopsendFlag) return false;
                     if (!CleanTrayWash(1))
                         return false;
                     if (!CleanTrayMovePace(-1))
@@ -5476,12 +5476,12 @@ namespace BioBaseCLIA.Run
 
                             StopWatchWithUpdateStatus();
 
-                            RunFlag = (int)RunFlagStart.Stoped;
+                           
                             if (frmMain.pauseFlag)
                                 frmMain.pauseFlag = false;
                             RunLightFlag = false;
                             buttonEnableRun(false);
-                            fbtnReturn.Enabled = true;//完成全部实验才允许返回按钮可用 
+                           
 
                             if (StopList.Count > 0)
                             {
@@ -5524,7 +5524,8 @@ namespace BioBaseCLIA.Run
                                 MessageBox.Show(getString("keywordText.Testcomplete"), getString("keywordText.Detectionstatus"), MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);//2018-07-13 zlx mod
                                 //}));
                             }
-
+                            RunFlag = (int)RunFlagStart.Stoped;
+                            fbtnReturn.Enabled = true;//完成全部实验才允许返回按钮可用 
                             break;
                         }
                         Thread.Sleep(50);
@@ -11480,7 +11481,7 @@ namespace BioBaseCLIA.Run
             //    NetCom3.Delay(10);//如果正在加样步骤，暂时先不会弹出样本装载界面
             //}
 
-            if (AddingSampleFlag)
+            if (AddingSampleFlag || RetestFlag)
             {
                 MessageBox.Show(getString("keywordText.StopAddingS"), getString("keywordText.tip"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
