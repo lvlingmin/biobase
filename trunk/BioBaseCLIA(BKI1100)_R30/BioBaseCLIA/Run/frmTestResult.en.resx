@@ -1378,4 +1378,7 @@
   <data name="keywordText.SubLess" xml:space="preserve">
     <value>Insufficient substrate, this operation failed</value>
   </data>
+  <data name="keywordText.NoAddSample" xml:space="preserve">
+    <value>The experiment has not started to add samples, this operation is invalid!</value>
+  </data>
 </root>

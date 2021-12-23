@@ -1741,7 +1741,7 @@
     <value>When the piper throws the waste pipe in the cleaning plate, the experiment will stop!</value>
   </data>
   <data name="keywordText.Throwthe" xml:space="preserve">
-    <value>Throwing the second from the cleaning dish</value>
+    <value>Throwing the {0} reaction tube from the cleaning tray</value>
   </data>
   <data name="keywordText.time" xml:space="preserve">
     <value>Time</value>

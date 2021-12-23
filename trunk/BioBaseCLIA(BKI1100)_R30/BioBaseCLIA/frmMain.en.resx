@@ -188,9 +188,6 @@
   <data name="fbtnScalQc.Text" xml:space="preserve">
     <value>Calibration/QC</value>
   </data>
-  <data name="fbtnScalQc.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="fbtnSet.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAQAAAAA6CAYAAABf5IcZAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
@@ -260,9 +257,6 @@
   </data>
   <data name="fbtnSet.Text" xml:space="preserve">
     <value>Setting</value>
-  </data>
-  <data name="fbtnSet.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="fbtnDataQuery.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -334,9 +328,6 @@
   <data name="fbtnDataQuery.Text" xml:space="preserve">
     <value>Historical Data</value>
   </data>
-  <data name="fbtnDataQuery.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="fbtnMaintenance.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAQAAAAA6CAYAAABf5IcZAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
@@ -407,9 +398,6 @@
   <data name="fbtnMaintenance.Text" xml:space="preserve">
     <value>System Settings</value>
   </data>
-  <data name="fbtnMaintenance.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="fbtnTest.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAQAAAAA6CAYAAABf5IcZAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
@@ -479,15 +467,6 @@
   </data>
   <data name="fbtnTest.Text" xml:space="preserve">
     <value>Sample Testing</value>
-  </data>
-  <data name="fbtnTest.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="pnlSidebar.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="pnlPublic.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="temperatureButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -683,7 +662,7 @@
 </value>
   </data>
   <data name="temperatureButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 19</value>
+    <value>181, 19</value>
   </data>
   <data name="temperatureButton.ToolTip" xml:space="preserve">
     <value>Temperature query</value>
@@ -1044,9 +1023,6 @@
         Iu9VpiaCoJCQWNi4aQesXBVPU9I/SVu3/QRjx05FAITMUP8dAFzhf1W2qhwPqaI2AAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="dbtnSound.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="btnVersion.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAQAAAAA6CAYAAABf5IcZAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
@@ -1116,12 +1092,6 @@
   </data>
   <data name="btnVersion.Text" xml:space="preserve">
     <value>About</value>
-  </data>
-  <data name="btnVersion.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label2.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="dbtnConnect.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1270,9 +1240,6 @@
         RUul8v992UzRAOLRkAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="dbtnConnect.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="btnHelp.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAQAAAAA6CAYAAABf5IcZAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
@@ -1343,9 +1310,6 @@
   <data name="btnHelp.Text" xml:space="preserve">
     <value>Help</value>
   </data>
-  <data name="btnHelp.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="btnExit.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAQAAAAA6CAYAAABf5IcZAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
@@ -1415,12 +1379,6 @@
   </data>
   <data name="btnExit.Text" xml:space="preserve">
     <value>Exit</value>
-  </data>
-  <data name="btnExit.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="pnlbarDown.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="pnlbarUP.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1839,9 +1797,6 @@
         QmCC
 </value>
   </data>
-  <data name="btnWasteRack.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="logo.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAPwAAAAfCAYAAADDe6BLAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
@@ -1896,9 +1851,6 @@
         ZTXPXYgJP2mMFbtf2gHi9prjoPLNF39ufwJ+8ZHaKordDxid9jsg+k9zH9TDls/o45Pgf0SYdJr4T/4m
         JKGLZB9ArCeH2Iwr/bXp6IS/g+Hztzf/BWONHokoIFqBAAAAAElFTkSuQmCC
 </value>
-  </data>
-  <data name="logo.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="defineButton1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2110,9 +2062,6 @@
         Hp6mTuM6dPVmmPi6metvdUMgrAj+wLZaaKBO4EkdDri7M+JrsyE4VgWeSmagDYZwDiacqy9Ot/U36d+0
         IXiags1jA7VEl66Ot+985/8BUpPL+WMd4LAAAAAASUVORK5CYII=
 </value>
-  </data>
-  <data name="defineButton1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="defineButton3.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2335,9 +2284,6 @@
         wMuFfF8Szir7BjroAMzNL+e23M082Tbyg/8P8ALOLBUAqPgAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="defineButton3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="defineButton2.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
@@ -2553,9 +2499,6 @@
         TDgn1ve3vvtv/yy3H/zg/wOYx25b8u7zogAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="defineButton2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="dbtnLog.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
@@ -2743,9 +2686,6 @@
         IdVWIRoV0sVGGHPQpzJS7COGVFuFaIwwdhCNEcYOojHC2EE0Rhg7iMYIYwVd+3+dc/J87WZA/wAAAABJ
         RU5ErkJggg==
 </value>
-  </data>
-  <data name="dbtnLog.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="dbtnRack.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2947,9 +2887,6 @@
         l3Axs43rdcHlVsIaJdzNahn1oG9luLHXGlxuJazRQf2BNTqoP7BGB/UH1uig/sAaHdQXhOH/ATZdQA3V
         7Y1jAAAAAElFTkSuQmCC
 </value>
-  </data>
-  <data name="dbtnRack.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="dbtnRegent.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -3166,9 +3103,6 @@
         +aA0Wmk+KI1Wmg9Ko5Xmg9JopblAhv8HNahytSLzDJMAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="dbtnRegent.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="dbtnSubstract.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
@@ -3371,9 +3305,6 @@
         etykGaetgg0quJuVA21HtB1TcINQYJBGaBOiB5fIuwnXpj1c37VwY1dwObPP623BaatggwruZhWMdtD3
         M9zYKwxOWwUbdFB9YIMOqg9s0EH1gQ06qD6wQQfVBWH6f8PAg/k2CUlqAAAAAElFTkSuQmCC
 </value>
-  </data>
-  <data name="dbtnSubstract.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="dbtnWaste.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -3615,9 +3546,6 @@
         K8spOygryyk7KCvLKTsoK8spOygryykrkO7/AHjefPVd4KrjAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="dbtnWaste.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="dbtnWash.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
@@ -3837,9 +3765,6 @@
         rkJggg==
 </value>
   </data>
-  <data name="dbtnWash.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="dbtnBuffer.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
@@ -4052,12 +3977,6 @@
         67uCi5l1XC8ILrcK1qjgLlbLaDt9OcP1vdbgcqtgjXYaD6zRTuOBNdppPLBGO40H1minsSAM/w8QLTXh
         W87XagAAAABJRU5ErkJggg==
 </value>
-  </data>
-  <data name="dbtnBuffer.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="pnlbarUP.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -5190,9 +5109,6 @@
         ////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////8=
 </value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="keywordText.Abnormalexit" xml:space="preserve">
     <value>Abnormal exit software detected, please empty the incubator disk!</value>

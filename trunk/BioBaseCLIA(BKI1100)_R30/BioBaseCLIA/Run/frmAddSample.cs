@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using Maticsoft.DBUtility;
-using System.Threading;
-using System.Text.RegularExpressions;
+﻿using BioBaseCLIA.InfoSetting;
 using Common;
-using BioBaseCLIA.InfoSetting;
-using System.IO;
-using FastReport;
+using Maticsoft.DBUtility;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
 using System.Resources;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace BioBaseCLIA.Run
 {
@@ -2145,21 +2140,22 @@ namespace BioBaseCLIA.Run
                 }
                 else
                 {
-                    if (Convert.ToDateTime(tbScalingResult.Rows[0]["ActiveDate"]) < DateTime.Now.AddDays(-ExpiryDate))
-                    {
-                        frmMsg.MessageShow(getString("keywordText.SampleLoad"), string.Format(getString("keywordText.NoCalInfo"), dr["Batch"], itemname));
-                        return false;
-                    }
-                    else
-                    {
-                        ScalingInfo scalingInfo = new ScalingInfo();
-                        scalingInfo.ItemName = itemname;
-                        scalingInfo.RegenBatch = dr["Batch"].ToString();
-                        scalingInfo.Num = "0";
-                        scalingInfo.TestConc = dtItemInfo.Rows[0][1].ToString();
-                        scalingInfo.testType = int.Parse(dtItemInfo.Rows[0][0].ToString());
-                        frmWorkList.lisScalingInfo.Add(scalingInfo);
-                    }
+                    //if (Convert.ToDateTime(tbScalingResult.Rows[0]["ActiveDate"]) < DateTime.Now.AddDays(-ExpiryDate))
+                    //{
+                    //    frmMsg.MessageShow(getString("keywordText.SampleLoad"), string.Format(getString("keywordText.NoCalInfo"), dr["Batch"], itemname));
+                    //    return false;
+                    //}
+                    //else
+                    //{
+                        
+                    //}
+                    ScalingInfo scalingInfo = new ScalingInfo();
+                    scalingInfo.ItemName = itemname;
+                    scalingInfo.RegenBatch = dr["Batch"].ToString();
+                    scalingInfo.Num = "0";
+                    scalingInfo.TestConc = dtItemInfo.Rows[0][1].ToString();
+                    scalingInfo.testType = int.Parse(dtItemInfo.Rows[0][0].ToString());
+                    frmWorkList.lisScalingInfo.Add(scalingInfo);
                 }
             }
             return true;

@@ -8587,6 +8587,11 @@ namespace BioBaseCLIA.SysMaintenance
                 {
                     goto enzymaticActivityTestEnd;
                 }
+                NetCom3.Instance.Send(NetCom3.Cover("EB 90 F1 02"), 5);
+                if (!NetCom3.Instance.SingleQuery())
+                {
+                    goto enzymaticActivityTestEnd;
+                }
                 for (int i = 0; i < repeat; i++)
                 {
                     NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 02 01 " + int.Parse(samplePos).ToString("x2") + " " + reactTrayStartPos.ToString("x2")
@@ -8618,7 +8623,11 @@ namespace BioBaseCLIA.SysMaintenance
                 {
                     goto enzymaticActivityTestEnd;
                 }
-
+                NetCom3.Instance.Send(NetCom3.Cover("EB 90 F1 02"), 5);
+                if (!NetCom3.Instance.SingleQuery())
+                {
+                    goto enzymaticActivityTestEnd;
+                }
                 BeginInvoke(new Action(() =>
                 {
                     textBox3.AppendText(DateTime.Now.ToString("HH-mm-ss") + ": 测试开始。" + Environment.NewLine);
@@ -8632,10 +8641,22 @@ namespace BioBaseCLIA.SysMaintenance
                     NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 02 " + reactTrayStartPos.ToString("x2")), 1);
                     if (!NetCom3.Instance.MoveQuery())
                     {
-                        if (errorcount < 2 && (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked))
+                        if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked)
                         {
                             errorcount++;
-                            goto again;
+                            if (errorcount < 2)
+                            {
+                                goto again;
+                            }
+                            else
+                            {
+                                Invoke(new Action(() =>
+                                {
+                                    textBox3.AppendText(DateTime.Now.ToString("HH-mm-ss") + ": 从温育盘向清洗盘移管取管异常。" + Environment.NewLine);
+                                }));
+                                goto enzymaticActivityTestEnd;
+                            }
+
                         }
                         else
                         {
@@ -8645,8 +8666,8 @@ namespace BioBaseCLIA.SysMaintenance
                             }));
                             goto enzymaticActivityTestEnd;
                         }
-
                     }
+
                     reactTrayStartPos++;
 
                     //清洗盘顺时针旋转一位
@@ -8787,10 +8808,21 @@ namespace BioBaseCLIA.SysMaintenance
                     NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 04 06"), 1);
                     if (!NetCom3.Instance.MoveQuery())
                     {
-                        if (errorcount < 2 && (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull))
+                        if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull)
                         {
                             errorcount++;
-                            goto again;
+                            if (errorcount < 2)
+                            {
+                                goto again;
+                            }
+                            else
+                            {
+                                BeginInvoke(new Action(() =>
+                                {
+                                    textBox3.AppendText(DateTime.Now.ToString("HH-mm-ss") + ":移管手从清洗盘向废管盒移管异常。" + Environment.NewLine);
+                                }));
+                                goto enzymaticActivityTestEnd;
+                            }
                         }
                         else
                         {
@@ -8820,6 +8852,11 @@ namespace BioBaseCLIA.SysMaintenance
                 {
                     goto enzymaticActivityTestEnd;
                 }
+                NetCom3.Instance.Send(NetCom3.Cover("EB 90 F1 02"), 5);
+                if (!NetCom3.Instance.SingleQuery())
+                {
+                    goto enzymaticActivityTestEnd;
+                }
                 BeginInvoke(new Action(() =>
                 {
                     textBox3.AppendText(DateTime.Now.ToString("HH-mm-ss") + ": 测试开始。" + Environment.NewLine);
@@ -8843,10 +8880,16 @@ namespace BioBaseCLIA.SysMaintenance
                         NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 05 " + (i + 1).ToString("X2")), 1);
                         if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
                         {
-                            if (errorcount < 2 && (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked))
+                            if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked)
                             {
                                 errorcount++;
-                                goto again;
+                                if (errorcount < 2)
+                                    goto again;
+                                else
+                                {
+                                    MessageBox.Show("从温育盘向废管盒取管异常，请重试");
+                                    goto enzymaticActivityTestEnd;
+                                }
                             }
                             else
                             {
@@ -8873,7 +8916,7 @@ namespace BioBaseCLIA.SysMaintenance
                                 goto againInjection;
                             else
                             {
-                                MessageBox.Show("从暂存盘向温育盘取管异常，请重试");
+                                MessageBox.Show("从暂存盘向温育盘取管异常，终止本次操作");
                                 goto enzymaticActivityTestEnd;
                             }
                         }
@@ -8883,12 +8926,16 @@ namespace BioBaseCLIA.SysMaintenance
                             if (second < 2)
                             {
                                 NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 05 " + (i + 1).ToString("X2")), 1);
-                                if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag!= (int)ErrorState.IsNull)
+                                if (!NetCom3.Instance.MoveQuery())
                                 {
-                                    MessageBox.Show("从温育盘向废管盒取管异常，请重试");
-                                    goto enzymaticActivityTestEnd;
+                                    if (NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
+                                    {
+                                        MessageBox.Show("从温育盘向废管盒取管异常，请重试");
+                                        goto enzymaticActivityTestEnd;
+                                    }
+                                    else
+                                        goto againInjection;
                                 }
-                                goto againInjection;
                             }
                             else
                             {
@@ -8929,10 +8976,21 @@ namespace BioBaseCLIA.SysMaintenance
                         NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 02 " + reactTrayStartPos.ToString("x2")), 1);  //夹管
                         if (!NetCom3.Instance.MoveQuery())
                         {
-                            if (errorcount < 2 && (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull))
+                            if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull)
                             {
                                 errorcount++;
-                                goto again;
+                                if (errorcount < 2)
+                                {
+                                    goto again;
+                                }
+                                else
+                                {
+                                    BeginInvoke(new Action(() =>
+                                    {
+                                        textBox3.AppendText(DateTime.Now.ToString("HH-mm-ss") + ": 移管手从温育盘向清洗盘移管异常。" + Environment.NewLine);
+                                    }));
+                                    goto enzymaticActivityTestEnd;
+                                }
                             }
                             else
                             {
@@ -9052,10 +9110,20 @@ namespace BioBaseCLIA.SysMaintenance
                         NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 04 06"), 1);//取放管处扔管
                         if (!NetCom3.Instance.MoveQuery())
                         {
-                            if (errorcount < 2 && (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked))
+                            if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked)
                             {
                                 errorcount++;
-                                goto again;
+                                if (errorcount < 2)
+                                    goto again;
+                                else
+                                {
+                                    BeginInvoke(new Action(() =>
+                                    {
+                                        textBox3.AppendText(DateTime.Now.ToString("HH-mm-ss") + ":移管手从清洗盘向废管盒移管异常。" + Environment.NewLine);
+                                    }));
+                                    goto enzymaticActivityTestEnd;
+                                }
+
                             }
                             else
                             {
@@ -9277,6 +9345,11 @@ namespace BioBaseCLIA.SysMaintenance
                 {
                     goto enzymaticActivityTestEnd;
                 }
+                NetCom3.Instance.Send(NetCom3.Cover("EB 90 F1 02"), 5);
+                if (!NetCom3.Instance.SingleQuery())
+                {
+                    goto enzymaticActivityTestEnd;
+                }
                 BeginInvoke(new Action(() =>
                 {
                     textBox3.AppendText(DateTime.Now.ToString("HH-mm-ss") + ": 测试开始。" + Environment.NewLine);
@@ -9292,10 +9365,17 @@ namespace BioBaseCLIA.SysMaintenance
                     NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 05 01"), 1);
                     if (!NetCom3.Instance.MoveQuery())
                     {
-                        if (errorcount < 2 && (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked))
+                        if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked)
                         {
                             errorcount++;
-                            goto again;
+                            if (errorcount < 2)
+                                goto again;
+                            else
+                            {
+                                MessageBox.Show("从温育盘向废管盒取管异常，请重试");
+                                goto enzymaticActivityTestEnd;
+                            }
+
                         }
                         else
                         {
@@ -9314,28 +9394,42 @@ namespace BioBaseCLIA.SysMaintenance
                     int num = 1; //第samp个样本杯，第num个管在读数
                     for (int i = 0; i < repeat2; i++)
                     {
-                    //夹新管到温育盘1号位
+                        //夹新管到温育盘1号位
+                        int errorcount = 0;
                     addTubeAgain:
                         NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 01 01"), 1);
                         if (!NetCom3.Instance.MoveQuery())
                         {
                             if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked)
                             {
-                                goto addTubeAgain;
+                                errorcount++;
+                                if (errorcount < 2)
+                                    goto addTubeAgain;
+                                else
+                                {
+                                    MessageBox.Show("从暂存盘向温育盘取管异常，终止本次操作");
+                                    goto enzymaticActivityTestEnd;
+                                }
                             }
                             else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.putKnocked)
                             {
                                 NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 05 01"), 1);
-                                if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
+                                if (!NetCom3.Instance.MoveQuery())
                                 {
-                                    MessageBox.Show("从温育盘向废管盒取管异常，请重试");
-                                    goto enzymaticActivityTestEnd;
+                                    if (NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
+                                    {
+                                        MessageBox.Show("从温育盘向废管盒取管异常，终止本次操作");
+                                        goto enzymaticActivityTestEnd;
+                                    }
+                                    else
+                                    {
+                                        goto addTubeAgain;
+                                    }
                                 }
-                                goto addTubeAgain;
                             }
                             else
                             {
-                                MessageBox.Show("从暂存盘向温育盘取管异常，请重试");
+                                MessageBox.Show("从暂存盘向温育盘取管异常，终止本次操作");
                                 goto enzymaticActivityTestEnd;
                             }
                         }
@@ -9354,15 +9448,22 @@ namespace BioBaseCLIA.SysMaintenance
                             goto enzymaticActivityTestEnd;
                         }
                         //移管到清洗盘
-                        int errorcount = 0;
+                        errorcount = 0;
                     again:
                         NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 02 01"), 1);
                         if (!NetCom3.Instance.MoveQuery())
                         {
-                            if (errorcount < 2 && (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull))
+                            if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull)
                             {
                                 errorcount++;
-                                goto again;
+                                if (errorcount < 2)
+                                    goto again;
+                                else
+                                {
+                                    MessageBox.Show("从温育怕向清洗盘移管异常，请重试");
+                                    goto enzymaticActivityTestEnd;
+                                }
+
                             }
                             else
                             {
@@ -9458,14 +9559,24 @@ namespace BioBaseCLIA.SysMaintenance
                         NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 04 06"), 1);
                         if (!NetCom3.Instance.MoveQuery())
                         {
-                            if (errorcount < 2 && (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull))
+                            if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull)
                             {
                                 errorcount++;
-                                goto again1;
+                                if (errorcount < 2)
+                                    goto again1;
+                                else
+                                {
+                                    MessageBox.Show("移管手从清洗盘向废管盒移管异常，请重试");
+                                    goto enzymaticActivityTestEnd;
+                                }
+
                             }
                             else
                             {
-                                MessageBox.Show("从清洗盘想废管盒移管异常，请重试");
+                                BeginInvoke(new Action(() =>
+                                {
+                                    textBox3.AppendText(DateTime.Now.ToString("HH-mm-ss") + ":移管手从清洗盘向废管盒移管异常。" + Environment.NewLine);
+                                }));
                                 goto enzymaticActivityTestEnd;
                             }
                         }
@@ -9475,8 +9586,14 @@ namespace BioBaseCLIA.SysMaintenance
             //清洗注液测试
             else if (testIndex == 4)
             {
-                DialogResult r = MessageBox.Show("请确认准备完毕，点击确定马上开始测试。", "仪器调试", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                int needPos = InjectionNum * 4;//一组需要4个孔位
+                DialogResult r = MessageBox.Show("确认反应盘1-"+ needPos + "号位置是否已添加反应管，点击确定马上开始测试。", "仪器调试", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Cancel)
+                {
+                    goto enzymaticActivityTestEnd;
+                }
+                NetCom3.Instance.Send(NetCom3.Cover("EB 90 F1 02"), 5);
+                if (!NetCom3.Instance.SingleQuery())
                 {
                     goto enzymaticActivityTestEnd;
                 }
@@ -9486,86 +9603,100 @@ namespace BioBaseCLIA.SysMaintenance
                     goto enzymaticActivityTestEnd;
                 }
 
-                int needPos = InjectionNum * 4;//一组需要4个孔位
+                
 
                 //检测1-needPos孔位是否有管，清掉
-                DataTable dtInTrayIni = OperateIniFile.ReadConfig(iniPathReactTrayInfo);
-                for (int i = 0; i < needPos; i++)
-                {
-                    if (int.Parse(dtInTrayIni.Rows[i][1].ToString()) >= 1)//有管
-                    {
-                        //有管扔掉
-                        int errorcount = 0;
-                    again:
-                        NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 05 " + (i + 1).ToString("X2")), 1);
-                        if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
-                        {
-                            if (errorcount < 2 && (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked))
-                            {
-                                errorcount++;
-                                goto again;
-                            }
-                            else
-                            {
-                                MessageBox.Show("从文预判向废管盒移管异常，请重试");
-                                goto enzymaticActivityTestEnd;
-                            }
-                        }
-                        //修改反应盘信息
-                        OperateIniFile.WriteIniData("ReactTrayInfo", "no" + (i + 1), "0", iniPathReactTrayInfo);
-                    }
-                }
-                //夹新管
-                for (int i = 0; i < needPos; i++)
-                {
-                    if (i % 4 == 3)
-                    {
-                        continue;
-                    }
-                    int second = 0;
-                againInjection:
-                    NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 01 " + (i + 1).ToString("X2")), 1);
-                    if (!NetCom3.Instance.MoveQuery())
-                    {
-                        if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked)
-                        {
-                            second++;
-                            if (second < 2)
-                                goto againInjection;
-                            else
-                            {
-                                MessageBox.Show("从暂存盘向温育盘移管异常，请重试");
-                                goto enzymaticActivityTestEnd;
-                            }
-                        }
-                        else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.putKnocked)
-                        {
-                            second++;
-                            if (second < 2)
-                            {
-                                NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 05 " + (i + 1).ToString("X2")), 1);
-                                if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
-                                {
-                                    MessageBox.Show("从温育盘向废管盒移管异常，请重试");
-                                    goto enzymaticActivityTestEnd;
-                                }
-                                goto againInjection;
-                            }
-                            else
-                            {
-                                MessageBox.Show("从暂存盘向温育盘移管放管异常，请重试");
-                                goto enzymaticActivityTestEnd;
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("从暂存盘向温育盘移管异常，请重试");
-                            goto enzymaticActivityTestEnd;
-                        }
-                    }
-                    //修改反应盘信息
-                    OperateIniFile.WriteIniData("ReactTrayInfo", "no" + (i + 1), "1", iniPathReactTrayInfo);
-                }
+                //DataTable dtInTrayIni = OperateIniFile.ReadConfig(iniPathReactTrayInfo);
+                //for (int i = 0; i < needPos; i++)
+                //{
+                //    if (int.Parse(dtInTrayIni.Rows[i][1].ToString()) >= 1)//有管
+                //    {
+                //        //有管扔掉
+                //        int errorcount = 0;
+                //    again:
+                //        NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 05 " + (i + 1).ToString("X2")), 1);
+                //        if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
+                //        {
+                //            if ( NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked)
+                //            {
+                //                errorcount++;
+                //                if (errorcount < 2)
+                //                    goto again;
+                //                else
+                //                {
+                //                    MessageBox.Show("从温育盘向废管盒移管异常，请重试");
+                //                    goto enzymaticActivityTestEnd;
+                //                }
+                //            }
+                //            else
+                //            {
+                //                MessageBox.Show("从温育盘向废管盒移管异常，请重试");
+                //                goto enzymaticActivityTestEnd;
+                //            }
+                //        }
+                //        //修改反应盘信息
+                //        OperateIniFile.WriteIniData("ReactTrayInfo", "no" + (i + 1), "0", iniPathReactTrayInfo);
+                //    }
+                //}
+                ////夹新管
+                //for (int i = 0; i < needPos; i++)
+                //{
+                //    if (i % 4 == 3)
+                //    {
+                //        continue;
+                //    }
+                //    int second = 0;
+                //againInjection:
+                //    NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 01 " + (i + 1).ToString("X2")), 1);
+                //    if (!NetCom3.Instance.MoveQuery())
+                //    {
+                //        if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked)
+                //        {
+                //            second++;
+                //            if (second < 2)
+                //                goto againInjection;
+                //            else
+                //            {
+                //                MessageBox.Show("从暂存盘向温育盘移管异常，终止本次操作");
+                //                goto enzymaticActivityTestEnd;
+                //            }
+                //        }
+                //        else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.putKnocked)
+                //        {
+                //            second++;
+                //            if (second < 2)
+                //            {
+                //                NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 05 " + (i + 1).ToString("X2")), 1);
+                //                if (!NetCom3.Instance.MoveQuery())
+                //                {
+                //                    if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull)
+                //                    {
+                //                        goto againInjection;
+                //                    }
+                //                    else
+                //                    {
+                //                        MessageBox.Show("从温育盘向废管盒移管异常，请重试");
+                //                        goto enzymaticActivityTestEnd;
+                //                    }
+
+                //                }
+
+                //            }
+                //            else
+                //            {
+                //                MessageBox.Show("从暂存盘向温育盘移管放管异常，请重试");
+                //                goto enzymaticActivityTestEnd;
+                //            }
+                //        }
+                //        else
+                //        {
+                //            MessageBox.Show("从暂存盘向温育盘移管异常，请重试");
+                //            goto enzymaticActivityTestEnd;
+                //        }
+                //    }
+                //    //修改反应盘信息
+                //    OperateIniFile.WriteIniData("ReactTrayInfo", "no" + (i + 1), "1", iniPathReactTrayInfo);
+                //}
                 //for循环，温育盘-》清洗盘（旋转），注液，清洗盘=》温育盘
                 for (int i = 0; i < InjectionNum; i++)
                 {
@@ -9585,7 +9716,7 @@ namespace BioBaseCLIA.SysMaintenance
                                 goto moveAgain;
                             else
                             {
-                                MessageBox.Show("从温育盘向清洗盘移管异常，请重试");
+                                MessageBox.Show("从温育盘向清洗盘移管异常，终止本次操作");
                                 goto enzymaticActivityTestEnd;
                             }
                         }
@@ -9636,7 +9767,7 @@ namespace BioBaseCLIA.SysMaintenance
                                 goto moveAgain2;
                             else
                             {
-                                MessageBox.Show("从温育盘向清洗盘移管异常，请重试");
+                                MessageBox.Show("从温育盘向清洗盘移管异常，终止本次操作");
                                 goto enzymaticActivityTestEnd;
                             }
                         }
@@ -9687,7 +9818,7 @@ namespace BioBaseCLIA.SysMaintenance
                                 goto moveAgain3;
                             else
                             {
-                                MessageBox.Show("从温育盘向清洗盘移管异常，请重试");
+                                MessageBox.Show("从温育盘向清洗盘移管异常，终止本次操作");
                                 goto enzymaticActivityTestEnd;
                             }
                         }
@@ -9743,8 +9874,9 @@ namespace BioBaseCLIA.SysMaintenance
                     //放回--actPos
                     second = 0;
                     actPos += 4;
+                    int actPos1 = --actPos;
                 moveback1:
-                    NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 03 " + (--actPos).ToString("X2") + " 02"), 1);
+                    NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 03 " + (actPos1).ToString("X2") + " 02"), 1);
                     if (!NetCom3.Instance.MoveQuery())
                     {
                         if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked || NetCom3.Instance.MoverrorFlag == (int)ErrorState.putKnocked)
@@ -9775,8 +9907,9 @@ namespace BioBaseCLIA.SysMaintenance
                     }
                     //放回--actPos
                     second = 0;
+                    actPos1 = --actPos;
                 moveback2:
-                    NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 03 " + (--actPos).ToString("X2") + " 02"), 1);
+                    NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 03 " + (actPos1).ToString("X2") + " 02"), 1);
                     if (!NetCom3.Instance.MoveQuery())
                     {
                         if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked || NetCom3.Instance.MoverrorFlag == (int)ErrorState.putKnocked)
@@ -9807,8 +9940,9 @@ namespace BioBaseCLIA.SysMaintenance
                     }
                     //放回--actPos
                     second = 0;
+                    actPos1 = --actPos;
                 moveback3:
-                    NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 03 " + (--actPos).ToString("X2") + " 02"), 1);
+                    NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 03 " + (actPos1).ToString("X2") + " 02"), 1);
                     if (!NetCom3.Instance.MoveQuery())
                     {
                         if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked || NetCom3.Instance.MoverrorFlag == (int)ErrorState.putKnocked)
@@ -9853,6 +9987,7 @@ namespace BioBaseCLIA.SysMaintenance
                 fbtnTestsStop.Enabled = false;
             }));
         }
+
 
 
         /// <summary>
