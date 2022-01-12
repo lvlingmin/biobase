@@ -1422,4 +1422,7 @@
   <data name="keywordText.Tips" xml:space="preserve">
     <value>消息提示</value>
   </data>
+  <data name="keywordText.NocontrolInfo" xml:space="preserve">
+    <value>The project name is {0}, the quality control batch number is {1}, and the quality control category is {2} quality control information!</value>
+  </data>
 </root>
