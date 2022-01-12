@@ -9460,14 +9460,14 @@ namespace BioBaseCLIA.SysMaintenance
                                     goto again;
                                 else
                                 {
-                                    MessageBox.Show("从温育怕向清洗盘移管异常，请重试");
+                                    MessageBox.Show("从温育盘向清洗盘移管异常，请重试");
                                     goto enzymaticActivityTestEnd;
                                 }
 
                             }
                             else
                             {
-                                MessageBox.Show("从温育怕向清洗盘移管异常，请重试");
+                                MessageBox.Show("从温育盘向清洗盘移管异常，请重试");
                                 goto enzymaticActivityTestEnd;
                             }
                         }
@@ -9586,8 +9586,8 @@ namespace BioBaseCLIA.SysMaintenance
             //清洗注液测试
             else if (testIndex == 4)
             {
-                int needPos = InjectionNum * 4;//一组需要4个孔位
-                DialogResult r = MessageBox.Show("确认反应盘1-"+ needPos + "号位置是否已添加反应管，点击确定马上开始测试。", "仪器调试", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                int needPos = InjectionNum * 3;//一组需要4个孔位
+                DialogResult r = MessageBox.Show("确认反应盘1-" + needPos + "号位置是否已添加反应管，点击确定马上开始测试。", "仪器调试", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Cancel)
                 {
                     goto enzymaticActivityTestEnd;
@@ -9603,104 +9603,107 @@ namespace BioBaseCLIA.SysMaintenance
                     goto enzymaticActivityTestEnd;
                 }
 
-                
 
+                #region 屏蔽从温育盘扔管的指令和从暂存盘向温育盘取管的指令
                 //检测1-needPos孔位是否有管，清掉
-                //DataTable dtInTrayIni = OperateIniFile.ReadConfig(iniPathReactTrayInfo);
-                //for (int i = 0; i < needPos; i++)
-                //{
-                //    if (int.Parse(dtInTrayIni.Rows[i][1].ToString()) >= 1)//有管
-                //    {
-                //        //有管扔掉
-                //        int errorcount = 0;
-                //    again:
-                //        NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 05 " + (i + 1).ToString("X2")), 1);
-                //        if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
-                //        {
-                //            if ( NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked)
-                //            {
-                //                errorcount++;
-                //                if (errorcount < 2)
-                //                    goto again;
-                //                else
-                //                {
-                //                    MessageBox.Show("从温育盘向废管盒移管异常，请重试");
-                //                    goto enzymaticActivityTestEnd;
-                //                }
-                //            }
-                //            else
-                //            {
-                //                MessageBox.Show("从温育盘向废管盒移管异常，请重试");
-                //                goto enzymaticActivityTestEnd;
-                //            }
-                //        }
-                //        //修改反应盘信息
-                //        OperateIniFile.WriteIniData("ReactTrayInfo", "no" + (i + 1), "0", iniPathReactTrayInfo);
-                //    }
-                //}
-                ////夹新管
-                //for (int i = 0; i < needPos; i++)
-                //{
-                //    if (i % 4 == 3)
-                //    {
-                //        continue;
-                //    }
-                //    int second = 0;
-                //againInjection:
-                //    NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 01 " + (i + 1).ToString("X2")), 1);
-                //    if (!NetCom3.Instance.MoveQuery())
-                //    {
-                //        if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked)
-                //        {
-                //            second++;
-                //            if (second < 2)
-                //                goto againInjection;
-                //            else
-                //            {
-                //                MessageBox.Show("从暂存盘向温育盘移管异常，终止本次操作");
-                //                goto enzymaticActivityTestEnd;
-                //            }
-                //        }
-                //        else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.putKnocked)
-                //        {
-                //            second++;
-                //            if (second < 2)
-                //            {
-                //                NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 05 " + (i + 1).ToString("X2")), 1);
-                //                if (!NetCom3.Instance.MoveQuery())
-                //                {
-                //                    if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull)
-                //                    {
-                //                        goto againInjection;
-                //                    }
-                //                    else
-                //                    {
-                //                        MessageBox.Show("从温育盘向废管盒移管异常，请重试");
-                //                        goto enzymaticActivityTestEnd;
-                //                    }
+                /*
+                DataTable dtInTrayIni = OperateIniFile.ReadConfig(iniPathReactTrayInfo);
+                for (int i = 0; i < needPos; i++)
+                {
+                    if (int.Parse(dtInTrayIni.Rows[i][1].ToString()) >= 1)//有管
+                    {
+                        //有管扔掉
+                        int errorcount = 0;
+                    again:
+                        NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 05 " + (i + 1).ToString("X2")), 1);
+                        if (!NetCom3.Instance.MoveQuery() && NetCom3.Instance.MoverrorFlag != (int)ErrorState.IsNull)
+                        {
+                            if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked)
+                            {
+                                errorcount++;
+                                if (errorcount < 2)
+                                    goto again;
+                                else
+                                {
+                                    MessageBox.Show("从温育盘向废管盒移管异常，请重试");
+                                    goto enzymaticActivityTestEnd;
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("从温育盘向废管盒移管异常，请重试");
+                                goto enzymaticActivityTestEnd;
+                            }
+                        }
+                        //修改反应盘信息
+                        OperateIniFile.WriteIniData("ReactTrayInfo", "no" + (i + 1), "0", iniPathReactTrayInfo);
+                    }
+                }
+                //夹新管
+                for (int i = 0; i < needPos; i++)
+                {
+                    if (i % 4 == 3)
+                    {
+                        continue;
+                    }
+                    int second = 0;
+                againInjection:
+                    NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 01 " + (i + 1).ToString("X2")), 1);
+                    if (!NetCom3.Instance.MoveQuery())
+                    {
+                        if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull || NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsKnocked)
+                        {
+                            second++;
+                            if (second < 2)
+                                goto againInjection;
+                            else
+                            {
+                                MessageBox.Show("从暂存盘向温育盘移管异常，终止本次操作");
+                                goto enzymaticActivityTestEnd;
+                            }
+                        }
+                        else if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.putKnocked)
+                        {
+                            second++;
+                            if (second < 2)
+                            {
+                                NetCom3.Instance.Send(NetCom3.Cover("EB 90 31 01 05 " + (i + 1).ToString("X2")), 1);
+                                if (!NetCom3.Instance.MoveQuery())
+                                {
+                                    if (NetCom3.Instance.MoverrorFlag == (int)ErrorState.IsNull)
+                                    {
+                                        goto againInjection;
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("从温育盘向废管盒移管异常，请重试");
+                                        goto enzymaticActivityTestEnd;
+                                    }
 
-                //                }
+                                }
 
-                //            }
-                //            else
-                //            {
-                //                MessageBox.Show("从暂存盘向温育盘移管放管异常，请重试");
-                //                goto enzymaticActivityTestEnd;
-                //            }
-                //        }
-                //        else
-                //        {
-                //            MessageBox.Show("从暂存盘向温育盘移管异常，请重试");
-                //            goto enzymaticActivityTestEnd;
-                //        }
-                //    }
-                //    //修改反应盘信息
-                //    OperateIniFile.WriteIniData("ReactTrayInfo", "no" + (i + 1), "1", iniPathReactTrayInfo);
-                //}
+                            }
+                            else
+                            {
+                                MessageBox.Show("从暂存盘向温育盘移管放管异常，请重试");
+                                goto enzymaticActivityTestEnd;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("从暂存盘向温育盘移管异常，请重试");
+                            goto enzymaticActivityTestEnd;
+                        }
+                    }
+                    //修改反应盘信息
+                    OperateIniFile.WriteIniData("ReactTrayInfo", "no" + (i + 1), "1", iniPathReactTrayInfo);
+                }
+                */
+                #endregion
                 //for循环，温育盘-》清洗盘（旋转），注液，清洗盘=》温育盘
                 for (int i = 0; i < InjectionNum; i++)
                 {
-                    int actPos = 4 * i + 1;//1 5 9
+                    int actPos = 3 * i + 1;//1 5 9
                     int second = 0;
 
                     actPos += 2;
@@ -9987,6 +9990,7 @@ namespace BioBaseCLIA.SysMaintenance
                 fbtnTestsStop.Enabled = false;
             }));
         }
+
 
 
 

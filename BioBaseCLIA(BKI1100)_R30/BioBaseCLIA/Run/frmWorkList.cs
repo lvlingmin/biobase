@@ -3901,24 +3901,30 @@ namespace BioBaseCLIA.Run
             foreach (TestItem item in QCList)
             {
                 string QCLevel;
+                string QcBatch = item.RegentBatch;
                 if (item.SampleType == getString("keywordText.ControlHigh"))
                 {
                     QCLevel = "0";
+                    QcBatch = QcBatch + "-H";
                 }
                 else if (item.SampleType == getString("keywordText.ControlMiddle")) 
                 {
                     QCLevel = "1";
+                    QcBatch = QcBatch + "-M";
                 }
                 else
                 {
                     QCLevel = "2";
+                    QcBatch = QcBatch + "-L";
                 }
+
                 DbHelperOleDb db = new DbHelperOleDb(3);
                 DataTable dtQCInfo = DbHelperOleDb.Query(3, @"select QCID,Batch,QCLevel from tbQC where status = '1' and ProjectName = '"
-                                                            + item.ItemName + "'and QCLevel = '" + QCLevel + "' and Status = '1'").Tables[0];
+                                                            + item.ItemName + "'and QCLevel = '" + QCLevel + "' and Batch='" + QcBatch + "' and Status = '1'").Tables[0];
                 if (dtQCInfo == null || dtQCInfo.Rows.Count == 0)
                 {
-                    frmMsgShow.MessageShow(getString("btnWorkList.Text"), getString("keywordText.ProjectName") + item.ItemName + "," + getString("keywordText.controltype") + item.SampleType + getString("keywordText.controlInfo"));
+                    //frmMsgShow.MessageShow(getString("btnWorkList.Text"), getString("keywordText.ProjectName") + item.ItemName + "," + getString("keywordText.controltype") + item.SampleType + getString("keywordText.controlInfo"));
+                    frmMsgShow.MessageShow(getString("btnWorkList.Text"), string.Format(getString("keywordText.NocontrolInfo"), item.ItemName, QcBatch, item.SampleType));
                     return false;
                 }
             }
@@ -5040,14 +5046,14 @@ namespace BioBaseCLIA.Run
                                 }
                                 OperateIniFile.WriteIniData("Tube", "TubePos", "1", Application.StartupPath + "//SubstrateTube.ini");
                             }
-                            if (SubstrateStop)
-                            {
-                                if (!frmMain.pauseFlag)
-                                {
-                                    AllPause();
-                                    GetNoStartList();
-                                }
-                            }
+                            //if (SubstrateStop)
+                            //{
+                            //    if (!frmMain.pauseFlag)
+                            //    {
+                            //        AllPause();
+                            //        GetNoStartList();
+                            //    }
+                            //}
                             if (PlugneedleFalg)
                             {
                                 if (!frmMain.pauseFlag)
@@ -5059,11 +5065,11 @@ namespace BioBaseCLIA.Run
                         }
                         else
                         {
-                            string LeftCount1 = OperateIniFile.ReadIniData("Substrate1", "LeftCount", "", iniPathSubstrateTube);
-                            if ((!frmMain.StopFlag[0] && !frmMain.StopFlag[1] && !frmMain.StopFlag[2] && !frmMain.StopFlag[3]) && StopList.Count > 0 && !TubeStop && (int.Parse(LeftCount1) > SampleNumCurrent) && !BFullReactTray && !PlugneedleFalg)
+                            //string LeftCount1 = OperateIniFile.ReadIniData("Substrate1", "LeftCount", "", iniPathSubstrateTube);
+                            if ((!frmMain.StopFlag[0] && !frmMain.StopFlag[1] && !frmMain.StopFlag[2] && !frmMain.StopFlag[3]) && StopList.Count > 0  && !BFullReactTray && !PlugneedleFalg)//&& !TubeStop && (int.Parse(LeftCount1) > SampleNumCurrent)
                             {
-                                if (SubstrateStop)
-                                    SubstrateStop = false;
+                                //if (SubstrateStop)
+                                //    SubstrateStop = false;
                                 StopList.Clear();
                                 Goon();
                                 frmMain.pauseFlag = false;
@@ -5100,7 +5106,7 @@ namespace BioBaseCLIA.Run
                         {
                             Thread.Sleep(100);
                             if (((SampleNumCurrent >= StopList.Count)
-                                && SampleNumCurrent != 0 && !SubstrateStop)
+                                && SampleNumCurrent != 0)//&& !SubstrateStop
                                 || (EmergencyFlag || addOrdinaryFlag))
                             {
                                 BackToCurrentUI(SampleNumCurrent, ref EmergencyFlag, ref addOrdinaryFlag);
@@ -5210,6 +5216,7 @@ namespace BioBaseCLIA.Run
                                 }
                                 #endregion
                                 #region 底物是否够用判断
+                                /*
                                 string LeftCount1 = OperateIniFile.ReadIniData("Substrate1", "LeftCount", "", iniPathSubstrateTube);
                                 List<TestSchedule> list = lisTestSchedule.FindAll(tx => (tx.TestID < NoStartTestId && tx.StartTime > 0));
                                 int Sampleing = 0;
@@ -5229,7 +5236,7 @@ namespace BioBaseCLIA.Run
                                     setmainformbutten();
                                     break;
                                 }
-
+                                */
                                 #endregion
                                 int movepos = TestStep.AddSamplePos + toUsedTube;
                                 if (movepos > ReactTrayNum)
@@ -9628,8 +9635,9 @@ namespace BioBaseCLIA.Run
             double PMT = double.Parse(System.Convert.ToInt32("0x" + readData, 16).ToString());
             PMT = GetPMT(PMT);
             int pmt = (int)PMT;
-            LogFile.Instance.Write(string.Format("{0}<-:{1}", DateTime.Now.ToString("HH:mm:ss:fff"), "实验" + testid + "读数发光值为:" + pmt));
-            CalculatResult(testid, pmt);
+            int NewPMT = (int)((double)pmt * double.Parse(Coefficient));
+            LogFile.Instance.Write(string.Format("{0}<-:{1}", DateTime.Now.ToString("HH:mm:ss:fff"), "实验" + testid + "读数发光值为:" + pmt + ",通过校准系数校准后的读数发光值为：" + NewPMT));
+            CalculatResult(testid, NewPMT);
         }
         /// <summary>
         /// 反应管完成结果计算
@@ -9639,6 +9647,7 @@ namespace BioBaseCLIA.Run
         void CalculatResult(int testid, int pmt)
         {
             #region 当前项目的所有样本完成时更新样本状态
+            if (dgvWorkListData.Rows.Count == 0) return;
             TestItem ti = new TestItem();
             ti.ItemName = dgvWorkListData.Rows[testid - 1].Cells["ItemName"].Value.ToString();
             ti.RegentBatch = dgvWorkListData.Rows[testid - 1].Cells["RegentBatch"].Value.ToString();
@@ -10435,21 +10444,26 @@ namespace BioBaseCLIA.Run
             if (result.SampleType.Contains(getString("keywordText.Control")))
             {
                 string QCLevel;
+                string QcBatch = result.ReagentBeach;
                 if (result.SampleType == getString("keywordText.ControlHigh"))
                 {
                     QCLevel = "0";
+                    QcBatch = QcBatch + "-H";
                 }
                 else if (result.SampleType == getString("keywordText.ControlMiddle"))
                 {
                     QCLevel = "1";
+                    QcBatch = QcBatch + "-M";
                 }
                 else
                 {
                     QCLevel = "2";
+                    QcBatch = QcBatch + "-L";
                 }
                 DbHelperOleDb db = new DbHelperOleDb(3);
                 DataTable dtQCInfo = DbHelperOleDb.Query(3, @"select QCID,Batch,QCLevel from tbQC where status = '1' and ProjectName = '"
-                                                            + result.ItemName + "'and QCLevel = '" + QCLevel + "' and Status = '1'").Tables[0];
+                                                            + result.ItemName + "' and QCLevel = '" + QCLevel + "' and Batch = '"
+                                                            + QcBatch + "'").Tables[0];
                 if (dtQCInfo == null || dtQCInfo.Rows.Count == 0)
                 {
                     //frmMsgShow.MessageShow("实验结果", "查找不到相关质控的信息！");
@@ -10471,7 +10485,7 @@ namespace BioBaseCLIA.Run
                 modelQCResult.ConcSPEC = "";
                 modelQCResult.ItemName = result.ItemName;
                 modelQCResult.PMTCounter = result.PMT;
-                modelQCResult.PMTCounter = (int)((double)result.PMT * double.Parse(Coefficient));
+                //modelQCResult.PMTCounter = (int)((double)result.PMT * double.Parse(Coefficient));
                 modelQCResult.QCID = int.Parse(dtQCInfo.Rows[0][0].ToString());
                 modelQCResult.Source = 0;
                 modelQCResult.TestDate = DateTime.Now;
@@ -10499,7 +10513,7 @@ namespace BioBaseCLIA.Run
                 modelAssayResult.DiluteCount = result.DiluteCount;
                 modelAssayResult.ItemName = result.ItemName;
                 modelAssayResult.PMTCounter = result.PMT;
-                modelAssayResult.PMTCounter = (int)((double)result.PMT * double.Parse(Coefficient));
+                //modelAssayResult.PMTCounter = (int)((double)result.PMT * double.Parse(Coefficient));
                 modelAssayResult.Range = result.Range1 + " " + result.Range2;
                 modelAssayResult.Result = result.Result;
                 modelAssayResult.Specification = "";
@@ -11470,7 +11484,7 @@ namespace BioBaseCLIA.Run
             //    MessageBox.Show("当前供应品缺乏，请保证供应品充足后在进行实验操作！", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             //    return;
             //}
-            if (frmMain.StopFlag[0] || frmMain.StopFlag[1] || frmMain.StopFlag[2] || frmMain.StopFlag[3] || TubeStop || SubstrateStop)
+            if (frmMain.StopFlag[0] || frmMain.StopFlag[1] || frmMain.StopFlag[2] || frmMain.StopFlag[3] || TubeStop)//|| SubstrateStop
             {
                 MessageBox.Show(getString("keywordText.LackSupplies"), getString("keywordText.tip"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -11539,7 +11553,7 @@ namespace BioBaseCLIA.Run
             //    MessageBox.Show("当前供应品缺乏，请保证供应品充足后在进行实验操作！", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             //    return;
             //}
-            if (frmMain.StopFlag[0] || frmMain.StopFlag[1] || frmMain.StopFlag[2] || frmMain.StopFlag[3] || TubeStop || SubstrateStop)
+            if (frmMain.StopFlag[0] || frmMain.StopFlag[1] || frmMain.StopFlag[2] || frmMain.StopFlag[3] || TubeStop)//|| SubstrateStop
             {
                 MessageBox.Show(getString("keywordText.LackSupplies"), getString("keywordText.tip"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;

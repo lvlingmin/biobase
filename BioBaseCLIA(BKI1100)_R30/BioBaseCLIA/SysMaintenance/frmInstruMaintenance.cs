@@ -104,7 +104,7 @@ namespace BioBaseCLIA.SysMaintenance
             {
                 //fbtnInstruMaintenance.Enabled = false;
                 fbtnInstruDiagnost.Enabled = false;
-                fbtnGroupTest.Enabled = true;
+                fbtnGroupTest.Enabled = false;
             }
             else if (LoginUserType == "2") // normal 用户
             {
@@ -2023,7 +2023,7 @@ namespace BioBaseCLIA.SysMaintenance
                 NewWashEnd(1);
                 return;
             }
-            TExtAppend(GetString("Throw4"));
+            TExtAppend(GetString("keywordText.Throw4"));
             NewWashEnd();
             TExtAppend(GetString("keywordText.Circulationcompleted"));
         }
@@ -2098,6 +2098,26 @@ namespace BioBaseCLIA.SysMaintenance
                 Thread.Sleep(30);
             }
             textBox1.Invoke(new Action(() => { textBox1.Text = ""; }));
+            frmMain.BQLiquaid = false;
+            TExtAppend(GetString("keywordText.Initializing"));
+            NetCom3.Instance.Send(NetCom3.Cover("EB 90 F1 02"), 5);
+            if (!NetCom3.Instance.SingleQuery())
+            {
+                NewWashEnd();
+                return;
+            }
+            #region 判断各个模组是否初始化成功
+            if (NetCom3.Instance.ErrorMessage != null)
+            {
+                //2018-09-06 zlx mod
+                TExtAppend(GetString("keywordText.Init") + ":" + NetCom3.Instance.ErrorMessage);
+                //frmMsgShow.MessageShow(GetString("keywordText.Init"), NetCom3.Instance.ErrorMessage);
+                NewWashEnd();
+                return;
+            }
+            TExtAppend(GetString("keywordText.Initfinish"));
+            frmMain.BQLiquaid = true;
+            #endregion
             if (cbClearTray.Checked)
             {
                 TExtAppend(GetString("keywordText.CleanIncubate"));
@@ -2695,6 +2715,7 @@ namespace BioBaseCLIA.SysMaintenance
             }
             isNewWashRun = false;
             CancellationToken = true; //lyq add 20190822
+            frmMain.BQLiquaid = true;
             NetCom3.Instance.ReceiveHandel -= GetReadNum2;
             if (bLoopRun)
             {

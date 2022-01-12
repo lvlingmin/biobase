@@ -1,23 +1,18 @@
-﻿using System;
+﻿using Common;
+using DBUtility;
+using Dialogs;
+using Localization;
+using Maticsoft.DBUtility;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using Common;
 using System.IO;
-using Maticsoft.DBUtility;
-using Dialogs;
-using System.Timers;
-using System.Threading;
-using DBUtility;
-using System.Text.RegularExpressions;
-using Common;
-using BioBaseCLIA.DataQuery;
 using System.Resources;
-using Localization;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace BioBaseCLIA.Run
 {
@@ -2905,8 +2900,8 @@ namespace BioBaseCLIA.Run
             mQC.XValue = qcX;
             mQC.ProjectName = itemName;
             mQC.OperatorName = LoginUserName;
-            mQC.AddDate = DateTime.Now.ToLongDateString().Trim();
-            mQC.ValidDate = Convert.ToDateTime(validTime).AddMonths(14).AddDays(-1).ToLongDateString().Trim();//DateTime.Now.AddDays(28).ToLongDateString().Trim();
+            mQC.AddDate = DateTime.Now.ToString("yyyy-MM-dd");
+            mQC.ValidDate = dateValidDate.Value.ToString("yyyy-MM-dd");//DateTime.Now.AddDays(28).ToLongDateString().Trim();
             mQC.QCRules = rule;
             #endregion
             #region QC-DB                
@@ -3345,7 +3340,7 @@ namespace BioBaseCLIA.Run
             if (RgType == (int)ReagentType.ready)
                 return false;
 
-            DataTable dtable = bllRg.GetList("BarCode='" + txtRgBatch.Text + "'").Tables[0];
+            DataTable dtable = bllRg.GetList("BarCode='" + txtRgCode.Text + "'").Tables[0];
             if (loadItem.Substring(1, 1) == "1" && dtable.Rows.Count <= 0 && RgType == (int)ReagentType.reagent)//首次装载
             {
                 //pro
