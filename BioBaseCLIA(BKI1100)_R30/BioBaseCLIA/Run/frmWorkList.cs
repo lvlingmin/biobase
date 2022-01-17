@@ -3346,6 +3346,8 @@ namespace BioBaseCLIA.Run
             List<string> lisRegentBatch = new List<string>();
             #region 检查稀释液和试剂是否够用
             DataTable DtRgInfoNoStat = frmSampleLoad.DtItemInfoNoStat.Copy();
+            bool SCflag = false;//由于定标原因禁止开始实验标识
+            string SCStopItems = null;
             if (DtRgInfoNoStat.Rows.Count == 0)
             {
                 foreach (var item in ItemNames)
@@ -3584,8 +3586,17 @@ namespace BioBaseCLIA.Run
                                             Calculater er = GetCalculater(DataMain, tempdt, item.Key);
                                             if (er.R2 < 0.99)
                                             {
-                                                frmMsgShow.MessageShow(getString("btnWorkList.Text"), getString("keywordText.Reagentbatch") + reBNum.Key + getString("keywordText.ProjectName") + item.Key + getString("keywordText.Recalibrate"));
-                                                return false;
+                                                if (!SCflag)
+                                                {
+                                                    SCStopItems += getString("keywordText.ProjectName") + item.Key + "," + getString("keywordText.Reagentbatch") + reBNum.Key + " "
+                                                        + getString("keywordText.Recalibrate") + "\n";
+                                                    SCflag = true;
+                                                }
+                                                else
+                                                    SCStopItems += getString("keywordText.ProjectName") + item.Key + "," + getString("keywordText.Reagentbatch") + reBNum.Key + " "
+                                                        + getString("keywordText.Recalibrate") + "\n";
+                                                //frmMsgShow.MessageShow(getString("btnWorkList.Text"), getString("keywordText.Reagentbatch") + reBNum.Key + getString("keywordText.ProjectName") + item.Key + getString("keywordText.Recalibrate"));
+                                                //return false;
                                             }
                                             #endregion
                                         }
@@ -3603,8 +3614,17 @@ namespace BioBaseCLIA.Run
                                         //判断是否有历史定标
                                         if (points == null || points == "")
                                         {
-                                            frmMsgShow.MessageShow(getString("btnWorkList.Text"), getString("keywordText.noMainCurve"));
-                                            return false;
+                                            if (!SCflag)
+                                            {
+                                                SCStopItems += getString("keywordText.ProjectName") + item.Key + "," + getString("keywordText.Reagentbatch") + reBNum.Key + " "
+                                                    + getString("keywordText.noMainCurve") + "\n";
+                                                SCflag = true;
+                                            }
+                                            else
+                                                SCStopItems += getString("keywordText.ProjectName") + item.Key + "," + getString("keywordText.Reagentbatch") + reBNum.Key + " "
+                                                    + getString("keywordText.noMainCurve") + "\n";
+                                            //frmMsgShow.MessageShow(getString("btnWorkList.Text"), getString("keywordText.noMainCurve"));
+                                            //return false;
                                         }
                                         else if (DateTime.Now.Date.AddDays(-Convert.ToInt32(dtItemInfo.Rows[0][3])).Date > Convert.ToDateTime(ActiveDate))
                                         {
@@ -3663,8 +3683,17 @@ namespace BioBaseCLIA.Run
                                                 Calculater er = GetCalculater(DataMain, tempdt, item.Key);
                                                 if (er.R2 < 0.99)
                                                 {
-                                                    frmMsgShow.MessageShow(getString("btnWorkList.Text"), getString("keywordText.Reagentbatch") + reBNum.Key + getString("keywordText.ProjectName") + item.Key + getString("keywordText.Recalibrate"));
-                                                    return false;
+                                                    if (!SCflag)
+                                                    {
+                                                        SCStopItems += getString("keywordText.ProjectName") + item.Key + "," + getString("keywordText.Reagentbatch") + reBNum.Key + " "
+                                                            + getString("keywordText.Recalibrate") + "\n";
+                                                        SCflag = true;
+                                                    }
+                                                    else
+                                                        SCStopItems += getString("keywordText.ProjectName") + item.Key + "," + getString("keywordText.Reagentbatch") + reBNum.Key + " "
+                                                            + getString("keywordText.Recalibrate") + "\n";
+                                                    //frmMsgShow.MessageShow(getString("btnWorkList.Text"), getString("keywordText.Reagentbatch") + reBNum.Key + getString("keywordText.ProjectName") + item.Key + getString("keywordText.Recalibrate"));
+                                                    //return false;
                                                 }
                                                 #endregion
                                             }
@@ -3686,8 +3715,17 @@ namespace BioBaseCLIA.Run
                                         int count = lisSameItem.FindAll(ty => (ty.RegentBatch == reBNum.Key || ty.RegentBatch == "")).Count;
                                         if (count > 0)
                                         {
-                                            frmMsgShow.MessageShow(getString("btnWorkList.Text"), getString("keywordText.Reagentbatch") + reBNum.Key + getString("keywordText.ProjectName") + item.Key + getString("keywordText.NoScling"));
-                                            return false;
+                                            if (!SCflag)
+                                            {
+                                                SCStopItems += getString("keywordText.ProjectName") + item.Key + "," + getString("keywordText.Reagentbatch") + reBNum.Key + " "
+                                                    + getString("keywordText.NoScling") + "\n";
+                                                SCflag = true;
+                                            }
+                                            else
+                                                SCStopItems += getString("keywordText.ProjectName") + item.Key + "," + getString("keywordText.Reagentbatch") + reBNum.Key + " "
+                                                    + getString("keywordText.NoScling") + "\n";
+                                            //frmMsgShow.MessageShow(getString("btnWorkList.Text"), getString("keywordText.Reagentbatch") + reBNum.Key + getString("keywordText.ProjectName") + item.Key + getString("keywordText.NoScling"));
+                                            //return false;
                                         }
                                     }
                                     else if (DateTime.Now.Date.AddDays(-Convert.ToInt32(dtItemInfo.Rows[0][3])).Date > Convert.ToDateTime(ActiveDate))
@@ -3746,8 +3784,17 @@ namespace BioBaseCLIA.Run
                                             Calculater er = GetCalculater(DataMain, tempdt, item.Key);
                                             if (er.R2 < 0.99)
                                             {
-                                                frmMsgShow.MessageShow(getString("btnWorkList.Text"), getString("keywordText.Reagentbatch") + reBNum.Key + getString("keywordText.ProjectName") + item.Key + getString("keywordText.Recalibrate"));
-                                                return false;
+                                                if (!SCflag)
+                                                {
+                                                    SCStopItems += getString("keywordText.ProjectName") + item.Key + "," + getString("keywordText.Reagentbatch") + reBNum.Key + " "
+                                                        + getString("keywordText.Recalibrate") + "\n";
+                                                    SCflag = true;
+                                                }
+                                                else
+                                                    SCStopItems += getString("keywordText.ProjectName") + item.Key + "," + getString("keywordText.Reagentbatch") + reBNum.Key + " "
+                                                        + getString("keywordText.Recalibrate") + "\n";
+                                                //frmMsgShow.MessageShow(getString("btnWorkList.Text"), getString("keywordText.Reagentbatch") + reBNum.Key + getString("keywordText.ProjectName") + item.Key + getString("keywordText.Recalibrate"));
+                                                //return false;
                                             }
                                             #endregion
                                         }
@@ -3799,8 +3846,17 @@ namespace BioBaseCLIA.Run
                                     Calculater er = GetCalculater(DataMain, tempdt, item.Key);
                                     if (er.R2 < 0.99)
                                     {
-                                        frmMsgShow.MessageShow(getString("btnWorkList.Text"), getString("keywordText.Reagentbatch") + reBNum.Key + getString("keywordText.ProjectName") + item.Key + getString("keywordText.Recalibrate"));
-                                        return false;
+                                        if (!SCflag)
+                                        {
+                                            SCStopItems += getString("keywordText.ProjectName") + item.Key + "," + getString("keywordText.Reagentbatch") + reBNum.Key + " "
+                                                + getString("keywordText.Recalibrate") + "\n";
+                                            SCflag = true;
+                                        }
+                                        else
+                                            SCStopItems += getString("keywordText.ProjectName") + item.Key + "," + getString("keywordText.Reagentbatch") + reBNum.Key + " "
+                                                + getString("keywordText.Recalibrate") + "\n";
+                                        //frmMsgShow.MessageShow(getString("btnWorkList.Text"), getString("keywordText.Reagentbatch") + reBNum.Key + getString("keywordText.ProjectName") + item.Key + getString("keywordText.Recalibrate"));
+                                        //return false;
                                     }
                                     #endregion
                                 }
@@ -3863,12 +3919,12 @@ namespace BioBaseCLIA.Run
                 }
                 #endregion
             }
-            if (flag)
-            {
-                DialogResult result = MessageBox.Show(ExpiredItems + getString("keywordText.SclingOver"), getString("btnWorkList.Text"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.No)
-                    return false;
-            }
+            //if (flag)
+            //{
+            //    DialogResult result = MessageBox.Show(ExpiredItems + getString("keywordText.SclingOver"), getString("btnWorkList.Text"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //    if (result == DialogResult.No)
+            //        return false;
+            //}
             #region 检测底物测数是否够本次实验使用
             string BarCode = OperateIniFile.ReadIniData("Substrate1", "BarCode", "", iniPathSubstrateTube);
             if (BarCode == "")
@@ -3898,10 +3954,16 @@ namespace BioBaseCLIA.Run
             }
             #endregion
             List<TestItem> QCList = lisItem.FindAll(x => x.SampleType.Contains(getString("keywordText.Control")));
+            List<TestItem> QCListcopy = new List<TestItem>();
             foreach (TestItem item in QCList)
             {
                 string QCLevel;
                 string QcBatch = item.RegentBatch;
+                var itemc = QCListcopy.FindAll(x => (x.SampleType == item.SampleType && x.RegentBatch == item.RegentBatch));
+                if (itemc.Count > 0)
+                    continue;
+                else
+                    QCListcopy.Add(item);
                 if (item.SampleType == getString("keywordText.ControlHigh"))
                 {
                     QCLevel = "0";
@@ -3923,10 +3985,28 @@ namespace BioBaseCLIA.Run
                                                             + item.ItemName + "'and QCLevel = '" + QCLevel + "' and Batch='" + QcBatch + "' and Status = '1'").Tables[0];
                 if (dtQCInfo == null || dtQCInfo.Rows.Count == 0)
                 {
-                    //frmMsgShow.MessageShow(getString("btnWorkList.Text"), getString("keywordText.ProjectName") + item.ItemName + "," + getString("keywordText.controltype") + item.SampleType + getString("keywordText.controlInfo"));
-                    frmMsgShow.MessageShow(getString("btnWorkList.Text"), string.Format(getString("keywordText.NocontrolInfo"), item.ItemName, QcBatch, item.SampleType));
-                    return false;
+                    if (!SCflag)
+                    {
+                        SCStopItems += string.Format(getString("keywordText.NocontrolInfo"), item.ItemName, QcBatch, item.SampleType) + "\n";
+                        SCflag = true;
+                    }
+                    else
+                        SCStopItems += string.Format(getString("keywordText.NocontrolInfo"), item.ItemName, QcBatch, item.SampleType) + "\n";
+                    ////frmMsgShow.MessageShow(getString("btnWorkList.Text"), getString("keywordText.ProjectName") + item.ItemName + "," + getString("keywordText.controltype") + item.SampleType + getString("keywordText.controlInfo"));
+                    //frmMsgShow.MessageShow(getString("btnWorkList.Text"), string.Format(getString("keywordText.NocontrolInfo"), item.ItemName, QcBatch, item.SampleType));
+                    //return false;
                 }
+            }
+            if (SCflag)
+            {
+                frmMsgShow.MessageShow(getString("btnWorkList.Text"), SCStopItems);
+                return false;
+            }
+            if (flag)
+            {
+                DialogResult result = MessageBox.Show(ExpiredItems + getString("keywordText.SclingOver"), getString("btnWorkList.Text"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.No)
+                    return false;
             }
             return true;
         }
@@ -5487,7 +5567,7 @@ namespace BioBaseCLIA.Run
                             if (frmMain.pauseFlag)
                                 frmMain.pauseFlag = false;
                             RunLightFlag = false;
-                            buttonEnableRun(false);
+                            //buttonEnableRun(false);
                            
 
                             if (StopList.Count > 0)
@@ -5531,6 +5611,7 @@ namespace BioBaseCLIA.Run
                                 MessageBox.Show(getString("keywordText.Testcomplete"), getString("keywordText.Detectionstatus"), MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);//2018-07-13 zlx mod
                                 //}));
                             }
+                            buttonEnableRun(false);
                             RunFlag = (int)RunFlagStart.Stoped;
                             fbtnReturn.Enabled = true;//完成全部实验才允许返回按钮可用 
                             break;
@@ -9743,6 +9824,7 @@ namespace BioBaseCLIA.Run
             //string Range2 = ob == null ? "" : ob.ToString();
             //当前反应管使用过的项目定标信息
             ScalingInfo CurrentScal = lisScalingInfo.Find(ty => ty.ItemName == ItemName && ty.RegenBatch == Batch);
+            LogFile.Instance.Write("查询定标信息，项目名称为：" + ItemName + ",试剂批次为：" + Batch);
             //2018-08-17  zlx add
             int ScalingState = 0;
             if (CurrentScal.testType == 0)//定性实验

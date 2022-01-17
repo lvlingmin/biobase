@@ -67,8 +67,10 @@ namespace BioBaseCLIA.Run
         /// <summary>
         /// 无焦点获取扫码信息钩子
         /// </summary>
-        BarCodeHook barCodeHook = new BarCodeHook();
-        private delegate void ShowInfoDelegate(BarCodeHook.BarCodes barCode);
+        //BarCodeHook barCodeHook = new BarCodeHook();
+        ScanerHook barCodeHook = new ScanerHook();
+        //private delegate void ShowInfoDelegate(BarCodeHook.BarCodes barCode);
+        private delegate void ShowInfoDelegate(ScanerHook.ScanerCodes barCode);
         public frmAddSample()
         {
             InitializeComponent();
@@ -434,6 +436,8 @@ namespace BioBaseCLIA.Run
             //barCodeHook.BarCodeEvent -= new BarCodeHook.BarCodeDelegate(BarCodeEventHandler);
             //barCodeHook.BarCodeEvent += new BarCodeHook.BarCodeDelegate(BarCodeEventHandler);
         }
+        #region 屏蔽原先条码扫描代码
+        /*
         private void BarCodeEventHandler(BarCodeHook.BarCodes barCode)
         {
             this.txtSpBarCode.Text = string.Empty;
@@ -457,6 +461,31 @@ namespace BioBaseCLIA.Run
                         {
                             this.txtSpCode1.Text = rgCode;
                         }
+                    }
+                }
+            }
+        }
+        */
+        #endregion
+        private void BarCodeEventHandler(ScanerHook.ScanerCodes barCode)
+        {
+            this.txtSpBarCode.Text = string.Empty;
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new ShowInfoDelegate(BarCodeEventHandler), new object[] { barCode });
+            }
+            else
+            {
+                string rgCode = Regex.Replace(barCode.Result, @"\s", "");
+                if (rgCode != null && rgCode != "")
+                {
+                    if (chbSampleNoScan.Checked)
+                    {
+                        this.txtSpBarCode.Text = rgCode;
+                    }
+                    if (chbMoreSampleScan.Checked)
+                    {
+                        this.txtSpCode1.Text = rgCode;
                     }
                 }
             }
