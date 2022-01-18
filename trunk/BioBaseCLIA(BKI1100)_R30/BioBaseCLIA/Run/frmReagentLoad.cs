@@ -2842,14 +2842,25 @@ namespace BioBaseCLIA.Run
             //pro = bllPro.GetModel(proId);
             //MessageBox.Show(pro.ProjectID.ToString());
             //string name = pro.FullName;
+            //批号
+            string batchDay = decryption.Substring(4, 3);
             //生产日期
-            string productDay = decryption.Substring(4, 3);
+            string productDay = batchDay /*decryption.Substring(7, 3)*/;
+            //质控靶值
+            string tempX;
+            //质控标准差
+            string tempSD;
+            //质控类别
+            string qcLevel;
+            //质控规则
+            string rule16;
+            #region
             string year = "";
             string month = "";
             string day = "";
-            year = reverseDate(productDay.Substring(0, 1).ToCharArray()[0]);
-            month = reverseDate(productDay.Substring(1, 1).ToCharArray()[0]);
-            day = reverseDate(productDay.Substring(2, 1).ToCharArray()[0]);
+            year = reverseDate(batchDay.Substring(0, 1).ToCharArray()[0]);
+            month = reverseDate(batchDay.Substring(1, 1).ToCharArray()[0]);
+            day = reverseDate(batchDay.Substring(2, 1).ToCharArray()[0]);
             while (year.Length < 4)
             {
                 year = year.Insert(0, "20");
@@ -2862,9 +2873,63 @@ namespace BioBaseCLIA.Run
             {
                 day = day.Insert(0, "0");
             }
-            //质控靶值
-            string tempX = decryption.Substring(7, 5);
-            string tempSD = decryption.Substring(12, 5);
+
+            string year2 = "";
+            string month2 = "";
+            string day2 = "";
+            year2 = reverseDate(productDay.Substring(0, 1).ToCharArray()[0]);
+            month2 = reverseDate(productDay.Substring(1, 1).ToCharArray()[0]);
+            day2 = reverseDate(productDay.Substring(2, 1).ToCharArray()[0]);
+            while (year2.Length < 4)
+            {
+                year2 = year2.Insert(0, "20");
+            }
+            while (month2.Length < 2)
+            {
+                month2 = month2.Insert(0, "0");
+            }
+            while (day2.Length < 2)
+            {
+                day2 = day2.Insert(0, "0");
+            }
+            #endregion
+            if (rgcode.Length == 25)
+            {
+                //质控靶值
+                tempX = decryption.Substring(10, 5);
+                //质控标准差
+                tempSD = decryption.Substring(15, 5);
+                //质控类别
+                qcLevel = decryption.Substring(20, 1);
+                //质控规则
+                rule16 = decryption.Substring(21, 4);
+            }
+            else if (rgcode.Length == 22)
+            {
+                //质控靶值
+                tempX = decryption.Substring(7, 5);
+                //质控标准差
+                tempSD = decryption.Substring(12, 5);
+                //质控类别
+                qcLevel = decryption.Substring(17, 1);
+                //质控规则
+                rule16 = decryption.Substring(18, 4);
+            }
+            else if (rgcode.Length == 23)
+            {
+                //质控靶值
+                tempX = decryption.Substring(7, 5);
+                //质控标准差
+                tempSD = decryption.Substring(12, 6);
+                //质控类别
+                qcLevel = decryption.Substring(18, 1);
+                //质控规则
+                rule16 = decryption.Substring(19, 4);
+            }
+            else
+                return true;
+
+            //tempX = Convert.ToInt32(tempX.Substring(0, 3), 16).ToString() + "." + Convert.ToInt32(tempX.Substring(3, 2), 16).ToString();
 
             string temp = Convert.ToInt32(tempX.Substring(3, 2), 16).ToString();
             while (temp.Length < 2)
@@ -2876,17 +2941,29 @@ namespace BioBaseCLIA.Run
             tempX = Convert.ToInt32(tempX.Substring(0, 3), 16).ToString() + "." + temp;
 
             double qcX = double.Parse(tempX);
-            temp = Convert.ToInt32(tempSD.Substring(2, 3), 16).ToString();
-            while (temp.Length < 3)
-            {
-                temp = "0" + temp;
-            }
+
             //倒转
-            temp = temp.Substring(2, 1) + temp.Substring(1, 1) + temp.Substring(0, 1);
-            tempSD = Convert.ToInt32(tempSD.Substring(0, 2), 16).ToString() + "." + temp;
+            if (tempSD.Length == 6)
+            {
+                temp = Convert.ToInt32(tempSD.Substring(3, 3), 16).ToString();
+                while (temp.Length < 3)
+                {
+                    temp = "0" + temp;
+                }
+                temp = temp.Substring(2, 1) + temp.Substring(1, 1) + temp.Substring(0, 1);
+                tempSD = Convert.ToInt32(tempSD.Substring(0, 3), 16).ToString() + "." + temp;
+            }
+            else
+            {
+                temp = Convert.ToInt32(tempSD.Substring(2, 3), 16).ToString();
+                while (temp.Length < 3)
+                {
+                    temp = "0" + temp;
+                }
+                temp = temp.Substring(2, 1) + temp.Substring(1, 1) + temp.Substring(0, 1);
+                tempSD = Convert.ToInt32(tempSD.Substring(0, 2), 16).ToString() + "." + temp;
+            }
             double qcSD = double.Parse(tempSD);
-            //质控类别
-            string qcLevel = decryption.Substring(17, 1);
             //质控批号
             string strLevel = qcLevel == "0" ? "H" : (qcLevel == "1" ? "M" : "L");
             string qcBatch = itemName + year + month + day + "-" + strLevel;
@@ -2894,9 +2971,6 @@ namespace BioBaseCLIA.Run
             {
                 return true;
             }
-
-            //质控规则
-            string rule16 = decryption.Substring(18, 4);
             int rule10 = Convert.ToInt32(rule16, 16);
             string rule2 = Convert.ToString(rule10, 2);
             while (rule2.Length < 16)
@@ -2913,7 +2987,7 @@ namespace BioBaseCLIA.Run
                     rule += i.ToString();
                 }
             }
-            string validTime = year + "/" + month + "/" + day;
+            //string validTime = year2 + "/" + month2 + "/" + day2;
             //录入者
             mQC.Batch = qcBatch;
             mQC.QCNumber = "No Use";//无用
